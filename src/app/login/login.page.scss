@@ -1,0 +1,30 @@
+h1{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    padding: 30px;
+}
+.borde{
+    border-radius: 28px;
+}
+.ion-icon{
+    height: 80%;
+}
+span{
+    display: block;
+    text-align: center;
+}
+a{
+    color: #fff;
+    text-decoration: none;
+}
+.contenedor{
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    text-align: center;
+    p{
+        margin: 5px;
+    }
+}

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Cambiar tu contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Por favor, ingresá tu email</h2>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input autocomplete="email" type="text" #email required></ion-input>
+    </ion-item>
+  <br>
+    <ion-row>
+      <ion-col>
+        <ion-button
+        (click)= "resetPass(email)"
+        type="submit"
+        shape="round"
+        color="success"
+        expand="block">
+          Cambiar contraseña
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <br>
+    <p>Se enviará a tu correo un enlace donde podrás realizar el cambio de tu contraseña</p>
+  </form>
+</ion-content>

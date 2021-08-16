@@ -1,20 +1,57 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false" ></ion-menu-button>
+      </ion-buttons>
     <ion-title>
-      Blank
+      Mi Gualeguay
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="grey">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  {{usuario}}
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid>
+    <!-- <h2>Bienvenido {{usuario.nombre}} </h2> -->
+    <h2>Bienvenido </h2>
+    <div class="container" *ngFor= "let usuario of usuarios ">
+    </div>
+    <ion-card [routerLink]= "['/home/atencion']" class="ion-padding ion-margin">
+      <ion-card-header>
+        <ion-card-title>Centro de Atención</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>Bienvenido a tu Centro de Atención al Vecino.</ion-text>
+        <ion-row>
+          <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card [routerLink]= "['/home/deliveries']" class="ion-padding ion-margin">
+      <ion-card-header>
+        <ion-card-title>Registro de deliveries</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>Aqui podras encontrar  tu registro de deliveries.</ion-text>
+        <ion-row>
+          <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-grid>
+
+  <ion-button (click)=  "logout()" color="danger" fill="clear" expand="full">
+    Cerrar Sesion
+  </ion-button>
+
 </ion-content>
+

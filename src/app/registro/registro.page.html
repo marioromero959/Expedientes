@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Registrate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+ <!--  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+  
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" #password required></ion-input>
+    </ion-item>
+  
+    <ion-row>
+      <ion-col>
+        <ion-button
+        type="submit"
+        (click)= "onRegister(email, password)"
+        expand="block">
+          Registrate
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+        type="submit"
+        (click)= "irALogin()"
+        expand="block">
+          Ya tengo cuenta
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form> -->
+
+<!-- Agregar ion-spinner -->
+
+
+  <form [formGroup]= "crearUsuarios"
+  (ngSubmit)= "registrarUsuario()">
+    <ion-item lines="full">
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text"
+      formControlName="usuario"
+      autocomplete="on"
+      ></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">DNI</ion-label>
+      <ion-input type="number" 
+      formControlName="dni"
+      autocomplete="on"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombres</ion-label>
+      <ion-input type="text" 
+      formControlName="nombre"
+      autocomplete="on"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text"
+      formControlName="apellido"
+      autocomplete="on"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" 
+      formControlName="email"
+      autocomplete="on"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input 
+      [type]= "showPassword ? 'text' : 'password'"
+      formControlName="password"
+      name= "password"
+      ></ion-input>
+      <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Repetir Contraseña</ion-label>
+      <ion-input 
+      [type]= "showRePassword ? 'text' : 'password'"
+      formControlName="repassword"
+      name= "password"
+      ></ion-input>
+      <ion-icon slot="end" class="ion-icon" [name]="rePasswordToggleIcon" (click)="toggleRePass()"></ion-icon>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+        type="submit"
+        expand="block">
+          Registrarse
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+        type="submit"
+        (click)= "irALogin()"
+        expand="block">
+          Ya tengo cuenta
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+</ion-content>

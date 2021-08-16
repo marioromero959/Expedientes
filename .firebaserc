@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "expedientes-33810": {
+      "hosting": {
+        "app": [
+          "expedientes-33810"
+        ]
+      }
+    }
+  }
+}

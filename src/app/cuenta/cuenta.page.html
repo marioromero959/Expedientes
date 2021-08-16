@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/home">
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title>Mi cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+ <ion-item>
+  <ion-thumbnail slot="start">
+    <img src="../assets/mario.jpeg">
+  </ion-thumbnail>
+  <ion-label>
+    <h2>Tu perfil</h2>
+    <p>Bienvenido</p>
+  </ion-label>
+  <ion-button fill="outline" slot="end">Editar</ion-button>
+</ion-item>
+
+
+   <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title style="font-size: medium;">Información personal
+      </ion-card-title>
+    </ion-card-header>
+  
+    <!-- ver items mas largos -->
+    <ion-card-content>
+      <ion-list>
+            <ion-label>Correo electronico</ion-label>
+          <ion-item>
+            <ion-label>marioromero959@gmail.com</ion-label>
+          </ion-item>
+            <ion-label>Celular</ion-label>
+          <ion-item>
+            <ion-label>3517648146</ion-label>
+          </ion-item>
+            <ion-label>Dirección</ion-label>
+          <ion-item>
+            <ion-label>Av dondesea123</ion-label>
+          </ion-item>
+            <ion-label>Teléfono Fijo</ion-label>
+          <ion-item>
+            <ion-label>3517648146</ion-label>
+          </ion-item>
+            <ion-label>Localidad</ion-label>
+          <ion-item>
+            <ion-label>Gualeguay</ion-label>
+          </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card> 
+
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title style="font-size: medium;">
+        Seguridad de mi cuenta
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label>
+        Usuario
+      </ion-label>
+      <ion-item>
+        <ion-label>
+          mario-romero
+        </ion-label>
+      </ion-item>
+      <ion-label>
+        Contraseña
+      </ion-label>
+      <ion-item>
+        <ion-label >
+          loquesea
+        </ion-label>
+      </ion-item>
+      <br>
+      <ion-button color="success" size="medium">
+        Cambiar contraseña
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color="danger" fill="clear" expand="full">
+    Cerrar Sesion
+  </ion-button>
+</ion-content>
