@@ -35,9 +35,9 @@ export class RegistroPage implements OnInit {
       dni:['',Validators.required],
       nombre:['',Validators.required],
       apellido:['',Validators.required],
-      email:['',Validators.required],
-      password:['',Validators.required],
-      repassword:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(6)]],
+      repassword:['',[Validators.required,Validators.minLength(6)]],
     })
   }
 
@@ -63,6 +63,7 @@ export class RegistroPage implements OnInit {
 
   registrarUsuario(){
     if(this.crearUsuarios.invalid){
+      this.crearUsuarios.markAllAsTouched();
       return;
     }
     const usuario: User = {
@@ -80,7 +81,6 @@ export class RegistroPage implements OnInit {
         console.log('Registro Exitoso');
         this.email = this.crearUsuarios.get(['email']).value;
         this.password = this.crearUsuarios.get(['password']).value;
-        // this.router.navigate(['/verificacion']);
         this.onRegister(this.email,this.password);
       }
     }).catch(error => {
@@ -88,14 +88,14 @@ export class RegistroPage implements OnInit {
     });
 
   }
-
     // Mediante el servicio en autenticacion.ts, agrega un usuario a la coleccion users en Firestore
+    // Se implementa en el registrarUsuario
   async onRegister(email:string, password:string){
     try{
       const user = await this.auth.register(email, password);
       if(user){
         console.log('Usuario registrado con auth');
-        // this.router.navigate(['/verificacion']);
+        this.router.navigate(['/verificacion']);
       }
     }
     catch(error){
@@ -103,14 +103,36 @@ export class RegistroPage implements OnInit {
     }
   }
 
-/*
+  // Obtengo los campos para validar los formularios
+get usuarioField(){
+  return this.crearUsuarios.get('usuario');
+}
+get dniField(){
+  return this.crearUsuarios.get('dni');
+}
+get nombreField(){
+  return this.crearUsuarios.get('nombre');
+}
+get apellidoField(){
+  return this.crearUsuarios.get('apellido');
+}
+get emailField(){
+  return this.crearUsuarios.get('email');
+}
+get passwordField(){
+  return this.crearUsuarios.get('password');
+}
+get repasswordField(){
+  return this.crearUsuarios.get('repassword');
+}
+
   redirectUser(isVerified:boolean){
     if(isVerified){
       this.router.navigate(['/home']);
     }else{
       this.router.navigate(['/verificacion']);
     }
-  } */
+  } 
 
   irALogin(){
     this.router.navigate(['/login']);

@@ -4,82 +4,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-
- <!--  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item>
-  
-    <ion-item lines="full">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
-  
-    <ion-row>
-      <ion-col>
-        <ion-button
-        type="submit"
-        (click)= "onRegister(email, password)"
-        expand="block">
-          Registrate
-        </ion-button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-button
-        type="submit"
-        (click)= "irALogin()"
-        expand="block">
-          Ya tengo cuenta
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </form> -->
-
+<ion-content color="light">
 <!-- Agregar ion-spinner -->
-
+  <h1>Municipalidad de Gualeguay</h1>
 
   <form [formGroup]= "crearUsuarios"
   (ngSubmit)= "registrarUsuario()">
-    <ion-item lines="full">
+    <ion-item lines="inset">
       <ion-label position="floating">Usuario</ion-label>
       <ion-input type="text"
       formControlName="usuario"
       autocomplete="on"
       ></ion-input>
     </ion-item>
-    <ion-item lines="full">
+    <div *ngIf= "usuarioField.errors && usuarioField.touched">
+      <p *ngIf= "usuarioField.hasError('required')">Este campo es requerido</p>
+    </div>
+    <ion-item lines="inset">
       <ion-label position="floating">DNI</ion-label>
       <ion-input type="number" 
       formControlName="dni"
       autocomplete="on"></ion-input>
     </ion-item>
-    <ion-item lines="full">
+    <div *ngIf= "dniField.errors && dniField.touched">
+      <p *ngIf= "dniField.hasError('required')">Este campo es requerido</p>
+    </div>
+    <ion-item lines="inset">
       <ion-label position="floating">Nombres</ion-label>
       <ion-input type="text" 
       formControlName="nombre"
       autocomplete="on"></ion-input>
     </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Apellido</ion-label>
+    <div *ngIf= "nombreField.errors && nombreField.touched">
+      <p *ngIf= "nombreField.hasError('required')">Este campo es requerido</p>
+    </div>
+    <ion-item lines="inset">
+      <ion-label position="floating">Apellidos</ion-label>
       <ion-input type="text"
       formControlName="apellido"
       autocomplete="on"></ion-input>
     </ion-item>
-    <ion-item lines="full">
+    <div *ngIf= "apellidoField.errors && apellidoField.touched">
+      <p *ngIf= "apellidoField.hasError('required')">Este campo es requerido</p>
+    </div>
+    <ion-item lines="inset">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" 
       formControlName="email"
       autocomplete="on"
       ></ion-input>
     </ion-item>
-
-    <ion-item lines="full">
+    <div *ngIf="emailField.errors && emailField.touched">
+      <p *ngIf= "emailField.hasError('required')">Este campo es requerido</p>
+      <p *ngIf= "emailField.hasError('email')">Este campo no es un email</p>
+    </div>
+    <ion-item lines="inset">
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input 
       [type]= "showPassword ? 'text' : 'password'"
@@ -88,22 +67,31 @@
       ></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
     </ion-item>
-
-    <ion-item lines="full">
+    <div *ngIf= "passwordField.errors && passwordField.touched">
+      <p *ngIf= "passwordField.hasError('required')">Este campo es requerido</p>
+      <p *ngIf= "passwordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
+    </div>
+    <ion-item lines="inset">
       <ion-label position="floating">Repetir Contraseña</ion-label>
       <ion-input 
       [type]= "showRePassword ? 'text' : 'password'"
       formControlName="repassword"
-      name= "password"
+      name= "repassword"
       ></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="rePasswordToggleIcon" (click)="toggleRePass()"></ion-icon>
     </ion-item>
-
+    <div *ngIf= "repasswordField.errors && repasswordField.touched">
+      <p *ngIf= "repasswordField.hasError('required')">Este campo es requerido</p>
+      <p *ngIf= "repasswordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
+    </div>
+    <div *ngIf= " passwordField.valid &&  repasswordField.value == passwordField.value">
+      <p>Las contraseñas coinciden</p>
+    </div>
     <ion-row>
-      <ion-col>
+      <ion-col size=6 offset=3>
         <ion-button
         type="submit"
-        expand="block">
+        color="success">
           Registrarse
         </ion-button>
       </ion-col>
@@ -114,8 +102,10 @@
       <ion-col>
         <ion-button
         type="submit"
+        class="login-button"
+        fill="outline"
         (click)= "irALogin()"
-        expand="block">
+        >
           Ya tengo cuenta
         </ion-button>
       </ion-col>

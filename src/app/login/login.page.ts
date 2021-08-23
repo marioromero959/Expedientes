@@ -61,8 +61,7 @@ redirectUser(isVerified:boolean){
   if(isVerified){
     this.router.navigate(['/home']);
   }else{
-    this.router.navigate(['/']);
-    // modificar esta ruta
+    this.router.navigate(['/verificacion']);
   }
 }
 

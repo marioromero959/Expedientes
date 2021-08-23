@@ -61,7 +61,6 @@ async register(email:string, password:string):Promise<Usuario>{
   }
 }
 
-
 async login(email:string, password:string):Promise<Usuario>{
   try{
     const { user } = await this.afAuth.signInWithEmailAndPassword(email, password);

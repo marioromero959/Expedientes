@@ -12,7 +12,7 @@ export class DatosService {
   ) { }
 
 
-// Agrega un usuario a la coleecion Usuarios
+// Agrega un usuario a la coleccion Usuarios
 agregarUsuario(usuario:any):Promise<any>{
   return this.afs.collection('Usuarios').add(usuario);
 }
