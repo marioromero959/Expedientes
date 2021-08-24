@@ -16,6 +16,12 @@ API = 'http://localhost/pruebas/';
     return this.http.post(this.API+"?insertar=1",data);
   }
 
+  obtenerUsuarios(){
+    return this.http.get(this.API);
+  }
 
+  borrarUsuario(id):Observable<any>{
+    return this.http.get(this.API+"?borrar="+id);
+  }
 
 }

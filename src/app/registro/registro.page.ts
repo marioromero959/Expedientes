@@ -75,6 +75,7 @@ export class RegistroPage implements OnInit {
     }
     this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
       console.log(res);
+      this.router.navigate(['/home']);
     });
   }
 

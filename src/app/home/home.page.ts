@@ -12,15 +12,21 @@ import { Usuario } from '../shared/interface/interfaz-de-usuario';
 })
 export class HomePage {
 
+  Usuarios:any;
+
   constructor(
     private menu:MenuController,
-    private auth: AutenticacionService,
     private data:DatosService,
     private router: Router) {
     }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.data.obtenerUsuarios().subscribe(res=>{
+      this.Usuarios=res;
+    });
+  }
 
+  // Abrir y cerrar menu lateral
   openFirst() {
     this.menu.enable(true, 'first');
     this.menu.open('first');
@@ -32,6 +38,16 @@ export class HomePage {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
+
+// agregar ventana de Confirmación
+
+  borrarUsuario(id){
+    console.log('borrado');
+    console.log(id);
+    this.data.borrarUsuario(id).subscribe();
+  }
+
+
 
 logout(){
   this.router.navigate(['/login']);

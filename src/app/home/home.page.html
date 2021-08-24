@@ -17,8 +17,7 @@
   </ion-header>
   
   <ion-grid>
-    <!-- <h2>Bienvenido {{usuario.nombre}} </h2> -->
-    <h2>Bienvenido </h2>
+   <!--  <h2>Bienvenido </h2>
     <ion-card [routerLink]= "['/home/atencion']" class="ion-padding ion-margin">
       <ion-card-header>
         <ion-card-title>Centro de Atención</ion-card-title>
@@ -29,7 +28,7 @@
           <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
         </ion-row>
       </ion-card-content>
-    </ion-card>
+    </ion-card> 
 
     <ion-card [routerLink]= "['/home/deliveries']" class="ion-padding ion-margin">
       <ion-card-header>
@@ -41,7 +40,23 @@
           <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
         </ion-row>
       </ion-card-content>
-    </ion-card>
+    </ion-card> 
+ -->
+
+     <div class="contenedor" *ngFor="let usuario of Usuarios">
+      <p> {{usuario.id}} </p>
+      <!-- <p> {{usuario.usuario}} </p> -->
+      <!-- <p> {{usuario.dni}} </p> -->
+      <p> {{usuario.nombre}} </p>
+      <p> {{usuario.apellido}} </p>
+      <p> {{usuario.email}} </p>
+      <!-- <p> {{usuario.password}} </p> -->
+      <!-- <p> {{usuario.repassword}} </p> -->
+      <ion-button (click)="borrarUsuario(usuario.id)" color="danger">
+        Borrar
+      </ion-button>
+    </div>
+
 
   </ion-grid>
 
