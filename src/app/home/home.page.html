@@ -43,7 +43,7 @@
     </ion-card> 
  -->
 
-     <div class="contenedor" *ngFor="let usuario of Usuarios">
+     <div *ngFor="let usuario of Usuarios">
       <p> {{usuario.id}} </p>
       <!-- <p> {{usuario.usuario}} </p> -->
       <!-- <p> {{usuario.dni}} </p> -->
@@ -56,6 +56,16 @@
         Borrar
       </ion-button>
     </div>
+
+    
+<!--     <div>
+      <ion-button (click)="obtenerUsuario(usuario.id)" color="danger">
+        Borrar
+      </ion-button>
+    </div> -->
+
+
+
 
 
   </ion-grid>

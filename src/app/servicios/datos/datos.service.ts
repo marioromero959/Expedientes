@@ -24,4 +24,8 @@ API = 'http://localhost/pruebas/';
     return this.http.get(this.API+"?borrar="+id);
   }
 
+  obtenerUsuario(id):Observable<any>{
+    return this.http.get(this.API+"?consultar="+id);
+  }
+// revisar obtener home.ts
 }
