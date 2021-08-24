@@ -45,28 +45,17 @@
 
      <div *ngFor="let usuario of Usuarios">
       <p> {{usuario.id}} </p>
-      <!-- <p> {{usuario.usuario}} </p> -->
-      <!-- <p> {{usuario.dni}} </p> -->
       <p> {{usuario.nombre}} </p>
       <p> {{usuario.apellido}} </p>
       <p> {{usuario.email}} </p>
-      <!-- <p> {{usuario.password}} </p> -->
-      <!-- <p> {{usuario.repassword}} </p> -->
       <ion-button (click)="borrarUsuario(usuario.id)" color="danger">
         Borrar
       </ion-button>
+      
+<!--       <ion-button (click)="editarUsuario(usuario.id)" color="danger">
+        Editar
+      </ion-button> -->
     </div>
-
-    
-<!--     <div>
-      <ion-button (click)="obtenerUsuario(usuario.id)" color="danger">
-        Borrar
-      </ion-button>
-    </div> -->
-
-
-
-
 
   </ion-grid>
 

@@ -47,11 +47,9 @@ export class HomePage {
     this.data.borrarUsuario(id).subscribe();
   }
 
-/*   obtenerUsuario(id){
-    this.data.obtenerUsuario(id).subscribe(res=>{
-      console.log('Datos desde obtener:',res);
-    });
-  } */
+/*    editarUsuario(id){
+    this.router.navigate(['/editar-perfil'])
+  }  */
 
 
 logout(){
