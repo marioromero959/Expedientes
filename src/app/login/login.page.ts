@@ -27,7 +27,12 @@ export class LoginPage implements OnInit {
     }
   };
 
+goToHome(){
+  this.router.navigate(['/home']);
+}
+
 goToRegister(){
   this.router.navigate(['/registro']);
 }
+loginGoogle(){}
 }

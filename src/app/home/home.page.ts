@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { DatosService } from '../servicios/datos/datos.service';
@@ -11,15 +12,11 @@ import { Usuario } from '../shared/interface/interfaz-de-usuario';
 })
 export class HomePage {
 
- /*  // public Usuarios:Usuario[] = []; 
-
-  usuarios:any[]=[];
-  usuario:string ='marito';
- */
   constructor(
     private menu:MenuController,
     private auth: AutenticacionService,
-    private data:DatosService) {
+    private data:DatosService,
+    private router: Router) {
     }
 
   ngOnInit(){}
@@ -35,5 +32,9 @@ export class HomePage {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
+
+logout(){
+  this.router.navigate(['/login']);
+}
 
 }

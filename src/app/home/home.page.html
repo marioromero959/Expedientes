@@ -16,13 +16,9 @@
     </ion-toolbar>
   </ion-header>
   
-  {{usuario}}
-
   <ion-grid>
     <!-- <h2>Bienvenido {{usuario.nombre}} </h2> -->
     <h2>Bienvenido </h2>
-    <div class="container" *ngFor= "let usuario of usuarios ">
-    </div>
     <ion-card [routerLink]= "['/home/atencion']" class="ion-padding ion-margin">
       <ion-card-header>
         <ion-card-title>Centro de Atención</ion-card-title>

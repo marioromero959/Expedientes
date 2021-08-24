@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DatosService } from '../servicios/datos/datos.service';
 import { User } from '../shared/interface/interfaz-registrado';
 
 @Component({
@@ -24,6 +25,7 @@ export class RegistroPage implements OnInit {
   constructor(
     private router:Router,
     private fb:FormBuilder,
+    private datos:DatosService,
   ) { 
 
     this.crearUsuarios = this.fb.group({
@@ -71,6 +73,9 @@ export class RegistroPage implements OnInit {
       password: this.crearUsuarios.value.password,
       repassword: this.crearUsuarios.value.repassword,
     }
+    this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
+      console.log(res);
+    });
   }
 
   // Obtengo los campos para validar los formularios
@@ -95,6 +100,19 @@ get passwordField(){
 get repasswordField(){
   return this.crearUsuarios.get('repassword');
 }
+
+// Forma 1 de obtener datos de formulario
+/*  mostrarusuario(){
+  const user:User =this.registrarUsuario();
+  console.log(user);
+}  */
+
+// Forma 2 de obtener datos de formulario(mejor)
+
+/* mostrarusuario(){
+  console.log(this.crearUsuarios.value)
+}
+ */
 
   irALogin(){
     this.router.navigate(['/login']);
