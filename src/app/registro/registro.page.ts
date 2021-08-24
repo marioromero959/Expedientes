@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
-import { DatosService } from '../servicios/datos/datos.service';
 import { User } from '../shared/interface/interfaz-registrado';
 
 @Component({
@@ -24,9 +22,7 @@ export class RegistroPage implements OnInit {
   password:string='';
 
   constructor(
-    private auth:AutenticacionService,
     private router:Router,
-    private data: DatosService,
     private fb:FormBuilder,
   ) { 
 
@@ -75,32 +71,6 @@ export class RegistroPage implements OnInit {
       password: this.crearUsuarios.value.password,
       repassword: this.crearUsuarios.value.repassword,
     }
-    // Mediante el servicio en datos.ts, agrega un usuario a la coleccion Usuario en Firestore
-    this.data.agregarUsuario(usuario).then(()=>{
-      if(usuario){
-        console.log('Registro Exitoso');
-        this.email = this.crearUsuarios.get(['email']).value;
-        this.password = this.crearUsuarios.get(['password']).value;
-        this.onRegister(this.email,this.password);
-      }
-    }).catch(error => {
-      console.log(error);
-    });
-
-  }
-    // Mediante el servicio en autenticacion.ts, agrega un usuario a la coleccion users en Firestore
-    // Se implementa en el registrarUsuario
-  async onRegister(email:string, password:string){
-    try{
-      const user = await this.auth.register(email, password);
-      if(user){
-        console.log('Usuario registrado con auth');
-        this.router.navigate(['/verificacion']);
-      }
-    }
-    catch(error){
-      console.log(error);
-    }
   }
 
   // Obtengo los campos para validar los formularios
@@ -125,14 +95,6 @@ get passwordField(){
 get repasswordField(){
   return this.crearUsuarios.get('repassword');
 }
-
-  redirectUser(isVerified:boolean){
-    if(isVerified){
-      this.router.navigate(['/home']);
-    }else{
-      this.router.navigate(['/verificacion']);
-    }
-  } 
 
   irALogin(){
     this.router.navigate(['/login']);

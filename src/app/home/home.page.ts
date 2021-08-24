@@ -11,56 +11,29 @@ import { Usuario } from '../shared/interface/interfaz-de-usuario';
 })
 export class HomePage {
 
-  // public Usuarios:Usuario[] = []; 
+ /*  // public Usuarios:Usuario[] = []; 
 
   usuarios:any[]=[];
   usuario:string ='marito';
-
+ */
   constructor(
     private menu:MenuController,
     private auth: AutenticacionService,
     private data:DatosService) {
     }
 
-    ngOnInit(){
-  /*     this.auth.getUsuarios().subscribe(
-        usuarios => {
-        this.Usuarios = usuarios;
-        }
-      ) */
-      // this.obtenerInfoUsuarios();
-    }
-
- /*    obtenerInfoUsuarios(){
-      this.data.obtenerUsuarios().subscribe(res =>{
-        this.usuarios = [];
-        res.forEach((element:any) => {
-          this.usuarios.push({
-            id:element.payload.doc.id,
-            ...element.payload.doc.data()
-          })
-        });
-        console.log(this.usuarios);
-      })
-    } */
-
+  ngOnInit(){}
 
   openFirst() {
     this.menu.enable(true, 'first');
     this.menu.open('first');
   }
-
   openEnd() {
     this.menu.open('end');
   }
-
   openCustom() {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
-  }
-
-  logout(){
-    this.auth.logout();
   }
 
 }

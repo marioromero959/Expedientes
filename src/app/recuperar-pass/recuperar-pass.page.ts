@@ -16,12 +16,5 @@ export class RecuperarPassPage implements OnInit {
 
   ngOnInit() {
   }
-  async resetPass(email){
-    try {
-      await this.auth.resetpassword(email.value);
-      this.router.navigate(['/login']);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 }
