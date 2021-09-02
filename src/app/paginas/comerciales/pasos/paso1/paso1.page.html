@@ -12,11 +12,12 @@
 <h1>
   Habilitaciones comerciales - Paso 1
 </h1>
-<form>
+<form [formGroup]= 'dataPaso1' (ngSubmit)="terminarP1()">
   <ion-item>
     <ion-label position="floating">CUIT</ion-label>
     <ion-input 
     type="number"
+    formControlName="CUIT"
     autocomplete="on"
     ></ion-input>
   </ion-item>
@@ -24,6 +25,7 @@
     <ion-label position="floating">Cta Municipal</ion-label>
     <ion-input 
     type="text"
+    formControlName ="CUENTA"
     autocomplete="on"
     ></ion-input>
   </ion-item>
@@ -31,19 +33,25 @@
     <ion-label position="floating">Tipo de Persona</ion-label>
     <ion-input 
     type="text"
+    formControlName="tipoPersona"
     autocomplete="on"
     ></ion-input>
   </ion-item>
-  <ion-item lines=none>
-    <p>¿Posee Local?</p>
-    <ion-checkbox>
-    </ion-checkbox>
-    <p>SI</p>
-    <ion-checkbox>
-    </ion-checkbox>
-    <p>NO</p>
-  </ion-item>
-
+  <ion-list>
+    <ion-radio-group (ionChange)="select($event)" value="">
+      <ion-list-header>
+        <ion-label>Posee Local</ion-label>
+      </ion-list-header>
+      <ion-item lines=none>
+        <ion-label>Si</ion-label>
+        <ion-radio slot="start" value="si"></ion-radio>
+      </ion-item>
+      <ion-item lines=none>
+        <ion-label>No</ion-label>
+        <ion-radio slot="start" value="no"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
   <div class="form-check">
     <h4>Tipo de solicitud</h4>
     <ion-row class="ion-align-items-center">
@@ -120,7 +128,7 @@
     </ion-row>
   </div>
   <ion-row class="ion-justify-content-center">
-    <ion-button color="secondary" (click)="terminarP1()">
+    <ion-button type="submit" color="secondary">
       Siguiente
     </ion-button>
   </ion-row>

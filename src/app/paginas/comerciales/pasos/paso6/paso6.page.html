@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start"> 
-      <ion-back-button defaultHref="/comerciales/4">
+      <ion-back-button defaultHref="/">
     </ion-back-button>
   </ion-buttons>
     <ion-title>Hab Comerciales</ion-title>
@@ -32,31 +32,43 @@
   </ion-card-content>
 </ion-card>
 <h2>Documentación a adjuntar</h2>
-<ion-row>
+<ion-list>
+  <ion-list-header>
+    <ion-label>Constancia de inscripción con sist registral</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>Constancia de inscripción en ATER</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>Constancia de sellado</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>Contrato de alguiler/comodato, en caso de corresponder</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>Copia de impuesto inmobiliario o tasa inmobiliaria donde conste numero de partida del inmueble</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>DNI del titular - Dorso</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>DNI del titular - Frente</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
+  <ion-list-header>
+    <ion-label>Plano/Croquis del lugar donde se desarrollará la actividad (Opcional)</ion-label>
+    <ion-button color=secondary>Agregar</ion-button>
+  </ion-list-header>
 
-  <ion-col size=10>
-    <div class="documentacion">
-      <p>Constancia de inscripción con sist registral</p>
-    <p>Constancia de inscripción en ATER</p>
-    <p>Constancia de sellado</p>
-    <p>Contrato de alguiler/comodato, en caso de corresponder</p>
-    <p>Copia de impuesto inmobiliario o tasa inmobiliaria donde conste numero de partida del inmueble</p>
-    <p>DNI del titular - Dorso</p>
-    <p>DNI del titular - Frente</p>
-    <p>Plano/Croquis del lugar donde se desarrollará la actividad (Opcional)</p>
-  </div>  
-</ion-col>
-<ion-col>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-  <p>+</p>
-</ion-col>
-</ion-row>
+</ion-list>
+
+
   <ion-row class="ion-justify-content-center">
     <ion-button  color="secondary" (click)="terminarP5()">
       Siguiente

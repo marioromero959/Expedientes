@@ -4,12 +4,12 @@
       <ion-menu-button autoHide="false" ></ion-menu-button>
       </ion-buttons>
     <ion-title>
-      Mi Gualeguay
+      MiGualeguay
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="grey">
+<ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
@@ -21,19 +21,28 @@
   <h4>Trámites Online</h4>
   <ion-card [routerLink]= "['/comerciales']" class="ion-padding ion-margin">
     <ion-card-header>
-      <ion-card-title>Habilitaciones Comerciales</ion-card-title>
+      <ion-icon name="storefront-outline"
+      color=secondary></ion-icon>
+      <ion-card-title>
+        Habilitaciones Comerciales
+      </ion-card-title>
     </ion-card-header>
   </ion-card> 
   
   <ion-card [routerLink]= "['/atencion']" class="ion-padding ion-margin">
     <ion-card-header>
-      <ion-card-title>Centro de Atención al Vecino</ion-card-title>
+      <ion-icon name="headset-outline" color=secondary></ion-icon>
+      <ion-card-title>
+        Centro de Atención al Vecino</ion-card-title>
     </ion-card-header>
   </ion-card> 
 
   <ion-card [routerLink]= "['/deliveries']" class="ion-padding ion-margin">
     <ion-card-header>
-      <ion-card-title>Registro de Deliveries</ion-card-title>
+      <ion-icon name="bicycle-outline"
+      color=secondary></ion-icon>
+      <ion-card-title>
+        Registro de Deliveries</ion-card-title>
     </ion-card-header>
     </ion-card>  
 
