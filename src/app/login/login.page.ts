@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { BehaviorService } from '../behavior.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +15,31 @@ export class LoginPage implements OnInit {
   passwordToggleIcon = "eye";
   showPassword = false;
 
+  ingreso:FormGroup;
+  ingresado = false;
+
+  datos ={
+    id: null,
+    email: null,
+    password: null
+  }
+  userData:any = [];
+
   constructor(
-    private router: Router
-  ) { }
+    private auth: AutenticacionService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private bs: BehaviorService,
+  ){}
 
   ngOnInit() {
+
+    this.ingreso = this.formBuilder.group({
+      email: ['',[Validators.required, Validators.email]],
+      password: ['',[Validators.required,Validators.minLength(6)]]
+    })
   }
+
 // Mostrar y ocultar contraseña
   togglePass(){
     this.showPassword =! this.showPassword;
@@ -27,12 +50,36 @@ export class LoginPage implements OnInit {
     }
   };
 
-goToHome(){
-  this.router.navigate(['/home']);
-}
-
 goToRegister(){
   this.router.navigate(['/registro']);
 }
-loginGoogle(){}
+
+login(){
+  if(this.ingreso.invalid){
+    this.ingreso.markAllAsTouched();
+    return;
+  }else{
+    this.ingresado = true;
+    this.iniciar(this.ingreso);
+  }
+}
+
+iniciar(ingreso){
+  this.auth.userLogin(ingreso.value.email, ingreso.value.password).pipe(first()).subscribe(data =>{
+    const userDatos = data;
+    this.bs.mandar(userDatos).subscribe();
+    this.router.navigate(['/home']);
+  } )
+}
+// obtener campos
+get emailField(){
+  return this.ingreso.get('email');
+}
+get passwordField(){
+  return this.ingreso.get('password');
+}
+
+// hacer funcion con google
+// loginGoogle(){}
+
 }

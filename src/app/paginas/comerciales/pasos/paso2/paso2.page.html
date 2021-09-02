@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/comerciales/1">
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title>Hab Comerciales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<h1>
+  Habilitaciones comerciales - Paso 2
+</h1>
+
+
+  <form>
+  <h2>Razón de persona jurídica</h2>
+  <ion-item>
+    <ion-label position=floating>
+      Razón Social
+    </ion-label>
+    <ion-input 
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fecha de Inscripcion</ion-label>
+    <ion-datetime displayFormat="MM DD YY" placeholder=">"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      Tipo Societario
+    </ion-label>
+    <ion-input 
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      Cierre de ejercicio
+    </ion-label>
+    <ion-input 
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <h2>Responsable de la persona jurídica</h2>
+  <ion-item>
+    <ion-label position=floating>
+      Apellido
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      Nombres
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      CUIT  
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fecha de Nacimiento</ion-label>
+    <ion-datetime displayFormat="MM DD YY" placeholder=">"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      Domicilio
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      Localidad
+    </ion-label>
+    <ion-input
+    type=country-name
+    autocomplete=on></ion-input>
+  </ion-item>
+<!--   <ion-item>
+    <ion-select>
+      <ion-select-option value = "m">Masculino</ion-select-option>
+      <ion-select-option value = "f">Femenino</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+  <ion-item>
+    <ion-label position=floating>
+      Nacionalidad
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position=floating>
+      En carácter de 
+    </ion-label>
+    <ion-input
+    type=text
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-row class="ion-justify-content-center">
+    <ion-button color="secondary" (click)="terminarP2()">
+      Siguiente
+    </ion-button>
+  </ion-row>
+</form>
+</ion-content>

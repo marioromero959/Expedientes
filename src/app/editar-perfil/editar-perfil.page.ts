@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
@@ -14,13 +14,13 @@ export class EditarPerfilPage implements OnInit {
   crearUsuarios: FormGroup;
   registrado = false;
 
+  prueba:string=null;
+
+
   passwordToggleIcon = "eye";
   rePasswordToggleIcon = "eye";
   showPassword = false;
   showRePassword= false;
-
-  email:string='';
-  password:string='';
 
   constructor(
     private router:Router,
@@ -59,7 +59,7 @@ export class EditarPerfilPage implements OnInit {
     }
   };
 
-  registrarUsuario(){
+  editarUsuario(){
     if(this.crearUsuarios.invalid){
       this.crearUsuarios.markAllAsTouched();
       return;
@@ -73,6 +73,8 @@ export class EditarPerfilPage implements OnInit {
       password: this.crearUsuarios.value.password,
       repassword: this.crearUsuarios.value.repassword,
     }
+
+    // ver esta funcion en el data.ts
     this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
       console.log(res);
       this.router.navigate(['/home']);
@@ -102,20 +104,8 @@ get repasswordField(){
   return this.crearUsuarios.get('repassword');
 }
 
-// Forma 1 de obtener datos de formulario
-/*  mostrarusuario(){
-  const user:User =this.registrarUsuario();
-  console.log(user);
-}  */
-
-// Forma 2 de obtener datos de formulario(mejor)
-
-/* mostrarusuario(){
-  console.log(this.crearUsuarios.value)
-}
- */
-
   irALogin(){
     this.router.navigate(['/login']);
   }
+
 }

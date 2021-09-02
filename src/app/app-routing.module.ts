@@ -36,6 +36,30 @@ const routes: Routes = [
     path: 'editar-perfil',
     loadChildren: () => import('./editar-perfil/editar-perfil.module').then( m => m.EditarPerfilPageModule)
   },
+  {
+    path: 'tramites',
+    loadChildren: () => import('./tramites/tramites.module').then( m => m.TramitesPageModule)
+  },
+  {
+    path: 'comerciales',
+    children: [
+    {
+      path: '',
+      loadChildren: () => import('./paginas/comerciales/comerciales.module').then( m => m.ComercialesPageModule)
+    }
+  ],
+  }
+  
+  
+  ,
+  {
+    path: 'atencion',
+    loadChildren: () => import('./paginas/atencion/atencion.module').then( m => m.AtencionPageModule)
+  },
+  {
+    path: 'deliveries',
+    loadChildren: () => import('./paginas/deliveries/deliveries.module').then( m => m.DeliveriesPageModule)
+  },
 ];
 
 @NgModule({

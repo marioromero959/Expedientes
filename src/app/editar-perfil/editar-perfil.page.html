@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>Registrate</ion-title>
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/home">
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title>Edita tus datos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
 <!-- Agregar ion-spinner -->
-  <h1>Municipalidad de Gualeguay</h1>
+  <!-- <h1>Municipalidad de Gualeguay</h1> -->
+<h1> {{prueba}} </h1>
 
   <form [formGroup]= "crearUsuarios"
-  (ngSubmit)= "registrarUsuario()">
+  (ngSubmit)= "editarUsuario()">
     <ion-item lines="inset">
       <ion-label position="floating">Usuario</ion-label>
       <ion-input type="text"
@@ -84,8 +89,8 @@
       <p *ngIf= "repasswordField.hasError('required')">Este campo es requerido</p>
       <p *ngIf= "repasswordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
     </div>
-    <div *ngIf= " passwordField.valid &&  repasswordField.value == passwordField.value">
-      <p>Las contraseñas coinciden</p>
+    <div *ngIf= " passwordField.valid &&  repasswordField.value !== passwordField.value">
+      <p>Las contraseñas no coinciden</p>
     </div>
     <ion-row>
       <ion-col size=6 offset=3>

@@ -74,8 +74,8 @@ export class RegistroPage implements OnInit {
       repassword: this.crearUsuarios.value.repassword,
     }
     this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
-      console.log(res);
-      this.router.navigate(['/home']);
+      // ejecutar funcion php en backend para mandar el mail de verificacion
+      this.router.navigate(['/verificacion']);
     });
   }
 
@@ -101,12 +101,6 @@ get passwordField(){
 get repasswordField(){
   return this.crearUsuarios.get('repassword');
 }
-
-// Forma 1 de obtener datos de formulario
-/*  mostrarusuario(){
-  const user:User =this.registrarUsuario();
-  console.log(user);
-}  */
 
 // Forma 2 de obtener datos de formulario(mejor)
 

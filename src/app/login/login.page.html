@@ -1,46 +1,45 @@
-<ion-content color="primary">
+<!-- <ion-content color="primary"> -->
+  <ion-content >
 
-  <h1>Mi Gualeguay</h1>
+  <h1>MiGualeguay</h1>
   
-  <form>
+  <form [formGroup]= "ingreso">
     <ion-item lines="full" class="ion-margin-horizontal borde">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email autocomplete="on"></ion-input>
+      <ion-input type="email"
+      formControlName ="email"
+      autocomplete="on"></ion-input>
     </ion-item>
+    <div *ngIf="emailField.errors && emailField.touched">
+      <p *ngIf= "emailField.hasError('required')">Este campo es requerido</p>
+      <p *ngIf= "emailField.hasError('email')">Este campo no es un email</p>
+    </div>
   <br>
     <ion-item lines="full" class="ion-margin-horizontal borde">
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" name="password" #password [type]="showPassword ? 'text' : 'password'"></ion-input>
+      <ion-input type="password" 
+      name="password"
+      formControlName="password"
+      [type]="showPassword ? 'text' : 'password'"></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
     </ion-item>
+    <div *ngIf= "passwordField.errors && passwordField.touched">
+      <p *ngIf= "passwordField.hasError('required')">Este campo es requerido</p>
+      <p *ngIf= "passwordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
+    </div>
   <br>
     <ion-row>
-      <ion-col>
+      <ion-col size=6 offset=3>
         <ion-button
-        (click)= "goToHome()"
+        (click)= "login()"
         type="submit"
         color="secondary"
-        expand="block"
         shape="round"
         required>
           Iniciar Sesión
         </ion-button>
       </ion-col>
     </ion-row>
-  
-  <span>o</span>
-  <ion-row>
-    <ion-col>
-      <ion-button 
-      type="submit"
-      expand = "full"
-      color = "danger"
-      shape="round"
-      (click)= "loginGoogle()">
-        Iniciar con Google
-      </ion-button>
-    </ion-col>
-  </ion-row> 
   
   </form>
   
@@ -64,6 +63,7 @@
     </ion-button>
   </div>
   
+  <ion-img src ="assets/logomuni.png"></ion-img>
   
   
   </ion-content>

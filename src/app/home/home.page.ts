@@ -1,9 +1,9 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { DatosService } from '../servicios/datos/datos.service';
-import { Usuario } from '../shared/interface/interfaz-de-usuario';
+import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { BehaviorService } from '../behavior.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +13,33 @@ import { Usuario } from '../shared/interface/interfaz-de-usuario';
 export class HomePage {
 
   Usuarios:any;
+  userData:any;
 
   constructor(
+    private bs: BehaviorService,
     private menu:MenuController,
     private data:DatosService,
+    private auth:AutenticacionService,
     private router: Router) {
     }
 
   ngOnInit(){
-    this.data.obtenerUsuarios().subscribe(res=>{
-      this.Usuarios=res;
-    });
+    // obtiene todos los usuarios de mi bd
+   /*  this.data.obtenerUsuarios().subscribe(res=>{
+      this.Usuarios = res;
+    }); */
+    
+    // obtiene y guarda los datos de mi usuario autenticado en userData
+    this.bs.escucha().subscribe((res:any)=>{
+      this.userData = res;
+    })
+
+
   }
+
+
+
+
 
   // Abrir y cerrar menu lateral
   openFirst() {
@@ -47,12 +62,9 @@ export class HomePage {
     this.data.borrarUsuario(id).subscribe();
   }
 
-/*    editarUsuario(id){
-    this.router.navigate(['/editar-perfil'])
-  }  */
-
-
+  // ver logout
 logout(){
+  this.auth.deleteToken();
   this.router.navigate(['/login']);
 }
 

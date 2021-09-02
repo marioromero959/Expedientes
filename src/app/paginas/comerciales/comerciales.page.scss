@@ -1,0 +1,19 @@
+h1 , h2{
+    color: #3dc2ff;
+    margin: 20px;
+}
+h2{
+    font-size: 20px;
+}
+ion-button{
+    margin-left: 20px;
+}
+.container{
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(243, 243, 243);
+    ion-col:nth-child(1){
+        font-weight: 600;
+    }
+}

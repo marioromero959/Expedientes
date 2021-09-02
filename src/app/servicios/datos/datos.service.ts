@@ -10,7 +10,7 @@ API = 'http://localhost/pruebas/';
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {}
 
   agregarUsuario(data):Observable<any>{
     return this.http.post(this.API+"?insertar=1",data);
@@ -28,5 +28,9 @@ API = 'http://localhost/pruebas/';
     return this.http.get(this.API+"?consultar="+id);
   }
 
-  
+/*   editarUsuario(id,data):Observable<any>{
+    return this.http.post(this.API+"?actualizar="+id,data);
+  }
+ */
+
 }

@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/comerciales">
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title>Hab Comerciales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<h1>
+  Habilitaciones comerciales - Paso 1
+</h1>
+<form>
+  <ion-item>
+    <ion-label position="floating">CUIT</ion-label>
+    <ion-input 
+    type="number"
+    autocomplete="on"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cta Municipal</ion-label>
+    <ion-input 
+    type="text"
+    autocomplete="on"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Tipo de Persona</ion-label>
+    <ion-input 
+    type="text"
+    autocomplete="on"
+    ></ion-input>
+  </ion-item>
+  <ion-item lines=none>
+    <p>¿Posee Local?</p>
+    <ion-checkbox>
+    </ion-checkbox>
+    <p>SI</p>
+    <ion-checkbox>
+    </ion-checkbox>
+    <p>NO</p>
+  </ion-item>
+
+  <div class="form-check">
+    <h4>Tipo de solicitud</h4>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Ampliación de Rubro</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Apertura de sucursal</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Cambio de domicilio</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Cambio de responsable</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Cambio de Rubro</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Cese de actividad</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Cierre definitivo</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Rehabilitación</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" offset=1>
+        <ion-checkbox></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        <p>Solicitud de inscripción</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row class="ion-justify-content-center">
+    <ion-button color="secondary" (click)="terminarP1()">
+      Siguiente
+    </ion-button>
+  </ion-row>
+  </form>
+</ion-content>

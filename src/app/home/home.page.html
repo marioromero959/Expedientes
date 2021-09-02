@@ -17,33 +17,28 @@
   </ion-header>
   
   <ion-grid>
-   <!--  <h2>Bienvenido </h2>
-    <ion-card [routerLink]= "['/home/atencion']" class="ion-padding ion-margin">
-      <ion-card-header>
-        <ion-card-title>Centro de Atención</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-text>Bienvenido a tu Centro de Atención al Vecino.</ion-text>
-        <ion-row>
-          <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
-        </ion-row>
-      </ion-card-content>
-    </ion-card> 
+  <h2>Bienvenido {{userData.nombre}}</h2>
+  <h4>Trámites Online</h4>
+  <ion-card [routerLink]= "['/comerciales']" class="ion-padding ion-margin">
+    <ion-card-header>
+      <ion-card-title>Habilitaciones Comerciales</ion-card-title>
+    </ion-card-header>
+  </ion-card> 
+  
+  <ion-card [routerLink]= "['/atencion']" class="ion-padding ion-margin">
+    <ion-card-header>
+      <ion-card-title>Centro de Atención al Vecino</ion-card-title>
+    </ion-card-header>
+  </ion-card> 
 
-    <ion-card [routerLink]= "['/home/deliveries']" class="ion-padding ion-margin">
-      <ion-card-header>
-        <ion-card-title>Registro de deliveries</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-text>Aqui podras encontrar  tu registro de deliveries.</ion-text>
-        <ion-row>
-          <ion-button color="secondary" class="ion-margin-top">Acceder</ion-button>
-        </ion-row>
-      </ion-card-content>
-    </ion-card> 
- -->
+  <ion-card [routerLink]= "['/deliveries']" class="ion-padding ion-margin">
+    <ion-card-header>
+      <ion-card-title>Registro de Deliveries</ion-card-title>
+    </ion-card-header>
+    </ion-card>  
 
-     <div *ngFor="let usuario of Usuarios">
+<!-- 
+  <div *ngFor="let usuario of Usuarios">
       <p> {{usuario.id}} </p>
       <p> {{usuario.nombre}} </p>
       <p> {{usuario.apellido}} </p>
@@ -51,15 +46,14 @@
       <ion-button (click)="borrarUsuario(usuario.id)" color="danger">
         Borrar
       </ion-button>
-      
-<!--       <ion-button (click)="editarUsuario(usuario.id)" color="danger">
-        Editar
-      </ion-button> -->
-    </div>
+      <ion-button (click)="obtenerUsuario(usuario.id)" color="warning">
+        Obtener
+      </ion-button>
+    </div>  -->
 
   </ion-grid>
 
-  <ion-button (click)=  "logout()" color="danger" fill="clear" expand="full">
+  <ion-button (click)= "logout()" color="danger" fill="clear" expand="full">
     Cerrar Sesion
   </ion-button>
 

@@ -84,8 +84,8 @@
       <p *ngIf= "repasswordField.hasError('required')">Este campo es requerido</p>
       <p *ngIf= "repasswordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
     </div>
-    <div *ngIf= " passwordField.valid &&  repasswordField.value == passwordField.value">
-      <p>Las contraseñas coinciden</p>
+    <div *ngIf= " passwordField.valid &&  repasswordField.value !== passwordField.value">
+      <p>Las contraseñas no coinciden</p>
     </div>
     <ion-row>
       <ion-col size=6 offset=3>
@@ -103,7 +103,6 @@
         <ion-button
         type="submit"
         class="login-button"
-        fill="outline"
         (click)= "irALogin()"
         >
           Ya tengo cuenta
@@ -111,12 +110,4 @@
       </ion-col>
     </ion-row>
 
-<!--     <ion-row>
-      <ion-col>
-        <ion-button (click)= "mostrarusuario()">
-          mostrar
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    -->
 </ion-content>

@@ -1,0 +1,26 @@
+h1{
+    background-color: rgb(243, 243, 243);
+    margin: 20px;
+    padding: 5px;
+    text-align: center;
+    color: #3dc2ff;
+    border-radius: 15px;
+}
+ion-item{
+    margin: 0 15px 0 15px;
+
+    p{
+        margin-right: 10px;
+        margin-left: 5px;
+    }
+}
+.form-check{
+    h4{
+        width: auto;
+        margin-left: 1.1em;
+        font-size: 20px;
+    }
+    ion-col p{
+        margin: 0;
+    }
+}
