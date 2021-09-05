@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-paso1',
   templateUrl: './paso1.page.html',
@@ -11,36 +11,64 @@ export class Paso1Page implements OnInit {
 
   dataPaso1:FormGroup;
   opcionSelec:string ='';
+  persona: string ="";
+  solic: string ="";
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private alertCtrl: AlertController,
   ) {
-    this.dataPaso1 = this.fb.group({
-      CUIT:['hola',[Validators.required]],
-      CUENTA:['',[Validators.required]],
-      tipoPersona:['',[Validators.required]],
-    });
-    
+    this.miForm();
   }
   ngOnInit() {
   }
 
+  tipo(event){
+    this.persona = event.detail.value;
+  }
   select(event){
     this.opcionSelec = event.detail.value;
-    console.log(this.opcionSelec);
+  };
+  solicitud(event){
+    this.solic = event.detail.value;
+  };
+
+  terminarP1(event){
+    if (this.dataPaso1.valid) {
+      const value = {
+        cuit: this.dataPaso1.value.cuit,
+        cuenta:this.dataPaso1.value.cuenta,
+        tipo:this.persona,
+        local:this.opcionSelec,
+        solicitud:this.solic,
+      };
+      console.log(value);
+      if(value.tipo == '' || value.local == '' || value.solicitud == ''){
+        this.presentAlert();
+      }else{
+        this.router.navigate(['/comerciales/2']);
+      };
+    }
+  }
+
+async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Datos Incompletos',
+      subHeader: 'Por favor, complete todos los campos.',
+      // message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+
+  await alert.present();
   };
 
 
-  terminarP1(){
-    const datos = {
-      cuit: this.dataPaso1.value.CUIT,
-      cuenta: this.dataPaso1.value.CUENTA,
-      tipoP: this.dataPaso1.value.tipoPersona,
-      local:this.opcionSelec,
-    };
-    console.log(datos);
-    // this.router.navigate(['/comerciales/2'])
+  private miForm(){
+    this.dataPaso1 = this.fb.group({
+      cuit: ['', [Validators.required,Validators.minLength(10)]],
+      cuenta: ['', [Validators.required,Validators.minLength(10)]],
+    })
   }
-
 }

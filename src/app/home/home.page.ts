@@ -38,9 +38,6 @@ export class HomePage {
   }
 
 
-
-
-
   // Abrir y cerrar menu lateral
   openFirst() {
     this.menu.enable(true, 'first');

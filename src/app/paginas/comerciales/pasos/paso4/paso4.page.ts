@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./paso4.page.scss'],
 })
 export class Paso4Page implements OnInit {
-
   constructor( private router:Router) { }
 
   ngOnInit() {
   }
+
   terminarP4(){
     this.router.navigate(['/comerciales/5']);
   }

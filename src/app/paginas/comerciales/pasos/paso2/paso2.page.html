@@ -13,9 +13,7 @@
 <h1>
   Habilitaciones comerciales - Paso 2
 </h1>
-
-
-  <form>
+  <form [formGroup]= 'dataPaso2' (ngSubmit)="terminarP2($event)">
   <h2>Razón de persona jurídica</h2>
   <ion-item>
     <ion-label position=floating>
@@ -23,27 +21,36 @@
     </ion-label>
     <ion-input 
     type=text
+    formControlName="razon"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Fecha de Inscripcion</ion-label>
-    <ion-datetime displayFormat="MM DD YY" placeholder=">"></ion-datetime>
+    <ion-datetime 
+    (ionChange)="fechaIns($event)"
+    displayFormat="MM DD YY" 
+    placeholder="MM/DD/AA"></ion-datetime>
   </ion-item>
+  <!-- Tipo de societario con ion-select -->
   <ion-item>
+    <ion-label position="floating">Tipo de Societario</ion-label>
+    <ion-select (ionChange)="tipo($event)">
+      <ion-select-option value="Societario 1">Soc 1</ion-select-option>
+      <ion-select-option value="Societario 2">Soc 2</ion-select-option>
+    </ion-select>
+  </ion-item>
+<!--   <ion-item>
     <ion-label position=floating>
       Tipo Societario
     </ion-label>
     <ion-input 
     type=text
+    formControlName="societario"
     autocomplete=on></ion-input>
-  </ion-item>
+  </ion-item> -->
   <ion-item>
-    <ion-label position=floating>
-      Cierre de ejercicio
-    </ion-label>
-    <ion-input 
-    type=text
-    autocomplete=on></ion-input>
+    <ion-label>Cierre de ejercicio</ion-label>
+    <ion-datetime displayFormat="MM DD" placeholder="MM/DD"></ion-datetime>
   </ion-item>
   <h2>Responsable de la persona jurídica</h2>
   <ion-item>
@@ -90,12 +97,6 @@
     type=country-name
     autocomplete=on></ion-input>
   </ion-item>
-<!--   <ion-item>
-    <ion-select>
-      <ion-select-option value = "m">Masculino</ion-select-option>
-      <ion-select-option value = "f">Femenino</ion-select-option>
-    </ion-select>
-  </ion-item> -->
   <ion-item>
     <ion-label position=floating>
       Nacionalidad
@@ -113,7 +114,7 @@
     autocomplete=on></ion-input>
   </ion-item>
   <ion-row class="ion-justify-content-center">
-    <ion-button color="secondary" (click)="terminarP2()">
+    <ion-button type="submit" color="secondary">
       Siguiente
     </ion-button>
   </ion-row>

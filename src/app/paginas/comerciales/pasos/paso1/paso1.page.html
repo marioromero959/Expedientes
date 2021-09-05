@@ -12,30 +12,29 @@
 <h1>
   Habilitaciones comerciales - Paso 1
 </h1>
-<form [formGroup]= 'dataPaso1' (ngSubmit)="terminarP1()">
+<form [formGroup]= 'dataPaso1' (ngSubmit)="terminarP1($event)">
   <ion-item>
     <ion-label position="floating">CUIT</ion-label>
     <ion-input 
     type="number"
-    formControlName="CUIT"
+    formControlName="cuit"
     autocomplete="on"
     ></ion-input>
-  </ion-item>
+  </ion-item> 
   <ion-item>
     <ion-label position="floating">Cta Municipal</ion-label>
     <ion-input 
-    type="text"
-    formControlName ="CUENTA"
+    type="number"
+    formControlName ="cuenta"
     autocomplete="on"
     ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Tipo de Persona</ion-label>
-    <ion-input 
-    type="text"
-    formControlName="tipoPersona"
-    autocomplete="on"
-    ></ion-input>
+    <ion-select (ionChange)="tipo($event)">
+      <ion-select-option value="Persona Fisica">Persona Fisica</ion-select-option>
+      <ion-select-option value="Persona Jurídica">Persona Jurídica</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-list>
     <ion-radio-group (ionChange)="select($event)" value="">
@@ -51,86 +50,26 @@
         <ion-radio slot="start" value="no"></ion-radio>
       </ion-item>
     </ion-radio-group>
-  </ion-list>
-  <div class="form-check">
-    <h4>Tipo de solicitud</h4>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Ampliación de Rubro</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Apertura de sucursal</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Cambio de domicilio</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Cambio de responsable</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Cambio de Rubro</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Cese de actividad</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Cierre definitivo</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Rehabilitación</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2" offset=1>
-        <ion-checkbox></ion-checkbox>
-      </ion-col>
-      <ion-col>
-        <p>Solicitud de inscripción</p>
-      </ion-col>
-    </ion-row>
-  </div>
-  <ion-row class="ion-justify-content-center">
+  </ion-list>  
+  <ion-item>
+    <ion-label position="floating">Tipo de Solicitud</ion-label>
+    <ion-select (ionChange)="solicitud($event)">
+      <ion-select-option value="Ampliación de rubro">Ampliación de Rubro</ion-select-option>
+      <ion-select-option value="Apertura de sucursal">Apertura de Sucursal</ion-select-option>
+      <ion-select-option value="Cambio de domicilio">Cambio de Domicilio</ion-select-option>
+      <ion-select-option value="Cambio de Responsable">Cambio de Responsable</ion-select-option>
+      <ion-select-option value="Cambio de rubro">Cambio de Rubro</ion-select-option>
+      <ion-select-option value="Cese de Actividad">Cese de Actividad</ion-select-option>
+      <ion-select-option value="Cierre Definitivo">Cierre Definitivo</ion-select-option>
+      <ion-select-option value="Rehabilitación">Rehabilición</ion-select-option>
+      <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
+    </ion-select>
+  </ion-item>
+   <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary">
       Siguiente
     </ion-button>
   </ion-row>
-  </form>
+  </form> 
+
 </ion-content>

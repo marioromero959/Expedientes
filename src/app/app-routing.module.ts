@@ -42,16 +42,8 @@ const routes: Routes = [
   },
   {
     path: 'comerciales',
-    children: [
-    {
-      path: '',
       loadChildren: () => import('./paginas/comerciales/comerciales.module').then( m => m.ComercialesPageModule)
-    }
-  ],
-  }
-  
-  
-  ,
+  },
   {
     path: 'atencion',
     loadChildren: () => import('./paginas/atencion/atencion.module').then( m => m.AtencionPageModule)
