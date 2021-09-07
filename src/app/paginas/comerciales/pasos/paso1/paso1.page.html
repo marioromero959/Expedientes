@@ -31,7 +31,7 @@
   </ion-item>
   <ion-item>
     <ion-label position="floating">Tipo de Persona</ion-label>
-    <ion-select (ionChange)="tipo($event)">
+    <ion-select (ionChange)="tipo($event)" cancelText="Cancelar" okText="OK">
       <ion-select-option value="Persona Fisica">Persona Fisica</ion-select-option>
       <ion-select-option value="Persona Jurídica">Persona Jurídica</ion-select-option>
     </ion-select>

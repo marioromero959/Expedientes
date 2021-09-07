@@ -14,7 +14,7 @@
   Habilitaciones comerciales - Paso 3
 </h1>
 
-  <form>
+  <form [formGroup]= 'dataPaso3' (ngSubmit)="terminarP3($event)">
   <h2>Domicilio Fiscal</h2>
   <ion-item>
     <ion-label position=floating>
@@ -22,6 +22,7 @@
     </ion-label>
     <ion-input 
     type=text
+    formControlName="calle"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -30,6 +31,7 @@
     </ion-label>
     <ion-input 
     type=number
+    formControlName="numeroCalle"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -38,6 +40,7 @@
     </ion-label>
     <ion-input 
     type=number
+    formControlName="piso"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -46,6 +49,7 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="provincia"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -53,7 +57,8 @@
       Localidad
     </ion-label>
     <ion-input
-    type=country-name
+    type=text
+    formControlName="localidad"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -62,10 +67,10 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="codPostal"
     autocomplete=on></ion-input>
   </ion-item>
- 
-  <div>
+  <div *ngIf="condicion">
     <h2>Domicilio Comercial</h2>
     <ion-item>
       <ion-label position=floating>
@@ -137,7 +142,7 @@
     </ion-list>
   </div>
   <ion-row class="ion-justify-content-center">
-    <ion-button color="secondary" (click)="terminarP3()">
+    <ion-button type="submit" color="secondary">
       Siguiente
     </ion-button>
   </ion-row>

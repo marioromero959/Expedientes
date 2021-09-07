@@ -29,28 +29,27 @@
     <ion-datetime 
     (ionChange)="fechaIns($event)"
     displayFormat="MM DD YY" 
-    placeholder="MM/DD/AA"></ion-datetime>
+    placeholder="MM/DD/AA"
+    cancelText="Cancelar"
+    doneText="OK"
+    ></ion-datetime>
   </ion-item>
-  <!-- Tipo de societario con ion-select -->
   <ion-item>
     <ion-label position="floating">Tipo de Societario</ion-label>
-    <ion-select (ionChange)="tipo($event)">
+    <ion-select (ionChange)="tipo($event)" cancelText="Cancelar" okText="OK">
       <ion-select-option value="Societario 1">Soc 1</ion-select-option>
       <ion-select-option value="Societario 2">Soc 2</ion-select-option>
     </ion-select>
   </ion-item>
-<!--   <ion-item>
-    <ion-label position=floating>
-      Tipo Societario
-    </ion-label>
-    <ion-input 
-    type=text
-    formControlName="societario"
-    autocomplete=on></ion-input>
-  </ion-item> -->
   <ion-item>
     <ion-label>Cierre de ejercicio</ion-label>
-    <ion-datetime displayFormat="MM DD" placeholder="MM/DD"></ion-datetime>
+    <ion-datetime 
+    (ionChange)="fechaCierre($event)"
+    displayFormat="MM DD"
+    placeholder="MM/DD"
+    cancelText="Cancelar"
+    doneText="OK"
+    ></ion-datetime>
   </ion-item>
   <h2>Responsable de la persona jurídica</h2>
   <ion-item>
@@ -59,6 +58,7 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="apellido"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -67,6 +67,7 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="nombres"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -74,12 +75,19 @@
       CUIT  
     </ion-label>
     <ion-input
-    type=text
+    type=number
+    formControlName="cuit"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Fecha de Nacimiento</ion-label>
-    <ion-datetime displayFormat="MM DD YY" placeholder=">"></ion-datetime>
+    <ion-datetime 
+    displayFormat="MM DD YY"
+    (ionChange)="fechaNacimiento($event)"
+    placeholder="MM/DD/AA"
+    cancelText="Cancelar"
+    doneText="OK"
+    ></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position=floating>
@@ -87,6 +95,7 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="domicilio"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -95,6 +104,7 @@
     </ion-label>
     <ion-input
     type=country-name
+    formControlName="localidad"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -103,15 +113,15 @@
     </ion-label>
     <ion-input
     type=text
+    formControlName="nacionalidad"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position=floating>
-      En carácter de 
-    </ion-label>
-    <ion-input
-    type=text
-    autocomplete=on></ion-input>
+    <ion-label position="floating">En caracter de:</ion-label>
+    <ion-select (ionChange)="selCaracter($event)" cancelText="Cancelar" okText="OK">
+      <ion-select-option value="Caracter 1">Caracter 1</ion-select-option>
+      <ion-select-option value="Caracter 2">Caracter 2</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary">

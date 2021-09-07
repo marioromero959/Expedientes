@@ -43,12 +43,14 @@ export class Paso1Page implements OnInit {
         local:this.opcionSelec,
         solicitud:this.solic,
       };
-      console.log(value);
       if(value.tipo == '' || value.local == '' || value.solicitud == ''){
         this.presentAlert();
       }else{
         this.router.navigate(['/comerciales/2']);
       };
+    }else{
+      this.presentAlert();
+      this.dataPaso1.markAllAsTouched();
     }
   }
 
@@ -56,7 +58,7 @@ async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: 'Datos Incompletos',
-      subHeader: 'Por favor, complete todos los campos.',
+      subHeader: 'Por favor, complete todos los campos para continuar.',
       // message: 'This is an alert message.',
       buttons: ['OK']
     });
