@@ -11,9 +11,9 @@ export class Paso2Page implements OnInit {
 
   dataPaso2: FormGroup;
   tipoSocietario:string = '';
-  inscripcion:Date;
-  cierre:Date;
-  nacimiento:Date;
+  inscripcion:string = '';
+  cierre:string = '';
+  nacimiento:string = '';
   caracter:string = '';
 
   constructor(
@@ -27,16 +27,16 @@ export class Paso2Page implements OnInit {
   ngOnInit() {}
 
 fechaIns(event){
-  this.inscripcion = new Date(event.detail.value);
+  this.inscripcion = new Date(event.detail.value).toLocaleDateString();
 }
 fechaCierre(event){
-  this.cierre = new Date(event.detail.value);
+  this.cierre = new Date(event.detail.value).toLocaleDateString();
 }
 tipo(event){
   this.tipoSocietario = event.detail.value;
 }
 fechaNacimiento(event){
-  this.nacimiento = new Date(event.detail.value);
+  this.nacimiento = new Date(event.detail.value).toLocaleDateString();
 }
 selCaracter(event){
   this.caracter = event.detail.value;
@@ -58,7 +58,7 @@ terminarP2(event){
       nacionalidad:this.dataPaso2.value.nacionalidad,
       caracter: this.caracter,
     };
-    if(value.razon == '' || value.societario == '' || value.inscripcion == undefined || value.cierre == undefined || value.fechaNacimiento == undefined || value.caracter == ""
+    if(value.razon == '' || value.societario == '' || value.inscripcion == '' || value.cierre == '' || value.fechaNacimiento == '' || value.caracter == ""
       ){
       this.presentAlert();
     }else{

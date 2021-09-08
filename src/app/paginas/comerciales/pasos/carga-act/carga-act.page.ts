@@ -12,7 +12,7 @@ export class CargaActPage implements OnInit {
   @Input() fecha;
 
   tipoAct:string = '';
-  fechaInicio: Date;
+  fechaInicio:string = '';
 
   constructor(
     private modalCtrl:ModalController,
@@ -26,17 +26,15 @@ export class CargaActPage implements OnInit {
     this.tipoAct = event.detail.value;
   }
   fechaInicioBaja(event){
-    this.fechaInicio = new Date(event.detail.value);
+    this.fechaInicio = new Date(event.detail.value).toLocaleDateString();
   }
-
   volver(){
     this.modalCtrl.dismiss();
   }
 
-
   enviarAct(event){
     // creamos el objeto
-    if(this.fechaInicio == undefined || this.tipoAct == ''){
+    if(this.fechaInicio == '' || this.tipoAct == ''){
       this.presentAlert();
     }else{ 
     this.modalCtrl.dismiss({

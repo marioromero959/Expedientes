@@ -13,7 +13,7 @@
   Habilitaciones comerciales - Paso 5
 </h1>
   <form [formGroup]= 'dataPaso5' (ngSubmit)="terminarP5($event)">
-  <h2>Datos del Propietario</h2>
+  <h2>Datos Económicos</h2>
   <ion-item>
     <ion-label position=floating>
       Nombre de Fantasía
@@ -54,38 +54,24 @@
       <ion-icon slot="end" name="duplicate-outline"></ion-icon>
     </ion-button>
   </ion-row>
-  
+
   <h2>Actividades Agregadas</h2>
-  <div>
-    <ion-row class="tabla" style="border-bottom: groove;">
-      <ion-col col-3>
-      <ion-label>Codigo</ion-label>
-    </ion-col>
-    <ion-col col-3>
-      <ion-label>Descripción</ion-label>
-    </ion-col>
-      <ion-col col-3>
-      <ion-label>Fecha</ion-label>
-    </ion-col>
-    <ion-col col-3>
-      <ion-label>Opciones</ion-label>
-    </ion-col>
-  </ion-row>
+<div *ngIf= "mostrar; else elseBlock">
   <ion-row>
-      <ion-col col-3>
-      <ion-label>1234</ion-label>
-    </ion-col>
-    <ion-col col-3>
-      <ion-label>blabla</ion-label>
-    </ion-col>
-    <ion-col col-3>
-      <ion-label>02/02/2018</ion-label>
-    </ion-col>
-      <ion-col col-3>
-      <ion-label>XXXXX</ion-label>
-    </ion-col>
+    <ion-col>Fecha</ion-col>
+    <ion-col size=8>Descripción</ion-col>
   </ion-row>
-  </div>
+  <ion-row *ngFor= "let i of actividades">
+    <ion-col> {{i.fecha}} </ion-col>
+    <ion-col size=8> {{i.tipo}} </ion-col>
+  </ion-row>
+</div> 
+<br>
+<ng-template #elseBlock>
+<p>
+  Debe agregar al menos una actividad para continuar.
+</p>
+</ng-template>
   <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary" >
       Siguiente

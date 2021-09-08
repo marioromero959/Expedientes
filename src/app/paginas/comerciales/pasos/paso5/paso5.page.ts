@@ -12,15 +12,8 @@ import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
 export class Paso5Page implements OnInit {
 
   dataPaso5: FormGroup;
-  actComercial:string= '';
-  fechaInicioBaja:Date;
-
-  actividades = {
-    "0": { "id": 0, "descripcion": "des1", "fecha":"lunes"},
-    "1": { "id": 1, "descripcion": "des1", "fecha":"lunes"},
-    "2": { "id": 2, "descripcion": "des1", "fecha":"lunes"},
-};
-
+  mostrar:boolean = false;
+  actividades = [];
 
   constructor(
     private router:Router,
@@ -34,7 +27,7 @@ export class Paso5Page implements OnInit {
   ngOnInit() {
   }
   terminarP5(event){
-    if(this.dataPaso5.invalid){
+    if(this.dataPaso5.invalid || this.mostrar == false){
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
@@ -67,14 +60,20 @@ async agregarAct(){
       component: CargaActPage,
       componentProps:{
         tipo: '',
-        fecha: null,
+        fecha: '',
       },
       cssClass: 'my-custom-class'
     }
   )
   await modal.present();
   const { data } = await modal.onDidDismiss();
-  console.log('Data desde el modal actividad', data);
+      if(data === undefined){
+        console.log('Cancelado');
+      }else{
+        this.actividades.push(data);
+        this.mostrar = true;
+        console.log(this.actividades);
+      }
 }
 
 async  agregarEstudio(){
