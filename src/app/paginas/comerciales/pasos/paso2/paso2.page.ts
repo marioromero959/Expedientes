@@ -82,13 +82,13 @@ terminarP2(event){
 
   private miForm(){
     this.dataPaso2 = this.fb.group({
-      razon: ['', [Validators.required,]],
-      apellido: ['', [Validators.required,]],
-      nombres: ['', [Validators.required,]],
-      cuit: ['', [Validators.required,]],
-      domicilio: ['', [Validators.required,]],
-      localidad: ['', [Validators.required,]],
-      nacionalidad: ['', [Validators.required,]],
+      razon: ['', Validators.required],
+      apellido: ['', Validators.required],
+      nombres: ['', Validators.required],
+      cuit: ['', [Validators.required,Validators.minLength(10)]],
+      domicilio: ['', Validators.required],
+      localidad: ['', Validators.required],
+      nacionalidad: ['', Validators.required],
     })
   }
 

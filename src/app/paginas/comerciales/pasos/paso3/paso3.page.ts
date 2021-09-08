@@ -73,22 +73,22 @@ private miForm(){
   this.dataPaso3 = this.fb.group({
     // Domicilio Fiscal
     domFiscal: this.fb.group({
-    calle: ['', [Validators.required,]],
-    numeroCalle: ['', [Validators.required,]],
-    piso: ['', [Validators.required,]],
-    provincia: ['', [Validators.required,]],
-    localidad: ['', [Validators.required,]],
-    codPostal: ['', [Validators.required,]],
+    calle: ['', Validators.required],
+    numeroCalle: ['', Validators.required],
+    piso: ['', Validators.required],
+    provincia: ['', Validators.required],
+    localidad: ['', Validators.required],
+    codPostal: ['', Validators.required],
     }),
   //Domicilio comercial
     domComercial: this.fb.group({
-      calleC: ['', [Validators.required,]],
-      numeroCalleC: ['', [Validators.required,]],
-      pisoC: ['', [Validators.required,]],
-      provinciaC: ['', [Validators.required,]],
-      localidadC: ['', [Validators.required,]],
-      codPostalC: ['', [Validators.required,]],
-      partida: ['', [Validators.required,]],
+      calleC: ['', Validators.required],
+      numeroCalleC: ['', Validators.required],
+      pisoC: ['', Validators.required],
+      provinciaC: ['', Validators.required],
+      localidadC: ['', Validators.required],
+      codPostalC: ['', Validators.required],
+      partida: ['', Validators.required],
       })
   })
 

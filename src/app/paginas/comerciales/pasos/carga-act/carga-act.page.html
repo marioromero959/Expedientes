@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nueva Actividad Comercial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- <h1>Agregar Actividad Comercial</h1> -->
+
+<form (ngSubmit)="enviarAct($event)">
+  <h2>Actividad Comercial</h2>
+  <ion-item>
+    <ion-label position="floating">Actividad Comercial</ion-label>
+    <ion-select (ionChange)="act($event)" cancelText="Cancelar" okText="OK">
+      <ion-select-option value="Actividad 1">Actividad 1</ion-select-option>
+      <ion-select-option value="Actividad 2">Actividad 2</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <h2>Fecha de Inicio/Baja</h2>
+  <ion-item>
+    <ion-datetime 
+    (ionChange)="fechaInicioBaja($event)"
+    displayFormat="MM DD YY" 
+    placeholder="MM/DD/AA"
+    cancelText="Cancelar"
+    doneText="OK"
+    ></ion-datetime>
+  </ion-item>  
+  <br>
+  <ion-row>
+    <ion-col class="ion-justify-content-center">
+      <ion-button type="button" color="primary">
+        Cancelar
+      </ion-button>
+    </ion-col>
+    <ion-col class="ion-justify-content-center">
+      <ion-button type="submit" color="secondary">
+        Agregar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</form>
+
+</ion-content>
