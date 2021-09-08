@@ -9,10 +9,13 @@ import { Paso5PageRoutingModule } from './paso5-routing.module';
 import { Paso5Page } from './paso5.page';
 import { CargaActPage } from '../carga-act/carga-act.page';
 import { CargaActPageModule } from '../carga-act/carga-act.module';
+import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
+import { CargaEstudioPageModule } from '../carga-estudio/carga-estudio.module';
 
 @NgModule({
   entryComponents: [
-    CargaActPage
+    CargaActPage,
+    CargaEstudioPage,
   ],
   imports: [
     CommonModule,
@@ -21,6 +24,7 @@ import { CargaActPageModule } from '../carga-act/carga-act.module';
     IonicModule,
     Paso5PageRoutingModule,
     CargaActPageModule,
+    CargaEstudioPageModule,
   ],
   declarations: [Paso5Page]
 })

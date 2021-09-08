@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController, ModalController } from '@ionic/angular';
 import { CargaActPage } from '../carga-act/carga-act.page';
+import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
 @Component({
   selector: 'app-paso5',
   templateUrl: './paso5.page.html',
@@ -13,6 +14,13 @@ export class Paso5Page implements OnInit {
   dataPaso5: FormGroup;
   actComercial:string= '';
   fechaInicioBaja:Date;
+
+  actividades = {
+    "0": { "id": 0, "descripcion": "des1", "fecha":"lunes"},
+    "1": { "id": 1, "descripcion": "des1", "fecha":"lunes"},
+    "2": { "id": 2, "descripcion": "des1", "fecha":"lunes"},
+};
+
 
   constructor(
     private router:Router,
@@ -30,9 +38,8 @@ export class Paso5Page implements OnInit {
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
-      console.log(this.dataPaso5.value);
+      this.router.navigate(['/comerciales/6'])
     }
-    // this.router.navigate(['/comerciales/6'])
   }
 
 async presentAlert() {
@@ -66,12 +73,25 @@ async agregarAct(){
     }
   )
   await modal.present();
-
   const { data } = await modal.onDidDismiss();
-  console.log('Data desde el modal', data);
+  console.log('Data desde el modal actividad', data);
 }
 
-
-
-  agregarEstudio(){}
+async  agregarEstudio(){
+    const modal = await this.modalCtrl.create(
+      {
+        component: CargaEstudioPage,
+        componentProps:{
+          estudio: '',
+          telefono: '',
+          email: '',
+        },
+        cssClass: 'my-custom-class'
+      }
+    )
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log('Data desde el modal de estudio', data);
+  }
+  
 }

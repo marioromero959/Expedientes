@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-carga-act',
@@ -16,6 +16,7 @@ export class CargaActPage implements OnInit {
 
   constructor(
     private modalCtrl:ModalController,
+    private alertCtrl:AlertController,
   ) { }
 
   ngOnInit() {
@@ -28,12 +29,30 @@ export class CargaActPage implements OnInit {
     this.fechaInicio = new Date(event.detail.value);
   }
 
+  volver(){
+    this.modalCtrl.dismiss();
+  }
+
+
   enviarAct(event){
     // creamos el objeto
+    if(this.fechaInicio == undefined || this.tipoAct == ''){
+      this.presentAlert();
+    }else{ 
     this.modalCtrl.dismiss({
       tipo:this.tipoAct,
       fecha:this.fechaInicio,
-    }); 
+    });
+    }
   }
 
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Datos Incompletos',
+      subHeader: 'Por favor, complete todos los campos para continuar.',
+      buttons: ['OK']
+    });
+  await alert.present();
+  };
 }
