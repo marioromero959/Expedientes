@@ -15,6 +15,7 @@
 </h1>
 
   <form [formGroup]= 'dataPaso3' (ngSubmit)="terminarP3($event)">
+  <div formGroupName="domFiscal">
   <h2>Domicilio Fiscal</h2>
   <ion-item>
     <ion-label position=floating>
@@ -70,7 +71,21 @@
     formControlName="codPostal"
     autocomplete=on></ion-input>
   </ion-item>
-  <div *ngIf="condicion">
+</div>
+  <ion-radio-group (ionChange)="select($event)" value="">
+    <ion-list-header>
+      <ion-label>¿Posee el mismo domicilio?</ion-label>
+    </ion-list-header>
+    <ion-item lines=none>
+      <ion-label>Si</ion-label>
+      <ion-radio slot="start" value="si"></ion-radio>
+    </ion-item>
+    <ion-item lines=none>
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value="no"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <div formGroupName="domComercial">
     <h2>Domicilio Comercial</h2>
     <ion-item>
       <ion-label position=floating>
@@ -78,6 +93,7 @@
       </ion-label>
       <ion-input 
       type=text
+      formControlName="calleC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -86,6 +102,7 @@
       </ion-label>
       <ion-input 
       type=number
+      formControlName="numeroCalleC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -94,6 +111,7 @@
       </ion-label>
       <ion-input 
       type=number
+      formControlName="pisoC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -102,6 +120,7 @@
       </ion-label>
       <ion-input
       type=text
+      formControlName="provinciaC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -109,7 +128,8 @@
         Localidad
       </ion-label>
       <ion-input
-      type=country-name
+      type=text
+      formControlName="localidadC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -118,6 +138,7 @@
       </ion-label>
       <ion-input
       type=text
+      formControlName="codPostalC"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-item>
@@ -126,20 +147,21 @@
       </ion-label>
       <ion-input
       type=text
+      formControlName="partida"
       autocomplete=on></ion-input>
     </ion-item>
     <ion-list>
-      <ion-radio-group value="biff">
+      <ion-radio-group (ionChange)="local($event)" value="">
         <ion-item lines=none>
           <ion-label>Propietario</ion-label>
-          <ion-radio slot="start" value="si"></ion-radio>
+          <ion-radio slot="start" value="Propietario"></ion-radio>
         </ion-item>
         <ion-item lines=none>
           <ion-label>Alquiler</ion-label>
-          <ion-radio slot="start" value="no"></ion-radio>
+          <ion-radio slot="start" value="Alquiler"></ion-radio>
         </ion-item>
       </ion-radio-group>
-    </ion-list>
+    </ion-list> 
   </div>
   <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary">
