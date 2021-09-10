@@ -36,6 +36,7 @@
       <ion-select-option value="Persona Jurídica">Persona Jurídica</ion-select-option>
     </ion-select>
   </ion-item>
+  <p>*</p>
   <ion-list>
     <ion-radio-group (ionChange)="select($event)" value="">
       <ion-list-header>
@@ -51,6 +52,7 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>  
+  <p>*</p>
   <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
     <ion-select (ionChange)="solicitud($event)">
@@ -65,6 +67,7 @@
       <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
     </ion-select>
   </ion-item>
+  <p>*</p>
   <br>
    <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary">
