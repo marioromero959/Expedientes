@@ -9,15 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
+<ion-content [fullscreen]="true">  
   <ion-grid>
-  <h2>Bienvenido {{userData.nombre}}</h2>
+  <h2>Bienvenido</h2>
   <h4>Trámites Online</h4>
   <ion-card [routerLink]= "['/comerciales']" class="ion-padding ion-margin">
     <ion-card-header>
@@ -28,7 +22,6 @@
       </ion-card-title>
     </ion-card-header>
   </ion-card> 
-  
   <ion-card [routerLink]= "['/atencion']" class="ion-padding ion-margin">
     <ion-card-header>
       <ion-icon name="headset-outline" color=secondary></ion-icon>
@@ -36,7 +29,6 @@
         Centro de Atención al Vecino</ion-card-title>
     </ion-card-header>
   </ion-card> 
-
   <ion-card [routerLink]= "['/deliveries']" class="ion-padding ion-margin">
     <ion-card-header>
       <ion-icon name="bicycle-outline"
@@ -45,24 +37,9 @@
         Registro de Deliveries</ion-card-title>
     </ion-card-header>
     </ion-card>  
-
-<!-- 
-  <div *ngFor="let usuario of Usuarios">
-      <p> {{usuario.id}} </p>
-      <p> {{usuario.nombre}} </p>
-      <p> {{usuario.apellido}} </p>
-      <p> {{usuario.email}} </p>
-      <ion-button (click)="borrarUsuario(usuario.id)" color="danger">
-        Borrar
-      </ion-button>
-      <ion-button (click)="obtenerUsuario(usuario.id)" color="warning">
-        Obtener
-      </ion-button>
-    </div>  -->
-
   </ion-grid>
 
-  <ion-button (click)= "logout()" color="danger" fill="clear" expand="full">
+  <ion-button (click)= "logout()" color="danger" fill="clear" expand="block">
     Cerrar Sesion
   </ion-button>
 

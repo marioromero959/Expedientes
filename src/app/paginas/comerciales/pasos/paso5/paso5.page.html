@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/comerciales/4">
     </ion-back-button>
   </ion-buttons>
-    <ion-title>Hab Comerciales</ion-title>
+    <ion-title>Habilitaciones Comerciales</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -43,13 +43,13 @@
   </ion-item>
   <br>
   <ion-row class="ion-justify-content-center">
-    <ion-button type=button color="primary" (click)="agregarAct()">
+    <ion-button type=button color="primary" (click)="agregarAct()" shape=round>
       Agregar Actividad 
       <ion-icon slot="end" name="duplicate-outline"></ion-icon>
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
-    <ion-button type=button color="primary" (click)="agregarEstudio()">
+    <ion-button type=button color="primary" (click)="agregarEstudio()" shape=round>
       Agregar Estudio Contable 
       <ion-icon slot="end" name="duplicate-outline"></ion-icon>
     </ion-button>
@@ -61,19 +61,19 @@
     <ion-col>Fecha</ion-col>
     <ion-col size=8>Descripción</ion-col>
   </ion-row>
-  <ion-row *ngFor= "let i of actividades">
-    <ion-col> {{i.fecha}} </ion-col>
-    <ion-col size=8> {{i.tipo}} </ion-col>
+  <ion-row *ngFor= "let act of actividades">
+    <ion-col> {{act.fecha}} </ion-col>
+    <ion-col size=8> {{act.tipo}} </ion-col>
   </ion-row>
 </div> 
 <br>
 <ng-template #elseBlock>
-<p>
+<p class="ion-text-center">
   Debe agregar al menos una actividad para continuar.
 </p>
 </ng-template>
   <ion-row class="ion-justify-content-center">
-    <ion-button type="submit" color="secondary" >
+    <ion-button type="submit" color="secondary" shape=round>
       Siguiente
     </ion-button>
   </ion-row>

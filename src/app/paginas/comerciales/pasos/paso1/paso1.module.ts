@@ -14,7 +14,7 @@ import { Paso1Page } from './paso1.page';
     FormsModule,
     IonicModule,
     Paso1PageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [Paso1Page]
 })

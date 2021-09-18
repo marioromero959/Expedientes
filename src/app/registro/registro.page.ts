@@ -101,14 +101,7 @@ get passwordField(){
 get repasswordField(){
   return this.crearUsuarios.get('repassword');
 }
-
-// Forma 2 de obtener datos de formulario(mejor)
-
-/* mostrarusuario(){
-  console.log(this.crearUsuarios.value)
-}
- */
-
+  
   irALogin(){
     this.router.navigate(['/login']);
   }

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
+import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
 @Component({
   selector: 'app-paso1',
   templateUrl: './paso1.page.html',
-  styleUrls: ['./paso1.page.scss'],
+  styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso1Page implements OnInit {
 
@@ -14,10 +15,13 @@ export class Paso1Page implements OnInit {
   persona: string ="";
   solic: string ="";
 
+  prueba:string ="testeo";
+   
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private alertCtrl: AlertController,
+    private formData:FormulariosService,
   ) {
     this.miForm();
   }
@@ -46,6 +50,7 @@ export class Paso1Page implements OnInit {
       if(value.tipo == '' || value.local == '' || value.solicitud == ''){
         this.presentAlert();
       }else{
+        this.formData.mandar(value).subscribe();
         this.router.navigate(['/comerciales/2']);
       };
     }else{
@@ -59,13 +64,11 @@ async presentAlert() {
       cssClass: 'my-custom-class',
       header: 'Datos Incompletos',
       subHeader: 'Por favor, complete todos los campos para continuar.',
-      // message: 'This is an alert message.',
       buttons: ['OK']
     });
 
   await alert.present();
   };
-
 
   private miForm(){
     this.dataPaso1 = this.fb.group({

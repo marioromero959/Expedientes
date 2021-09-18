@@ -1,9 +1,6 @@
 h1,p,label,input{
     color: white;
 }
-ion-item{
-    --ion-background-color:#fff !important;
-}
 h1{
     display: block;
     text-align: center;
@@ -19,28 +16,19 @@ h1{
 .ion-icon{
     height: 80%;
 }
-span{
-    display: block;
-    text-align: center;
-}
 a{
     color: #fff;
     text-decoration: none;
 }
-.contenedor{
-    display: flex;
-    justify-content: center;
-    padding: 8px;
-    text-align: center;
-    p{
-        margin: 5px;
-    }
+p{
+    margin-left: 20px;
+}
+ion-item{
+    --ion-background-color:#fff !important;
 }
 ion-img{
-/*     position: relative;
-    left: 20vw;
-    top:10vh; */
     width: 200px;
+    margin-top: 20px;
 }
 ion-content{
     --ion-background-color: linear-gradient(0deg, rgba(7,88,190,1) 22%, rgba(53,212,215,1) 69%);

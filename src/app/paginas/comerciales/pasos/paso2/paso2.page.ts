@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
+import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+
 @Component({
   selector: 'app-paso2',
   templateUrl: './paso2.page.html',
-  styleUrls: ['./paso2.page.scss'],
+  styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso2Page implements OnInit {
 
@@ -20,6 +22,7 @@ export class Paso2Page implements OnInit {
     private router: Router,
     private fb:FormBuilder,
     private alertCtrl:AlertController,
+    private formData:FormulariosService,
   ) { 
     this.miForm();
   }
@@ -62,6 +65,7 @@ terminarP2(event){
       ){
       this.presentAlert();
     }else{
+      this.formData.mandar(value).subscribe();
       this.router.navigate(['/comerciales/3']);
       };
     }else{

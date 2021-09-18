@@ -4,10 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-<!-- Agregar ion-spinner -->
-  <h1>Municipalidad de Gualeguay</h1>
-
+<ion-content>
+  <h1>Crea tu cuenta</h1>
   <form [formGroup]= "crearUsuarios"
   (ngSubmit)= "registrarUsuario()">
     <ion-item lines="inset">
@@ -87,10 +85,11 @@
     <div *ngIf= " passwordField.valid &&  repasswordField.value !== passwordField.value">
       <p>Las contraseñas no coinciden</p>
     </div>
-    <ion-row>
+    <ion-row class="ion-text-center">
       <ion-col size=6 offset=3>
         <ion-button
         type="submit"
+        shape=round
         color="success">
           Registrarse
         </ion-button>
@@ -98,13 +97,12 @@
     </ion-row>
   </form>
 
-    <ion-row>
+    <ion-row class="ion-text-center">
       <ion-col>
         <ion-button
         type="submit"
-        class="login-button"
-        (click)= "irALogin()"
-        >
+        shape=round
+        (click)= "irALogin()">
           Ya tengo cuenta
         </ion-button>
       </ion-col>

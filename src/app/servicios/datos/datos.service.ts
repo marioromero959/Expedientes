@@ -28,9 +28,5 @@ API = 'http://localhost/pruebas/';
     return this.http.get(this.API+"?consultar="+id);
   }
 
-/*   editarUsuario(id,data):Observable<any>{
-    return this.http.post(this.API+"?actualizar="+id,data);
-  }
- */
 
 }

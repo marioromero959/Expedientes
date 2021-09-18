@@ -4,22 +4,26 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController, ModalController } from '@ionic/angular';
 import { CargaActPage } from '../carga-act/carga-act.page';
 import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
+import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+
 @Component({
   selector: 'app-paso5',
   templateUrl: './paso5.page.html',
-  styleUrls: ['./paso5.page.scss'],
+  styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso5Page implements OnInit {
 
   dataPaso5: FormGroup;
   mostrar:boolean = false;
   actividades = [];
+  value:any[] = [];
 
   constructor(
     private router:Router,
     private fb:FormBuilder,
     private alertCtrl:AlertController,
     private modalCtrl:ModalController,
+    private formData:FormulariosService,
     ) {
       this.miForm();
     }
@@ -31,6 +35,8 @@ export class Paso5Page implements OnInit {
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
+      this.value.push(this.dataPaso5.value);
+      this.formData.mandar(this.value).subscribe();
       this.router.navigate(['/comerciales/6'])
     }
   }
@@ -53,7 +59,6 @@ async presentAlert() {
     })
   }
 
-
 async agregarAct(){
   const modal = await this.modalCtrl.create(
     {
@@ -71,11 +76,10 @@ async agregarAct(){
         console.log('Cancelado');
       }else{
         this.actividades.push(data);
+        this.value.push(data);
         this.mostrar = true;
-        console.log(this.actividades);
       }
 }
-
 async  agregarEstudio(){
     const modal = await this.modalCtrl.create(
       {
@@ -90,7 +94,10 @@ async  agregarEstudio(){
     )
     await modal.present();
     const { data } = await modal.onDidDismiss();
-    console.log('Data desde el modal de estudio', data);
-  }
-  
+    if(data === undefined){
+      console.log('Cancelado');
+    }else{
+      this.value.push(data);
+    }
+}
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { DatosService } from '../servicios/datos/datos.service';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
-import { BehaviorService } from '../behavior.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,28 +16,15 @@ export class HomePage {
   userData:any;
 
   constructor(
-    private bs: BehaviorService,
     private menu:MenuController,
     private data:DatosService,
     private auth:AutenticacionService,
+    private alertCtrl:AlertController,
     private router: Router) {
     }
 
   ngOnInit(){
-    // obtiene todos los usuarios de mi bd
-   /*  this.data.obtenerUsuarios().subscribe(res=>{
-      this.Usuarios = res;
-    }); */
-    
-    // obtiene y guarda los datos de mi usuario autenticado en userData
-    this.bs.escucha().subscribe((res:any)=>{
-      this.userData = res;
-    })
-
-
   }
-
-
   // Abrir y cerrar menu lateral
   openFirst() {
     this.menu.enable(true, 'first');
@@ -59,10 +46,27 @@ export class HomePage {
     this.data.borrarUsuario(id).subscribe();
   }
 
-  // ver logout
-logout(){
-  this.auth.deleteToken();
-  this.router.navigate(['/login']);
-}
+  async logout() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: '¿Salir de MiGualeguay?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'danger',
+        }, {
+          text: 'Aceptar',
+          cssClass: 'aceptar',
+          handler: () => {
+            this.auth.deleteToken();
+            this.router.navigate(['login']);
+          }
+        }
+      ]
+    });
+
+  await alert.present();
+  };
 
 }

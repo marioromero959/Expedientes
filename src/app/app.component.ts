@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutenticacionService } from './servicios/Autenticación/autenticacion.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,30 @@ export class AppComponent {
   constructor(
     private auth: AutenticacionService,
     private router: Router,
-  ) {
-  }
-  logout(){
-    this.auth.deleteToken();
-    this.router.navigate(['/login']);
-  }
+    private alertCtrl:AlertController
+  ) {}
+
+  async logout() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: '¿Salir de MiGualeguay?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'danger',
+        }, {
+          text: 'Aceptar',
+          cssClass: 'aceptar',
+          handler: () => {
+            this.auth.deleteToken();
+            this.router.navigate(['login']);
+          }
+        }
+      ]
+    });
+
+  await alert.present();
+  };
+  
 }

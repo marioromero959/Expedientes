@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
+import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+
 @Component({
   selector: 'app-paso3',
   templateUrl: './paso3.page.html',
-  styleUrls: ['./paso3.page.scss'],
+  styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso3Page implements OnInit {
 
@@ -19,7 +21,9 @@ export class Paso3Page implements OnInit {
   constructor(    
     private router: Router,
     private fb:FormBuilder,
-    private alertCtrl:AlertController,) { 
+    private alertCtrl:AlertController,
+    private formData:FormulariosService,
+    ) { 
     this.miForm();    
     }
 
@@ -65,6 +69,8 @@ terminarP3(event){
     this.dataPaso3.markAllAsTouched();
   }else{
     // Navegacion
+    this.formData.mandar(this.dataPaso3.value).subscribe();
+    // ver envio de variable de propietario o alquiler
     this.router.navigate(['/comerciales/4'])
   };
 }

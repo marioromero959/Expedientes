@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
+import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+
 @Component({
   selector: 'app-paso4',
   templateUrl: './paso4.page.html',
-  styleUrls: ['./paso4.page.scss'],
+  styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso4Page implements OnInit {
 
@@ -15,6 +17,7 @@ export class Paso4Page implements OnInit {
     private router:Router,
     private fb:FormBuilder,
     private alertCtrl:AlertController,
+    private formData:FormulariosService,
     ) {
       this.miForm();
     }
@@ -27,7 +30,7 @@ export class Paso4Page implements OnInit {
       this.dataPaso4.markAllAsTouched();
       this.presentAlert();
     }else{
-      // console.log(this.dataPaso4.value)
+      this.formData.mandar(this.dataPaso4.value).subscribe();
       this.router.navigate(['/comerciales/5']);
     }
   }

@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/comerciales/1">
     </ion-back-button>
   </ion-buttons>
-    <ion-title>Hab Comerciales</ion-title>
+    <ion-title>Habilitaciones Comerciales</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -37,8 +37,11 @@
   <ion-item>
     <ion-label position="floating">Tipo de Societario</ion-label>
     <ion-select (ionChange)="tipo($event)" cancelText="Cancelar" okText="OK">
-      <ion-select-option value="Societario 1">Soc 1</ion-select-option>
-      <ion-select-option value="Societario 2">Soc 2</ion-select-option>
+      <ion-select-option value="Entidades sin fines de lucro">Entidades sin fines de lucro</ion-select-option>
+      <ion-select-option value="Sociedad anónima simplificada">Sociedad anónima simplificada</ion-select-option>
+      <ion-select-option value="Sociedad simple">Sociedad simple</ion-select-option>
+      <ion-select-option value="Sociedad de Resp Limitada">Sociedad de Resp Limitada</ion-select-option>
+      <ion-select-option value="Sociedad anónima">Sociedad anónima</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
@@ -119,13 +122,14 @@
   <ion-item>
     <ion-label position="floating">En caracter de:</ion-label>
     <ion-select (ionChange)="selCaracter($event)" cancelText="Cancelar" okText="OK">
-      <ion-select-option value="Caracter 1">Caracter 1</ion-select-option>
-      <ion-select-option value="Caracter 2">Caracter 2</ion-select-option>
+      <ion-select-option value="Titular">Titular</ion-select-option>
+      <ion-select-option value="Apoderado">Apoderado</ion-select-option>
+      <ion-select-option value="Representante legal">Representante legal</ion-select-option>
     </ion-select>
   </ion-item>
   <br>
   <ion-row class="ion-justify-content-center">
-    <ion-button type="submit" color="secondary">
+    <ion-button type="submit" color="secondary" shape=round>
       Siguiente
     </ion-button>
   </ion-row>

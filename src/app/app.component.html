@@ -13,16 +13,19 @@
           <ion-label>Mi cuenta</ion-label>
         </ion-item>
         <ion-item [routerLink]= "['/editar-perfil']">
-          Editar Perfil
+          <ion-label>
+            Editar Perfil
+          </ion-label>
         </ion-item>
         <ion-item [routerLink]= "['/tramites']">
-          Mis trámites
+          <ion-label>
+            Mis trámites
+          </ion-label>
         </ion-item>
         <ion-item>
           <ion-button (click)= "logout()" color="danger" fill="outline" >
             Cerrar Sesión
           </ion-button>
-          <!-- <ion-text [routerLink]= "['/']" color="danger">Cerrar Sesión</ion-text> -->
         </ion-item>
       </ion-menu-toggle>
       </ion-list>

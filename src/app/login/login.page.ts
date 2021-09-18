@@ -55,13 +55,14 @@ goToRegister(){
 }
 
 login(){
-  if(this.ingreso.invalid){
+/*   if(this.ingreso.invalid){
     this.ingreso.markAllAsTouched();
     return;
   }else{
     this.ingresado = true;
     this.iniciar(this.ingreso);
-  }
+  } */
+  this.router.navigate(['/home']);
 }
 
 iniciar(ingreso){
@@ -78,8 +79,5 @@ get emailField(){
 get passwordField(){
   return this.ingreso.get('password');
 }
-
-// hacer funcion con google
-// loginGoogle(){}
 
 }

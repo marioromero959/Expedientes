@@ -10,83 +10,87 @@
 
 <ion-content>
 
- <ion-item>
+ <ion-item lines=none>
   <ion-thumbnail slot="start">
-    <img src="../assets/mario.jpeg">
+    <img src="">
   </ion-thumbnail>
-  <ion-label>
+  <ion-label lines=none>
     <h2>Tu perfil</h2>
     <p>Bienvenido</p>
   </ion-label>
-  <ion-button fill="outline" slot="end">Editar</ion-button>
+  <ion-button fill="outline" shape=round slot="end">Editar</ion-button>
 </ion-item>
-
 
    <ion-card mode="ios">
     <ion-card-header>
-      <ion-card-title style="font-size: medium;">Información personal
+      <ion-card-title color="secondary" style="font-size: medium;">Información personal
       </ion-card-title>
     </ion-card-header>
-  
-    <!-- ver items mas largos -->
     <ion-card-content>
-      <ion-list>
-            <ion-label>Correo electronico</ion-label>
-          <ion-item>
-            <ion-label>marioromero959@gmail.com</ion-label>
-          </ion-item>
-            <ion-label>Celular</ion-label>
-          <ion-item>
-            <ion-label>3517648146</ion-label>
-          </ion-item>
-            <ion-label>Dirección</ion-label>
-          <ion-item>
-            <ion-label>Av dondesea123</ion-label>
-          </ion-item>
-            <ion-label>Teléfono Fijo</ion-label>
-          <ion-item>
-            <ion-label>3517648146</ion-label>
-          </ion-item>
-            <ion-label>Localidad</ion-label>
-          <ion-item>
-            <ion-label>Gualeguay</ion-label>
-          </ion-item>
-      </ion-list>
+        <ion-list *ngFor= "let user of userData">
+      <ion-label>
+        Correo Electrónico
+      </ion-label>
+      <ion-item lines=none>
+        {{user.correo}}
+      </ion-item>
+      <ion-label>
+        Dirección
+      </ion-label>
+      <ion-item lines=none>
+        {{user.direccion}}
+      </ion-item>
+      <ion-label>
+        Celular
+      </ion-label>
+      <ion-item lines=none>
+        {{user.celular}}
+      </ion-item>
+      <ion-label>
+        Teléfono
+      </ion-label>
+      <ion-item lines=none>
+        {{user.telefono}}
+      </ion-item>
+      <ion-label>
+        Localidad
+      </ion-label>
+      <ion-item lines=none>
+        {{user.localidad}}
+      </ion-item>
+        </ion-list>
     </ion-card-content>
   </ion-card> 
 
   <ion-card mode="ios">
     <ion-card-header>
-      <ion-card-title style="font-size: medium;">
+      <ion-card-title color="secondary" style="font-size: medium;">
         Seguridad de mi cuenta
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-label>
-        Usuario
-      </ion-label>
-      <ion-item>
+      <ion-list *ngFor= "let user of userData">
         <ion-label>
-          mario-romero
+          Usuario
         </ion-label>
-      </ion-item>
-      <ion-label>
-        Contraseña
-      </ion-label>
-      <ion-item>
-        <ion-label >
-          loquesea
+        <ion-item lines=none>
+          {{user.usuario}}
+        </ion-item>
+        <ion-label>
+          Contraseña
         </ion-label>
-      </ion-item>
-      <br>
-      <ion-button color="success" size="medium">
+        <ion-item lines=none>
+          {{user.contrasena}}
+        </ion-item>
+      </ion-list>
+      <ion-button color="danger" fill="clear">
         Cambiar contraseña
       </ion-button>
     </ion-card-content>
   </ion-card>
 
-  <ion-button color="danger" fill="clear" expand="full">
+  <ion-button fill="clear" expand="full" (click)="presentAlert()">
     Cerrar Sesion
   </ion-button>
 </ion-content>
