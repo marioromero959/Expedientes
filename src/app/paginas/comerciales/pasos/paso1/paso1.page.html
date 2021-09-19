@@ -21,7 +21,7 @@
     autocomplete="on"
     ></ion-input>
   </ion-item> 
-  <ion-item>
+  <ion-item >
     <ion-label position="floating">Cta Municipal</ion-label>
     <ion-input 
     type="number"
@@ -51,7 +51,7 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>  
-  <ion-item>
+<!--   <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
     <ion-select (ionChange)="solicitud($event)">
       <ion-select-option value="Ampliación de rubro">Ampliación de Rubro</ion-select-option>
@@ -64,7 +64,21 @@
       <ion-select-option value="Rehabilitación">Rehabilición</ion-select-option>
       <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
     </ion-select>
+  </ion-item> -->
+  
+
+  
+  
+  <h2>Tipo de Solicitud</h2>
+  <ion-item lines="none">
+    <ion-list>
+      <ion-item *ngFor="let tipo of tipos">
+        <ion-label>{{tipo.val}}</ion-label>
+        <ion-checkbox value="{{tipo.val}}" (ionChange)="obtenerTipo($event)" slot="start"></ion-checkbox>
+      </ion-item>
+    </ion-list>
   </ion-item>
+  
   <br>
    <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary" shape=round>

@@ -12,12 +12,11 @@
 <h1>
   Habilitaciones comerciales - Paso 6
 </h1>
-<h2>Sellaldo de Apertura</h2>
+<!-- <h2>Sellaldo de Apertura</h2>
 <ion-card>
   <ion-card-header>
     <ion-card-title color=danger>DATOS PARA TRANSFERENCIA</ion-card-title>
   </ion-card-header>
-
   <ion-card-content>
     <p>CBU Municipalidad de Gualeguay: 1245678913245678912456789</p>
     <p>CUIT:30-123456789-1</p>
@@ -30,100 +29,104 @@
     <p>*Adjuntar el comprobante.</p>
     <p>*Si desea pagar plus por pago, debera solicitar la boleta correspondiente a rentas@gualeguay.gob.ar. </p>
   </ion-card-content>
-</ion-card> 
+</ion-card>  -->
 <h2>Documentación a adjuntar</h2>
-   <ion-row>
-     <ion-col offset=0.5>  
-         <ion-label>Constancia de inscripción con sist registral</ion-label>
-         <ion-input 
-         type=file
-         accept=".jpg, .jpeg, .pdf"
-         multiple=true
-         (change)="select($event)" 
-         ></ion-input>
-      </ion-col>
-    </ion-row>
-
+<!-- 
+  <div *ngFor="let a of nombresDoc">
     <ion-row>
       <ion-col offset=0.5>  
-          <ion-label>Constancia de inscripción en ATER</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>Constancia de sellado</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>Contrato de alguiler/comodato, en caso de corresponder</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>Copia de impuesto inmobiliario o tasa inmobiliaria donde conste numero de partida del inmueble</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>DNI del titular - Dorso</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>DNI del titular - Frente</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row>
-      <ion-col offset=0.5>  
-          <ion-label>Plano/Croquis del lugar donde se desarrollará la actividad (Opcional)</ion-label>
-          <ion-input 
-          type=file
-          accept=".jpg, .jpeg, .pdf"
-          multiple=true
-          (change)="select($event)" 
-          ></ion-input>
-       </ion-col>
-     </ion-row>
-     <ion-row class="ion-justify-content-center">
-      <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
-        Siguiente
-      </ion-button>
-    </ion-row>  
+        <ion-label> {{a.name}} </ion-label>
+        <ion-input 
+        type=file
+        accept=".jpg, .jpeg, .pdf"
+        multiple=true
+        (change)="select($event)" 
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+  </div>
+<ion-row class="ion-justify-content-center">
+  <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
+    Siguiente
+  </ion-button>
+</ion-row>  
+ -->
+
+<form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
+  <ion-item lines=none>
+        <ion-input 
+        type=file
+        formControlname="registral"
+        accept=".jpg, .jpeg, .pdf"
+        multiple=true
+        (change)="select($event)" 
+        ></ion-input>
+  </ion-item>
+  <ion-item lines=none>
+    <ion-input 
+    type=file
+    formControlname="ater"
+    accept=".jpg, .jpeg, .pdf"
+    multiple=true
+    (change)="select($event)" 
+    ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="sellado"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="alquiler"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="impuesto"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="DNIdorso"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="DNIfrente"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+<ion-item lines=none>
+  <ion-input 
+  type=file
+  formControlname="planos"
+  accept=".jpg, .jpeg, .pdf"
+  multiple=true
+  (change)="select($event)" 
+  ></ion-input>
+</ion-item>
+  <ion-button type="submit" color="secondary" shape="round">
+    Siguiente
+  </ion-button>
+</form>
 </ion-content>
