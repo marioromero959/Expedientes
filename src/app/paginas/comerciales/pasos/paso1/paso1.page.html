@@ -51,9 +51,10 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>  
-<!--   <ion-item>
+
+<!--    <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
-    <ion-select (ionChange)="solicitud($event)">
+    <ion-select multiple=true (ionChange)="solicitud($event)">
       <ion-select-option value="Ampliación de rubro">Ampliación de Rubro</ion-select-option>
       <ion-select-option value="Apertura de sucursal">Apertura de Sucursal</ion-select-option>
       <ion-select-option value="Cambio de domicilio">Cambio de Domicilio</ion-select-option>
@@ -64,26 +65,20 @@
       <ion-select-option value="Rehabilitación">Rehabilición</ion-select-option>
       <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
     </ion-select>
-  </ion-item> -->
-  
+  </ion-item>  -->
 
   
-  
-  <h2>Tipo de Solicitud</h2>
-  <ion-item lines="none">
-    <ion-list>
-      <ion-item *ngFor="let tipo of tipos">
-        <ion-label>{{tipo.val}}</ion-label>
-        <ion-checkbox value="{{tipo.val}}" (ionChange)="obtenerTipo($event)" slot="start"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-  </ion-item>
-  
+
+
+  <p *ngIf="mostrar" class="ion-text-center">Debe elegir al menos una opción para continuar</p>
+  <p *ngIf=condicion>
+    (No se puede puede tildar Solicitud de Inscripción o Cierre definitivo con otra opción a la vez)
+  </p>
   <br>
-   <ion-row class="ion-justify-content-center">
+  <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary" shape=round>
       Siguiente
     </ion-button>
   </ion-row>  
-  </form> 
+</form> 
 </ion-content>
