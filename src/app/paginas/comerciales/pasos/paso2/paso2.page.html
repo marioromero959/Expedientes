@@ -14,7 +14,8 @@
   Habilitaciones comerciales - Paso 2
 </h1>
   <form [formGroup]= 'dataPaso2' (ngSubmit)="terminarP2($event)">
-  <h2>Razón de persona jurídica</h2>
+  <h2>Datos de {{persona[0]}}</h2>
+  <div *ngIf="tipoPersona">
   <ion-item>
     <ion-label position=floating>
       Razón Social
@@ -54,7 +55,10 @@
     doneText="OK"
     ></ion-datetime>
   </ion-item>
-  <h2>Responsable de la persona jurídica</h2>
+</div>
+
+
+  <h2 *ngIf="tipoPersona">Responsable de la persona jurídica</h2>
   <ion-item>
     <ion-label position=floating>
       Apellido
@@ -73,13 +77,22 @@
     formControlName="nombres"
     autocomplete=on></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="tipoPersona">
     <ion-label position=floating>
       CUIT  
     </ion-label>
     <ion-input
     type=number
     formControlName="cuit"
+    autocomplete=on></ion-input>
+  </ion-item>
+  <ion-item *ngIf="tipoPersona !== 'Persona Jurídica' ">
+    <ion-label position=floating>
+      DNI  
+    </ion-label>
+    <ion-input
+    type=number
+    formControlName="dni"
     autocomplete=on></ion-input>
   </ion-item>
   <ion-item>
@@ -92,7 +105,7 @@
     doneText="OK"
     ></ion-datetime>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="tipoPersona">
     <ion-label position=floating>
       Domicilio
     </ion-label>
@@ -101,7 +114,7 @@
     formControlName="domicilio"
     autocomplete=on></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="tipoPersona">
     <ion-label position=floating>
       Localidad
     </ion-label>
@@ -121,7 +134,7 @@
   </ion-item>
   <ion-item>
     <ion-label position="floating">En caracter de:</ion-label>
-    <ion-select (ionChange)="selCaracter($event)" cancelText="Cancelar" okText="OK">
+    <ion-select (ionChange)="selCaracter($event)" cancelText="Cancelar" okText="OK" [value]="valor" [disabled]="desabilitado">
       <ion-select-option value="Titular">Titular</ion-select-option>
       <ion-select-option value="Apoderado">Apoderado</ion-select-option>
       <ion-select-option value="Representante legal">Representante legal</ion-select-option>

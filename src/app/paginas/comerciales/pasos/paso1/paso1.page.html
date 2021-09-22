@@ -37,7 +37,7 @@
     </ion-select>
   </ion-item>
   <ion-list>
-    <ion-radio-group (ionChange)="select($event)" value="">
+    <ion-radio-group (ionChange)="selecLocal($event)" value="">
       <ion-list-header>
         <ion-label>Posee Local</ion-label>
       </ion-list-header>
@@ -52,7 +52,7 @@
     </ion-radio-group>
   </ion-list>  
 
-<!--    <ion-item>
+  <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
     <ion-select multiple=true (ionChange)="solicitud($event)">
       <ion-select-option value="Ampliación de rubro">Ampliación de Rubro</ion-select-option>
@@ -65,10 +65,7 @@
       <ion-select-option value="Rehabilitación">Rehabilición</ion-select-option>
       <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
     </ion-select>
-  </ion-item>  -->
-
-  
-
+  </ion-item>  
 
   <p *ngIf="mostrar" class="ion-text-center">Debe elegir al menos una opción para continuar</p>
   <p *ngIf=condicion>

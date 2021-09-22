@@ -72,7 +72,8 @@
     autocomplete=on></ion-input>
   </ion-item>
 </div>
-  <ion-radio-group (ionChange)="select($event)" value="">
+
+  <ion-radio-group (ionChange)="select($event)" value="" *ngIf="local" >
     <ion-list-header>
       <ion-label>¿Posee el mismo domicilio?</ion-label>
     </ion-list-header>
@@ -85,6 +86,7 @@
       <ion-radio slot="start" value="no"></ion-radio>
     </ion-item>
   </ion-radio-group>
+
   <div formGroupName="domComercial">
     <h2>Domicilio Comercial</h2>
     <ion-item>
@@ -151,7 +153,7 @@
       autocomplete=on></ion-input>
     </ion-item>
     <ion-list>
-      <ion-radio-group (ionChange)="local($event)" value="">
+      <ion-radio-group (ionChange)="alquiler($event)" value="">
         <ion-item lines=none>
           <ion-label>Propietario</ion-label>
           <ion-radio slot="start" value="Propietario"></ion-radio>
@@ -163,6 +165,7 @@
       </ion-radio-group>
     </ion-list> 
   </div>
+
   <ion-row class="ion-justify-content-center">
     <ion-button type="submit" color="secondary" shape=round>
       Siguiente

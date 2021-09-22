@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { BehaviorService } from '../behavior.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +28,6 @@ export class LoginPage implements OnInit {
     private auth: AutenticacionService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private bs: BehaviorService,
   ){}
 
   ngOnInit() {
@@ -68,7 +66,6 @@ login(){
 iniciar(ingreso){
   this.auth.userLogin(ingreso.value.email, ingreso.value.password).pipe(first()).subscribe(data =>{
     const userDatos = data;
-    this.bs.mandar(userDatos).subscribe();
     this.router.navigate(['/home']);
   } )
 }

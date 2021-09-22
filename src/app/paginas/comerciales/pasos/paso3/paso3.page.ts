@@ -17,13 +17,18 @@ export class Paso3Page implements OnInit {
   domComercial:FormGroup;
   opSelect:string = '';
   seleccion:string = '';
+  local:string;
 
   constructor(    
     private router: Router,
     private fb:FormBuilder,
     private alertCtrl:AlertController,
     private formData:FormulariosService,
-    ) { 
+    ) {
+      // Recibo si tiene local o no desde el paso 1
+      this.formData.obtener().subscribe(res =>{
+        this.local = res[1];
+      })
     this.miForm();    
     }
 
@@ -57,7 +62,7 @@ export class Paso3Page implements OnInit {
     }
   }
 
-  local(event){
+  alquiler(event){
     this.seleccion = event.detail.value;
     console.log(this.seleccion)
   }

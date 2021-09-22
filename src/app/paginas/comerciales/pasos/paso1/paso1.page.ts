@@ -17,17 +17,6 @@ export class Paso1Page implements OnInit {
   solic:any[]=[];
   mostrar = true;
   condicion = false;  
-  public tipos = [
-    {value: 'Ampliación de rubro'},
-    {value: 'Apertura de sucursal'},
-    {value: 'Cambio de domicilio'},
-    {value: 'Cambio de Responsable'},
-    {value: 'Cambio de rubro'},
-    {value: 'Cese de Actividad'},
-    {value: 'Rehabilitación'},
-    {value: 'Cierre Definitivo'},
-    {value: 'Solicitud de Inscripción'}
-  ];
 
   constructor(
     private router: Router,
@@ -39,20 +28,21 @@ export class Paso1Page implements OnInit {
   }
   ngOnInit() {
   }
-
+  // Obtengo los campos
   tipo(event){
     this.persona = event.detail.value;
   }
-  select(event){
+  selecLocal(event){
     this.opcionSelec = event.detail.value;
   };
-
   solicitud(event){
+    // Mostrar mensaje de completado
     if(event.detail.value == ''){
       this.mostrar = true;
     }else{
       this.mostrar = false;
     }
+    // Desabilito el input de Nro de cuenta y vacio el array de tipos 
     if(event.detail.value.includes("Solicitud de Inscripción")){
         event.detail.value.splice(0,event.detail.value.length, "Solicitud de Inscripción");
         this.dataPaso1.get('cuenta').patchValue('');
@@ -63,18 +53,15 @@ export class Paso1Page implements OnInit {
       this.dataPaso1.controls['cuenta'].enable();
       this.condicion = true;
     }else{
+      // Habilito Nro de cuenta y muestro template de error
       this.dataPaso1.controls['cuenta'].enable();
       this.condicion = false;
     }
-
-
-    // console.log(event.detail.value);
-
-
+    this.solic = event.detail.value;
   };
 
   terminarP1(event){
-    if (this.dataPaso1.valid) {
+    if (this.dataPaso1.valid){
       const value = {
         cuit: this.dataPaso1.value.cuit,
         cuenta:this.dataPaso1.value.cuenta,
@@ -82,13 +69,14 @@ export class Paso1Page implements OnInit {
         local:this.opcionSelec,
         solicitud:this.solic,
       };
-      // cambiar if ---------
-      if(value.tipo == '' || value.local == ''){
+      if(value.tipo == '' || value.local == '' || this.mostrar == true){
         this.presentAlert();
       }else{
+        // Envio el formulario al servicio
         this.formData.mandar(value).subscribe();
-        console.log(value);
-        // this.router.navigate(['/comerciales/2']);
+        // Mando el tipo de solicitud para generar paso 2 y si tiene local para el paso 3 
+        this.formData.enviar(value.tipo,value.local).subscribe();
+        this.router.navigate(['/comerciales/2']);
       };
     }else{
       this.presentAlert();
