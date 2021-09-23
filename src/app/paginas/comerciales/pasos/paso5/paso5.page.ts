@@ -14,9 +14,15 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
 export class Paso5Page implements OnInit {
 
   dataPaso5: FormGroup;
-  mostrar:boolean = false;
+  mostratAct:boolean = false;
+  mostrarEstudio:boolean = false;
   actividades = [];
+  estudio = [];
   value:any[] = [];
+  cambio;
+  paso:number;
+  disabledButton:boolean = false;
+  navegacion:string = '';
 
   constructor(
     private router:Router,
@@ -25,13 +31,18 @@ export class Paso5Page implements OnInit {
     private modalCtrl:ModalController,
     private formData:FormulariosService,
     ) {
+    //Recibo de paso 3 si es propietario o alquiler 
+      this.cambio = this.formData.obtener().subscribe(res =>{
+        (res[0] == 'Propietario') ? this.paso = 4 : this.paso = 5;
+        (res[0] == 'Propietario') ? this.navegacion = '/comerciales/3' : this.navegacion = '/comerciales/4';
+        this.cambio = res[0];
+      })
       this.miForm();
     }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   terminarP5(event){
-    if(this.dataPaso5.invalid || this.mostrar == false){
+    if(this.dataPaso5.invalid || this.mostratAct == false){
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
@@ -77,7 +88,7 @@ async agregarAct(){
       }else{
         this.actividades.push(data);
         this.value.push(data);
-        this.mostrar = true;
+        this.mostratAct = true;
       }
 }
 async  agregarEstudio(){
@@ -97,7 +108,9 @@ async  agregarEstudio(){
     if(data === undefined){
       console.log('Cancelado');
     }else{
+      this.estudio.push(data);
       this.value.push(data);
+      this.mostrarEstudio = true;
     }
 }
 }

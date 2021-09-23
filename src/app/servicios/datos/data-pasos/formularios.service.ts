@@ -28,7 +28,6 @@ export class FormulariosService {
     const info = [];
     info.push(cadena,op);
       this.bd.next(info);
-      console.log('la bd',this.bd.value)
       return this.bd.asObservable();
   }
 

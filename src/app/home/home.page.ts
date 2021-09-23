@@ -23,8 +23,7 @@ export class HomePage {
     private router: Router) {
     }
 
-  ngOnInit(){
-  }
+  ngOnInit(){}
   // Abrir y cerrar menu lateral
   openFirst() {
     this.menu.enable(true, 'first');
@@ -68,5 +67,4 @@ export class HomePage {
 
   await alert.present();
   };
-
 }

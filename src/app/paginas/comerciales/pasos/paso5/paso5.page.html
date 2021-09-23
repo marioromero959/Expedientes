@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start"> 
-      <ion-back-button defaultHref="/comerciales/4">
+      <ion-back-button [defaultHref]="navegacion">
     </ion-back-button>
   </ion-buttons>
     <ion-title>Habilitaciones Comerciales</ion-title>
@@ -10,7 +10,7 @@
 
 <ion-content>
 <h1>
-  Habilitaciones comerciales - Paso 5
+  Habilitaciones comerciales - Paso {{paso}}
 </h1>
   <form [formGroup]= 'dataPaso5' (ngSubmit)="terminarP5($event)">
   <h2>Datos Económicos</h2>
@@ -49,14 +49,33 @@
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
-    <ion-button type=button color="primary" (click)="agregarEstudio()" shape=round>
+    <ion-button type=button 
+                color="primary"
+                (click)="agregarEstudio()" 
+                shape=round 
+                *ngIf="!mostrarEstudio">
       Agregar Estudio Contable 
       <ion-icon slot="end" name="duplicate-outline"></ion-icon>
     </ion-button>
   </ion-row>
 
-  <h2>Actividades Agregadas</h2>
-<div *ngIf= "mostrar; else elseBlock">
+<div *ngIf= "mostrarEstudio"  class="ion-text-center">
+  <h2>Datos de Estudio Contable</h2>
+  <ion-row>
+    <ion-col size=4>Descripción</ion-col>
+    <ion-col size=4>Teléfono</ion-col>
+    <ion-col size=4>Email</ion-col>
+  </ion-row>
+  <ion-row *ngFor= "let act of estudio">
+    <ion-col> {{act.estudio}} </ion-col>
+    <ion-col> {{act.telefono}} </ion-col>
+    <ion-col> {{act.email}} </ion-col>
+  </ion-row>
+</div>
+
+<br>
+<h2>Actividades Agregadas</h2>
+<div *ngIf= "mostratAct; else elseBlock">
   <ion-row>
     <ion-col>Fecha</ion-col>
     <ion-col size=8>Descripción</ion-col>

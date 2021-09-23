@@ -33,6 +33,16 @@ export class Paso3Page implements OnInit {
     }
 
   ngOnInit() {
+    // En caso de poseer local, agrego validacoines a los campos de domicilio comercial
+    if(this.local != 'no'){
+      this.dataPaso3.get(['domComercial','calleC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','numeroCalleC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','pisoC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','provinciaC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','localidadC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','codPostalC']).setValidators(Validators.required);
+      this.dataPaso3.get(['domComercial','partida']).setValidators(Validators.required);
+    }
   }
 
   select(event){
@@ -64,7 +74,6 @@ export class Paso3Page implements OnInit {
 
   alquiler(event){
     this.seleccion = event.detail.value;
-    console.log(this.seleccion)
   }
 
 
@@ -73,10 +82,22 @@ terminarP3(event){
     this.presentAlert();
     this.dataPaso3.markAllAsTouched();
   }else{
-    // Navegacion
-    this.formData.mandar(this.dataPaso3.value).subscribe();
-    // ver envio de variable de propietario o alquiler
-    this.router.navigate(['/comerciales/4'])
+    // Si tengo local mando ambos domicilios
+    if(this.local != 'no'){
+      this.formData.mandar(this.dataPaso3.value).subscribe();
+      // Envio si es alquilado o no
+      this.formData.enviar(this.seleccion).subscribe();
+      if(this.seleccion == 'Alquiler'){
+        this.router.navigate(['/comerciales/4'])
+      }else{
+        this.router.navigate(['/comerciales/5'])
+      }
+      // Sino solo domicilio fiscal
+    }else{
+      this.formData.mandar(this.dataPaso3.value.domFiscal).subscribe();
+      // (Mostrar 5 como 4)
+      this.router.navigate(['/comerciales/5'])
+  }
   };
 }
 
@@ -93,18 +114,16 @@ private miForm(){
     }),
   //Domicilio comercial
     domComercial: this.fb.group({
-      calleC: ['', Validators.required],
-      numeroCalleC: ['', Validators.required],
-      pisoC: ['', Validators.required],
-      provinciaC: ['', Validators.required],
-      localidadC: ['', Validators.required],
-      codPostalC: ['', Validators.required],
-      partida: ['', Validators.required],
+      calleC: [''],
+      numeroCalleC: [''],
+      pisoC: [''],
+      provinciaC: [''],
+      localidadC: [''],
+      codPostalC: [''],
+      partida: [''],
       })
   })
-
 }
-
 async presentAlert() {
   const alert = await this.alertCtrl.create({
     cssClass: 'my-custom-class',

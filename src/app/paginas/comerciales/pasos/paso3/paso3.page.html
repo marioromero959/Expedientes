@@ -73,7 +73,7 @@
   </ion-item>
 </div>
 
-  <ion-radio-group (ionChange)="select($event)" value="" *ngIf="local" >
+  <ion-radio-group (ionChange)="select($event)" value="" *ngIf="local != 'no'" >
     <ion-list-header>
       <ion-label>¿Posee el mismo domicilio?</ion-label>
     </ion-list-header>
@@ -87,7 +87,7 @@
     </ion-item>
   </ion-radio-group>
 
-  <div formGroupName="domComercial">
+  <div formGroupName="domComercial" *ngIf="local != 'no'">
     <h2>Domicilio Comercial</h2>
     <ion-item>
       <ion-label position=floating>
