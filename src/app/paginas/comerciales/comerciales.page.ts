@@ -15,10 +15,10 @@ info:Array<any> = [];
     private router: Router,
     private formData:FormulariosService,
   ) { 
-      this.formData.escucharData().subscribe((res) =>{
+/*       this.formData.escucharData().subscribe((res) =>{
         this.info = res;
         console.log('Arreglo:',this.info);
-      });
+      }); */
   }
 
   ngOnInit() {

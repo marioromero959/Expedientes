@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs'
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
-import { forEach } from '@angular-devkit/schematics';
 @Component({
   selector: 'app-paso1',
   templateUrl: './paso1.page.html',
   styleUrls: ['../estilos-pasos.scss'],
 })
-export class Paso1Page implements OnInit {
+export class Paso1Page implements OnInit, OnDestroy {
 
   dataPaso1:FormGroup;
   opcionSelec:string ='';
@@ -17,6 +17,9 @@ export class Paso1Page implements OnInit {
   solic:any[]=[];
   mostrar = true;
   condicion = false;  
+
+  private suscripcionForm1: Subscription;
+  private suscripcionForm2: Subscription;
 
   constructor(
     private router: Router,
@@ -73,10 +76,8 @@ export class Paso1Page implements OnInit {
         this.presentAlert();
       }else{
         // Envio el formulario al servicio
-        this.formData.mandar(value).subscribe();
-        // Mando el tipo de solicitud para generar paso 2 y si tiene local para el paso 3 
-        this.formData.enviar(value.tipo,value.local).subscribe();
-        this.router.navigate(['/comerciales/2']);
+       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
+      this.router.navigate(['/comerciales/2']);
       };
     }else{
       this.presentAlert();
@@ -100,5 +101,13 @@ async presentAlert() {
       cuit: ['', [Validators.required,Validators.minLength(10)]],
       cuenta: [{value:'', disabled:false}, [Validators.required,Validators.minLength(10)]],
     })
+  }
+
+  ngOnDestroy(){
+    if(this.suscripcionForm1)
+    this.suscripcionForm1.unsubscribe();
+    if(this.suscripcionForm1)
+    this.suscripcionForm2.unsubscribe();
+
   }
 }

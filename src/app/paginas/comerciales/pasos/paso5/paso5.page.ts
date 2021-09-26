@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController, ModalController } from '@ionic/angular';
@@ -11,7 +12,7 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
   templateUrl: './paso5.page.html',
   styleUrls: ['../estilos-pasos.scss'],
 })
-export class Paso5Page implements OnInit {
+export class Paso5Page implements OnInit, OnDestroy {
 
   dataPaso5: FormGroup;
   mostratAct:boolean = false;
@@ -24,6 +25,9 @@ export class Paso5Page implements OnInit {
   disabledButton:boolean = false;
   navegacion:string = '';
 
+  private suscripcionForm1: Subscription;
+  private suscripcionForm2: Subscription;
+
   constructor(
     private router:Router,
     private fb:FormBuilder,
@@ -32,10 +36,14 @@ export class Paso5Page implements OnInit {
     private formData:FormulariosService,
     ) {
     //Recibo de paso 3 si es propietario o alquiler 
-      this.cambio = this.formData.obtener().subscribe(res =>{
-        (res[0] == 'Propietario') ? this.paso = 4 : this.paso = 5;
-        (res[0] == 'Propietario') ? this.navegacion = '/comerciales/3' : this.navegacion = '/comerciales/4';
-        this.cambio = res[0];
+    this.suscripcionForm1 = this.formData.escucharData().subscribe(res =>{
+      if(res[2].domComercial != undefined){
+        this.cambio = res[2].domComercial.alquilado;
+      }else{
+        this.cambio = 'Propietario'
+      }
+         (this.cambio == 'Alquiler') ? this.paso = 5 : this.paso = 4;
+         (this.cambio == 'Alquiler') ? this.navegacion = '/comerciales/4' : this.navegacion = '/comerciales/3';
       })
       this.miForm();
     }
@@ -47,10 +55,12 @@ export class Paso5Page implements OnInit {
       this.presentAlert();
     }else{
       this.value.push(this.dataPaso5.value);
-      this.formData.mandar(this.value).subscribe();
+     this.suscripcionForm2 = this.formData.mandar(this.value,4).subscribe();
       this.router.navigate(['/comerciales/6'])
     }
   }
+
+  // MODIFICAR NOMBRES PASO 6 O 5 
 
 async presentAlert() {
     const alert = await this.alertCtrl.create({
@@ -112,5 +122,11 @@ async  agregarEstudio(){
       this.value.push(data);
       this.mostrarEstudio = true;
     }
+}
+ngOnDestroy(){
+  if(this.suscripcionForm1)
+  this.suscripcionForm1.unsubscribe();
+  if(this.suscripcionForm2)
+  this.suscripcionForm2.unsubscribe();
 }
 }

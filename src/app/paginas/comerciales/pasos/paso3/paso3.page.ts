@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
@@ -9,7 +10,7 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
   templateUrl: './paso3.page.html',
   styleUrls: ['../estilos-pasos.scss'],
 })
-export class Paso3Page implements OnInit {
+export class Paso3Page implements OnInit, OnDestroy {
 
   condicion:boolean = true;
   dataPaso3: FormGroup;
@@ -19,6 +20,11 @@ export class Paso3Page implements OnInit {
   seleccion:string = '';
   local:string;
 
+  private suscripcionForm1: Subscription;
+  private suscripcionForm2: Subscription;
+  private suscripcionForm3: Subscription;
+  private suscripcionForm4: Subscription;
+
   constructor(    
     private router: Router,
     private fb:FormBuilder,
@@ -26,15 +32,15 @@ export class Paso3Page implements OnInit {
     private formData:FormulariosService,
     ) {
       // Recibo si tiene local o no desde el paso 1
-      this.formData.obtener().subscribe(res =>{
-        this.local = res[1];
+      this.suscripcionForm1 = this.formData.escucharData().subscribe(res =>{
+        this.local = res[0].local;
       })
     this.miForm();    
     }
 
   ngOnInit() {
     // En caso de poseer local, agrego validacoines a los campos de domicilio comercial
-    if(this.local != 'no'){
+    if(this.local == 'si'){
       this.dataPaso3.get(['domComercial','calleC']).setValidators(Validators.required);
       this.dataPaso3.get(['domComercial','numeroCalleC']).setValidators(Validators.required);
       this.dataPaso3.get(['domComercial','pisoC']).setValidators(Validators.required);
@@ -82,23 +88,21 @@ terminarP3(event){
     this.presentAlert();
     this.dataPaso3.markAllAsTouched();
   }else{
-    // Si tengo local mando ambos domicilios
-    if(this.local != 'no'){
-      this.formData.mandar(this.dataPaso3.value).subscribe();
-      // Envio si es alquilado o no
-      this.formData.enviar(this.seleccion).subscribe();
+    if(this.local == 'si'){
       if(this.seleccion == 'Alquiler'){
+        this.dataPaso3.get(['domComercial','alquilado']).setValue('Alquiler');
+        this.suscripcionForm2 =  this.formData.mandar(this.dataPaso3.value,2).subscribe();
         this.router.navigate(['/comerciales/4'])
       }else{
+        this.dataPaso3.get(['domComercial','alquilado']).setValue('Propietario');
+        this.suscripcionForm3 =  this.formData.mandar(this.dataPaso3.value,2).subscribe();
         this.router.navigate(['/comerciales/5'])
       }
-      // Sino solo domicilio fiscal
     }else{
-      this.formData.mandar(this.dataPaso3.value.domFiscal).subscribe();
-      // (Mostrar 5 como 4)
+      this.suscripcionForm4 = this.formData.mandar(this.dataPaso3.value.domFiscal,2).subscribe();
       this.router.navigate(['/comerciales/5'])
-  }
-  };
+    }
+  }; 
 }
 
 private miForm(){
@@ -121,6 +125,7 @@ private miForm(){
       localidadC: [''],
       codPostalC: [''],
       partida: [''],
+      alquilado: [''],
       })
   })
 }
@@ -135,6 +140,16 @@ async presentAlert() {
 await alert.present();
 };
 
+ngOnDestroy(){
+  if(this.suscripcionForm1)
+  this.suscripcionForm1.unsubscribe();
+  if(this.suscripcionForm2)
+  this.suscripcionForm2.unsubscribe();
+  if(this.suscripcionForm3)
+  this.suscripcionForm3.unsubscribe();
+  if(this.suscripcionForm4)
+  this.suscripcionForm4.unsubscribe();
+}
 
 }
 

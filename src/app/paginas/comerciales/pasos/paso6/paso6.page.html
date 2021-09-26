@@ -10,7 +10,7 @@
 
 <ion-content>
 <h1>
-  Habilitaciones comerciales - Paso 6
+  Habilitaciones comerciales - Paso {{paso}}
 </h1>
 <!-- <h2>Sellaldo de Apertura</h2>
 <ion-card>
@@ -31,102 +31,29 @@
   </ion-card-content>
 </ion-card>  -->
 <h2>Documentación a adjuntar</h2>
-<!-- 
-  <div *ngFor="let a of nombresDoc">
-    <ion-row>
-      <ion-col offset=0.5>  
-        <ion-label> {{a.name}} </ion-label>
-        <ion-input 
-        type=file
-        accept=".jpg, .jpeg, .pdf"
-        multiple=true
-        (change)="select($event)" 
-        ></ion-input>
-      </ion-col>
-    </ion-row>
+
+<form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
+<div *ngFor="let documento of documentos">
+  <ion-row>
+    <ion-label>
+      {{documento.name}}
+    </ion-label>
+  </ion-row>
+  <ion-item lines=none>
+    <ion-input 
+    type=file
+    formControlname="documento.sName"
+    accept=".jpg, .jpeg, .pdf"
+    multiple=true
+    (change)="select($event)"
+    ></ion-input>
+</ion-item>
   </div>
 <ion-row class="ion-justify-content-center">
   <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
     Siguiente
   </ion-button>
 </ion-row>  
- -->
+</form> 
 
-<form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
-  <ion-item lines=none>
-        <ion-input 
-        type=file
-        formControlname="registral"
-        accept=".jpg, .jpeg, .pdf"
-        multiple=true
-        (change)="select($event)" 
-        ></ion-input>
-  </ion-item>
-  <ion-item lines=none>
-    <ion-input 
-    type=file
-    formControlname="ater"
-    accept=".jpg, .jpeg, .pdf"
-    multiple=true
-    (change)="select($event)" 
-    ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="sellado"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="alquiler"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="impuesto"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="DNIdorso"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="DNIfrente"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-<ion-item lines=none>
-  <ion-input 
-  type=file
-  formControlname="planos"
-  accept=".jpg, .jpeg, .pdf"
-  multiple=true
-  (change)="select($event)" 
-  ></ion-input>
-</ion-item>
-  <ion-button type="submit" color="secondary" shape="round">
-    Siguiente
-  </ion-button>
-</form>
 </ion-content>

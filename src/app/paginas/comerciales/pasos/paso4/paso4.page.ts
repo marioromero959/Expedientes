@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
@@ -9,9 +10,10 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
   templateUrl: './paso4.page.html',
   styleUrls: ['../estilos-pasos.scss'],
 })
-export class Paso4Page implements OnInit {
+export class Paso4Page implements OnInit, OnDestroy {
 
   dataPaso4: FormGroup;
+  private suscripcionForm1: Subscription;
 
   constructor(
     private router:Router,
@@ -30,7 +32,7 @@ export class Paso4Page implements OnInit {
       this.dataPaso4.markAllAsTouched();
       this.presentAlert();
     }else{
-      this.formData.mandar(this.dataPaso4.value).subscribe();
+     this.suscripcionForm1 = this.formData.mandar(this.dataPaso4.value,3).subscribe();
       this.router.navigate(['/comerciales/5']);
     }
   }
@@ -52,5 +54,9 @@ export class Paso4Page implements OnInit {
     apellido: ['',Validators.required],
     nombres: ['',Validators.required],
     })
+  }
+  ngOnDestroy(){
+    if(this.suscripcionForm1)
+    this.suscripcionForm1.unsubscribe();
   }
 }

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs'
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
@@ -9,7 +10,7 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
   templateUrl: './paso2.page.html',
   styleUrls: ['../estilos-pasos.scss'],
 })
-export class Paso2Page implements OnInit {
+export class Paso2Page implements OnInit, OnDestroy {
 
   dataPaso2: FormGroup;
   tipoSocietario:string = '';
@@ -22,6 +23,10 @@ export class Paso2Page implements OnInit {
   desabilitado = false;
   valor = '';
 
+  private suscripcionForm1: Subscription;
+  private suscripcionForm2: Subscription;
+  private suscripcionForm3: Subscription;
+
   constructor(
     private router: Router,
     private fb:FormBuilder,
@@ -29,11 +34,10 @@ export class Paso2Page implements OnInit {
     private formData:FormulariosService,
   ) {
     // Obtengo el tipo de persona
-    this.formData.obtener().subscribe(res => {
-      // res contiene el array de formularioService.ts
-      this.persona = res;
-      if(this.persona[0] == "Persona Jurídica"){
-        this.tipoPersona = "Persona Jurídica";
+    this.suscripcionForm1 = this.formData.escucharData().subscribe(res => {
+      this.persona = res[0].tipo;
+      if(res[0].tipo == "Persona Juridica"){
+        this.tipoPersona = "Persona Juridica";
       }else{
         this.desabilitado = true;
         this.valor = "Titular";
@@ -45,9 +49,9 @@ export class Paso2Page implements OnInit {
 
   ngOnInit() {
     // Agrego validaciones dependiendo el tipo de persona
-    if(this.tipoPersona != "Persona Jurídica")
+    if(this.tipoPersona != "Persona Juridica")
     this.dataPaso2.get('dni').setValidators(Validators.required);
-    if(this.tipoPersona == "Persona Jurídica"){
+    if(this.tipoPersona == "Persona Juridica"){
     this.dataPaso2.get('razon').setValidators(Validators.required);
     this.dataPaso2.get('domicilio').setValidators(Validators.required);
     this.dataPaso2.get('localidad').setValidators(Validators.required);
@@ -98,10 +102,10 @@ terminarP2(event){
       caracter: this.caracter,
     };
 //mando los valores al arreglo de formularios.ts
-    if(this.tipoPersona == "Persona Jurídica")
-    this.formData.mandar(juridica).subscribe();
-    if(this.tipoPersona != "Persona Jurídica")
-    this.formData.mandar(fisica).subscribe();
+    if(this.tipoPersona == "Persona Juridica")
+   this.suscripcionForm2 = this.formData.mandar(juridica,1).subscribe();
+    if(this.tipoPersona != "Persona Juridica")
+   this.suscripcionForm3 = this.formData.mandar(fisica,1).subscribe();
     // ---
     this.router.navigate(['/comerciales/3']);
     }else{
@@ -133,6 +137,14 @@ terminarP2(event){
     })
   }
 
+  ngOnDestroy(){
+    if(this.suscripcionForm1)
+    this.suscripcionForm1.unsubscribe();
+    if(this.suscripcionForm2)
+    this.suscripcionForm2.unsubscribe();
+    if(this.suscripcionForm3)
+    this.suscripcionForm3.unsubscribe();
+  }
 
 
 }
