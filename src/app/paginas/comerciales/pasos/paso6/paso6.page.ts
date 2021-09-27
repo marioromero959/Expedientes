@@ -14,7 +14,6 @@ export class Paso6Page implements OnInit, OnDestroy {
   
   datosP;
   paso:number;
-  navegacion:string = '';
   public archivos:any = [];
   dataPaso6: FormGroup;
   claseInput:boolean = false;  
@@ -94,10 +93,8 @@ export class Paso6Page implements OnInit, OnDestroy {
         if(this.datosP[0].local == 'no'){
           this.paso = 5
         }else{
-          console.log('hay local')
-          this.paso = 4
-            /*(this.datosP[2].domComercial.alquilado == 'Alquiler') ? this.paso = 6 : this.paso = 5;
-           (this.datosP[2].domComercial.alquilado == 'Alquiler') ? this.navegacion = '/comerciales/5' : this.navegacion = '/comerciales/4'; */
+          const local = this.datosP[2].domComercial.alquilado;
+          (local == 'Alquiler') ? this.paso = 6 : this.paso = 5;
         }
       })
       this.miForm();
@@ -106,10 +103,10 @@ export class Paso6Page implements OnInit, OnDestroy {
     this.mostrarDocs();
   }
 
+// Crear pipe de filtro de documentos
+
   mostrarDocs(){
     this.filtroDocs = this.documentos.filter(res=>{
-
-
         if(this.datosP[0].tipo == 'Persona Fisica'){
           if(this.datosP[0].local == 'si'){
             const rta = res.id != 13 && res.id != 14 && res.id != 15 && res.id != 19

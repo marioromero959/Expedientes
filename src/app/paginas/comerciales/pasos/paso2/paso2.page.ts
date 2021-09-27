@@ -77,42 +77,50 @@ selCaracter(event){
 }
 
 terminarP2(event){
-  if (this.dataPaso2.valid) {
-    // Si es válido, inrtoduzco valores en un objeto, dependiendo del tipo de persona
-    const fisica = {
-      dni:this.dataPaso2.value.dni,
-      apellido:this.dataPaso2.value.apellido,
-      nombres:this.dataPaso2.value.nombres,
-      fechaNacimiento:this.nacimiento,
-      nacionalidad:this.dataPaso2.value.nacionalidad,
-      caracter: this.caracter,
-    }
+   if (this.dataPaso2.valid && this.nacimiento !== '') {
+    if(this.tipoPersona == "Persona Juridica" && 
+      (this.caracter == '' || this.cierre == '' ||
+      this.inscripcion == '' ||
+      this.tipoSocietario == '')){
+        this.presentAlert();
+    }else{
     const juridica = {
-      razon: this.dataPaso2.value.razon,
-      societario: this.tipoSocietario,
-      inscripcion: this.inscripcion,
-      cierre: this.cierre,
-      apellido:this.dataPaso2.value.apellido,
-      nombres:this.dataPaso2.value.nombres,
-      cuit:this.dataPaso2.value.cuit,
-      fechaNacimiento:this.nacimiento,
-      domicilio:this.dataPaso2.value.domicilio,
-      localidad:this.dataPaso2.value.localidad,
-      nacionalidad:this.dataPaso2.value.nacionalidad,
-      caracter: this.caracter,
+    razon: this.dataPaso2.value.razon,
+    societario: this.tipoSocietario,
+    inscripcion: this.inscripcion,
+    cierre: this.cierre,
+    apellido:this.dataPaso2.value.apellido,
+    nombres:this.dataPaso2.value.nombres,
+    cuit:this.dataPaso2.value.cuit,
+    fechaNacimiento:this.nacimiento,
+    domicilio:this.dataPaso2.value.domicilio,
+    localidad:this.dataPaso2.value.localidad,
+    nacionalidad:this.dataPaso2.value.nacionalidad,
+    caracter: this.caracter,
     };
-//mando los valores al arreglo de formularios.ts
-    if(this.tipoPersona == "Persona Juridica")
-   this.suscripcionForm2 = this.formData.mandar(juridica,1).subscribe();
-    if(this.tipoPersona != "Persona Juridica")
-   this.suscripcionForm3 = this.formData.mandar(fisica,1).subscribe();
-    // ---
+    //mando los valores de juridica al arreglo de formularios.ts
+    this.suscripcionForm2 = this.formData.mandar(juridica,1).subscribe();
     this.router.navigate(['/comerciales/3']);
+  }
+    const fisica = {
+    dni:this.dataPaso2.value.dni,
+    apellido:this.dataPaso2.value.apellido,
+    nombres:this.dataPaso2.value.nombres,
+    fechaNacimiento:this.nacimiento,
+    nacionalidad:this.dataPaso2.value.nacionalidad,
+    caracter: this.caracter,
+    }
+    //mando los valores de fisica al arreglo de formularios.ts
+    if(this.tipoPersona != "Persona Juridica"){
+      this.suscripcionForm3 = this.formData.mandar(fisica,1).subscribe();
+      this.router.navigate(['/comerciales/3']);
+    }
     }else{
       this.presentAlert();
       this.dataPaso2.markAllAsTouched();
-    }
+    } 
   }
+
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
