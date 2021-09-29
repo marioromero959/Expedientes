@@ -9,10 +9,10 @@
 </ion-header>
 
 <ion-content>
-<h1>
+ <h1>
   Habilitaciones comerciales - Paso {{paso}}
 </h1>
-<!-- <h2>Sellaldo de Apertura</h2>
+ <h2>Sellaldo de Apertura</h2>
 <ion-card>
   <ion-card-header>
     <ion-card-title color=danger>DATOS PARA TRANSFERENCIA</ion-card-title>
@@ -29,11 +29,10 @@
     <p>*Adjuntar el comprobante.</p>
     <p>*Si desea pagar plus por pago, debera solicitar la boleta correspondiente a rentas@gualeguay.gob.ar. </p>
   </ion-card-content>
-</ion-card>  -->
+</ion-card>  
 <h2>Documentación a adjuntar</h2>
-
 <form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
-<div *ngFor="let documento of documentos">
+<div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic ">
   <ion-row>
     <ion-label>
       {{documento.name}}
@@ -54,6 +53,7 @@
     Siguiente
   </ion-button>
 </ion-row>  
-</form> 
+</form>  
+
 
 </ion-content>

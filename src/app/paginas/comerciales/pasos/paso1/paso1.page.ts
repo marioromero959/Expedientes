@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+
 @Component({
   selector: 'app-paso1',
   templateUrl: './paso1.page.html',

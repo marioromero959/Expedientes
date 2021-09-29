@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+import { FiltrosDocsPipe } from '../filtros-docs.pipe'
 
 @Component({
   selector: 'app-paso6',
@@ -79,6 +80,13 @@ export class Paso6Page implements OnInit, OnDestroy {
   ];
   filtroDocs = [];
 
+  // filtrado de documentos
+  filtroLocal = 'no';
+  filtroPersona = 'Persona Juridica';
+  filtroSolic = [
+    {id:'Apertura Sucursal'},
+    {id:'Cierre Sucursal'}];
+
   private suscripcionForm1: Subscription;
 
   constructor(
@@ -86,10 +94,14 @@ export class Paso6Page implements OnInit, OnDestroy {
     private fb:FormBuilder,
     private formData:FormulariosService,
     private alertCtrl:AlertController,) {
-      // Segun la informacion del paso 1, pediremos diferentes documentos
       // Segun la informacion del paso 3 mostraremos como paso 5 o 6
-    this.suscripcionForm1 =  this.formData.escucharData().subscribe(res=>{
+      this.suscripcionForm1 =  this.formData.escucharData().subscribe(res=>{
         this.datosP = res;
+
+        this.filtroLocal = this.datosP[0].local;
+        this.filtroPersona = this.datosP[0].tipo;
+        this.filtroSolic = this.datosP[0].solicitud;
+
         if(this.datosP[0].local == 'no'){
           this.paso = 5
         }else{
@@ -97,36 +109,11 @@ export class Paso6Page implements OnInit, OnDestroy {
           (local == 'Alquiler') ? this.paso = 6 : this.paso = 5;
         }
       })
-      this.miForm();
+      this.miForm(); 
+
     }
-  ngOnInit() {
-    this.mostrarDocs();
-  }
-
-// Crear pipe de filtro de documentos
-
-  mostrarDocs(){
-    this.filtroDocs = this.documentos.filter(res=>{
-        if(this.datosP[0].tipo == 'Persona Fisica'){
-          if(this.datosP[0].local == 'si'){
-            const rta = res.id != 13 && res.id != 14 && res.id != 15 && res.id != 19
-            return rta;
-          }else{
-            const rta = res.id != 13 && res.id != 14 && res.id != 15 && res.id != 19 && res.id != 4 && res.id != 5 && res.id != 6
-            return rta;
-          }
-        }else if(this.datosP[0].tipo == 'Persona Juridica'){
-          if(this.datosP[0].local == 'si'){
-            const rta = res.id != 3 && res.id != 7 && res.id != 8 && res.id != 17 && res.id != 18 
-            return rta;
-          }else{
-            const rta = res.id != 3 && res.id != 7 && res.id != 8 && res.id != 17 && res.id != 18 && res.id != 4 && res.id != 5 && res.id != 6 
-            return rta;
-          }
-        }
-    })
-    console.log(this.filtroDocs)
-  }
+    
+  ngOnInit() {}
 
   // Agrego las imagenes en base64 al arr de archivos
 select(event){
