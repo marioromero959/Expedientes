@@ -32,7 +32,7 @@
 </ion-card>  
 <h2>Documentación a adjuntar</h2>
 <form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
-<div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic ">
+<div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic">
   <ion-row>
     <ion-label>
       {{documento.name}}
@@ -54,6 +54,4 @@
   </ion-button>
 </ion-row>  
 </form>  
-
-
 </ion-content>

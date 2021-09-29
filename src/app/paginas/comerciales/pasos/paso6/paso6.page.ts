@@ -4,15 +4,16 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
-import { FiltrosDocsPipe } from '../filtros-docs.pipe'
-
+import { FiltrosDocsPipe } from '../filtros-docs.pipe';
 @Component({
   selector: 'app-paso6',
   templateUrl: './paso6.page.html',
   styleUrls: ['./paso6.page.scss'],
+  providers: [FiltrosDocsPipe]
 })
 export class Paso6Page implements OnInit, OnDestroy {
-  
+
+  filtroData;
   datosP;
   paso:number;
   public archivos:any = [];
@@ -78,19 +79,22 @@ export class Paso6Page implements OnInit, OnDestroy {
     name: 'DNI del Presidente o Socio representante - Dorso',
     sName:'DNIPresidenteDorso'},
   ];
-  filtroDocs = [];
+contador = 0;
+
+
 
   // filtrado de documentos
-  filtroLocal = 'no';
-  filtroPersona = 'Persona Juridica';
-  filtroSolic = [
-    {id:'Apertura Sucursal'},
-    {id:'Cierre Sucursal'}];
+  filtroLocal = '';
+  filtroPersona = '';
+  filtroSolic = [];
 
+
+  test;
   private suscripcionForm1: Subscription;
 
   constructor(
     private router:Router,
+    private filtroPipe:FiltrosDocsPipe,
     private fb:FormBuilder,
     private formData:FormulariosService,
     private alertCtrl:AlertController,) {
@@ -110,13 +114,15 @@ export class Paso6Page implements OnInit, OnDestroy {
         }
       })
       this.miForm(); 
-
     }
-    
-  ngOnInit() {}
+
+  ngOnInit() {
+  }
 
   // Agrego las imagenes en base64 al arr de archivos
 select(event){
+  this.contador += 1;
+  const count = this.contador;
   var reader = new FileReader();
   const self = this.archivos;
   const archivoCapturado = event.target.files[0];
@@ -124,7 +130,13 @@ select(event){
     reader.readAsDataURL(archivoCapturado); 
     reader.onloadend = function() {
         var base64data = reader.result;
-        self.push(base64data);
+
+
+        console.log('Contador:',count)
+
+// VER SI FUNCIONA EL CONTADOR COUNT  
+
+        // self.push(base64data);
       };
   }else{
     console.log('err')
@@ -135,13 +147,6 @@ terminarP6(){
 
   console.log(this.dataPaso6.value)
   // this.dataPaso6.get('registral').setValue(this.archivos[0]);
-  // this.dataPaso6.get('ater').setValue(this.archivos[1]);
-  // this.dataPaso6.get('sellado').setValue(this.archivos[2]);
-  // this.dataPaso6.get('alquiler').setValue(this.archivos[3]);
-  // this.dataPaso6.get('impuesto').setValue(this.archivos[4]);
-  // this.dataPaso6.get('DNIdorso').setValue(this.archivos[5]);
-  // this.dataPaso6.get('DNIfrente').setValue(this.archivos[6]);
-  // this.dataPaso6.get('planos').setValue(this.archivos[7]);
 
   if(this.archivos != ''){
     console.log('Del Form:',this.dataPaso6.value);

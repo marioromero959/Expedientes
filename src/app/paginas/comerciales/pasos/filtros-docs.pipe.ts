@@ -8,8 +8,8 @@ export class FiltrosDocsPipe implements PipeTransform {
   transform(value:any , ...args: any[]): unknown {
 
 // Argumentos 1:Local, 2:Tipo de persona, 3:Tipo de solicitud
-      console.log('Desde pipe',args)
-    
+
+// Filtro primero por local y tipo de persona
     const docs = value.filter(res => {
       if(args[1] === 'Persona Fisica'){
         if(args[0] === 'si'){
@@ -29,7 +29,7 @@ export class FiltrosDocsPipe implements PipeTransform {
         }
       }
     })
-
+// Filtro docs por tipo de solicitud
     const solicitud = docs.filter(res =>{
       if(
         args[2].includes('Solicitud de Inscripción') || 
@@ -38,7 +38,6 @@ export class FiltrosDocsPipe implements PipeTransform {
         args[2].includes('Rehabilitación') || 
         args[2].includes('Cambio de rubro') || 
         args[2].includes('Apertura de sucursal') ){
-        console.log(args[2])
         const rta = res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17
         if(args[2].includes('Cambio de Responsable')){
           const rta2 = res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17
@@ -62,10 +61,8 @@ export class FiltrosDocsPipe implements PipeTransform {
         console.log('Error')
       }
     })
-
     return solicitud;
     ;
-
   }
 
 }
