@@ -30,8 +30,7 @@ export class FiltrosDocsPipe implements PipeTransform {
       }
     })
 
-
-    const solicitud = value.filter(res =>{
+    const solicitud = docs.filter(res =>{
       if(
         args[2].includes('Solicitud de Inscripción') || 
         args[2].includes('Ampliación de rubro') || 
@@ -40,25 +39,31 @@ export class FiltrosDocsPipe implements PipeTransform {
         args[2].includes('Cambio de rubro') || 
         args[2].includes('Apertura de sucursal') ){
         console.log(args[2])
-        const rta = res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17  
+        const rta = res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17
+        if(args[2].includes('Cambio de Responsable')){
+          const rta2 = res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17
+          return rta2
+        }
+        if(args[2].includes('Cese de Actividad')){
+          const rta3 = res.id != 7 && res.id != 8 && res.id != 11  && res.id != 12 && res.id != 16 && res.id != 17
+          return rta3
+        }  
         return rta
       }else if(args[2].includes('Cambio de Responsable')){
         const rta = res.id != 9 && res.id != 10 && res.id != 11 && res.id != 12  
         return rta
       }else if(args[2].includes('Cese de Actividad')){
-        const rta = res.id == 9 && res.id == 10  
+        const rta = res.id != 1  && res.id != 2 && res.id != 3 && res.id != 4 && res.id != 5 && res.id != 6 && res.id != 7 && res.id != 8 && res.id != 11 && res.id != 12 && res.id != 13 && res.id != 14 && res.id != 15 && res.id != 16  && res.id != 17 && res.id != 18 && res.id != 19   
         return rta
       }else if(args[2].includes('Cierre Definitivo')){
-        const rta = res.id == 10 && res.id == 11  
+        const rta = res.id != 1  && res.id != 2 && res.id != 3 && res.id != 4 && res.id != 5 && res.id != 6 && res.id != 7 && res.id != 8 && res.id != 9 && res.id != 10 && res.id != 13 && res.id != 14 && res.id != 15 && res.id != 16  && res.id != 17 && res.id != 18 && res.id != 19   
         return rta
+      }else{
+        console.log('Error')
       }
     })
 
-
-    console.log('Filtro Solicitud:',solicitud)
-
-
-    return docs;
+    return solicitud;
     ;
 
   }

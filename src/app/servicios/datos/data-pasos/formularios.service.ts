@@ -21,7 +21,7 @@ export class FormulariosService {
       console.log('err');
     }
     this.bs.next(this.informacion);
-    console.log('Info de los formularios:', this.bs.value)
+    // console.log('Info de los formularios:', this.bs.value)
     return this.bs.asObservable();
   }
 // Devuelve la informacion obtenida 
