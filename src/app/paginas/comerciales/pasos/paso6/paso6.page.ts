@@ -110,7 +110,6 @@ export class Paso6Page implements OnInit, OnDestroy {
       this.miForm(); 
     }
   ngOnInit() {
-    this.archivos.fill('')
   }
 
   // Agrego las imagenes en base64 al arr de archivos
@@ -125,24 +124,28 @@ select(event,index,count){
     reader.readAsDataURL(archivoCapturado); 
     reader.onloadend = function() {
         var base64data = reader.result;
-        if(self[index] == '' || self[index] != '' ){
+        if(self[index] == '' || self[index] != ''){
           self.splice(index,1,base64data);
         }
       };
   }else{
-    console.log('err')
+    self.splice(index,1,null)
   }
 }
 
 terminarP6(){
-  
-  console.log('Imrpimo desde afuera, archivos:',this.archivos)
-  console.log(this.dataPaso6.value)
-  // this.dataPaso6.get('registral').setValue(this.archivos[0]);
+  console.log('Imprimo archivos:',this.archivos)
+  let filtrado = this.archivos.filter((res)=>{
+    return res   
+  })
 
-  if(this.archivos != ''){
-    console.log('Del Form:',this.dataPaso6.value);
- }
+  if(this.archivos.length != filtrado.length){
+    this.presentAlert();
+  }else{
+    // Navegacion
+    console.log('Archivos completos');
+  }
+
 
  if(this.dataPaso6.invalid){
   this.presentAlert();
