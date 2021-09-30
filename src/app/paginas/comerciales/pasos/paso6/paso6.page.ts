@@ -16,7 +16,7 @@ export class Paso6Page implements OnInit, OnDestroy {
   filtroData;
   datosP;
   paso:number;
-  public archivos:any = [];
+  archivos:any = [];
   dataPaso6: FormGroup;
   claseInput:boolean = false;  
   documentos = [
@@ -79,17 +79,11 @@ export class Paso6Page implements OnInit, OnDestroy {
     name: 'DNI del Presidente o Socio representante - Dorso',
     sName:'DNIPresidenteDorso'},
   ];
-contador = 0;
-
-
-
   // filtrado de documentos
   filtroLocal = '';
   filtroPersona = '';
   filtroSolic = [];
 
-
-  test;
   private suscripcionForm1: Subscription;
 
   constructor(
@@ -115,28 +109,25 @@ contador = 0;
       })
       this.miForm(); 
     }
-
   ngOnInit() {
+    this.archivos.fill('')
   }
 
   // Agrego las imagenes en base64 al arr de archivos
-select(event){
-  this.contador += 1;
-  const count = this.contador;
+select(event,index,count){
+  // count es el length del array a llenar
   var reader = new FileReader();
+  this.archivos.length = count;
   const self = this.archivos;
+
   const archivoCapturado = event.target.files[0];
   if(archivoCapturado){
     reader.readAsDataURL(archivoCapturado); 
     reader.onloadend = function() {
         var base64data = reader.result;
-
-
-        console.log('Contador:',count)
-
-// VER SI FUNCIONA EL CONTADOR COUNT  
-
-        // self.push(base64data);
+        if(self[index] == '' || self[index] != '' ){
+          self.splice(index,1,base64data);
+        }
       };
   }else{
     console.log('err')
@@ -144,7 +135,8 @@ select(event){
 }
 
 terminarP6(){
-
+  
+  console.log('Imrpimo desde afuera, archivos:',this.archivos)
   console.log(this.dataPaso6.value)
   // this.dataPaso6.get('registral').setValue(this.archivos[0]);
 
