@@ -10,4 +10,11 @@
 
 <ion-content>
 
+<div *ngFor="let i of arr">
+  {{i.id}}
+  <input type="text" [(ngModel)]="i.name" (click)="imprimir()">
+</div>
+
+
+
 </ion-content>

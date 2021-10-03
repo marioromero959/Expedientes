@@ -9,6 +9,21 @@ export class AtencionPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  arr = [
+    {id: 1,
+    name: 'mario'},
+    {id: 2,
+    name: 'juan'},
+    {id: 3,
+    name: 'jose'},
+  ]
+
+  ngOnInit() {
+
+  }
+
+imprimir(res){
+  console.log(res)
+}
 
 }

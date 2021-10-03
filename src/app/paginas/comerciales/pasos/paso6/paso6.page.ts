@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild,ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder} from '@angular/forms'
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
 import { FiltrosDocsPipe } from '../filtros-docs.pipe';
+
 @Component({
   selector: 'app-paso6',
   templateUrl: './paso6.page.html',
@@ -107,7 +108,6 @@ export class Paso6Page implements OnInit, OnDestroy {
           (local == 'Alquiler') ? this.paso = 6 : this.paso = 5;
         }
       })
-      this.miForm(); 
     }
   ngOnInit() {
   }
@@ -134,54 +134,23 @@ select(event,index,count){
 }
 
 terminarP6(){
-  console.log('Imprimo archivos:',this.archivos)
   let filtrado = this.archivos.filter((res)=>{
     return res   
   })
-
-  if(this.archivos.length != filtrado.length){
+  if(this.archivos.length != filtrado.length || this.archivos.length == 0){
     this.presentAlert();
   }else{
-    // Navegacion
+    this.formData.mandar(this.archivos,this.paso - 1).subscribe();
+    this.router.navigate(['/comerciales'])
     console.log('Archivos completos');
   }
-
-
- if(this.dataPaso6.invalid){
-  this.presentAlert();
-}else{
-  console.log('tamoready');
-}
 };
 
-private miForm(){
-  this.dataPaso6 = this.fb.group({
-  registral: ['',Validators.required],
-  ater: ['',Validators.required],
-  DNIfrente: ['',Validators.required],
-  alquiler: ['',Validators.required],
-  impuesto: ['',Validators.required],
-  planos: ['',Validators.required],
-  nuevoDNIfrente: ['',Validators.required],
-  baja: ['',Validators.required],
-  bajaAFIP: ['',Validators.required],
-  bajaActATER: ['',Validators.required],
-  bajaRegistralAFIP: ['',Validators.required],
-  bajaAter: ['',Validators.required],
-  DNIPresidenteFrente: ['',Validators.required],
-  acta: ['',Validators.required],
-  estatuto: ['',Validators.required],
-  sellado: ['',Validators.required],
-  nuevoDNIdorso: ['',Validators.required],
-  DNIdorso: ['',Validators.required],
-  DNIPresidenteDorso: ['',Validators.required],
-  })
-}
 
 async presentAlert() {
   const alert = await this.alertCtrl.create({
     cssClass: 'my-custom-class',
-    header: 'Datos Incompletos',
+    header: 'Datos Faltantes',
     subHeader: 'Por favor, agregue todos los archivos para continuar.',
     buttons: ['OK']
   });

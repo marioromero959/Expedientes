@@ -104,11 +104,10 @@ async presentAlert() {
     })
   }
 
-  ngOnDestroy(){
-    if(this.suscripcionForm1)
+  ngOnDestroy():void{
+  if(this.suscripcionForm1)
     this.suscripcionForm1.unsubscribe();
-    if(this.suscripcionForm1)
+    if(this.suscripcionForm2)
     this.suscripcionForm2.unsubscribe();
-
-  }
+  } 
 }

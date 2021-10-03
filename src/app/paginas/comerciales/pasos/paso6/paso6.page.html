@@ -31,27 +31,24 @@
   </ion-card-content>
 </ion-card>  
 <h2>Documentación a adjuntar</h2>
-<form [formGroup]= 'dataPaso6' (ngSubmit)="terminarP6($event)">
+<form>
 <div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic ; let i = index let count = count">
   <ion-row>
-    <ion-label>
+    <ion-label id='titulo'>
       {{documento.name}} 
     </ion-label>
   </ion-row>
   <ion-row>
-    <ion-col size="10">
+    <ion-col>
       <ion-item lines=none>
-        <ion-input 
+        <input 
         type=file
-        formControlname="documento.sName"
+        [id] = i
+        value = 'marito'
         accept=".jpg, .jpeg, .pdf"
         multiple=false
         (change)="select($event,i,count)">
-      </ion-input>
     </ion-item>
-  </ion-col>
-  <ion-col style="text-align: center ; align-items:center" >
-    <ion-icon name="trash" color="danger" size="large"></ion-icon>
   </ion-col>
 </ion-row>
 </div>
@@ -59,6 +56,7 @@
   <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
     Siguiente
   </ion-button>
-</ion-row>  
+</ion-row> 
 </form>  
+
 </ion-content>

@@ -9,24 +9,25 @@ import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formulari
 })
 export class ComercialesPage implements OnInit {
 
-info:Array<any> = [];
+  dataPaso1;
 
   constructor(
     private router: Router,
     private formData:FormulariosService,
-  ) { 
-/*       this.formData.escucharData().subscribe((res) =>{
-        this.info = res;
-        console.log('Arreglo:',this.info);
-      }); */
-  }
+  ) {}
 
   ngOnInit() {
+    this.formData.escucharData().subscribe((res) =>{
+    if(res){
+      this.dataPaso1 = res[0];
+    }else{
+      this.dataPaso1 = '';
+    }
+      console.log('Datos paso 1:',this.dataPaso1)
+    });
   }
-  nuevaHab(){
-    this.router.navigate(['/comerciales/1']);
-  }
-
-
+nuevaHab(){
+  this.router.navigate(['/comerciales/1']);
+}
 
 }

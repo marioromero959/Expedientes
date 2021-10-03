@@ -55,12 +55,10 @@ export class Paso5Page implements OnInit, OnDestroy {
       this.presentAlert();
     }else{
       this.value.push(this.dataPaso5.value);
-     this.suscripcionForm2 = this.formData.mandar(this.value,4).subscribe();
+     this.suscripcionForm2 = this.formData.mandar(this.value,this.paso - 1).subscribe();
       this.router.navigate(['/comerciales/6'])
     }
   }
-
-  // MODIFICAR NOMBRES PASO 6 O 5 
 
 async presentAlert() {
     const alert = await this.alertCtrl.create({
