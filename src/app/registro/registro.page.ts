@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
 import { LocalstorageService } from '../servicios/localstorage/localstorage.service';
 
-import { Observable, from, of} from 'rxjs';
-import {tap,map } from 'rxjs/operators';
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -20,13 +17,7 @@ export class RegistroPage implements OnInit, OnDestroy {
   rePasswordToggleIcon = "eye";
   showPassword = false;
   showRePassword = false;
-  userExiste = true;
-  correoExiste = false;
-
-  myObj$:Observable<any>;
-  myObj;
   users;
-  emailPattern = "/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i";
 
   constructor(
     private router:Router,
@@ -34,13 +25,12 @@ export class RegistroPage implements OnInit, OnDestroy {
     private datos:DatosService,
     private localS:LocalstorageService
   ) { 
-
     this.crearUsuarios = this.fb.group({
       usuario:['',Validators.required],
       dni:['',Validators.required],
       nombre:['',Validators.required],
       apellido:['',Validators.required],
-      email:[''],
+      email:['',Validators.required],
       pass:['',[Validators.required,Validators.minLength(6)]],
       repass:['',[Validators.required,Validators.minLength(6)]],
     })
@@ -52,15 +42,10 @@ export class RegistroPage implements OnInit, OnDestroy {
       // Obtengo datos y agrego validaciones
       const usuarios = this.users.map(rta=>(rta.usuario))
       const emails = this.users.map(rta=>(rta.email))
-        this.crearUsuarios.get('usuario').setValidators(MisValidaciones.currentUser(usuarios));
-        this.crearUsuarios.get('email').setValidators([Validators.required,Validators.pattern(this.emailPattern),MisValidaciones.currentEmail(emails)]);
-    })
-    
+        this.crearUsuarios.get('usuario').setValidators([Validators.required,MisValidaciones.currentUser(usuarios)]);
+        this.crearUsuarios.get('email').setValidators([Validators.required,Validators.email,MisValidaciones.currentEmail(emails)]);
+      })
   }
-
-aa(){
-  console.log(this.users)
-}
 
   // mostrar u ocultar contraseña
   togglePass(){
