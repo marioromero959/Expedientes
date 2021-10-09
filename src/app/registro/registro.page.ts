@@ -1,31 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MisValidaciones } from '../shared/utils/mis-validaciones'
 import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
-import { User } from '../shared/interface/interfaz-registrado';
+import { LocalstorageService } from '../servicios/localstorage/localstorage.service';
+
+import { Observable, from, of} from 'rxjs';
+import {tap,map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage implements OnInit, OnDestroy {
 
   crearUsuarios: FormGroup;
-  registrado = false;
-
   passwordToggleIcon = "eye";
   rePasswordToggleIcon = "eye";
   showPassword = false;
-  showRePassword= false;
+  showRePassword = false;
+  userExiste = true;
+  correoExiste = false;
 
-  email:string='';
-  password:string='';
+  myObj$:Observable<any>;
+  myObj;
+  users;
+  emailPattern = "/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i";
 
   constructor(
     private router:Router,
     private fb:FormBuilder,
     private datos:DatosService,
+    private localS:LocalstorageService
   ) { 
 
     this.crearUsuarios = this.fb.group({
@@ -33,13 +40,27 @@ export class RegistroPage implements OnInit {
       dni:['',Validators.required],
       nombre:['',Validators.required],
       apellido:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]],
-      repassword:['',[Validators.required,Validators.minLength(6)]],
+      email:[''],
+      pass:['',[Validators.required,Validators.minLength(6)]],
+      repass:['',[Validators.required,Validators.minLength(6)]],
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.datos.obtenerUsuarios().subscribe((res)=>{
+      this.users = res;
+      // Obtengo datos y agrego validaciones
+      const usuarios = this.users.map(rta=>(rta.usuario))
+      const emails = this.users.map(rta=>(rta.email))
+        this.crearUsuarios.get('usuario').setValidators(MisValidaciones.currentUser(usuarios));
+        this.crearUsuarios.get('email').setValidators([Validators.required,Validators.pattern(this.emailPattern),MisValidaciones.currentEmail(emails)]);
+    })
+    
+  }
+
+aa(){
+  console.log(this.users)
+}
 
   // mostrar u ocultar contraseña
   togglePass(){
@@ -63,20 +84,14 @@ export class RegistroPage implements OnInit {
     if(this.crearUsuarios.invalid){
       this.crearUsuarios.markAllAsTouched();
       return;
+    }else{
+    //Envio la data al back 
+    this.datos.agregarUsuario(this.crearUsuarios.value).subscribe();
+    // ejecutar funcion php en backend para mandar el mail de verificacion
+    // Agrego los datos cargados al localstorage
+    this.localS.agregar(this.crearUsuarios.value);
+    this.router.navigate(['/verificacion']);
     }
-    const usuario: User = {
-      usuario: this.crearUsuarios.value.usuario,
-      dni: this.crearUsuarios.value.dni,
-      nombre: this.crearUsuarios.value.nombre,
-      apellido: this.crearUsuarios.value.apellido,
-      email: this.crearUsuarios.value.email,
-      password: this.crearUsuarios.value.password,
-      repassword: this.crearUsuarios.value.repassword,
-    }
-    this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
-      // ejecutar funcion php en backend para mandar el mail de verificacion
-      this.router.navigate(['/verificacion']);
-    });
   }
 
   // Obtengo los campos para validar los formularios
@@ -96,13 +111,15 @@ get emailField(){
   return this.crearUsuarios.get('email');
 }
 get passwordField(){
-  return this.crearUsuarios.get('password');
+  return this.crearUsuarios.get('pass');
 }
 get repasswordField(){
-  return this.crearUsuarios.get('repassword');
+  return this.crearUsuarios.get('repass');
 }
   
-  irALogin(){
-    this.router.navigate(['/login']);
-  }
+irALogin(){
+  this.router.navigate(['/login']);
+}
+
+ngOnDestroy(){}
 }

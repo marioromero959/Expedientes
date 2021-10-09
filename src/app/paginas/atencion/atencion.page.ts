@@ -7,23 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtencionPage implements OnInit {
 
-  constructor() { }
-
-  arr = [
-    {id: 1,
-    name: 'mario'},
-    {id: 2,
-    name: 'juan'},
-    {id: 3,
-    name: 'jose'},
-  ]
+  constructor() {}
 
   ngOnInit() {
-
   }
-
-imprimir(res){
-  console.log(res)
-}
 
 }

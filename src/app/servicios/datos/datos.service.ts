@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class DatosService {
 
-API = 'http://localhost/pruebas/';
+API = 'http://localhost:1234/prueba/conexion.php';
 
   constructor(
     private http: HttpClient,

@@ -70,8 +70,8 @@ export class EditarPerfilPage implements OnInit {
       nombre: this.crearUsuarios.value.nombre,
       apellido: this.crearUsuarios.value.apellido,
       email: this.crearUsuarios.value.email,
-      password: this.crearUsuarios.value.password,
-      repassword: this.crearUsuarios.value.repassword,
+      pass: this.crearUsuarios.value.pass,
+      repass: this.crearUsuarios.value.repass,
     }
 
     // ver esta funcion en el data.ts

@@ -4,6 +4,6 @@ export interface User{
     apellido: string;
     email: string;
     dni: number;
-    password: string;
-    repassword: string;
+    pass: string;
+    repass: string;
 }
