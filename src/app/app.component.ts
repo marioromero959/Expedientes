@@ -28,7 +28,8 @@ export class AppComponent {
           text: 'Aceptar',
           cssClass: 'aceptar',
           handler: () => {
-            this.auth.deleteToken();
+            // Borrar tokens con los datos del usuario
+            // this.auth.deleteToken();
             this.router.navigate(['login']);
           }
         }

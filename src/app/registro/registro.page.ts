@@ -71,7 +71,7 @@ export class RegistroPage implements OnInit, OnDestroy {
       return;
     }else{
     //Envio la data al back 
-    this.datos.agregarUsuario(this.crearUsuarios.value).subscribe();
+    this.datos.altaUsuario(this.crearUsuarios.value).subscribe();
     // ejecutar funcion php en backend para mandar el mail de verificacion
     // Agrego los datos cargados al localstorage
     this.localS.agregar(this.crearUsuarios.value);

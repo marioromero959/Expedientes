@@ -17,7 +17,7 @@
     </ion-item>
     <div *ngIf= "usuarioField.errors && usuarioField.touched">
       <p *ngIf= "usuarioField.hasError('required')">Este campo es requerido</p>
-      <p *ngIf= "usuarioField.hasError('currentUser')">Este usuario ya esta en uso</p>
+      <p *ngIf= "usuarioField.hasError('currentUser')">Este usuario no esta disponible</p>
     </div>
     <ion-item lines="inset">
       <ion-label position="floating">DNI</ion-label>
@@ -56,7 +56,7 @@
     <div *ngIf="emailField.errors && emailField.touched">
       <p *ngIf= "emailField.hasError('required')">Este campo es requerido</p>
       <p *ngIf= "emailField.hasError('email')">Este campo no es un email válido</p>
-      <p *ngIf= "emailField.hasError('currentEmail')">Este email ya esta en uso</p>
+      <p *ngIf= "emailField.hasError('currentEmail')">Este email ya se encuentra en uso</p>
     </div>
 
     <ion-item lines="inset">
@@ -86,7 +86,7 @@
       <p *ngIf= "repasswordField.hasError('required')">Este campo es requerido</p>
       <p *ngIf= "repasswordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
     </div>
-    <div *ngIf= " passwordField.valid &&  repasswordField.value !== passwordField.value">
+    <div *ngIf= "passwordField.valid && repasswordField.value !== passwordField.value && repasswordField.touched">
       <p>Las contraseñas no coinciden</p>
     </div>
     <ion-row class="ion-justify-content-center">

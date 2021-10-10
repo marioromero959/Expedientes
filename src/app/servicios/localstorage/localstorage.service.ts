@@ -17,7 +17,7 @@ export class LocalstorageService {
   constructor() { }
 
   agregar(arr){
-    console.log('desde lser',arr)
+    // console.log('desde lser',arr)
     let obj = JSON.stringify(arr)
     localStorage['variable'] = obj;
   }

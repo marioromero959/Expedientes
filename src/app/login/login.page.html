@@ -11,21 +11,21 @@
       autocomplete="on"></ion-input>
     </ion-item>
     <div *ngIf="emailField.errors && emailField.touched">
-      <p *ngIf= "emailField.hasError('required')">Este campo es requerido</p>
-      <p *ngIf= "emailField.hasError('email')">Este campo no es un email</p>
+      <p *ngIf= "emailField.hasError('required')" class="ion-text-center">Este campo es requerido</p>
+      <p *ngIf= "emailField.hasError('email')" class="ion-text-center">El email ingresado no es válido</p>
     </div>
   <br>
     <ion-item lines="full" class="ion-margin-horizontal borde">
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" 
-      name="password"
-      formControlName="password"
+      name="pass"
+      formControlName="pass"
       [type]="showPassword ? 'text' : 'password'"></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
     </ion-item>
     <div *ngIf= "passwordField.errors && passwordField.touched">
-      <p *ngIf= "passwordField.hasError('required')">Este campo es requerido</p>
-      <p *ngIf= "passwordField.hasError('minlength')">Su contraseña debe tener almenos 6 caracteres</p>
+      <p *ngIf= "passwordField.hasError('required')" class="ion-text-center">Este campo es requerido</p>
+      <p *ngIf= "passwordField.hasError('minlength')" class="ion-text-center">Su contraseña debe tener almenos 6 caracteres</p>
     </div>
   <br>
     <ion-row>
@@ -40,12 +40,14 @@
         </ion-button>
       </ion-col>
     </ion-row>
+  <br>
   </form>
   <ion-row class="ion-text-center">
     <ion-col>
       <p><a routerLink="/">¿Olvidaste tu contraseña?</a></p>
     </ion-col>
   </ion-row>
+  <br>
       <ion-row>
       <ion-col offset=0.5>
         <p class="ion-text-center">¿Sos nuevo?</p>

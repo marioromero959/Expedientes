@@ -42,7 +42,7 @@ export class HomePage {
   borrarUsuario(id){
     console.log('borrado');
     console.log(id);
-    this.data.borrarUsuario(id).subscribe();
+    // this.data.borrarUsuario(id).subscribe();
   }
 
   async logout() {
@@ -58,7 +58,8 @@ export class HomePage {
           text: 'Aceptar',
           cssClass: 'aceptar',
           handler: () => {
-            this.auth.deleteToken();
+            // Borrar tokens con los datos del usuario
+            // this.auth.deleteToken();
             this.router.navigate(['login']);
           }
         }

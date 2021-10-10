@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +16,6 @@ export class LoginPage implements OnInit {
   ingreso:FormGroup;
   ingresado = false;
 
-  datos ={
-    id: null,
-    email: null,
-    password: null
-  }
-  userData:any = [];
-
   constructor(
     private auth: AutenticacionService,
     private router: Router,
@@ -31,10 +23,9 @@ export class LoginPage implements OnInit {
   ){}
 
   ngOnInit() {
-
     this.ingreso = this.formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required,Validators.minLength(6)]]
+      pass: ['',[Validators.required,Validators.minLength(6)]]
     })
   }
 
@@ -53,28 +44,24 @@ goToRegister(){
 }
 
 login(){
-/*   if(this.ingreso.invalid){
+  if(this.ingreso.invalid){
     this.ingreso.markAllAsTouched();
     return;
   }else{
-    this.ingresado = true;
-    this.iniciar(this.ingreso);
-  } */
-  this.router.navigate(['/home']);
+    console.log(this.ingreso.value.email)
+    this.auth.seleccionarUsuario(2).subscribe(res=>{
+      const user = res[0];
+      console.log('Usuario seleccionado',user.email, user.pass)
+    })
+  }
+  // this.router.navigate(['/home']);
 }
 
-iniciar(ingreso){
-  this.auth.userLogin(ingreso.value.email, ingreso.value.password).pipe(first()).subscribe(data =>{
-    const userDatos = data;
-    this.router.navigate(['/home']);
-  } )
-}
 // obtener campos
 get emailField(){
   return this.ingreso.get('email');
 }
 get passwordField(){
-  return this.ingreso.get('password');
+  return this.ingreso.get('pass');
 }
-
 }

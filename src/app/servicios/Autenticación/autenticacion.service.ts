@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {  Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { map } from 'rxjs/operators';
 import { DatosService } from '../datos/datos.service';
 
 @Injectable({
@@ -10,7 +8,8 @@ import { DatosService } from '../datos/datos.service';
 })
 export class AutenticacionService {
 
-API = 'http://localhost/pruebas/';
+  API = 'http://localhost:1234/prueba/';
+  datos:any;
 
   constructor( 
     private data: DatosService,
@@ -19,30 +18,16 @@ API = 'http://localhost/pruebas/';
   ) {}
 
 
-  userLogin(email:string, password:string){
-    return this.http.post<any>(this.API + 'login.php', { email, password })
-.pipe(map(Users => {
-this.setToken(Users[0].usuario);
-return Users[0];
-}));
+  bajaUsuario(idUsuario: number) {
+    return this.http.get(`${this.API}baja.php?idUsuario=${idUsuario}`);
   }
 
-    setToken(token: string) {
-    localStorage.setItem('token', token);
-    console.log(token);
-    }
-    getToken() {
-    return localStorage.getItem('token');
-    }
-    deleteToken() {
-    localStorage.removeItem('token');
-    }
-    isLoggedIn() {
-    const usertoken = this.getToken();
-    if (usertoken != null) {
-    return true
-    }
-    return false;
-    }
+  seleccionarUsuario(id:number) {
+    return this.http.get(`${this.API}seleccionar.php?id=${id}`);
+  }
+
+  editarUsuario(usuario) {
+    return this.http.post(`${this.API}editar.php`, JSON.stringify(usuario));
+  }
 
 }

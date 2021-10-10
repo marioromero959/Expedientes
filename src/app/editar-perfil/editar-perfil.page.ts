@@ -74,11 +74,8 @@ export class EditarPerfilPage implements OnInit {
       repass: this.crearUsuarios.value.repass,
     }
 
-    // ver esta funcion en el data.ts
-    this.datos.agregarUsuario(this.crearUsuarios.value).subscribe(res =>{
-      console.log(res);
-      this.router.navigate(['/home']);
-    });
+    // Lammar funcion edita en el datos.ts
+
   }
 
   // Obtengo los campos para validar los formularios

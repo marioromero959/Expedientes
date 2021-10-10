@@ -6,27 +6,22 @@ import { Observable } from 'rxjs';
 })
 export class DatosService {
 
-API = 'http://localhost:1234/prueba/conexion.php';
+API = 'http://localhost:1234/prueba/';
 
   constructor(
     private http: HttpClient,
   ) {}
 
-  agregarUsuario(data):Observable<any>{
-    return this.http.post(this.API+"?insertar=1",data);
+  altaUsuario(data) {
+    return this.http.post(`${this.API}alta.php`, JSON.stringify(data));
   }
 
-  obtenerUsuarios(){
-    return this.http.get(this.API);
+  obtenerUsuarios() {
+    return this.http.get(`${this.API}obtener.php`);
   }
-
-  borrarUsuario(id):Observable<any>{
-    return this.http.get(this.API+"?borrar="+id);
-  }
-
-  obtenerUsuario(id):Observable<any>{
-    return this.http.get(this.API+"?consultar="+id);
-  }
-
-
+  
+  /*   obtenerUsuario(id):Observable<any>{
+      return this.http.get(this.API+"?consultar="+id);
+    } */
+  
 }
