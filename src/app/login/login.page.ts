@@ -48,13 +48,16 @@ login(){
     this.ingreso.markAllAsTouched();
     return;
   }else{
-    console.log(this.ingreso.value.email)
-    this.auth.seleccionarUsuario(2).subscribe(res=>{
+/*     this.auth.seleccionarUsuario(2).subscribe(res=>{
       const user = res[0];
       console.log('Usuario seleccionado',user.email, user.pass)
-    })
+    }) */
+
+
+    this.router.navigate(['/home']);
+
   }
-  // this.router.navigate(['/home']);
+  this.router.navigate(['/home']);
 }
 
 // obtener campos

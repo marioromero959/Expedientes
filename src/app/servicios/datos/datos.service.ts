@@ -20,8 +20,8 @@ API = 'http://localhost:1234/prueba/';
     return this.http.get(`${this.API}obtener.php`);
   }
   
-  /*   obtenerUsuario(id):Observable<any>{
-      return this.http.get(this.API+"?consultar="+id);
-    } */
+  editarUsuario(data){
+    return this.http.post(`${this.API}editar.php`, JSON.stringify(data));
+  }
   
 }

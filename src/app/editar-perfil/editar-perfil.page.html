@@ -65,8 +65,8 @@
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input 
       [type]= "showPassword ? 'text' : 'password'"
-      formControlName="password"
-      name= "password"
+      formControlName="pass"
+      name= "pass"
       ></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
     </ion-item>
@@ -78,8 +78,8 @@
       <ion-label position="floating">Repetir Contraseña</ion-label>
       <ion-input 
       [type]= "showRePassword ? 'text' : 'password'"
-      formControlName="repassword"
-      name= "repassword"
+      formControlName="repass"
+      name= "repass"
       ></ion-input>
       <ion-icon slot="end" class="ion-icon" [name]="rePasswordToggleIcon" (click)="toggleRePass()"></ion-icon>
     </ion-item>

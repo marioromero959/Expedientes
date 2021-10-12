@@ -34,8 +34,8 @@ export class EditarPerfilPage implements OnInit {
       nombre:['',Validators.required],
       apellido:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]],
-      repassword:['',[Validators.required,Validators.minLength(6)]],
+      pass:['',[Validators.required,Validators.minLength(6)]],
+      repass:['',[Validators.required,Validators.minLength(6)]],
     })
   }
 
@@ -64,7 +64,9 @@ export class EditarPerfilPage implements OnInit {
       this.crearUsuarios.markAllAsTouched();
       return;
     }
-    const usuario: User = {
+    const usuario:any = {
+      // Poner id dinamico de localstorage
+      id: 8,
       usuario: this.crearUsuarios.value.usuario,
       dni: this.crearUsuarios.value.dni,
       nombre: this.crearUsuarios.value.nombre,
@@ -75,7 +77,7 @@ export class EditarPerfilPage implements OnInit {
     }
 
     // Lammar funcion edita en el datos.ts
-
+    this.datos.editarUsuario(usuario).subscribe();
   }
 
   // Obtengo los campos para validar los formularios
@@ -95,10 +97,10 @@ get emailField(){
   return this.crearUsuarios.get('email');
 }
 get passwordField(){
-  return this.crearUsuarios.get('password');
+  return this.crearUsuarios.get('pass');
 }
 get repasswordField(){
-  return this.crearUsuarios.get('repassword');
+  return this.crearUsuarios.get('repass');
 }
 
   irALogin(){

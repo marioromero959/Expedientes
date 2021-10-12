@@ -24,10 +24,7 @@ export class AutenticacionService {
 
   seleccionarUsuario(id:number) {
     return this.http.get(`${this.API}seleccionar.php?id=${id}`);
-  }
+  } 
 
-  editarUsuario(usuario) {
-    return this.http.post(`${this.API}editar.php`, JSON.stringify(usuario));
-  }
-
+   
 }
