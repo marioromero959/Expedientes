@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
-import { User } from '../shared/interface/interfaz-registrado';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-editar-perfil',
@@ -11,11 +12,9 @@ import { User } from '../shared/interface/interfaz-registrado';
 })
 export class EditarPerfilPage implements OnInit {
 
-  crearUsuarios: FormGroup;
+  UsuarioEditado: FormGroup;
   registrado = false;
-
   prueba:string=null;
-
 
   passwordToggleIcon = "eye";
   rePasswordToggleIcon = "eye";
@@ -24,18 +23,22 @@ export class EditarPerfilPage implements OnInit {
 
   constructor(
     private router:Router,
+    private alertCtrl: AlertController,
     private fb:FormBuilder,
     private datos:DatosService,
   ) { 
+    let perfil = JSON.parse(localStorage['Usuario']);
+    console.log('localstorage:',perfil);
 
-    this.crearUsuarios = this.fb.group({
-      usuario:['',Validators.required],
-      dni:['',Validators.required],
-      nombre:['',Validators.required],
-      apellido:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      pass:['',[Validators.required,Validators.minLength(6)]],
-      repass:['',[Validators.required,Validators.minLength(6)]],
+    this.UsuarioEditado = this.fb.group({
+      id:[perfil.id],
+      usuario:[perfil.usuario,Validators.required],
+      dni:[perfil.dni,Validators.required],
+      nombre:[perfil.nombre,Validators.required],
+      apellido:[perfil.apellido,Validators.required],
+      email:[perfil.email,[Validators.required,Validators.email]],
+      pass:[perfil.pass,[Validators.required,Validators.minLength(6)]],
+      repass:[perfil.repass,[Validators.required,Validators.minLength(6)]],
     })
   }
 
@@ -60,51 +63,67 @@ export class EditarPerfilPage implements OnInit {
   };
 
   editarUsuario(){
-    if(this.crearUsuarios.invalid){
-      this.crearUsuarios.markAllAsTouched();
+    if(this.UsuarioEditado.invalid){
+      this.UsuarioEditado.markAllAsTouched();
       return;
+    }else{
     }
-    const usuario:any = {
-      // Poner id dinamico de localstorage
-      id: 8,
-      usuario: this.crearUsuarios.value.usuario,
-      dni: this.crearUsuarios.value.dni,
-      nombre: this.crearUsuarios.value.nombre,
-      apellido: this.crearUsuarios.value.apellido,
-      email: this.crearUsuarios.value.email,
-      pass: this.crearUsuarios.value.pass,
-      repass: this.crearUsuarios.value.repass,
-    }
-
-    // Lammar funcion edita en el datos.ts
-    this.datos.editarUsuario(usuario).subscribe();
+    this.presentAlert(this.UsuarioEditado.value);
   }
+
+  async presentAlert(usuario) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: '¿Esta seguro de que desea editar sus datos?',
+      buttons: [
+        {
+          text:'cancelar',
+          role:'cancel'
+        },
+        {
+          text:'Si, estoy seguro',
+          handler: () =>{
+          this.confirmarEdicion(usuario);
+          }
+        }
+      ]
+    });
+
+  await alert.present();
+  };
+
+confirmarEdicion(usuario){
+  this.datos.editarUsuario(usuario).subscribe();
+  const obj = JSON.stringify(usuario)
+  localStorage.setItem('Usuario',obj)
+  window.location.reload();
+}
 
   // Obtengo los campos para validar los formularios
 get usuarioField(){
-  return this.crearUsuarios.get('usuario');
+  return this.UsuarioEditado.get('usuario');
 }
 get dniField(){
-  return this.crearUsuarios.get('dni');
+  return this.UsuarioEditado.get('dni');
 }
 get nombreField(){
-  return this.crearUsuarios.get('nombre');
+  return this.UsuarioEditado.get('nombre');
 }
 get apellidoField(){
-  return this.crearUsuarios.get('apellido');
+  return this.UsuarioEditado.get('apellido');
 }
 get emailField(){
-  return this.crearUsuarios.get('email');
+  return this.UsuarioEditado.get('email');
 }
 get passwordField(){
-  return this.crearUsuarios.get('pass');
+  return this.UsuarioEditado.get('pass');
 }
 get repasswordField(){
-  return this.crearUsuarios.get('repass');
+  return this.UsuarioEditado.get('repass');
 }
 
-  irALogin(){
-    this.router.navigate(['/login']);
-  }
+irALogin(){
+  this.router.navigate(['/login']);
+}
 
 }

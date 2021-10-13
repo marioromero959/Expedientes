@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import {  Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosService } from '../datos/datos.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,21 @@ export class AutenticacionService {
     return this.http.get(`${this.API}baja.php?idUsuario=${idUsuario}`);
   }
 
-  seleccionarUsuario(id:number) {
-    return this.http.get(`${this.API}seleccionar.php?id=${id}`);
-  } 
+userlogin(email, pass) {
+  return this.http.post<any>(`${this.API}seleccionar.php`,{ email, pass })
+  .pipe(map(Users => {
+    this.setToken(Users[0]);
+    return Users[0];
+  }));
+}  
 
-   
+setToken(usuario) {
+  const obj = JSON.stringify(usuario); 
+  localStorage.setItem('Usuario',obj);
+}
+  
+deleteToken() {
+  localStorage.removeItem('Usuario');
+}
+
 }
