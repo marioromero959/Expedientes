@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage{
 
   userData = '';
 
@@ -19,9 +19,11 @@ export class HomePage implements OnInit, OnDestroy {
     private alertCtrl:AlertController,
     private router: Router) {}
 
-  ngOnInit(){
-    this.userData = JSON.parse(localStorage.getItem('Usuario'));
-  }
+
+
+ionViewWillEnter(){
+  this.userData = JSON.parse(localStorage.getItem('Usuario'));
+}
 
   // Abrir y cerrar menu lateral
   openFirst() {
@@ -60,5 +62,4 @@ export class HomePage implements OnInit, OnDestroy {
   await alert.present();
   };
 
-  ngOnDestroy(){}
 }

@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 export class AutenticacionService {
 
   API = 'http://localhost:1234/prueba/';
-  datos:any;
   
   constructor( 
     private http:HttpClient,

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, OnDestroy {
+export class LoginPage implements OnInit{
 
   passwordToggleIcon = "eye";
   showPassword = false;
@@ -32,14 +32,14 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
 // Mostrar y ocultar contraseña
-  togglePass(){
+togglePass(){
     this.showPassword =! this.showPassword;
     if(this.passwordToggleIcon == 'eye'){
       this.passwordToggleIcon = 'eye-off';
     }else{
       this.passwordToggleIcon = 'eye';
     }
-  };
+};
 
 goToRegister(){
   this.ingreso.reset();
@@ -81,5 +81,6 @@ get passwordField(){
   return this.ingreso.get('pass');
 }
 
-ngOnDestroy(){}
+
+
 }
