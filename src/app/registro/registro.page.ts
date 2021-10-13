@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MisValidaciones } from '../shared/utils/mis-validaciones'
 import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
-import { LocalstorageService } from '../servicios/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +22,6 @@ export class RegistroPage implements OnInit, OnDestroy {
     private router:Router,
     private fb:FormBuilder,
     private datos:DatosService,
-    private localS:LocalstorageService
   ) { 
     this.crearUsuarios = this.fb.group({
       usuario:['',Validators.required],
@@ -73,8 +71,6 @@ export class RegistroPage implements OnInit, OnDestroy {
     //Envio la data al back 
     this.datos.altaUsuario(this.crearUsuarios.value).subscribe();
     // ejecutar funcion php en backend para mandar el mail de verificacion
-    // Agrego los datos cargados al localstorage
-    this.localS.agregar(this.crearUsuarios.value);
     this.router.navigate(['/verificacion']);
     }
   }

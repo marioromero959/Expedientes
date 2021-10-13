@@ -1,7 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { DatosService } from '../servicios/datos/datos.service';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
 import { AlertController } from '@ionic/angular';
 
@@ -10,20 +9,20 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy {
 
-  Usuarios:any;
-  userData:any;
+  userData = '';
 
   constructor(
     private menu:MenuController,
-    private data:DatosService,
     private auth:AutenticacionService,
     private alertCtrl:AlertController,
-    private router: Router) {
-    }
+    private router: Router) {}
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.userData = JSON.parse(localStorage.getItem('Usuario'));
+  }
+
   // Abrir y cerrar menu lateral
   openFirst() {
     this.menu.enable(true, 'first');
@@ -35,14 +34,6 @@ export class HomePage {
   openCustom() {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
-  }
-
-// agregar ventana de Confirmación
-
-  borrarUsuario(id){
-    console.log('borrado');
-    console.log(id);
-    // this.data.borrarUsuario(id).subscribe();
   }
 
   async logout() {
@@ -68,4 +59,6 @@ export class HomePage {
 
   await alert.present();
   };
+
+  ngOnDestroy(){}
 }

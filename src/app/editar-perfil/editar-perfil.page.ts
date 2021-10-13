@@ -28,7 +28,6 @@ export class EditarPerfilPage implements OnInit {
     private datos:DatosService,
   ) { 
     let perfil = JSON.parse(localStorage['Usuario']);
-    console.log('localstorage:',perfil);
 
     this.UsuarioEditado = this.fb.group({
       id:[perfil.id],

@@ -50,9 +50,11 @@
     <div *ngIf= "apellidoField.errors && apellidoField.touched">
       <p *ngIf= "apellidoField.hasError('required')">Este campo es requerido</p>
     </div>
-    <ion-item >
+    <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" 
+      <ion-input 
+      readonly
+      type="text" 
       formControlName="email"
       autocomplete="on"
       ></ion-input>
