@@ -2,34 +2,42 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { User } from '../shared/interface/interfaz-usuario';
 
 @Component({
   selector: 'app-cuenta',
   templateUrl: './cuenta.page.html',
   styleUrls: ['./cuenta.page.scss'],
 })
-export class CuentaPage implements OnInit {
+export class CuentaPage{
 
-  userData: any[] = [
-    {
-      correo:'marioromero@gmail.com',
-      direccion:'Yunka y Ayachucho',
-      celular:'+54123456789',
-      telefono:'404567893',
-      localidad:'Cordoba Capital',
-      usuario:'Mario959',
-      contrasena:'abcd1234',
-    }
-  ]
+  userData = [{
+    id: null,
+    usuario: '',
+    nombre: '',
+    apellido: '',
+    email: '',
+    dni: null,
+    pass: '',
+    repass: '',
+  }];
+  pass=false;
 
   constructor(
     private router:Router,
     private auth:AutenticacionService,
     private alertCtrl:AlertController) { }
+    
+    ionViewWillEnter(){
+      this.userData = JSON.parse(localStorage.getItem('Usuario'));
+    }
 
-  ngOnInit() {
+  editar(){
+    this.router.navigate(['/editar-perfil'])
   }
-
+  mostrarPass(){
+    this.pass = true;
+  }
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',

@@ -19,8 +19,6 @@ export class HomePage{
     private alertCtrl:AlertController,
     private router: Router) {}
 
-
-
 ionViewWillEnter(){
   this.userData = JSON.parse(localStorage.getItem('Usuario'));
 }

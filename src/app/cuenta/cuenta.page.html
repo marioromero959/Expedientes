@@ -11,84 +11,71 @@
 <ion-content>
 
  <ion-item lines=none>
-  <ion-thumbnail slot="start">
-    <img src="">
-  </ion-thumbnail>
-  <ion-label lines=none>
-    <h2>Tu perfil</h2>
-    <p>Bienvenido</p>
-  </ion-label>
-  <ion-button fill="outline" shape=round slot="end">Editar</ion-button>
+   <ion-row>
+       <h2>Tu perfil</h2>
+    </ion-row>
+    <ion-button shape=round slot="end" (click)="editar()" size=medium>Editar Datos</ion-button>
 </ion-item>
 
-   <ion-card mode="ios">
-    <ion-card-header>
-      <ion-card-title color="secondary" style="font-size: medium;">Información personal
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <ion-list *ngFor= "let user of userData">
+<ion-card mode="ios">
+  <ion-card-header>
+    <ion-card-title color="secondary" style="font-size: medium;">Información personal
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-label>
+        Nombre/s
+      </ion-label>
+      <ion-item lines=none>
+        {{userData.nombre}}
+      </ion-item>
+      <ion-label>
+        Apellido/s
+      </ion-label>
+      <ion-item lines=none>
+        {{userData.apellido}}
+      </ion-item>
+      <ion-label>
+        DNI
+      </ion-label>
+      <ion-item lines=none>
+        {{userData.dni}}
+      </ion-item> 
       <ion-label>
         Correo Electrónico
       </ion-label>
       <ion-item lines=none>
-        {{user.correo}}
-      </ion-item>
-      <ion-label>
-        Dirección
-      </ion-label>
-      <ion-item lines=none>
-        {{user.direccion}}
-      </ion-item>
-      <ion-label>
-        Celular
-      </ion-label>
-      <ion-item lines=none>
-        {{user.celular}}
-      </ion-item>
-      <ion-label>
-        Teléfono
-      </ion-label>
-      <ion-item lines=none>
-        {{user.telefono}}
-      </ion-item>
-      <ion-label>
-        Localidad
-      </ion-label>
-      <ion-item lines=none>
-        {{user.localidad}}
-      </ion-item>
-        </ion-list>
-    </ion-card-content>
-  </ion-card> 
+        {{userData.email}}
+      </ion-item>  
+    </ion-list>
+  </ion-card-content>
+</ion-card> 
 
-  <ion-card mode="ios">
-    <ion-card-header>
-      <ion-card-title color="secondary" style="font-size: medium;">
-        Seguridad de mi cuenta
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-list *ngFor= "let user of userData">
-        <ion-label>
-          Usuario
-        </ion-label>
-        <ion-item lines=none>
-          {{user.usuario}}
-        </ion-item>
-        <ion-label>
-          Contraseña
-        </ion-label>
-        <ion-item lines=none>
-          {{user.contrasena}}
-        </ion-item>
-      </ion-list>
-      <ion-button color="danger" fill="clear">
-        Cambiar contraseña
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+<ion-card mode="ios">
+  <ion-card-header>
+    <ion-card-title color="secondary" style="font-size: medium;">
+      Seguridad de mi cuenta
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-label>
+        Nombre de usuario
+      </ion-label>
+      <ion-item lines=none>
+        {{userData.usuario}}
+      </ion-item>
+      <ion-label (click)="mostrarPass()">
+        Mostrar Contraseña 
+      </ion-label>
+      <ion-item lines=none *ngIf=pass>
+        {{userData.pass}}
+      </ion-item>
+ 
+    </ion-list>
+  </ion-card-content>
+</ion-card>
 
   <ion-button fill="clear" expand="full" (click)="presentAlert()">
     Cerrar Sesion

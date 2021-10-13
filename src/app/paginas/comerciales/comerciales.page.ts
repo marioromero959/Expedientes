@@ -23,7 +23,6 @@ export class ComercialesPage implements OnInit {
     }else{
       this.dataPaso1 = '';
     }
-      console.log('Datos paso 1:',this.dataPaso1)
     });
   }
 nuevaHab(){
