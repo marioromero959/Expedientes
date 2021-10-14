@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild,ElementRef } from '@angular/cor
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { FormGroup, FormBuilder} from '@angular/forms'
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
 import { FiltrosDocsPipe } from '../filtros-docs.pipe';
 
@@ -14,11 +13,9 @@ import { FiltrosDocsPipe } from '../filtros-docs.pipe';
 })
 export class Paso6Page implements OnInit, OnDestroy {
 
-  filtroData;
   datosP;
   paso:number;
   archivos:any = [];
-  dataPaso6: FormGroup;
   claseInput:boolean = false;  
   documentos = [
     {id:1,
@@ -89,8 +86,6 @@ export class Paso6Page implements OnInit, OnDestroy {
 
   constructor(
     private router:Router,
-    private filtroPipe:FiltrosDocsPipe,
-    private fb:FormBuilder,
     private formData:FormulariosService,
     private alertCtrl:AlertController,) {
       // Segun la informacion del paso 3 mostraremos como paso 5 o 6
@@ -140,9 +135,13 @@ terminarP6(){
   if(this.archivos.length != filtrado.length || this.archivos.length == 0){
     this.presentAlert();
   }else{
-    this.formData.mandar(this.archivos,this.paso - 1).subscribe();
+    // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
+    this.archivos.forEach(res => {
+      // Ver tamaño de archivos en b64
+      const archivos = JSON.stringify(res)
+      this.formData.envioArchivos(archivos).subscribe();
+    });
     this.router.navigate(['/comerciales'])
-    console.log('Archivos completos');
   }
 };
 

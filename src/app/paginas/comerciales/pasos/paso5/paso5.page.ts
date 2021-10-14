@@ -54,11 +54,23 @@ export class Paso5Page implements OnInit, OnDestroy {
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
-      this.value.push(this.dataPaso5.value);
+      if(this.value[1] != null){
+        this.value.splice(2,1,this.dataPaso5.value);
+      }else{
+        this.value.splice(1,1,this.dataPaso5.value);
+      }
      this.suscripcionForm2 = this.formData.mandar(this.value,this.paso - 1).subscribe();
-      this.router.navigate(['/comerciales/6'])
+      // this.router.navigate(['/comerciales/6'])
     }
   }
+
+borrarAct(id){
+  console.log(id);
+  this.actividades.splice(id,1)
+  if(this.actividades.length == 0){
+    this.mostratAct = false;
+  }
+}
 
 async presentAlert() {
     const alert = await this.alertCtrl.create({
@@ -95,7 +107,7 @@ async agregarAct(){
         console.log('Cancelado');
       }else{
         this.actividades.push(data);
-        this.value.push(data);
+        this.value.splice(0,1,this.actividades)
         this.mostratAct = true;
       }
 }
@@ -117,7 +129,7 @@ async  agregarEstudio(){
       console.log('Cancelado');
     }else{
       this.estudio.push(data);
-      this.value.push(data);
+      this.value.splice(1,0,this.estudio);
       this.mostrarEstudio = true;
     }
 }

@@ -28,9 +28,9 @@ export class CuentaPage{
     private auth:AutenticacionService,
     private alertCtrl:AlertController) { }
     
-    ionViewWillEnter(){
-      this.userData = JSON.parse(localStorage.getItem('Usuario'));
-    }
+  ionViewWillEnter(){
+    this.userData = JSON.parse(localStorage.getItem('Usuario'));
+  }
 
   editar(){
     this.router.navigate(['/editar-perfil'])

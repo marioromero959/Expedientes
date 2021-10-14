@@ -43,7 +43,10 @@
   </ion-item>
   <br>
   <ion-row class="ion-justify-content-center">
-    <ion-button type=button color="primary" (click)="agregarAct()" shape=round>
+    <ion-button type=button 
+                color="primary"
+                (click)="agregarAct()" 
+                shape=round>
       Agregar Actividad 
       <ion-icon slot="end" name="duplicate-outline"></ion-icon>
     </ion-button>
@@ -67,9 +70,9 @@
     <ion-col size=4>Email</ion-col>
   </ion-row>
   <ion-row *ngFor= "let act of estudio">
-    <ion-col> {{act.estudio}} </ion-col>
-    <ion-col> {{act.telefono}} </ion-col>
-    <ion-col> {{act.email}} </ion-col>
+    <ion-col size=4> {{act.estudio}} </ion-col>
+    <ion-col size=4> {{act.telefono}} </ion-col>
+    <ion-col size=4> {{act.email}} </ion-col>
   </ion-row>
 </div>
 
@@ -80,9 +83,12 @@
     <ion-col>Fecha</ion-col>
     <ion-col size=8>Descripción</ion-col>
   </ion-row>
-  <ion-row *ngFor= "let act of actividades">
-    <ion-col> {{act.fecha}} </ion-col>
-    <ion-col size=8> {{act.tipo}} </ion-col>
+  <ion-row *ngFor= "let act of actividades; let i = index ">
+    <ion-col size=4> {{act.fecha}} </ion-col>
+    <ion-col size=6> {{act.tipo}} </ion-col>
+    <ion-button (click)=borrarAct(i) size=small color=danger>
+      X
+    </ion-button>
   </ion-row>
 </div> 
 <br>
