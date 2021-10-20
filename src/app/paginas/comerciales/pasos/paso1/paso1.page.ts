@@ -20,8 +20,8 @@ export class Paso1Page implements OnInit, OnDestroy {
   mostrar = true;
   condicion = false;  
 
-  personaF = 'Persona F'
-  personaJ = 'Persona J'
+  arrPersonas;
+  arrSolicitudes;
 
   private suscripcionForm1: Subscription;
   private suscripcionForm2: Subscription;
@@ -36,18 +36,19 @@ export class Paso1Page implements OnInit, OnDestroy {
     this.miForm();
   }
   ngOnInit() {
-    this.dataP1.obtenerPersonas().subscribe(res =>{
-      console.log(res)
+    this.dataP1.obtenerPersonas().subscribe((res) =>{
+      this.arrPersonas = res;
     });
     this.dataP1.obtenerSolicitudes().subscribe(res=>{
-      console.log(res)})
+      this.arrSolicitudes = res;
+    })
   }
   // Obtengo los campos
   tipo(event){
     console.log(event.detail.value)
-    console.log(this.personaF)
     this.persona = event.detail.value;
   }
+
   selecLocal(event){
     this.opcionSelec = event.detail.value;
   };
@@ -59,13 +60,13 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.mostrar = false;
     }
     // Desabilito el input de Nro de cuenta y vacio el array de tipos 
-    if(event.detail.value.includes("Solicitud de Inscripción")){
-        event.detail.value.splice(0,event.detail.value.length, "Solicitud de Inscripción");
+    if(event.detail.value.includes("Solicitud de Inscripcion")){
+        event.detail.value.splice(0,event.detail.value.length, "Solicitud de Inscripcion");
         this.dataPaso1.get('cuenta').patchValue('');
         this.dataPaso1.controls['cuenta'].disable();
         this.condicion = true;
-    }else if(event.detail.value.includes("Cierre Definitivo")){
-      event.detail.value.splice(0,event.detail.value.length, "Cierre Definitivo");
+    }else if(event.detail.value.includes("Cierre definitivo")){
+      event.detail.value.splice(0,event.detail.value.length, "Cierre definitivo");
       this.dataPaso1.controls['cuenta'].enable();
       this.condicion = true;
     }else{
