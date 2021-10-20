@@ -44,14 +44,14 @@ export class Paso1Page implements OnInit, OnDestroy {
     })
   }
   // Obtengo los campos
+  selecLocal(event){
+    this.opcionSelec = event.detail.value;
+  };
+
   tipo(event){
     console.log(event.detail.value)
     this.persona = event.detail.value;
   }
-
-  selecLocal(event){
-    this.opcionSelec = event.detail.value;
-  };
   solicitud(event){
     // Mostrar mensaje de completado
     if(event.detail.value == ''){

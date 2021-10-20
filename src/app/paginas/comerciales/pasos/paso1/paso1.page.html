@@ -33,7 +33,8 @@
   <ion-item>
     <ion-label position="floating">Tipo de Persona</ion-label>
     <ion-select (ionChange)="tipo($event)" cancelText="Cancelar" okText="OK">
-      <ion-select-option *ngFor="let persona of arrPersonas">{{persona.persona_tipo_nombre}}</ion-select-option>
+      <ion-select-option *ngFor="let persona of arrPersonas" [value]='persona.persona_tipo_id'>{{persona.persona_tipo_nombre}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-list>
@@ -55,26 +56,10 @@
   <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
     <ion-select multiple=true (ionChange)="solicitud($event)">
-      <ion-select-option *ngFor="let solicitudes of arrSolicitudes">{{solicitudes.solicitudes_tipo_nombre}}</ion-select-option>
+      <ion-select-option *ngFor="let solicitudes of arrSolicitudes">{{solicitudes.solicitudes_tipo_nombre}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
-
-
-
-<!--   <ion-item>
-    <ion-label position="floating">Tipo de Solicitud</ion-label>
-    <ion-select multiple=true (ionChange)="solicitud($event)">
-      <ion-select-option value="Ampliación de rubro">Ampliación de Rubro</ion-select-option>
-      <ion-select-option value="Apertura de sucursal">Apertura de Sucursal</ion-select-option>
-      <ion-select-option value="Cambio de domicilio">Cambio de Domicilio</ion-select-option>
-      <ion-select-option value="Cambio de Responsable">Cambio de Responsable</ion-select-option>
-      <ion-select-option value="Cambio de rubro">Cambio de Rubro</ion-select-option>
-      <ion-select-option value="Cese de Actividad">Cese de Actividad</ion-select-option>
-      <ion-select-option value="Cierre Definitivo">Cierre Definitivo</ion-select-option>
-      <ion-select-option value="Rehabilitación">Rehabilición</ion-select-option>
-      <ion-select-option value="Solicitud de Inscripción">Solicitud de Inscripción</ion-select-option>
-    </ion-select>
-  </ion-item>  --> 
 
   <p *ngIf="mostrar" class="ion-text-center">Debe elegir al menos una opción para continuar</p>
   <p *ngIf=condicion>
@@ -85,6 +70,6 @@
     <ion-button type="submit" color="secondary" shape=round>
       Siguiente
     </ion-button>
-  </ion-row>  
-</form> 
+  </ion-row>
+</form>
 </ion-content>
