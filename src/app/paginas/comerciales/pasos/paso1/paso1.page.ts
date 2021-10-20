@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
+import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1.service';
 
 @Component({
   selector: 'app-paso1',
@@ -19,6 +20,9 @@ export class Paso1Page implements OnInit, OnDestroy {
   mostrar = true;
   condicion = false;  
 
+  personaF = 'Persona F'
+  personaJ = 'Persona J'
+
   private suscripcionForm1: Subscription;
   private suscripcionForm2: Subscription;
 
@@ -26,14 +30,22 @@ export class Paso1Page implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private alertCtrl: AlertController,
+    private dataP1:DataP1Service,
     private formData:FormulariosService,
   ) {
     this.miForm();
   }
   ngOnInit() {
+    this.dataP1.obtenerPersonas().subscribe(res =>{
+      console.log(res)
+    });
+    this.dataP1.obtenerSolicitudes().subscribe(res=>{
+      console.log(res)})
   }
   // Obtengo los campos
   tipo(event){
+    console.log(event.detail.value)
+    console.log(this.personaF)
     this.persona = event.detail.value;
   }
   selecLocal(event){
@@ -77,8 +89,10 @@ export class Paso1Page implements OnInit, OnDestroy {
         this.presentAlert();
       }else{
         // Envio el formulario al servicio
-       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
-      this.router.navigate(['/comerciales/2']);
+      this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
+      this.dataP1.enviarPersonas(value.tipo).subscribe(res=>console.log(res));
+      this.dataP1.enviarSolicitudes(value.solicitud).subscribe(res=>console.log(res));
+      // this.router.navigate(['/comerciales/2']);
       };
     }else{
       this.presentAlert();

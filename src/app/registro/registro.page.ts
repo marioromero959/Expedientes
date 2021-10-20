@@ -17,6 +17,7 @@ export class RegistroPage implements OnInit, OnDestroy {
   showPassword = false;
   showRePassword = false;
   users;
+  errores = [false,false,false];
 
   constructor(
     private router:Router,
@@ -29,21 +30,12 @@ export class RegistroPage implements OnInit, OnDestroy {
       nombre:['',Validators.required],
       apellido:['',Validators.required],
       email:['',Validators.required],
-      pass:['',[Validators.required,Validators.minLength(6)]],
-      repass:['',[Validators.required,Validators.minLength(6)]],
+      pass:['',Validators.required],
+      repass:['',Validators.required],
     })
   }
 
-  ngOnInit() {
-    this.datos.obtenerUsuarios().subscribe((res)=>{
-      this.users = res;
-      // Obtengo datos y agrego validaciones
-      const usuarios = this.users.map(rta=>(rta.usuario))
-      const emails = this.users.map(rta=>(rta.email))
-        this.crearUsuarios.get('usuario').setValidators([Validators.required,MisValidaciones.currentUser(usuarios)]);
-        this.crearUsuarios.get('email').setValidators([Validators.required,Validators.email,MisValidaciones.currentEmail(emails)]);
-      })
-  }
+  ngOnInit() {}
 
   // mostrar u ocultar contraseña
   togglePass(){
@@ -69,9 +61,20 @@ export class RegistroPage implements OnInit, OnDestroy {
       return;
     }else{
     //Envio la data al back 
-    this.datos.altaUsuario(this.crearUsuarios.value).subscribe();
-    // ejecutar funcion php en backend para mandar el mail de verificacion
-    this.router.navigate(['/verificacion']);
+    this.datos.altaUsuario(this.crearUsuarios.value).subscribe(
+      res=>{
+        // Esperar el id del error
+        // if(res[0].includes('Usuario')){
+          // this.errores[0] = true;
+        // }else if(res[0].includes('DNI')){
+          // this.errores[1] = true;
+        // }else if(res[0].includes('Email')){
+          // this.errores[2] = true;
+        // }
+        console.error(res)
+      }
+    );
+    // this.router.navigate(['/verificacion']);
     }
   }
 

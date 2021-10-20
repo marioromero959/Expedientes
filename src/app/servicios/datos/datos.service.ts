@@ -5,25 +5,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DatosService {
 
-API = 'http://localhost:1234/prueba/';
+URL = 'https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&a=UsuarioGuardar'
 
   constructor(
     private http: HttpClient,
   ) {}
 
   altaUsuario(data) {
-    return this.http.post(`${this.API}alta.php`, JSON.stringify(data));
+    return this.http.post(this.URL, JSON.stringify(data));
   }
-
-  obtenerUsuarios() {
-    return this.http.get(`${this.API}obtener.php`);
-  }
-  
-  editarUsuario(data){
-    return this.http.post(`${this.API}editar.php`, JSON.stringify(data));
-  }
-
-
-
 
 }

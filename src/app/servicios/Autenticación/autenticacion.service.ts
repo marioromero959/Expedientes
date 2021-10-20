@@ -7,31 +7,25 @@ import { map } from 'rxjs/operators';
 })
 export class AutenticacionService {
 
-  API = 'http://localhost:1234/prueba/';
-  
+  URL = 'https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&a=UsuarioAcceso';
+
   constructor( 
     private http:HttpClient,
   ) {}
 
-// bajaUsuario(idUsuario: number) {
-  // return this.http.get(`${this.API}baja.php?idUsuario=${idUsuario}`);
-// }
-
-userlogin(email, pass) {
-  return this.http.post<any>(`${this.API}seleccionar.php`,{ email, pass })
+login(email, pass){
+  return this.http.post<any>(this.URL,{ email, pass })
   .pipe(map(Users => {
-    this.setToken(Users[0]);
-    return Users[0];
+    this.setToken(Users);
+    return Users;
   }));
-}  
+}
 
 setToken(usuario) {
   const obj = JSON.stringify(usuario); 
   localStorage.setItem('Usuario',obj);
 }
-  
 deleteToken() {
   localStorage.removeItem('Usuario');
 }
-
 }

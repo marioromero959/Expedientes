@@ -5,14 +5,13 @@
   
   <form [formGroup]= "ingreso">
     <ion-item lines="full" class="ion-margin-horizontal borde">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email"
+      <ion-label position="floating">Email o Usuario</ion-label>
+      <ion-input type="text"
       formControlName ="email"
       autocomplete="on"></ion-input>
     </ion-item>
     <div *ngIf="emailField.errors && emailField.touched">
       <p *ngIf= "emailField.hasError('required')" class="ion-text-center">Este campo es requerido</p>
-      <p *ngIf= "emailField.hasError('email')" class="ion-text-center">El email ingresado no es válido</p>
     </div>
   <br>
     <ion-item lines="full" class="ion-margin-horizontal borde">

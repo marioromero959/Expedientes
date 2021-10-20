@@ -1,3 +1,4 @@
+// Queda para futura actulizacion con el backend
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,23 +13,22 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditarPerfilPage implements OnInit {
 
-  UsuarioEditado: FormGroup;
+/*   UsuarioEditado: FormGroup;
   registrado = false;
   prueba:string=null;
 
   passwordToggleIcon = "eye";
   rePasswordToggleIcon = "eye";
   showPassword = false;
-  showRePassword= false;
+  showRePassword= false; */
 
   constructor(
-    private router:Router,
-    private alertCtrl: AlertController,
-    private fb:FormBuilder,
-    private datos:DatosService,
+    // private router:Router,
+    // private alertCtrl: AlertController,
+    // private fb:FormBuilder,
+    // private datos:DatosService,
   ) { 
-    let perfil = JSON.parse(localStorage['Usuario']);
-
+/*     let perfil = JSON.parse(localStorage['Usuario']);
     this.UsuarioEditado = this.fb.group({
       id:[perfil.id],
       usuario:[perfil.usuario,Validators.required],
@@ -38,13 +38,13 @@ export class EditarPerfilPage implements OnInit {
       email:[perfil.email,[Validators.required,Validators.email]],
       pass:[perfil.pass,[Validators.required,Validators.minLength(6)]],
       repass:[perfil.repass,[Validators.required,Validators.minLength(6)]],
-    })
+    }) */
   }
 
   ngOnInit() {}
 
   // mostrar u ocultar contraseña
-  togglePass(){
+/*   togglePass(){
     this.showPassword =! this.showPassword;
     if(this.passwordToggleIcon == 'eye'){
       this.passwordToggleIcon = 'eye-off';
@@ -59,18 +59,18 @@ export class EditarPerfilPage implements OnInit {
     }else{
       this.rePasswordToggleIcon = 'eye';
     }
-  };
+  }; */
 
-  editarUsuario(){
+/*   editarUsuario(){
     if(this.UsuarioEditado.invalid){
       this.UsuarioEditado.markAllAsTouched();
       return;
     }else{
     }
     this.presentAlert(this.UsuarioEditado.value);
-  }
+  } */
 
-  async presentAlert(usuario) {
+ /*  async presentAlert(usuario) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: '¿Esta seguro de que desea editar sus datos?',
@@ -89,17 +89,17 @@ export class EditarPerfilPage implements OnInit {
     });
 
   await alert.present();
-  };
-
+  }; */
+/* 
 confirmarEdicion(usuario){
   this.datos.editarUsuario(usuario).subscribe();
   const obj = JSON.stringify(usuario)
   localStorage.setItem('Usuario',obj)
   window.location.reload();
-}
+} */
 
   // Obtengo los campos para validar los formularios
-get usuarioField(){
+/* get usuarioField(){
   return this.UsuarioEditado.get('usuario');
 }
 get dniField(){
@@ -123,6 +123,6 @@ get repasswordField(){
 
 irALogin(){
   this.router.navigate(['/login']);
-}
+} */
 
 }

@@ -26,8 +26,8 @@ export class LoginPage implements OnInit{
 
   ngOnInit() {
     this.ingreso = this.formBuilder.group({
-      email: ['',[Validators.required, Validators.email]],
-      pass: ['',[Validators.required,Validators.minLength(6)]]
+      email: ['',Validators.required],
+      pass: ['',Validators.required]
     })
   }
 
@@ -51,22 +51,25 @@ login(){
     this.ingreso.markAllAsTouched();
     return;
   }else{
-    this.auth.userlogin(this.ingreso.value.email , this.ingreso.value.pass).subscribe(
-    res=>{
-      this.ingreso.reset();
-      this.router.navigate(['/home']);
-    },
-    error=>{
-      this.presentAlert();
-    });
+    this.auth.login(this.ingreso.value.email, this.ingreso.value.pass).subscribe(
+      res=>{
+        if(res.status === 'correcto'){
+        this.ingreso.reset();
+        this.router.navigate(['home'])
+        }else if(res.status === 'El usuario no existe'){
+          this.presentAlert(res.status);
+        }else if(res.status === 'La contraseña es incorrecta'){
+          this.presentAlert(res.status);
+        }
+      })
   }
 }
 
-async presentAlert() {
+async presentAlert(error) {
   const alert = await this.alertCtrl.create({
     cssClass: 'my-custom-class',
     header: 'Datos Incorrectos',
-    subHeader: 'El usuario y/o contraseña ingresados son incorrectos.',
+    subHeader: error,
     buttons: ['OK']
   });
 
