@@ -40,6 +40,7 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.arrPersonas = res;
     });
     this.dataP1.obtenerSolicitudes().subscribe(res=>{
+      console.log(res)
       this.arrSolicitudes = res;
     })
   }
@@ -49,7 +50,6 @@ export class Paso1Page implements OnInit, OnDestroy {
   };
 
   tipo(event){
-    console.log(event.detail.value)
     this.persona = event.detail.value;
   }
   solicitud(event){
@@ -60,13 +60,13 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.mostrar = false;
     }
     // Desabilito el input de Nro de cuenta y vacio el array de tipos 
-    if(event.detail.value.includes("Solicitud de Inscripcion")){
-        event.detail.value.splice(0,event.detail.value.length, "Solicitud de Inscripcion");
+    if(event.detail.value.includes(1)){
+        event.detail.value.splice(0,event.detail.value.length, 1);
         this.dataPaso1.get('cuenta').patchValue('');
         this.dataPaso1.controls['cuenta'].disable();
         this.condicion = true;
-    }else if(event.detail.value.includes("Cierre definitivo")){
-      event.detail.value.splice(0,event.detail.value.length, "Cierre definitivo");
+    }else if(event.detail.value.includes(9)){
+      event.detail.value.splice(0,event.detail.value.length, 9);
       this.dataPaso1.controls['cuenta'].enable();
       this.condicion = true;
     }else{
@@ -75,6 +75,7 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.condicion = false;
     }
     this.solic = event.detail.value;
+    console.log(this.solic)
   };
 
   terminarP1(event){
