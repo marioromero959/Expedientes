@@ -12,9 +12,9 @@ import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1
   styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso1Page implements OnInit, OnDestroy {
-
+  id:number;
   dataPaso1:FormGroup;
-  opcionSelec:string ='';
+  opcionSelec:number;
   persona: string ="";
   solic:any[]=[];
   mostrar = true;
@@ -36,17 +36,18 @@ export class Paso1Page implements OnInit, OnDestroy {
     this.miForm();
   }
   ngOnInit() {
+    const userData = JSON.parse(localStorage.getItem('Usuario'));
+    this.id = userData.usuario_id;
     this.dataP1.obtenerPersonas().subscribe((res) =>{
       this.arrPersonas = res;
     });
     this.dataP1.obtenerSolicitudes().subscribe(res=>{
-      console.log(res)
       this.arrSolicitudes = res;
     })
   }
   // Obtengo los campos
   selecLocal(event){
-    this.opcionSelec = event.detail.value;
+    this.opcionSelec = Number(event.detail.value);
   };
 
   tipo(event){
@@ -75,26 +76,25 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.condicion = false;
     }
     this.solic = event.detail.value;
-    console.log(this.solic)
   };
 
   terminarP1(event){
     if (this.dataPaso1.valid){
       const value = {
+        id:this.id,
         cuit: this.dataPaso1.value.cuit,
         cuenta:this.dataPaso1.value.cuenta,
         tipo:this.persona,
         local:this.opcionSelec,
         solicitud:this.solic,
       };
-      if(value.tipo == '' || value.local == '' || this.mostrar == true){
+      if(value.tipo == '' || this.mostrar == true || value.local == undefined){
         this.presentAlert();
       }else{
         // Envio el formulario al servicio
       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
-      this.dataP1.enviarPersonas(value.tipo).subscribe(res=>console.log(res));
-      this.dataP1.enviarSolicitudes(value.solicitud).subscribe(res=>console.log(res));
-      // this.router.navigate(['/comerciales/2']);
+      // this.dataP1.enviarP1(value).subscribe(res=>console.log(res));
+      this.router.navigate(['/comerciales/2']);
       };
     }else{
       this.presentAlert();

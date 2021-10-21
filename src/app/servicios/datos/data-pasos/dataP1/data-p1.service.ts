@@ -10,8 +10,9 @@ export class DataP1Service {
 
   URLSolicitudes = 'https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&a=HCSolicitudesTiposListar';
 
+  URLP1='https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&a=HComercialGuardar'
 
-  constructor(private http:HttpClient) { }
+constructor(private http:HttpClient) { }
 
   obtenerPersonas(){
     return this.http.get(this.URLPersonas);
@@ -19,12 +20,9 @@ export class DataP1Service {
   obtenerSolicitudes(){
     return this.http.get(this.URLSolicitudes);
   }
-
-  enviarPersonas(data){
-    return this.http.post(this.URLPersonas, JSON.stringify(data));
-  }
-  enviarSolicitudes(data){
-    return this.http.post(this.URLSolicitudes, JSON.stringify(data));
+  enviarP1(data){
+    console.log(data)
+    return this.http.post(this.URLP1, JSON.stringify(data));
   }
 
 
