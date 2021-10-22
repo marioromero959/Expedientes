@@ -14,8 +14,8 @@
   Habilitaciones comerciales - Paso 2
 </h1>
   <form [formGroup]= 'dataPaso2' (ngSubmit)="terminarP2($event)">
-  <h2>Datos de {{persona}}</h2>
-  <div *ngIf="tipoPersona">
+  <h2>Datos de {{tipoPersona}}</h2>
+  <div *ngIf="tipoPersona == 'Persona Juridica'">
   <ion-item>
     <ion-label position=floating>
       Razón Social
@@ -58,7 +58,7 @@
 </div>
 
 
-  <h2 *ngIf="tipoPersona">Responsable de la persona jurídica</h2>
+  <h2 *ngIf="tipoPersona == 'Persona Juridica'">Responsable de la persona jurídica</h2>
   <ion-item>
     <ion-label position=floating>
       Apellido
@@ -77,7 +77,7 @@
     formControlName="nombres"
     autocomplete=on></ion-input>
   </ion-item>
-  <ion-item *ngIf="tipoPersona">
+  <ion-item *ngIf="tipoPersona == 'Persona Juridica'">
     <ion-label position=floating>
       CUIT  
     </ion-label>
@@ -86,7 +86,7 @@
     formControlName="cuit"
     autocomplete=on></ion-input>
   </ion-item>
-  <ion-item *ngIf="tipoPersona !== 'Persona Jurídica' ">
+  <ion-item *ngIf="tipoPersona == 'Persona Fisica' ">
     <ion-label position=floating>
       DNI  
     </ion-label>
@@ -105,7 +105,7 @@
     doneText="OK"
     ></ion-datetime>
   </ion-item>
-  <ion-item *ngIf="tipoPersona">
+  <ion-item *ngIf="tipoPersona == 'Persona Juridica'">
     <ion-label position=floating>
       Domicilio
     </ion-label>
@@ -114,7 +114,7 @@
     formControlName="domicilio"
     autocomplete=on></ion-input>
   </ion-item>
-  <ion-item *ngIf="tipoPersona">
+  <ion-item *ngIf="tipoPersona == 'Persona Juridica'">
     <ion-label position=floating>
       Localidad
     </ion-label>

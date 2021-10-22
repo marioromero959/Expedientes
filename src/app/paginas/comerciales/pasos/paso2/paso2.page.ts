@@ -36,12 +36,13 @@ export class Paso2Page implements OnInit, OnDestroy {
     // Obtengo el tipo de persona
     this.suscripcionForm1 = this.formData.escucharData().subscribe(res => {
       this.persona = res[0].tipo;
-      if(res[0].tipo == "Persona Juridica"){
+      if(res[0].tipo == 2){
         this.tipoPersona = "Persona Juridica";
       }else{
+        this.tipoPersona = "Persona Fisica";
         this.desabilitado = true;
         this.valor = "Titular";
-        this.caracter = "Titular"
+        this.caracter = "Titular";
       };
     })
     this.miForm();
@@ -49,7 +50,7 @@ export class Paso2Page implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Agrego validaciones dependiendo el tipo de persona
-    if(this.tipoPersona != "Persona Juridica")
+    if(this.tipoPersona == "Persona Fisica")
     this.dataPaso2.get('dni').setValidators(Validators.required);
     if(this.tipoPersona == "Persona Juridica"){
     this.dataPaso2.get('razon').setValidators(Validators.required);
@@ -114,7 +115,7 @@ terminarP2(event){
     caracter: this.caracter,
     }
     //mando los valores de fisica al arreglo de formularios.ts
-    if(this.tipoPersona !== "Persona Juridica"){
+    if(this.tipoPersona == "Persona Fisica"){
       this.suscripcionForm3 = this.formData.mandar(fisica,1).subscribe();
       this.router.navigate(['/comerciales/3']);
     }

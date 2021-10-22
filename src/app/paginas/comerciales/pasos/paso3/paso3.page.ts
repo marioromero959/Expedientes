@@ -18,7 +18,7 @@ export class Paso3Page implements OnInit, OnDestroy {
   domComercial:FormGroup;
   opSelect:string = '';
   seleccion:string = '';
-  local:string;
+  local:number;
 
   private suscripcionForm1: Subscription;
   private suscripcionForm2: Subscription;
@@ -40,7 +40,7 @@ export class Paso3Page implements OnInit, OnDestroy {
 
   ngOnInit() {
     // En caso de poseer local, agrego validacoines a los campos de domicilio comercial
-    if(this.local == 'si'){
+    if(this.local === 1){
       this.dataPaso3.get(['domComercial','calleC']).setValidators(Validators.required);
       this.dataPaso3.get(['domComercial','numeroCalleC']).setValidators(Validators.required);
       this.dataPaso3.get(['domComercial','pisoC']).setValidators(Validators.required);
@@ -88,7 +88,7 @@ terminarP3(event){
     this.presentAlert();
     this.dataPaso3.markAllAsTouched();
   }else{
-    if(this.local == 'si'){
+    if(this.local === 1){
       if(this.seleccion == 'Alquiler'){
         this.dataPaso3.get(['domComercial','alquilado']).setValue('Alquiler');
         this.suscripcionForm2 =  this.formData.mandar(this.dataPaso3.value,2).subscribe();
