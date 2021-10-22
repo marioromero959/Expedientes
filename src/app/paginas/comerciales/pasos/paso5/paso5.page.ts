@@ -18,11 +18,10 @@ export class Paso5Page implements OnInit, OnDestroy {
   mostratAct:boolean = false;
   mostrarEstudio:boolean = false;
   actividades = [];
-  estudio = [];
+  estudio:any = [];
   value:any[] = [];
   cambio;
   paso:number;
-  disabledButton:boolean = false;
   navegacion:string = '';
 
   private suscripcionForm1: Subscription;
@@ -36,7 +35,7 @@ export class Paso5Page implements OnInit, OnDestroy {
     private formData:FormulariosService,
     ) {
     //Recibo de paso 3 si es propietario o alquiler 
- /*    this.suscripcionForm1 = this.formData.escucharData().subscribe(res =>{
+     this.suscripcionForm1 = this.formData.escucharData().subscribe(res =>{
       if(res[2].domComercial != undefined){
         this.cambio = res[2].domComercial.alquilado;
       }else{
@@ -44,7 +43,7 @@ export class Paso5Page implements OnInit, OnDestroy {
       }
          (this.cambio == 'Alquiler') ? this.paso = 5 : this.paso = 4;
          (this.cambio == 'Alquiler') ? this.navegacion = '/comerciales/4' : this.navegacion = '/comerciales/3';
-      }) */
+      }) 
       this.miForm();
     }
 
@@ -54,19 +53,20 @@ export class Paso5Page implements OnInit, OnDestroy {
       this.dataPaso5.markAllAsTouched();
       this.presentAlert();
     }else{
-      if(this.value[1] !== null){
+      if(this.mostrarEstudio){
         this.value.splice(2,1,this.dataPaso5.value);
-      }else{
+      }else{ 
         this.value.splice(1,1,this.dataPaso5.value);
-      }
-     this.suscripcionForm2 = this.formData.mandar(this.value,this.paso - 1).subscribe();
-     console.log(this.value) 
-     // this.router.navigate(['/comerciales/6'])
+      } 
+      this.suscripcionForm2 = this.formData.mandar(this.value,this.paso - 1).subscribe();
+      console.log(this.value) 
+     this.router.navigate(['/comerciales/6'])
     }
   }
 
 borrarEstudio(){
   this.estudio.splice(0,1)
+  this.value.splice(1,1)
   this.mostrarEstudio = false;
 }
 
@@ -136,6 +136,7 @@ async  agregarEstudio(){
       this.estudio.push(data);
       this.value.splice(1,0,this.estudio);
       this.mostrarEstudio = true;
+      console.log(this.value)
     }
 }
 ngOnDestroy(){
