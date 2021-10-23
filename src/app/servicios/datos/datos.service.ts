@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class DatosService {
 
 URL = 'https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&a=UsuarioGuardar'
+URL2 = 'https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&a=HComercialesListarXUsr'
 
   constructor(
     private http: HttpClient,
@@ -13,6 +14,10 @@ URL = 'https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&a=
 
   altaUsuario(data) {
     return this.http.post(this.URL, JSON.stringify(data));
+  }
+
+  obtenerExpedientes(data){
+    return this.http.post(this.URL2, JSON.stringify(data));
   }
 
 }

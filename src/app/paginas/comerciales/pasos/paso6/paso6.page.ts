@@ -78,8 +78,8 @@ export class Paso6Page implements OnInit, OnDestroy {
     sName:'DNIPresidenteDorso'},
   ];
   // filtrado de documentos
-  filtroLocal = '';
-  filtroPersona = '';
+  filtroLocal:number;
+  filtroPersona:number;
   filtroSolic = [];
 
   private suscripcionForm1: Subscription;
@@ -91,17 +91,16 @@ export class Paso6Page implements OnInit, OnDestroy {
       // Segun la informacion del paso 3 mostraremos como paso 5 o 6
       this.suscripcionForm1 =  this.formData.escucharData().subscribe(res=>{
         this.datosP = res;
-
         this.filtroLocal = this.datosP[0].local;
         this.filtroPersona = this.datosP[0].tipo;
         this.filtroSolic = this.datosP[0].solicitud;
 
-        if(this.datosP[0].local == 'no'){
+        if(this.datosP[0].local == 2){
           this.paso = 5
         }else{
           const local = this.datosP[2].domComercial.alquilado;
           (local == 'Alquiler') ? this.paso = 6 : this.paso = 5;
-        }
+        } 
       })
     }
   ngOnInit() {

@@ -16,32 +16,33 @@
   <ion-button (click)="nuevaHab()" color="secondary" shape=round>
     Nueva Habilitación
   </ion-button>
-<div class="container" *ngIf="dataPaso1; else error">
-   <ion-row>
-     <ion-col size="6">
-       <p>N° Expediente:</p>
-       <p>N° HC:</p>
-       <p>CUIT</p>
-       <!-- preguntar nombre de fantasia -->
-       <p>N° Fantasia</p>
-       <p>Tipo de Solicitud</p>
-       <p>Estado</p>
-     </ion-col>
-     <ion-col>
-       <!-- Traer estos datos desde el back -->
-       <p>123456789</p>
-       <p>260456789</p>
-       <!--  -->
-       <p>{{dataPaso1.cuit}}</p>
-       <p>Prueba</p>
-       <p>{{dataPaso1.solicitud}}</p>
-       <p>Carga-En proceso</p>
-     </ion-col>
-   </ion-row>
-   <ion-button color="primary" shape=round>
-    Editar
-   </ion-button>
- </div> 
+
+<div class="container" *ngIf="expedientes; else error">
+  <div *ngFor="let expediente of expedientes[0]" >
+    <ion-row>
+      <ion-col>
+        <p>N° Expediente</p>
+        <p>N° HC:</p>
+        <p>CUIT</p>
+        <p *ngIf='expediente.hc_nom_fantasia'>Nombre de Fantasía</p>
+        <p>Tipo de Solicitud</p>
+        <p>Estado</p>
+      </ion-col>
+      <ion-col>
+        <p>{{expediente.exp_id}}</p>
+        <p>{{expediente.hcexp_id}}</p>
+        <p>{{expediente.hc_cuit}}</p>
+        <p *ngIf='expediente.hc_nom_fantasia'>{{expediente.hc_nom_fantasia}}</p>
+        <p>{{expediente.hc_solicitudes_tipo}}</p>
+        <p>{{expediente.hc_estado}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-button color="primary" shape=round>
+      Editar
+    </ion-button>
+  </div> 
+</div>
+
 <ng-template #error>
   <p>No ha iniciado ninguna habilitacion comercial.</p>
 </ng-template>

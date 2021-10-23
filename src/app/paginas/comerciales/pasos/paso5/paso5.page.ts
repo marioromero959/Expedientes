@@ -59,8 +59,7 @@ export class Paso5Page implements OnInit, OnDestroy {
         this.value.splice(1,1,this.dataPaso5.value);
       } 
       this.suscripcionForm2 = this.formData.mandar(this.value,this.paso - 1).subscribe();
-      console.log(this.value) 
-     this.router.navigate(['/comerciales/6'])
+      this.router.navigate(['/comerciales/6'])
     }
   }
 

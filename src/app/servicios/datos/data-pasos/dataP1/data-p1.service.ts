@@ -21,7 +21,6 @@ constructor(private http:HttpClient) { }
     return this.http.get(this.URLSolicitudes);
   }
   enviarP1(data){
-    console.log(data)
     return this.http.post(this.URLP1, JSON.stringify(data));
   }
 
