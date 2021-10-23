@@ -27,5 +27,6 @@ setToken(usuario) {
 }
 deleteToken() {
   localStorage.removeItem('Usuario');
+  localStorage.removeItem('FormData');
 }
 }

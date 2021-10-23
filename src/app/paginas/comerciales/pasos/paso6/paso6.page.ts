@@ -135,12 +135,13 @@ terminarP6(){
     this.presentAlert();
   }else{
     // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
-    this.archivos.forEach(res => {
+/*     this.archivos.forEach(res => {
       // Ver tamaño de archivos en b64
       const archivos = JSON.stringify(res)
       this.formData.envioArchivos(archivos).subscribe();
-    });
-    this.router.navigate(['/comerciales'])
+    }); */
+    console.log('desde P6',this.archivos)
+    this.router.navigate(['/comerciales/comprobante'])
   }
 };
 

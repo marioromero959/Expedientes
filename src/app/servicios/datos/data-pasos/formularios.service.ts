@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FormulariosService {
 
-  API = 'http://localhost:1234/prueba/';
+  // API = '';
 
   bs:BehaviorSubject<any> = new BehaviorSubject('');
   // guarda la info de cada paso
@@ -26,6 +26,7 @@ export class FormulariosService {
     const obj = JSON.stringify(this.informacion)
     localStorage.setItem('FormData',obj)
     this.bs.next(this.informacion);
+    console.log('FomsSvc:',this.informacion)
     return this.bs.asObservable();
   }
 // Devuelve la informacion obtenida 
@@ -33,9 +34,9 @@ export class FormulariosService {
 		return this.bs.asObservable();
 	} 
   
-  // Envia los archviso cargados al back
-  envioArchivos(data){
-    return this.http.post(`${this.API}altaArchivos.php`,(data));
-  }
+  // Envia los archivos de los pasos 2 al 5 al back
+  enviarFormulario(){}
+// Envia archivos de P6 al backend
+  enviarArchivos(){}
 
 }

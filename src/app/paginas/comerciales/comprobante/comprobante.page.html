@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/comerciales/6">
+    </ion-back-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <h1>Haz realizado tu trámite de habilitación exitosamente!</h1>
+    <ion-item>
+      <p>Podés descargar el comprobante con el siguiente link</p>
+    </ion-item>    
+    <ion-card-content>
+    <a href="../../../assets/prueba.pdf" download="comprobante.pdf">Descargar Comprobante</a>
+  </ion-card-content>
+</ion-card>
+<ion-row class="ion-justify-content-center">
+  <ion-button (click)='irAHome()' shape=round>
+    Volver a inicio
+  </ion-button>
+</ion-row>
+</ion-content>
