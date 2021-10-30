@@ -32,13 +32,16 @@
   </ion-item>
   <ion-item>
     <ion-label position="floating">Tipo de Persona</ion-label>
-    <ion-select (ionChange)="tipo($event)" cancelText="Cancelar" okText="OK">
+    <ion-select 
+      cancelText="Cancelar" 
+      okText="OK"
+      formControlName="tipoPersona">
       <ion-select-option *ngFor="let persona of arrPersonas" [value]='persona.persona_tipo_id'>{{persona.persona_tipo_nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-list>
-    <ion-radio-group (ionChange)="selecLocal($event)" value="">
+    <ion-radio-group value="" formControlName="tipoLocal">
       <ion-list-header>
         <ion-label>Posee Local</ion-label>
       </ion-list-header>
@@ -52,16 +55,16 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>  
-<!-- solicitudes_tipo_id -->
   <ion-item>
     <ion-label position="floating">Tipo de Solicitud</ion-label>
-    <ion-select multiple=true (ionChange)="solicitud($event)">
+    <ion-select multiple=true (ionChange)="solicitud($event)" formControlName='solicitud'>
       <ion-select-option *ngFor="let solicitudes of arrSolicitudes" [value]="solicitudes.solicitudes_tipo_id">{{solicitudes.solicitudes_tipo_nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>
-
-  <p *ngIf="mostrar" class="ion-text-center">Debe elegir al menos una opción para continuar</p>
+  <div *ngIf="solicitudField.errors && solicitudField.touched">
+    <p *ngIf= "solicitudField.hasError('required')" class="ion-text-center">Debe elegir al menos una opción para continuar</p>
+  </div>
   <p *ngIf=condicion>
     (No se puede puede tildar Solicitud de Inscripción o Cierre definitivo con otra opción a la vez)
   </p>

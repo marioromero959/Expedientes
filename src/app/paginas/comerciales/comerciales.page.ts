@@ -39,4 +39,10 @@ nuevaHab(){
   this.router.navigate(['/comerciales/1']);
 }
 
+editarExp(id,expediente){
+  const obj = JSON.stringify(expediente)
+  localStorage.setItem('Datos Expedientes',obj);
+  this.router.navigate(['/comerciales/1'])
+}
+
 }

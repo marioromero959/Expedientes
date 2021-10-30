@@ -12,12 +12,10 @@ import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1
   styleUrls: ['../estilos-pasos.scss'],
 })
 export class Paso1Page implements OnInit, OnDestroy {
+  
   id:number;
   dataPaso1:FormGroup;
   opcionSelec:number;
-  persona: string ="";
-  solic:any[]=[];
-  mostrar = true;
   condicion = false;  
 
   arrPersonas;
@@ -37,29 +35,43 @@ export class Paso1Page implements OnInit, OnDestroy {
   }
   ngOnInit() {
     const userData = JSON.parse(localStorage.getItem('Usuario'));
+    const exp = JSON.parse(localStorage.getItem('Datos Expedientes'))
+    // Reviso, si es edicion agrego los valores a los inputs
+    if(exp !== null){
+      this.dataPaso1.get('cuit').patchValue(exp.hc_cuit)
+      this.dataPaso1.get('cuenta').patchValue(exp.exp_id)
+      // Ver tipo de persona y local
+      this.dataPaso1.get('tipoPersona').setValue(2)
+      this.dataPaso1.get('tipoLocal').setValue('1')
+      this.dataPaso1.get('solicitud').setValue([5])
+    }
     this.id = userData.usuario_id;
     this.dataP1.obtenerPersonas().subscribe((res) =>{
       this.arrPersonas = res;
     });
     this.dataP1.obtenerSolicitudes().subscribe(res=>{
+
+      if(exp !== null){
+        this.dataPaso1.get('cuit').patchValue(exp.hc_cuit)
+        this.dataPaso1.get('cuenta').patchValue(exp.exp_id)
+        // Ver tipo de persona y local
+        this.dataPaso1.get('tipoPersona').setValue(1)
+        this.dataPaso1.get('tipoLocal').setValue('1')
+        this.dataPaso1.get('solicitud').setValue([5])
+      }
       this.arrSolicitudes = res;
     })
-  }
-  // Obtengo los campos
-  selecLocal(event){
-    this.opcionSelec = Number(event.detail.value);
-  };
 
-  tipo(event){
-    this.persona = event.detail.value;
   }
+
+  get solicitudField(){
+    return this.dataPaso1.get('solicitud');
+  }
+  get tipoField(){
+    return this.dataPaso1.get('tipoPerosna');
+  }
+
   solicitud(event){
-    // Mostrar mensaje de completado
-    if(event.detail.value == ''){
-      this.mostrar = true;
-    }else{
-      this.mostrar = false;
-    }
     // Desabilito el input de Nro de cuenta y vacio el array de tipos 
     if(event.detail.value.includes(1)){
         event.detail.value.splice(0,event.detail.value.length, 1);
@@ -75,31 +87,27 @@ export class Paso1Page implements OnInit, OnDestroy {
       this.dataPaso1.controls['cuenta'].enable();
       this.condicion = false;
     }
-    this.solic = event.detail.value;
   };
 
   terminarP1(event){
     if (this.dataPaso1.valid){
+       console.log(this.dataPaso1.value)
       const value = {
         id:this.id,
         cuit: this.dataPaso1.value.cuit,
         cuenta:this.dataPaso1.value.cuenta,
-        tipo:this.persona,
-        local:this.opcionSelec,
-        solicitud:this.solic,
+        tipo:this.dataPaso1.value.tipoPersona,
+        local:Number(this.dataPaso1.value.tipoLocal),
+        solicitud:this.dataPaso1.value.solicitud,
       };
-      if(value.tipo == '' || this.mostrar == true || value.local == undefined){
-        this.presentAlert();
-      }else{
         // Envio el formulario al servicio
       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
-      // this.dataP1.enviarP1(value).subscribe();
-      this.router.navigate(['/comerciales/2']);
-      };
+      this.dataP1.enviarP1(value).subscribe();
+      // this.router.navigate(['/comerciales/2']);
     }else{
       this.presentAlert();
       this.dataPaso1.markAllAsTouched();
-    }
+    } 
   }
 
 async presentAlert() {
@@ -117,6 +125,9 @@ async presentAlert() {
     this.dataPaso1 = this.fb.group({
       cuit: ['', [Validators.required,Validators.minLength(10)]],
       cuenta: [{value:'', disabled:false}, [Validators.required,Validators.minLength(10)]],
+      tipoPersona: ['', Validators.required],
+      tipoLocal: ['', Validators.required],
+      solicitud: ['', Validators.required],
     })
   }
 

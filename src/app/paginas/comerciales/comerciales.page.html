@@ -36,7 +36,7 @@
         <p>{{expediente.hc_estado}}</p>
       </ion-col>
     </ion-row>
-    <ion-button color="primary" shape=round>
+    <ion-button (click)="editarExp(expediente.exp_id,expediente)" color="primary" shape=round>
       Editar
     </ion-button>
   </div> 
