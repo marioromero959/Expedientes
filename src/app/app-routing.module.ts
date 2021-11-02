@@ -52,7 +52,7 @@ const routes: Routes = [
   {
     path: 'deliveries',
     loadChildren: () => import('./paginas/deliveries/deliveries.module').then( m => m.DeliveriesPageModule)
-  },
+  }
 ];
 
 @NgModule({

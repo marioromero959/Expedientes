@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
   ReactiveFormsModule,
   HttpClientModule,
+  BrowserAnimationsModule,
 ],
   providers: [
             { provide: RouteReuseStrategy,

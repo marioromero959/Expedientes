@@ -1,0 +1,206 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/home">
+    </ion-back-button>
+  </ion-buttons>
+    <ion-title>Habilitaciones Comerciales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <button mat-raised-button (click)="isEditable = !isEditable">
+    {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
+  </button>
+  
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="paso1" [editable]="isEditable">
+      <form [formGroup]="paso1">
+        <mat-form-field appearance="fill">
+          <mat-label>CUIT</mat-label>
+          <input matInput formControlName="cuit" placeholder="Ej: 00-000000-0" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Cuenta</mat-label>
+          <input matInput formControlName="cuenta" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Persona</mat-label>
+          <input matInput formControlName="tipoPersona" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Local</mat-label>
+          <input matInput formControlName="tipoLocal" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Solicitud</mat-label>
+          <input matInput formControlName="solicitud" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext (click)="enviarP1()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paso2" [editable]="isEditable">
+      <form [formGroup]="paso2">
+        <mat-form-field appearance="fill">
+          <mat-label>Razón Social</mat-label>
+          <input matInput formControlName="razon" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Domicilio</mat-label>
+          <input matInput formControlName="domicilio" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Localidad</mat-label>
+          <input matInput formControlName="localidad" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nacionalidad</mat-label>
+          <input matInput formControlName="nacionalidad" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>CUIT</mat-label>
+          <input matInput formControlName="cuit" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Anterior</button>
+          <button mat-button matStepperNext (click)="enviarP2()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paso3" [editable]="isEditable">
+      <form [formGroup]="paso3">
+        <div formGroupName="domFiscal">
+          <mat-form-field appearance="fill">
+            <mat-label>Calle</mat-label>
+            <input matInput formControlName="calle" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>N°</mat-label>
+            <input matInput formControlName="numeroCalle" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Piso</mat-label>
+            <input matInput formControlName="piso" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Provincia</mat-label>
+            <input matInput formControlName="provincia" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Localidad</mat-label>
+            <input matInput formControlName="localidad" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Codigo Postal</mat-label>
+            <input matInput formControlName="codPostal" required>
+          </mat-form-field>
+        </div>
+        <div formGroupName="domComercial">
+          <mat-form-field appearance="fill">
+            <mat-label>Calle</mat-label>
+            <input matInput formControlName="calleC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>N°</mat-label>
+            <input matInput formControlName="numeroCalleC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Piso</mat-label>
+            <input matInput formControlName="pisoC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Provincia</mat-label>
+            <input matInput formControlName="provinciaC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Localidad</mat-label>
+            <input matInput formControlName="localidadC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Código Postal</mat-label>
+            <input matInput formControlName="codPostalC" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Partida</mat-label>
+            <input matInput formControlName="partida" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Alquilado</mat-label>
+            <input matInput formControlName="alquilado" required>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Anterior</button>
+          <button mat-button matStepperNext (click)="enviarP3()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paso4" [editable]="isEditable">
+      <form [formGroup]="paso4">
+        <mat-form-field appearance="fill">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Anterior</button>
+          <button mat-button matStepperNext (click)="enviarP4()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="paso5" [editable]="isEditable">
+      <form [formGroup]="paso5">
+        <mat-form-field appearance="fill">
+          <mat-label>Fantasía</mat-label>
+          <input matInput formControlName="fantasia" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Anterior</button>
+          <button mat-button matStepperNext (click)="enviarP5()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <!-- <ng-template matStepLabel>Done</ng-template> -->
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</ion-content>

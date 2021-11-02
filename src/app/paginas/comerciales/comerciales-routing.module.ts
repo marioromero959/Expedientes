@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'comprobante',
     loadChildren: () => import('./comprobante/comprobante.module').then( m => m.ComprobantePageModule)
   },
+  {
+    path: 'habilitaciones',
+    loadChildren: () => import('./habilitaciones/habilitaciones.module').then( m => m.HabilitacionesPageModule)
+  },
 ];
 
 @NgModule({
