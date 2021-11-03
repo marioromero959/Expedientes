@@ -23,6 +23,7 @@ export class HabilitacionesPage implements OnInit {
 // Variables y condiciones
 condicionP1Solicitud:boolean = false;
 condicionP2TipoPersona:string = '';
+condicionP3Local:boolean = true;
 
 
   constructor(
@@ -42,13 +43,18 @@ condicionP2TipoPersona:string = '';
     });
     this.paso2 = this._formBuilder.group({
       razon: [''],
-      apellido: ['',Validators.required],
-      nombres: ['',Validators.required],
+      fechaInscripcion: [''],
+      tipoSocietario: [''],
+      cierre: [''],
+      apellido: ['', Validators.required],
+      nombres: ['', Validators.required],
       dni: [''],
+      fechaNacimiento: ['', Validators.required],
       domicilio: [''],
       localidad: [''],
-      nacionalidad: ['',Validators.required],
-      cuit: ['']
+      nacionalidad: ['', Validators.required],
+      cuit: [''],
+      caracter: ['', Validators.required],
     });
     this.paso3 = this._formBuilder.group({
        // Domicilio Fiscal
@@ -114,25 +120,39 @@ enviarP1(){
   if(this.paso1.invalid){
       this.presentAlert();
   }else{
-    console.log('Fin p1')
     console.log(this.paso1.value)
   }
 // Modificamos el paso 2
 if(this.paso1.value.tipoPersona == 1){
   this.condicionP2TipoPersona = "Persona Fisica"
+  this.paso2.get('caracter').patchValue('Titular');
+  this.paso2.controls['caracter'].disable();
+  // Seteamos Validaciones
+  this.paso2.get('dni').setValidators(Validators.required);
 }else if(this.paso1.value.tipoPersona == 2){
   this.condicionP2TipoPersona = "Persona Juridica"
+  this.paso2.get('caracter').patchValue('');
+  this.paso2.controls['caracter'].enable();
+  // Seteamos Validaciones
+  this.paso2.get('razon').setValidators(Validators.required);
+  this.paso2.get('fechaInscripcion').setValidators(Validators.required);
+  this.paso2.get('tipoSocietario').setValidators(Validators.required);
+  this.paso2.get('cierre').setValidators(Validators.required);
+  this.paso2.get('domicilio').setValidators(Validators.required);
+  this.paso2.get('localidad').setValidators(Validators.required);
+  this.paso2.get('cuit').setValidators(Validators.required);
+}
 }
 
-
-}
 // PASO 2 ---------------
-
-
-
-
 enviarP2(){
-  console.log('Fin p2')
+  if(this.paso2.invalid){
+    this.presentAlert();
+  }else{
+    console.log(this.paso2.value)
+  }
+// Modiicamos el paso 3
+
 }
 
 // ------------

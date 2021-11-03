@@ -51,10 +51,29 @@
     <mat-step [stepControl]="paso2" [editable]="isEditable">
       <p>Datos de la {{condicionP2TipoPersona}} </p>
       <form [formGroup]="paso2">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Razón Social</mat-label>
           <input matInput formControlName="razon" required>
         </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
+          <mat-label>Fecha de Inscripción</mat-label>
+          <input matInput type="date" formControlName="fechaInscripcion" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
+          <mat-label>Tipo de Societario</mat-label>
+          <mat-select formControlName="tipoSocietario">
+            <mat-option value="Entidades sin fines de lucro">Entidades sin fines de lucro</mat-option>
+            <mat-option value="Sociedad anónima simplificada">Sociedad anónima simplificada</mat-option>
+            <mat-option value="Sociedad simple">Sociedad simple</mat-option>
+            <mat-option value="Sociedad de responsabilidad limitada">Sociedad de respondabilidad limitada</mat-option>
+            <mat-option value="Sociedad anónima">Sociedad anónima</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
+          <mat-label>Cierre de Ejercicio</mat-label>
+          <input matInput type="date" formControlName="cierre" required>
+        </mat-form-field>
+        <p *ngIf="condicionP2TipoPersona == 'Persona Juridica'">Responsable de la Persona Jurídica</p>
         <mat-form-field appearance="outline">
           <mat-label>Apellido</mat-label>
           <input matInput formControlName="apellido" required>
@@ -63,15 +82,23 @@
           <mat-label>Nombres</mat-label>
           <input matInput formControlName="nombres" required>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
+          <mat-label>CUIT</mat-label>
+          <input matInput formControlName="cuit" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Fisica'">
           <mat-label>DNI</mat-label>
           <input matInput formControlName="dni" required>
         </mat-form-field>
         <mat-form-field appearance="outline">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput type=date formControlName="fechaNacimiento" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Domicilio</mat-label>
           <input matInput formControlName="domicilio" required>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Localidad</mat-label>
           <input matInput formControlName="localidad" required>
         </mat-form-field>
@@ -79,9 +106,14 @@
           <mat-label>Nacionalidad</mat-label>
           <input matInput formControlName="nacionalidad" required>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>CUIT</mat-label>
-          <input matInput formControlName="cuit" required>
+          <mat-label>En caracter de</mat-label>
+          <mat-select formControlName="caracter">
+            <mat-option value='Titular'>Titular</mat-option>
+            <mat-option value='Apoderado'>Apoderado</mat-option>
+            <mat-option value='Representante Legal'>Representante Legal</mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Anterior</button>
@@ -93,6 +125,7 @@
     <mat-step [stepControl]="paso3" [editable]="isEditable">
       <form [formGroup]="paso3">
         <div formGroupName="domFiscal">
+          <p>Domicilio Fiscal</p>
           <mat-form-field appearance="outline">
             <mat-label>Calle</mat-label>
             <input matInput formControlName="calle" required>
@@ -118,7 +151,13 @@
             <input matInput formControlName="codPostal" required>
           </mat-form-field>
         </div>
-        <div formGroupName="domComercial">
+
+        <div formGroupName="domComercial" *ngIf="condicionP3Local">
+          <p>¿Posee el mismo domicilio?</p>
+          <mat-radio-group color="primary" (selectionChange)="domicilio($event.value)">
+            <mat-radio-button value="si">Si</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
           <mat-form-field appearance="outline">
             <mat-label>Calle</mat-label>
             <input matInput formControlName="calleC" required>
@@ -144,13 +183,13 @@
             <input matInput formControlName="codPostalC" required>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Partida</mat-label>
+            <mat-label>Partida Provincial</mat-label>
             <input matInput formControlName="partida" required>
           </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Alquilado</mat-label>
-            <input matInput formControlName="alquilado" required>
-          </mat-form-field>
+          <mat-radio-group formControlName="alquilado" color="primary" (selectionChange)="alquilado($event.value)" >
+            <mat-radio-button value="Alquiler">Alquilado</mat-radio-button>
+            <mat-radio-button value="Propietario">Propietario</mat-radio-button>
+          </mat-radio-group>
         </div>
         <div>
           <button mat-button matStepperPrevious>Anterior</button>
