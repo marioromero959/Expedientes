@@ -26,6 +26,19 @@ export class MisValidaciones {
      }
     }
 
+    static errorSolicitud(existe:any){
+        return (control:AbstractControl) =>{
+           const value = control.value;
+               for(let i = 0; i<existe.length;i++){
+                   if(value == existe[i]){
+                   return {currentUser:true};
+                   }
+               }
+        return null;
+        }
+       }
+
+
 
 
 }

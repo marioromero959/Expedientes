@@ -37,28 +37,28 @@ export class Paso1Page implements OnInit, OnDestroy {
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     const exp = JSON.parse(localStorage.getItem('Datos Expedientes'))
     // Reviso, si es edicion agrego los valores a los inputs
-    if(exp !== null){
+ /*    if(exp !== null){
       this.dataPaso1.get('cuit').patchValue(exp.hc_cuit)
       this.dataPaso1.get('cuenta').patchValue(exp.exp_id)
       // Ver tipo de persona y local
       this.dataPaso1.get('tipoPersona').setValue(2)
       this.dataPaso1.get('tipoLocal').setValue('1')
       this.dataPaso1.get('solicitud').setValue([5])
-    }
+    } */
     this.id = userData.usuario_id;
     this.dataP1.obtenerPersonas().subscribe((res) =>{
       this.arrPersonas = res;
     });
     this.dataP1.obtenerSolicitudes().subscribe(res=>{
 
-      if(exp !== null){
+/*       if(exp !== null){
         this.dataPaso1.get('cuit').patchValue(exp.hc_cuit)
         this.dataPaso1.get('cuenta').patchValue(exp.exp_id)
         // Ver tipo de persona y local
         this.dataPaso1.get('tipoPersona').setValue(1)
         this.dataPaso1.get('tipoLocal').setValue('1')
         this.dataPaso1.get('solicitud').setValue([5])
-      }
+      } */
       this.arrSolicitudes = res;
     })
 
@@ -102,8 +102,8 @@ export class Paso1Page implements OnInit, OnDestroy {
       };
         // Envio el formulario al servicio
       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
-      this.dataP1.enviarP1(value).subscribe();
-      // this.router.navigate(['/comerciales/2']);
+      // this.dataP1.enviarP1(value).subscribe();
+      this.router.navigate(['/comerciales/2']);
     }else{
       this.presentAlert();
       this.dataPaso1.markAllAsTouched();
