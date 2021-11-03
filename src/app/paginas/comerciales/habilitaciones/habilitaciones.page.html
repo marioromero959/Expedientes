@@ -116,12 +116,11 @@
           </mat-select>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Anterior</button>
-          <button mat-button matStepperNext (click)="enviarP2()">Siguiente</button>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="enviarP2()">Siguiente</button>
         </div>
       </form>
     </mat-step>
-
     <mat-step [stepControl]="paso3" [editable]="isEditable">
       <form [formGroup]="paso3">
         <div formGroupName="domFiscal">
@@ -151,10 +150,9 @@
             <input matInput formControlName="codPostal" required>
           </mat-form-field>
         </div>
-
         <div formGroupName="domComercial" *ngIf="condicionP3Local">
           <p>¿Posee el mismo domicilio?</p>
-          <mat-radio-group color="primary" (selectionChange)="domicilio($event.value)">
+          <mat-radio-group color="primary" (change)="domicilio($event.value)">
             <mat-radio-button value="si">Si</mat-radio-button>
             <mat-radio-button value="no">No</mat-radio-button>
           </mat-radio-group>
@@ -186,19 +184,20 @@
             <mat-label>Partida Provincial</mat-label>
             <input matInput formControlName="partida" required>
           </mat-form-field>
-          <mat-radio-group formControlName="alquilado" color="primary" (selectionChange)="alquilado($event.value)" >
-            <mat-radio-button value="Alquiler">Alquilado</mat-radio-button>
-            <mat-radio-button value="Propietario">Propietario</mat-radio-button>
+          <mat-radio-group formControlName="alquilado" color="primary" (change)="alquilado($event.value)" required>
+            <mat-radio-button value="1">Alquilado</mat-radio-button>
+            <mat-radio-button value="2">Propietario</mat-radio-button>
           </mat-radio-group>
         </div>
+        <br>
         <div>
-          <button mat-button matStepperPrevious>Anterior</button>
-          <button mat-button matStepperNext (click)="enviarP3()">Siguiente</button>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="enviarP3()">Siguiente</button>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="paso4" [editable]="isEditable">
+    <mat-step [stepControl]="paso4" [editable]="isEditable" *ngIf="condicionP4Alquiler">
       <form [formGroup]="paso4">
         <mat-form-field appearance="outline">
           <mat-label>ID</mat-label>
@@ -213,8 +212,8 @@
           <input matInput formControlName="nombres" required>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Anterior</button>
-          <button mat-button matStepperNext (click)="enviarP4()">Siguiente</button>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="enviarP4()">Siguiente</button>
         </div>
       </form>
     </mat-step>
@@ -234,8 +233,8 @@
           <input matInput formControlName="email" required>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Anterior</button>
-          <button mat-button matStepperNext (click)="enviarP5()">Siguiente</button>
+          <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+          <button mat-raised-button color="primary" matStepperNext (click)="enviarP5()">Siguiente</button>
         </div>
       </form>
     </mat-step>

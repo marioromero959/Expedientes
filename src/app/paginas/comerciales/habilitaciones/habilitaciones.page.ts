@@ -24,6 +24,7 @@ export class HabilitacionesPage implements OnInit {
 condicionP1Solicitud:boolean = false;
 condicionP2TipoPersona:string = '';
 condicionP3Local:boolean = true;
+condicionP4Alquiler:boolean = false;
 
 
   constructor(
@@ -98,9 +99,7 @@ condicionP3Local:boolean = true;
 
   }
 // PASO 1 ----------------
-get solicitudField(){
-  return this.paso1.get('solicitud');
-}
+get solicitudField(){return this.paso1.get('solicitud');}
 
 solicitud(event){
   // Desabilito el input de Nro de cuenta y vacio el array de tipos 
@@ -151,17 +150,62 @@ enviarP2(){
   }else{
     console.log(this.paso2.value)
   }
-// Modiicamos el paso 3
-
+// Modificamos el paso 3
+if(this.paso1.value.tipoLocal === '1'){
+  this.condicionP3Local = true;
+}else{
+  this.condicionP3Local = false;
+}
 }
 
-// ------------
+// PASO 3 -------------
+domicilio(event){
+  if(event === 'si'){
+    this.paso3.get(['domComercial','calleC']).patchValue(this.paso3.value.domFiscal.calle);
+    this.paso3.get(['domComercial','numeroCalleC']).patchValue(this.paso3.value.domFiscal.numeroCalle);
+    this.paso3.get(['domComercial','pisoC']).patchValue(this.paso3.value.domFiscal.piso);
+    this.paso3.get(['domComercial','provinciaC']).patchValue(this.paso3.value.domFiscal.provincia);
+    this.paso3.get(['domComercial','localidadC']).patchValue(this.paso3.value.domFiscal.localidad);
+    this.paso3.get(['domComercial','codPostalC']).patchValue(this.paso3.value.domFiscal.codPostal); 
+  }else if(event === 'no'){
+    this.paso3.get(['domComercial','calleC']).patchValue('');
+    this.paso3.get(['domComercial','numeroCalleC']).patchValue('');
+    this.paso3.get(['domComercial','pisoC']).patchValue('');
+    this.paso3.get(['domComercial','provinciaC']).patchValue('');
+    this.paso3.get(['domComercial','localidadC']).patchValue('');
+    this.paso3.get(['domComercial','codPostalC']).patchValue('');
+  }
+}
+
+// Determinamos si es alquilado o no para mostrar el paso 4
+alquilado(event){
+  if(event === '1'){
+    this.condicionP4Alquiler = true;
+  }else{
+    this.condicionP4Alquiler = false;
+  }
+}
+
 enviarP3(){
-  console.log('Fin p3')
+  if(this.paso3.invalid){
+    this.presentAlert();
+  }else{
+    if(this.paso3.value) 
+    console.log(this.paso3.value)
+  }
 }
+
+// PASO 4 -------------
 enviarP4(){
-  console.log('Fin p4')
+  if(this.paso4.invalid){
+    this.presentAlert();
+  }else{
+    console.log(this.paso4.value)
+  }
 }
+
+// PASO 5 -------------
+
 enviarP5(){
   console.log('Fin p5')
 }
