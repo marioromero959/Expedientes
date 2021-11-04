@@ -199,6 +199,7 @@
 
     <mat-step [stepControl]="paso4" [editable]="isEditable" *ngIf="condicionP4Alquiler">
       <form [formGroup]="paso4">
+        <p>Datos del Propietario</p>
         <mat-form-field appearance="outline">
           <mat-label>ID</mat-label>
           <input matInput formControlName="id" required>
@@ -220,6 +221,7 @@
 
     <mat-step [stepControl]="paso5" [editable]="isEditable">
       <form [formGroup]="paso5">
+        <p>Datos Economicos</p>
         <mat-form-field appearance="outline">
           <mat-label>Fantasía</mat-label>
           <input matInput formControlName="fantasia" required>
@@ -232,6 +234,9 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" required>
         </mat-form-field>
+        <button mat-button color="accent">Agregar Actividad</button>
+        <button mat-button color="accent">Agregar Estudio Contable</button>
+        <p>Actividades Agregadas:</p>
         <div>
           <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
           <button mat-raised-button color="primary" matStepperNext (click)="enviarP5()">Siguiente</button>

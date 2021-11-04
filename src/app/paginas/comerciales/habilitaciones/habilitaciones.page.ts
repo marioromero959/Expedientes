@@ -69,14 +69,14 @@ condicionP4Alquiler:boolean = false;
       }),
     //Domicilio comercial
       domComercial: this._formBuilder.group({
-        calleC: [''],
-        numeroCalleC: [''],
-        pisoC: [''],
-        provinciaC: [''],
-        localidadC: [''],
-        codPostalC: [''],
-        partida: [''],
-        alquilado: [''],
+        calleC: ['', Validators.required],
+        numeroCalleC: ['', Validators.required],
+        pisoC: ['', Validators.required],
+        provinciaC: ['', Validators.required],
+        localidadC: ['', Validators.required],
+        codPostalC: ['', Validators.required],
+        partida: ['', Validators.required],
+        alquilado: ['', Validators.required],
         })
     });
     this.paso4 = this._formBuilder.group({
@@ -153,8 +153,11 @@ enviarP2(){
 // Modificamos el paso 3
 if(this.paso1.value.tipoLocal === '1'){
   this.condicionP3Local = true;
+  // Ver añadir el control de com comercial
+  // this.paso3.addControl('domComercial');
 }else{
   this.condicionP3Local = false;
+  this.paso3.removeControl('domComercial');
 }
 }
 
@@ -189,9 +192,9 @@ alquilado(event){
 enviarP3(){
   if(this.paso3.invalid){
     this.presentAlert();
+    console.log(this.paso3)
   }else{
-    if(this.paso3.value) 
-    console.log(this.paso3.value)
+    console.log(this.paso3)
   }
 }
 
