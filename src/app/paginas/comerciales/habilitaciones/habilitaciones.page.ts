@@ -3,13 +3,14 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1.service';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-habilitaciones',
   templateUrl: './habilitaciones.page.html',
   styleUrls: ['./habilitaciones.page.scss'],
 })
-export class HabilitacionesPage implements OnInit {
 
+export class HabilitacionesPage implements OnInit {
   // Formularios
   paso1: FormGroup;
   paso2: FormGroup;
@@ -34,6 +35,8 @@ condicionP4Alquiler:boolean = false;
     ) { }
 
   ngOnInit() {
+
+
     // construccion formularios
     this.paso1 = this._formBuilder.group({
       cuit: ['', Validators.required],
@@ -152,10 +155,20 @@ enviarP2(){
   }
 // Modificamos el paso 3
 if(this.paso1.value.tipoLocal === '1'){
+  // Si tiene local añadimos el control de domComercial
   this.condicionP3Local = true;
-  // Ver añadir el control de com comercial
-  // this.paso3.addControl('domComercial');
+  this.paso3.addControl('domComercial',this._formBuilder.group({
+    calleC: ['', Validators.required],
+    numeroCalleC: ['', Validators.required],
+    pisoC: ['', Validators.required],
+    provinciaC: ['', Validators.required],
+    localidadC: ['', Validators.required],
+    codPostalC: ['', Validators.required],
+    partida: ['', Validators.required],
+    alquilado: ['', Validators.required],
+    }));
 }else{
+  // Si no tiene quitamos el control de domComercial
   this.condicionP3Local = false;
   this.paso3.removeControl('domComercial');
 }
@@ -208,7 +221,6 @@ enviarP4(){
 }
 
 // PASO 5 -------------
-
 enviarP5(){
   console.log('Fin p5')
 }

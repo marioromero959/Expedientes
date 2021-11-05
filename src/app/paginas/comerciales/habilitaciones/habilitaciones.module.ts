@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HabilitacionesPageRoutingModule } from './habilitaciones-routing.module';
 import { HabilitacionesPage } from './habilitaciones.page';
 import { MaterialModule } from 'src/app/material/material.module';
-
+import { TablasComponent } from './tablas/tablas.component';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { MaterialModule } from 'src/app/material/material.module';
     MaterialModule,
     HabilitacionesPageRoutingModule
   ],
-  declarations: [HabilitacionesPage]
+  declarations: [HabilitacionesPage,TablasComponent]
 })
 export class HabilitacionesPageModule {}
