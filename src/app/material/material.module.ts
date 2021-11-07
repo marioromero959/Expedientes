@@ -19,7 +19,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -45,6 +45,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule,
     MatFormFieldModule,
     MatStepperModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatButtonModule,
@@ -65,6 +66,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule,
     MatFormFieldModule,
     MatStepperModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }
