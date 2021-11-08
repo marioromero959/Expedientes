@@ -12,7 +12,7 @@
 <!--   <button mat-raised-button (click)="isEditable = !isEditable">
     {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
   </button> -->
-  <app-tablas></app-tablas>
+
   <h2>Pasos</h2>
   <mat-stepper linear #stepper>
     <mat-step [stepControl]="paso1" [editable]="isEditable">
@@ -218,7 +218,6 @@
         </div>
       </form>
     </mat-step>
-
     <mat-step [stepControl]="paso5" [editable]="isEditable">
       <form [formGroup]="paso5">
         <p>Datos Economicos</p>
@@ -235,15 +234,107 @@
           <input matInput formControlName="email" required>
         </mat-form-field>
         <button mat-raised-button color="accent" (click)="agregarAct()">Agregar Actividad</button>
-        <button mat-raised-button color="accent" (click)="agregarEstudio()">Agregar Estudio Contable</button>
-        <p>Actividades Agregadas:</p>
+        <button mat-raised-button color="accent" (click)="agregarEstudio()" [disabled]="estudioOk">Agregar Estudio Contable</button>
+        
+        
+        <div *ngIf= "estudio != 0"  class="container">
+          <h4>Datos de Estudio Contable</h4>
+          <div *ngFor= "let est of estudio" class="ion-text-start">
+          <ion-row>
+            <ion-col size=4 offset=0.5>Descripción:</ion-col>
+            <ion-col>{{est.estudio}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size=4 offset=0.5>Teléfono:</ion-col>
+            <ion-col>{{est.telefono}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size=4 offset=0.5>Email:</ion-col>
+            <ion-col>{{est.email}}</ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <button mat-raised-button (click)=borrarEstudio() size=small color="warn">Eliminar Estudio</button>
+          </ion-row>
+          <br>
+          </div>
+        </div>
 
+        <div class="container" *ngIf='actividades.length != 0; else elseBlock'>
+          <h4>Actividades Agregadas:</h4>
+          <ion-row>
+            <ion-col>Fecha</ion-col>
+            <ion-col size=8>Descripción</ion-col>
+          </ion-row>
+          <ion-row *ngFor= "let act of actividades; let i = index ">
+            <ion-col size=4>{{act.fecha}}</ion-col>
+            <ion-col size=6>{{act.tipo}}</ion-col>
+            <ion-button (click)=borrarAct(i) size=small color=danger>
+              X
+            </ion-button>
+          </ion-row>
+      </div>
+      <br>
+      <ng-template #elseBlock>
+        <p class="ion-text-center">
+          Debe agregar al menos una actividad para continuar.
+        </p>
+        </ng-template>
         <div>
           <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
           <button mat-raised-button color="primary" matStepperNext (click)="enviarP5()">Siguiente</button>
         </div>
       </form>
     </mat-step>
+
+    <mat-step [stepControl]="paso6" [editable]="isEditable">
+        <h4>Sellaldo de Apertura</h4>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title color=danger>DATOS PARA TRANSFERENCIA</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>CBU Municipalidad de Gualeguay: 1245678913245678912456789</p>
+          <p>CUIT:30-123456789-1</p>
+          <p>Valor:$220</p>
+        </ion-card-content>
+        <ion-card-header>
+          <ion-card-title color=danger>IMPORTANTE, EN EL CASO DE TRANSFERENCIAS</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>*Adjuntar el comprobante.</p>
+          <p>*Si desea pagar plus por pago, debera solicitar la boleta correspondiente a rentas@gualeguay.gob.ar. </p>
+        </ion-card-content>
+      </ion-card>  
+      <h4>Documentación a adjuntar</h4>
+   <!--    <form>
+      <div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic ; let i = index let count = count">
+        <ion-row>
+          <ion-label id='titulo'>
+            {{documento.name}} 
+          </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <input 
+              type=file
+              [id] = i
+              value = 'marito'
+              accept=".jpg, .jpeg, .pdf"
+              multiple=false
+              (change)="select($event,i,count)">
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      </div>
+      <ion-row class="ion-justify-content-center">
+        <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
+          Siguiente
+        </ion-button>
+      </ion-row> 
+      </form>  --> 
+    </mat-step>
+
 
     <mat-step>
       <p>You are now done.</p>

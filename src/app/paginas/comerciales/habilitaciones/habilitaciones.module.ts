@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HabilitacionesPageRoutingModule } from './habilitaciones-routing.module';
 import { HabilitacionesPage } from './habilitaciones.page';
 import { MaterialModule } from 'src/app/material/material.module';
-import { TablasComponent } from './tablas/tablas.component';
+import { FiltrosDocsPipe } from '../pasos/filtros-docs.pipe';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { TablasComponent } from './tablas/tablas.component';
     MaterialModule,
     HabilitacionesPageRoutingModule
   ],
-  declarations: [HabilitacionesPage,TablasComponent]
+  declarations: [HabilitacionesPage,FiltrosDocsPipe]
 })
 export class HabilitacionesPageModule {}

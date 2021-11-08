@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { CargaActPage } from '../pasos/carga-act/carga-act.page';
+import { CargaEstudioPage } from '../pasos/carga-estudio/carga-estudio.page';
 
 
 @Component({
@@ -17,7 +19,9 @@ export class HabilitacionesPage implements OnInit {
   paso3: FormGroup;
   paso4: FormGroup;
   paso5: FormGroup;
+  paso6;
   isEditable = true;
+  estudioOk = false;
   // Variables para almacenar datos del backend 
   arrPersonas:any;
   arrSolicitudes:any;
@@ -27,16 +31,19 @@ condicionP2TipoPersona:string = '';
 condicionP3Local:boolean = true;
 condicionP4Alquiler:boolean = false;
 
+// Variables P5
+actividades = []
+estudio = []
+value = []
 
   constructor(
     private _formBuilder: FormBuilder,
     private dataP1Svc: DataP1Service,
     private alerta: AlertController,
+    private modalCtrl:ModalController,
     ) { }
 
   ngOnInit() {
-
-
     // construccion formularios
     this.paso1 = this._formBuilder.group({
       cuit: ['', Validators.required],
@@ -91,6 +98,7 @@ condicionP4Alquiler:boolean = false;
       fantasia: ['', Validators.required],
       telefono: ['', Validators.required],
       email: ['', Validators.required],
+      actividad: ['', Validators.required],
     });
     // Traer data del back
     this.dataP1Svc.obtenerPersonas().subscribe(res=>{
@@ -205,9 +213,9 @@ alquilado(event){
 enviarP3(){
   if(this.paso3.invalid){
     this.presentAlert();
-    console.log(this.paso3)
+    console.log(this.paso3.value)
   }else{
-    console.log(this.paso3)
+    console.log(this.paso3.value)
   }
 }
 
@@ -221,12 +229,73 @@ enviarP4(){
 }
 
 // PASO 5 -------------
-enviarP5(){
-  console.log('Fin p5')
+borrarAct(id){
+  this.actividades.splice(id,1)
+  if(this.actividades.length == 0){
+    this.paso5.get('actividad').patchValue('');
+  }
+}
+borrarEstudio(){
+  this.estudio.splice(0,1)
+  this.value.splice(1,1)
+  this.estudioOk = false;
+}
+async agregarAct(){
+  const modal = await this.modalCtrl.create(
+    {
+      component: CargaActPage,
+      componentProps:{
+        tipo: '',
+        fecha: '',
+      },
+      cssClass: 'my-custom-class'
+    }
+  )
+  await modal.present();
+  const { data } = await modal.onDidDismiss();
+      if(data === undefined){
+        console.log('Cancelado');
+      }else{
+        console.log(data)
+        this.actividades.push(data);
+        // this.value.splice(0,1,this.actividades)
+        this.paso5.get('actividad').patchValue('ok');
+      }
+}
+async  agregarEstudio(){
+    const modal = await this.modalCtrl.create(
+      {
+        component: CargaEstudioPage,
+        componentProps:{
+          estudio: '',
+          telefono: '',
+          email: '',
+        },
+        cssClass: 'my-custom-class'
+      }
+    )
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if(data === undefined){
+      console.log('Cancelado');
+    }else{
+      this.estudio.push(data);
+      this.value.splice(1,0,this.estudio);
+      // this.mostrarEstudio = true;
+      console.log(this.value)
+      console.log(data)
+      this.estudioOk = true;
+    }
 }
 
 
-
+enviarP5(){
+  if(this.paso5.invalid || this.actividades.length == 0){
+    this.presentAlert();
+  }else{
+    console.log(this.paso5.value)
+  }
+}
 
 // alerta
 async presentAlert() {
