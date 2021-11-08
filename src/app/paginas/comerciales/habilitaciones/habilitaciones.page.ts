@@ -36,6 +36,76 @@ actividades = []
 estudio = []
 value = []
 
+// Variables P6
+  datosP;
+  paso:number;
+  archivos:any = [];
+  claseInput:boolean = false;  
+  documentos = [
+    {id:1,
+    name: 'Constancia de inscripción con sist registral',
+    sName:'registral'},
+    {id:2,
+    name: 'Constancia de inscripción en ATER',
+    sName:'ater'},
+    {id:3,
+    name: 'DNI del titular - Frente',
+    sName:'DNIfrente'},
+    {id:4,
+    name: 'Contrato de alquiler/comodato, en caso de corresponder',
+    sName:'alquiler'},
+    {id:5,
+    name: 'Copia de impuesto inmobiliario o tasa inmobiliaria donde conste numero de partida del inmueble',
+    sName:'impuesto'},
+    {id:6,
+    name: 'Plano/Croquis del lugar donde se desarrollará la actividad (Opcional)',
+    sName:'planos'},
+    {id:7,
+    name: 'DNI nuevo titular - Frente',
+    sName:'nuevoDNIfrente'},
+    {id:8,
+    name: 'Constancia de baja anterior',
+    sName:'baja'},
+    // Ver esta constancia
+    {id:9,
+    name: 'Constancia de baja de actividad en AFIP con sistema ASDASDA',
+    sName:'bajaAFIP'},
+    {id:10,
+    name: 'Constancia de baja de actividad en ATER',
+    sName:'bajaActATER'},
+    {id:11,
+    name: 'Constancia de baja en AFIP con sistema registral',
+    sName:'bajaRegistralAFIP'},
+    {id:12,
+    name: 'Constancia de baja en ATER',
+    sName:'bajaAter'},
+    {id:13,
+    name: 'DNI del Presidente o Socio representante - Frente',
+    sName:'DNIPresidenteFrente'},
+    {id:14,
+    name: 'Última acta de designación de autoridades',
+    sName:'acta'},
+    {id:15,
+    name: 'Estatuto o contrato constitutivo',
+    sName:'estatuto'},
+    {id:16,
+    name: 'Constancia de sellado',
+    sName:'sellado'},
+    {id:17,
+    name: 'DNI nuevo titular - Dorso',
+    sName:'nuevoDNIdorso'},
+    {id:18,
+    name: 'DNI del titular - Dorso',
+    sName:'DNIdorso'},
+    {id:19,
+    name: 'DNI del Presidente o Socio representante - Dorso',
+    sName:'DNIPresidenteDorso'},
+  ];
+  // filtrado de documentos
+  filtroLocal:number;
+  filtroPersona:number;
+  filtroSolic = [];
+
   constructor(
     private _formBuilder: FormBuilder,
     private dataP1Svc: DataP1Service,
@@ -294,8 +364,14 @@ enviarP5(){
     this.presentAlert();
   }else{
     console.log(this.paso5.value)
+    // Enviamos filtros P6
+    this.filtroLocal = this.paso1.value.tipoLocal;
+    this.filtroPersona = this.paso1.value.tipoPersona;
+    this.filtroSolic = this.paso1.value.solicitud;
   }
 }
+// PASO 6 ------------
+enviarP6(){}
 
 // alerta
 async presentAlert() {

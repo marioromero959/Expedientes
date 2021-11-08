@@ -306,7 +306,7 @@
         </ion-card-content>
       </ion-card>  
       <h4>Documentación a adjuntar</h4>
-   <!--    <form>
+   <form>
       <div *ngFor="let documento of documentos | filtro:filtroLocal:filtroPersona:filtroSolic ; let i = index let count = count">
         <ion-row>
           <ion-label id='titulo'>
@@ -327,12 +327,11 @@
         </ion-col>
       </ion-row>
       </div>
-      <ion-row class="ion-justify-content-center">
-        <ion-button type="button" (click)="terminarP6()" color="secondary" shape="round">
-          Siguiente
-        </ion-button>
-      </ion-row> 
-      </form>  --> 
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+        <button mat-raised-button color="primary" matStepperNext (click)="enviarP6()">Siguiente</button>
+      </div>
+      </form>   
     </mat-step>
 
 
