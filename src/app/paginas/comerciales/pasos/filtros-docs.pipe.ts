@@ -13,7 +13,7 @@ export class FiltrosDocsPipe implements PipeTransform {
 // Filtro primero por local y tipo de persona
     const docs = value.filter(res => {
       if(args[1] === 1){
-        if(args[0] === 1){
+        if(args[0] === '1'){
           const rta = res.id != 13 && res.id != 14 && res.id != 15 && res.id != 19;
           return rta;
         }else{
@@ -21,7 +21,7 @@ export class FiltrosDocsPipe implements PipeTransform {
           return rta;
         }
       }else if(args[1] === 2){
-        if(args[0] === 1){
+        if(args[0] === '1'){
           const rta = res.id != 3 && res.id != 7 && res.id != 8 && res.id != 17 && res.id != 18 
           return rta;
         }else{

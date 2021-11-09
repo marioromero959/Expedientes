@@ -22,19 +22,19 @@ export class HabilitacionesPage implements OnInit {
   paso6;
   isEditable = true;
   estudioOk = false;
-  // Variables para almacenar datos del backend 
+// Variables para almacenar datos del backend 
   arrPersonas:any;
   arrSolicitudes:any;
 // Variables y condiciones
-condicionP1Solicitud:boolean = false;
-condicionP2TipoPersona:string = '';
-condicionP3Local:boolean = true;
-condicionP4Alquiler:boolean = false;
+  condicionP1Solicitud:boolean = false;
+  condicionP2TipoPersona:string = '';
+  condicionP3Local:boolean = true;
+  condicionP4Alquiler:boolean = false;
 
 // Variables P5
-actividades = []
-estudio = []
-value = []
+  actividades = []
+  estudio = []
+  value = []
 
 // Variables P6
   datosP;
