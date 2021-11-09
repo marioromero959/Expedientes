@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-carga-act',
@@ -13,26 +14,36 @@ export class CargaActPage implements OnInit {
 
   tipoAct:string = '';
   fechaInicio:string = '';
+  actividades: FormGroup;
 
   constructor(
     private modalCtrl:ModalController,
     private alertCtrl:AlertController,
+    private _formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.actividades = this._formBuilder.group({
+      fechaInicioBaja: [''],
+      actividad: [''],
+    })
   }
 
-  act(event){
-    this.tipoAct = event.detail.value;
+agregar(){
+  if(this.actividades.invalid){
+    this.presentAlert();
+  }else{ 
+    this.modalCtrl.dismiss({
+      fecha:this.actividades.value.fechaInicioBaja,
+      tipo:this.actividades.value.actividad,
+    });
   }
-  fechaInicioBaja(event){
-    this.fechaInicio = new Date(event.detail.value).toLocaleDateString();
-  }
-  volver(){
-    this.modalCtrl.dismiss();
-  }
+}
+volver(){
+  this.modalCtrl.dismiss();
+} 
 
-  enviarAct(event){
+/*   enviarAct(event){
     // creamos el objeto
     if(this.fechaInicio == '' || this.tipoAct == ''){
       this.presentAlert();
@@ -42,7 +53,7 @@ export class CargaActPage implements OnInit {
       fecha:this.fechaInicio,
     });
     }
-  }
+  } */
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({

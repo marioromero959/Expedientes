@@ -5,55 +5,22 @@
 </ion-header>
 
 <ion-content>
-<!-- <h1>Agregar Actividad Comercial</h1> -->
-
-<form (ngSubmit)="enviarAct($event)">
-  <h2>Actividad Comercial</h2>
-  <ion-item>
-    <ion-label position="floating">Actividad Comercial</ion-label>
-    <ion-select (ionChange)="act($event)" cancelText="Cancelar" okText="OK">
-      <ion-select-option value="Actividad 1">Actividad 1</ion-select-option>
-      <ion-select-option value="Actividad 2">Actividad 2</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <h2>Fecha de Inicio/Baja</h2>
-  <ion-item>
-    <ion-datetime 
-    (ionChange)="fechaInicioBaja($event)"
-    displayFormat="MM DD YY" 
-    placeholder="MM/DD/AA"
-    cancelText="Cancelar"
-    doneText="OK"
-    ></ion-datetime>
-  </ion-item>  
-  <br>
-  <ion-row class="ion-justify-content-center">
-    <ion-col class="ion-text-center">
-      <ion-button type="button" color="primary" shape="round" (click)= "volver()">
-        Cancelar
-      </ion-button>
-    </ion-col>
-    <ion-col class="ion-text-center">
-      <ion-button type="submit" color="secondary" shape="round">
-        Agregar
-      </ion-button>
-    </ion-col>
-  </ion-row>
-</form>
-
-<mat-form-field appearance="outline">
-  <mat-label>Actividad Comercial</mat-label>
-  <mat-select>
-    <mat-option  value='act1'>Act 1</mat-option>
-    <mat-option  value='act2'>Act 2</mat-option>
+<h2>Agregar Actividad Comercial</h2>
+<form [formGroup]="actividades">
+  <mat-form-field appearance="outline">
+    <mat-label>Actividad Comercial</mat-label>
+    <mat-select formControlName="actividad" required>
+    <mat-option  value='Actividad 1'>Actividad 1</mat-option>
+    <mat-option  value='Actividad 2'>Actividad 2</mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" >
   <mat-label>Fecha de Inicio/Baja</mat-label>
-  <input matInput type="date">
-</mat-form-field>
+  <input matInput type="date" formControlName="fechaInicioBaja" required>
+</mat-form-field>   
 <br>
-<button mat-raised-button color='primary'>Cancelar</button>
-<button mat-raised-button color='accent'>Agregar</button>
+<button mat-raised-button color='primary' (click)="volver()">Cancelar</button>
+<button mat-raised-button color='accent' (click)="agregar()">Agregar</button>
+</form>
 
 </ion-content>
