@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CargaEstudioPageRoutingModule } from './carga-estudio-routing.module';
 
 import { CargaEstudioPage } from './carga-estudio.page';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { CargaEstudioPage } from './carga-estudio.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    CargaEstudioPageRoutingModule
+    CargaEstudioPageRoutingModule,
+    MaterialModule
   ],
   declarations: [CargaEstudioPage]
 })

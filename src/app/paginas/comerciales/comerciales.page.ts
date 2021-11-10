@@ -36,7 +36,7 @@ export class ComercialesPage implements OnInit {
     });
   }
 nuevaHab(){
-  this.router.navigate(['/comerciales/1']);
+  this.router.navigate(['/comerciales/habilitaciones']);
 }
 
 editarExp(id,expediente){

@@ -18,16 +18,18 @@ export class CargaEstudioPage implements OnInit {
     private fb: FormBuilder,
     private modalCtrl:ModalController,
     private alertCtrl:AlertController,
-  ) {
-    this.miForm();
-   }
+  ) {}
 
   ngOnInit() {
+    this.formEstudio = this.fb.group({
+      estudio: [''],
+      telefono: [''],
+      email: [''],
+      })
   }
 
-agregarEst(event){
+agregarEst(){
   if(this.formEstudio.invalid){
-    this.formEstudio.markAllAsTouched();
     this.presentAlert();
   }else{
     this.modalCtrl.dismiss({
@@ -37,13 +39,8 @@ agregarEst(event){
     });
   }
 }
-
-miForm(){
-  this.formEstudio = this.fb.group({
-  estudio: ['',Validators.required],
-  telefono: ['',Validators.required],
-  email: ['',[Validators.required,Validators.email]],
-  })
+volver(){
+  this.modalCtrl.dismiss();
 }
 
 async presentAlert() {
@@ -57,8 +54,5 @@ async presentAlert() {
 await alert.present();
 };
 
-volver(){
-  this.modalCtrl.dismiss();
-}
 
 }

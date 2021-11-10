@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { CargaActPage } from '../pasos/carga-act/carga-act.page';
-import { CargaEstudioPage } from '../pasos/carga-estudio/carga-estudio.page';
+import { CargaActPage } from './carga-act/carga-act.page';
+import { CargaEstudioPage } from './carga-estudio/carga-estudio.page';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,21 +27,18 @@ export class HabilitacionesPage implements OnInit {
   arrPersonas:any;
   arrSolicitudes:any;
 // Variables y condiciones
+  id:number;
   condicionP1Solicitud:boolean = false;
   condicionP2TipoPersona:string = '';
   condicionP3Local:boolean = true;
   condicionP4Alquiler:boolean = false;
-
 // Variables P5
   actividades = []
   estudio = []
-  value = []
-
 // Variables P6
   datosP;
   paso:number;
   archivos:any = [];
-  claseInput:boolean = false;  
   documentos = [
     {id:1,
     name: 'Constancia de inscripción con sist registral',
@@ -68,7 +66,7 @@ export class HabilitacionesPage implements OnInit {
     sName:'baja'},
     // Ver esta constancia
     {id:9,
-    name: 'Constancia de baja de actividad en AFIP con sistema ASDASDA',
+    name: 'Constancia de baja de actividad en AFIP con sistema registral',
     sName:'bajaAFIP'},
     {id:10,
     name: 'Constancia de baja de actividad en ATER',
@@ -111,6 +109,7 @@ export class HabilitacionesPage implements OnInit {
     private dataP1Svc: DataP1Service,
     private alerta: AlertController,
     private modalCtrl:ModalController,
+    private router: Router,
     ) { }
 
   ngOnInit() {
@@ -136,6 +135,18 @@ export class HabilitacionesPage implements OnInit {
       nacionalidad: ['', Validators.required],
       cuit: [''],
       caracter: ['', Validators.required],
+
+
+
+
+
+// TERMINAR p2 FORMCONTROLS
+
+
+
+
+
+
     });
     this.paso3 = this._formBuilder.group({
        // Domicilio Fiscal
@@ -169,7 +180,11 @@ export class HabilitacionesPage implements OnInit {
       telefono: ['', Validators.required],
       email: ['', Validators.required],
       actividad: ['', Validators.required],
+      estudio: ['']
     });
+    this.paso6 = this._formBuilder.group({
+    documentos: ['',Validators.required]  
+    })
     // Traer data del back
     this.dataP1Svc.obtenerPersonas().subscribe(res=>{
       this.arrPersonas = res;
@@ -177,7 +192,10 @@ export class HabilitacionesPage implements OnInit {
     this.dataP1Svc.obtenerSolicitudes().subscribe(res=>{
       this.arrSolicitudes = res;
     })
-
+    // Traer data del usuario cargada en memoria
+    const userData = JSON.parse(localStorage.getItem('Usuario'));
+    this.id = userData.usuario_id;
+    // const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
   }
 // PASO 1 ----------------
 get solicitudField(){return this.paso1.get('solicitud');}
@@ -200,10 +218,19 @@ enviarP1(){
   if(this.paso1.invalid){
       this.presentAlert();
   }else{
-    console.log(this.paso1.value)
+    // Armamos el objeto para enviar al backend
+    const value = {
+      id:this.id,
+      cuit: Number(this.paso1.value.cuit),
+      cuenta:Number(this.paso1.value.cuenta),
+      tipo:this.paso1.value.tipoPersona,
+      local:Number(this.paso1.value.tipoLocal),
+      solicitud:this.paso1.value.solicitud,
+    };
+    // this.dataP1.enviarP1(value).subscribe();
   }
 // Modificamos el paso 2
-if(this.paso1.value.tipoPersona == 1){
+/* if(this.paso1.value.tipoPersona == 1){
   this.condicionP2TipoPersona = "Persona Fisica"
   this.paso2.get('caracter').patchValue('Titular');
   this.paso2.controls['caracter'].disable();
@@ -222,6 +249,37 @@ if(this.paso1.value.tipoPersona == 1){
   this.paso2.get('localidad').setValidators(Validators.required);
   this.paso2.get('cuit').setValidators(Validators.required);
 }
+ */
+if(this.paso1.value.tipoPersona == 1){
+  this.condicionP2TipoPersona = "Persona Fisica"
+  this.paso2 = this._formBuilder.group({
+    apellido: ['', Validators.required],
+    nombres: ['', Validators.required],
+    dni: ['',Validators.required],
+    fechaNacimiento: ['', Validators.required],
+    nacionalidad: ['', Validators.required],
+    caracter: [{value:'Titular', disabled:true}, Validators.required],
+  })
+}else{
+this.condicionP2TipoPersona = "Persona Juridica"
+this.paso2 = this._formBuilder.group({
+  razon: ['',Validators.required],
+  fechaInscripcion: ['',Validators.required],
+  tipoSocietario: ['',Validators.required],
+  cierre: ['',Validators.required],
+  apellido: ['', Validators.required],
+  nombres: ['', Validators.required],
+  cuit: ['',Validators.required],
+  fechaNacimiento: ['', Validators.required],
+  domicilio: ['',Validators.required],
+  localidad: ['',Validators.required],
+  nacionalidad: ['', Validators.required],
+  caracter: ['', Validators.required],
+})
+}
+
+
+
 }
 
 // PASO 2 ---------------
@@ -229,7 +287,9 @@ enviarP2(){
   if(this.paso2.invalid){
     this.presentAlert();
   }else{
-    console.log(this.paso2.value)
+
+
+    console.log('Lo que envia el P2',this.paso2.value)
   }
 // Modificamos el paso 3
 if(this.paso1.value.tipoLocal === '1'){
@@ -305,11 +365,12 @@ borrarAct(id){
     this.paso5.get('actividad').patchValue('');
   }
 }
+
 borrarEstudio(){
   this.estudio.splice(0,1)
-  this.value.splice(1,1)
   this.estudioOk = false;
 }
+
 async agregarAct(){
   const modal = await this.modalCtrl.create(
     {
@@ -326,12 +387,11 @@ async agregarAct(){
       if(data === undefined){
         console.log('Cancelado');
       }else{
-        console.log(data)
         this.actividades.push(data);
-        // this.value.splice(0,1,this.actividades)
-        this.paso5.get('actividad').patchValue('ok');
+        this.paso5.get('actividad').patchValue(this.actividades);
       }
 }
+
 async  agregarEstudio(){
     const modal = await this.modalCtrl.create(
       {
@@ -350,30 +410,65 @@ async  agregarEstudio(){
       console.log('Cancelado');
     }else{
       this.estudio.push(data);
-      this.value.splice(1,0,this.estudio);
-      // this.mostrarEstudio = true;
-      console.log(this.value)
-      console.log(data)
+      this.paso5.get('estudio').patchValue(this.estudio);
       this.estudioOk = true;
     }
 }
-
 
 enviarP5(){
   if(this.paso5.invalid || this.actividades.length == 0){
     this.presentAlert();
   }else{
-    console.log(this.paso5.value)
+    console.log(this.paso5.value);
     // Enviamos filtros P6
     this.filtroLocal = this.paso1.value.tipoLocal;
     this.filtroPersona = this.paso1.value.tipoPersona;
     this.filtroSolic = this.paso1.value.solicitud;
   }
 }
-// PASO 6 ------------
-enviarP6(){}
 
-// alerta
+// PASO 6 ------------
+select(event,index,count){
+  // count es el length del array a llenar
+  var reader = new FileReader();
+  this.archivos.length = count;
+  const self = this.archivos;
+
+  const archivoCapturado = event.target.files[0];
+  if(archivoCapturado){
+    reader.readAsDataURL(archivoCapturado); 
+    reader.onloadend = function() {
+        var base64data = reader.result;
+        if(self[index] == '' || self[index] != ''){
+          self.splice(index,1,base64data);
+        }
+      };
+  }else{
+    self.splice(index,1,null)
+  }
+}
+
+enviarP6(){
+  let filtrado = this.archivos.filter((res)=>{
+    return res   
+  })
+  if(this.archivos.length != filtrado.length || this.archivos.length == 0){
+    this.presentAlert();
+  }else{
+  this.paso6.get('documentos').patchValue('ok');
+    // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
+/*     this.archivos.forEach(res => {
+      // Ver tamaño de archivos en b64
+      const archivos = JSON.stringify(res)
+      this.formData.envioArchivos(archivos).subscribe();
+    }); */
+    this.presentAlert2();
+    console.log(this.archivos)
+  }
+};
+
+
+// alertas
 async presentAlert() {
   const alert = await this.alerta.create({
     cssClass: 'my-custom-class',
@@ -384,4 +479,20 @@ async presentAlert() {
 
 await alert.present();
 };
+
+async presentAlert2() {
+  const alert = await this.alerta.create({
+    cssClass: 'my-custom-class',
+    header: '¿Enviar solicitud?',
+    subHeader: '¿Desea terminar esta habilitación comercial?',
+    buttons: [{
+      text:'Finalizar',
+      handler: () =>{
+        this.router.navigate(['/comerciales/comprobante'])
+      }
+    }]
+  });
+await alert.present();
+};
+
 }

@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
-import { FiltrosDocsPipe } from '../filtros-docs.pipe';
+import { FiltrosDocsPipe } from '../../habilitaciones/filtros-docs.pipe';
 
 @Component({
   selector: 'app-paso6',
@@ -16,7 +16,6 @@ export class Paso6Page implements OnInit, OnDestroy {
   datosP;
   paso:number;
   archivos:any = [];
-  claseInput:boolean = false;  
   documentos = [
     {id:1,
     name: 'Constancia de inscripción con sist registral',

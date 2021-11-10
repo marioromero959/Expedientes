@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AlertController, ModalController } from '@ionic/angular';
-import { CargaActPage } from '../carga-act/carga-act.page';
-import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
+import { CargaActPage } from '../../habilitaciones/carga-act/carga-act.page';
+import { CargaEstudioPage } from '../../habilitaciones/carga-estudio/carga-estudio.page';
 import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
 
 @Component({

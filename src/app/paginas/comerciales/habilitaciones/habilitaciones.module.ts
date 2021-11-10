@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HabilitacionesPageRoutingModule } from './habilitaciones-routing.module';
 import { HabilitacionesPage } from './habilitaciones.page';
 import { MaterialModule } from 'src/app/material/material.module';
-import { FiltrosDocsPipe } from '../pasos/filtros-docs.pipe';
+import { FiltrosDocsPipe } from './filtros-docs.pipe';
 
 @NgModule({
   imports: [

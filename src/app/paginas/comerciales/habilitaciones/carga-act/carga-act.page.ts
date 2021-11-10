@@ -43,18 +43,6 @@ volver(){
   this.modalCtrl.dismiss();
 } 
 
-/*   enviarAct(event){
-    // creamos el objeto
-    if(this.fechaInicio == '' || this.tipoAct == ''){
-      this.presentAlert();
-    }else{ 
-    this.modalCtrl.dismiss({
-      tipo:this.tipoAct,
-      fecha:this.fechaInicio,
-    });
-    }
-  } */
-
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',

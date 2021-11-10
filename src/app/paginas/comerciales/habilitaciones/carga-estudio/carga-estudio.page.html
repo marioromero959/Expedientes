@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Agregar Estudio Contable</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Agregar Estudio Contable</h2>
+<form [formGroup]= 'formEstudio'>
+  <mat-form-field appearance="outline">
+    <mat-label>Estudio Contable</mat-label>
+    <input matInput formControlName="estudio" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" required>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color='primary' (click)= "volver()">Cancelar</button>
+  <button mat-raised-button color='accent' (click)="agregarEst()">Agregar</button>
+</form>
+</ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start"> 
-      <ion-back-button defaultHref="/home">
+      <ion-back-button defaultHref="/comerciales">
     </ion-back-button>
   </ion-buttons>
     <ion-title>Habilitaciones Comerciales</ion-title>
@@ -9,10 +9,6 @@
 </ion-header>
 
 <ion-content>
-<!--   <button mat-raised-button (click)="isEditable = !isEditable">
-    {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
-  </button> -->
-
   <h2>Pasos</h2>
   <mat-stepper linear #stepper>
     <mat-step [stepControl]="paso1" [editable]="isEditable">
@@ -107,7 +103,6 @@
           <mat-label>Nacionalidad</mat-label>
           <input matInput formControlName="nacionalidad" required>
         </mat-form-field>
-
         <mat-form-field appearance="outline">
           <mat-label>En caracter de</mat-label>
           <mat-select formControlName="caracter">
@@ -285,7 +280,6 @@
         </div>
       </form>
     </mat-step>
-
     <mat-step [stepControl]="paso6" [editable]="isEditable">
         <h4>Sellaldo de Apertura</h4>
       <ion-card>
@@ -332,15 +326,6 @@
         <button mat-raised-button color="primary" matStepperNext (click)="enviarP6()">Siguiente</button>
       </div>
       </form>   
-    </mat-step>
-
-
-    <mat-step>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
     </mat-step>
   </mat-stepper>
 </ion-content>

@@ -13,11 +13,11 @@
   <h2>
     Listado de Habilitaciones Comerciales Gestionadas
   </h2>
-  <ion-button (click)="nuevaHab()" color="secondary" shape=round>
+  <button mat-raised-button (click)="nuevaHab()" color="primary">
     Nueva Habilitación
-  </ion-button>
+  </button>
 <div class="container" *ngIf="expedientes; else error">
-  <div *ngFor="let expediente of expedientes[0]" >
+  <div class="expedientes" *ngFor="let expediente of expedientes[0]" >
     <ion-row>
       <ion-col>
         <p>N° Expediente</p>
@@ -36,9 +36,9 @@
         <p>{{expediente.hc_estado}}</p>
       </ion-col>
     </ion-row>
-    <ion-button (click)="editarExp(expediente.exp_id,expediente)" color="primary" shape=round>
+    <button mat-button (click)="editarExp(expediente.exp_id,expediente)" color="primary">
       Editar
-    </ion-button>
+    </button>
   </div> 
 </div>
 

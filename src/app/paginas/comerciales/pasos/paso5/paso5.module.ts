@@ -7,10 +7,10 @@ import { IonicModule } from '@ionic/angular';
 import { Paso5PageRoutingModule } from './paso5-routing.module';
 
 import { Paso5Page } from './paso5.page';
-import { CargaActPage } from '../carga-act/carga-act.page';
-import { CargaActPageModule } from '../carga-act/carga-act.module';
-import { CargaEstudioPage } from '../carga-estudio/carga-estudio.page';
-import { CargaEstudioPageModule } from '../carga-estudio/carga-estudio.module';
+import { CargaActPage } from '../../habilitaciones/carga-act/carga-act.page';
+import { CargaActPageModule } from '../../habilitaciones/carga-act/carga-act.module';
+import { CargaEstudioPage } from '../../habilitaciones/carga-estudio/carga-estudio.page';
+import { CargaEstudioPageModule } from '../../habilitaciones/carga-estudio/carga-estudio.module';
 
 @NgModule({
   entryComponents: [

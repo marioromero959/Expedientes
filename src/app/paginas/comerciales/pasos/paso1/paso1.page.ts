@@ -103,7 +103,8 @@ export class Paso1Page implements OnInit, OnDestroy {
         // Envio el formulario al servicio
       this.suscripcionForm1 = this.formData.mandar(value,0).subscribe();
       // this.dataP1.enviarP1(value).subscribe();
-      this.router.navigate(['/comerciales/2']);
+      console.log('Data desde p1',value)
+      // this.router.navigate(['/comerciales/2']);
     }else{
       this.presentAlert();
       this.dataPaso1.markAllAsTouched();

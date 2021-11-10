@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { Paso6PageRoutingModule } from './paso6-routing.module';
 
 import { Paso6Page } from './paso6.page';
-import { FiltrosDocsPipe } from '../filtros-docs.pipe';
+import { FiltrosDocsPipe } from '../../habilitaciones/filtros-docs.pipe';
 
 @NgModule({
   imports: [

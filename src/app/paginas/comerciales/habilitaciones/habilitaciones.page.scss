@@ -43,3 +43,8 @@ p{
  ion-label{
    color: red;
  }
+
+//  Con esto evitamos la navegacion a travez de los numeros del header
+ ::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}

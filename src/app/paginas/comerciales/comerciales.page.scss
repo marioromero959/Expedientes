@@ -5,23 +5,30 @@ h1 , h2{
 h2{
     font-size: 20px;
 }
-ion-button{
+button{
     margin-left: 20px;
+    font-size: 17px;
 }
 .container{
     border-radius: 15px;
     padding: 10px;
     margin: 10px;
-    background-color: rgb(243, 243, 243);
+    // background-color: rgb(243, 243, 243);
     ion-col:nth-child(1){
         font-weight: 600;
     }
 }
-p{
-    margin: 10px;
+.expedientes{
+    border:1px solid black;
+    margin: 2px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 1px black;
 }
-ion-col{
-    p{
+p{margin: 10px;}
+
+ion-col p{
         font-size: 14px;
-    }
+}
+ion-title{
+    font-size: 5vw;
 }
