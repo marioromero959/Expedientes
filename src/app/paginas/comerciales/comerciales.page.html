@@ -14,36 +14,48 @@
     Listado de Habilitaciones Comerciales Gestionadas
   </h2>
   <button mat-raised-button (click)="nuevaHab()" color="primary">
-    Nueva Habilitación
+    Nueva Habilitación +
   </button>
-<div class="container" *ngIf="expedientes; else error">
-  <div class="expedientes" *ngFor="let expediente of expedientes[0]" >
-    <ion-row>
-      <ion-col>
-        <p>N° Expediente</p>
-        <p>N° HC:</p>
-        <p>CUIT</p>
-        <p *ngIf='expediente.hc_nom_fantasia'>Nombre de Fantasía</p>
-        <p>Tipo de Solicitud</p>
-        <p>Estado</p>
-      </ion-col>
-      <ion-col>
-        <p>{{expediente.exp_id}}</p>
-        <p>{{expediente.hcexp_id}}</p>
-        <p>{{expediente.hc_cuit}}</p>
-        <p *ngIf='expediente.hc_nom_fantasia'>{{expediente.hc_nom_fantasia}}</p>
-        <p>{{expediente.hc_solicitudes_tipo}}</p>
-        <p>{{expediente.hc_estado}}</p>
-      </ion-col>
-    </ion-row>
-    <button mat-button (click)="editarExp(expediente.exp_id,expediente)" color="primary">
-      Editar
-    </button>
-  </div> 
-</div>
 
-<ng-template #error>
-  <p>No ha iniciado ninguna habilitacion comercial.</p>
-</ng-template>
+<div *ngIf="expedientes; else error">
+  <mat-accordion *ngFor="let expediente of expedientes[0];let i = index">
+  <mat-expansion-panel 
+  (opened)="panelOpenState = true"                     
+    (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{i +1}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{expediente.hc_solicitudes_tipo}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ion-row>
+        <ion-col>
+          <p>N° Expediente</p>
+          <p>N° HC</p>
+          <p>CUIT</p>
+          <p *ngIf='expediente.hc_nom_fantasia'>Nombre de Fantasía</p>
+          <p>Tipo de Solicitud</p>
+          <p>Estado</p>
+        </ion-col>
+        <ion-col>
+          <p>{{expediente.exp_id}}</p>
+          <p>{{expediente.hcexp_id}}</p>
+          <p>{{expediente.hc_cuit}}</p>
+          <p *ngIf='expediente.hc_nom_fantasia'>{{expediente.hc_nom_fantasia}}</p>
+          <p>{{expediente.hc_solicitudes_tipo}}</p>
+          <p>{{expediente.hc_estado}}</p>
+        </ion-col>
+      </ion-row>
+      <button mat-button (click)="editarExp(expediente.exp_id,expediente)" color="primary">
+        Editar
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+  <ng-template #error>
+    <p>No ha iniciado ninguna habilitacion comercial.</p>
+  </ng-template>
 
 </ion-content>

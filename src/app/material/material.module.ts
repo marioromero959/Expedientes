@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -46,6 +47,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatFormFieldModule,
     MatStepperModule,
     MatCheckboxModule,
+    MatExpansionModule,
   ],
   exports: [
     MatButtonModule,
@@ -67,6 +69,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatFormFieldModule,
     MatStepperModule,
     MatCheckboxModule,
+    MatExpansionModule,
   ]
 })
 export class MaterialModule { }

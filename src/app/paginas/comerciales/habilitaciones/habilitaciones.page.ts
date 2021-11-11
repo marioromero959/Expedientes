@@ -135,18 +135,6 @@ export class HabilitacionesPage implements OnInit {
       nacionalidad: ['', Validators.required],
       cuit: [''],
       caracter: ['', Validators.required],
-
-
-
-
-
-// TERMINAR p2 FORMCONTROLS
-
-
-
-
-
-
     });
     this.paso3 = this._formBuilder.group({
        // Domicilio Fiscal
@@ -230,67 +218,49 @@ enviarP1(){
     // this.dataP1.enviarP1(value).subscribe();
   }
 // Modificamos el paso 2
-/* if(this.paso1.value.tipoPersona == 1){
+ if(this.paso1.value.tipoPersona == 1){
   this.condicionP2TipoPersona = "Persona Fisica"
   this.paso2.get('caracter').patchValue('Titular');
   this.paso2.controls['caracter'].disable();
-  // Seteamos Validaciones
-  this.paso2.get('dni').setValidators(Validators.required);
 }else if(this.paso1.value.tipoPersona == 2){
   this.condicionP2TipoPersona = "Persona Juridica"
   this.paso2.get('caracter').patchValue('');
   this.paso2.controls['caracter'].enable();
-  // Seteamos Validaciones
-  this.paso2.get('razon').setValidators(Validators.required);
-  this.paso2.get('fechaInscripcion').setValidators(Validators.required);
-  this.paso2.get('tipoSocietario').setValidators(Validators.required);
-  this.paso2.get('cierre').setValidators(Validators.required);
-  this.paso2.get('domicilio').setValidators(Validators.required);
-  this.paso2.get('localidad').setValidators(Validators.required);
-  this.paso2.get('cuit').setValidators(Validators.required);
 }
- */
-if(this.paso1.value.tipoPersona == 1){
-  this.condicionP2TipoPersona = "Persona Fisica"
-  this.paso2 = this._formBuilder.group({
-    apellido: ['', Validators.required],
-    nombres: ['', Validators.required],
-    dni: ['',Validators.required],
-    fechaNacimiento: ['', Validators.required],
-    nacionalidad: ['', Validators.required],
-    caracter: [{value:'Titular', disabled:true}, Validators.required],
-  })
-}else{
-this.condicionP2TipoPersona = "Persona Juridica"
-this.paso2 = this._formBuilder.group({
-  razon: ['',Validators.required],
-  fechaInscripcion: ['',Validators.required],
-  tipoSocietario: ['',Validators.required],
-  cierre: ['',Validators.required],
-  apellido: ['', Validators.required],
-  nombres: ['', Validators.required],
-  cuit: ['',Validators.required],
-  fechaNacimiento: ['', Validators.required],
-  domicilio: ['',Validators.required],
-  localidad: ['',Validators.required],
-  nacionalidad: ['', Validators.required],
-  caracter: ['', Validators.required],
-})
-}
-
-
-
 }
 
 // PASO 2 ---------------
 enviarP2(){
-  if(this.paso2.invalid){
-    this.presentAlert();
-  }else{
-
-
-    console.log('Lo que envia el P2',this.paso2.value)
+if(this.paso2.invalid){
+  this.presentAlert();
+}else{
+if(this.paso1.value.tipoPersona == 1){
+  const value = {
+  apellido: this.paso2.value.apellido,
+  nombres: this.paso2.value.nombres,
+  dni: this.paso2.value.dni,
+  fechaNacimiento: this.paso2.value.fechaNacimiento,
+  nacionalidad: this.paso2.value.nacionalidad,
+  caracter: 'Titular',
   }
+  // Enviar al back los value
+}else if(this.paso1.value.tipoPersona == 2){
+  const value = {
+    razon: this.paso2.value.razon,
+    fechaInscripcion: this.paso2.value.fechaInscripcion,
+    tipoSocietario: this.paso2.value.tipoSocietario,
+    cierre: this.paso2.value.cierre,
+    apellido: this.paso2.value.apellido,
+    nombres: this.paso2.value.nombres,
+    fechaNacimiento: this.paso2.value.fechaNacimiento,
+    domicilio: this.paso2.value.domicilio,
+    localidad: this.paso2.value.localidad,
+    nacionalidad: this.paso2.value.nacionalidad,
+    cuit: this.paso2.value.cuit,
+    caracter: this.paso2.value.caracter,
+  }
+}
+}
 // Modificamos el paso 3
 if(this.paso1.value.tipoLocal === '1'){
   // Si tiene local añadimos el control de domComercial
@@ -310,6 +280,8 @@ if(this.paso1.value.tipoLocal === '1'){
   this.condicionP3Local = false;
   this.paso3.removeControl('domComercial');
 }
+
+
 }
 
 // PASO 3 -------------
@@ -466,7 +438,6 @@ enviarP6(){
     console.log(this.archivos)
   }
 };
-
 
 // alertas
 async presentAlert() {

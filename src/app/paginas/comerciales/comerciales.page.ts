@@ -13,7 +13,8 @@ export class ComercialesPage implements OnInit {
   dataPaso1;
   expedientes = [];
   objetoUsuario = [{'dni':null}]
-
+  panelOpenState = false;
+  arr = [ 1 , 2 ]
   constructor(
     private router: Router,
     private datos: DatosService,
