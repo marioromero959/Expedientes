@@ -9,5 +9,58 @@
 </ion-header>
 
 <ion-content>
+<mat-card>
+  <mat-card-title>Negocios</mat-card-title>
+  <mat-card-content>
+    <p>Indique lo que está buscando.</p>
+    <form>
+      <mat-form-field appearance="outline">
+        <input [formControl]="busquedaNegocios" type="text" matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+<!--     <button mat-raised-button color="primary" (click)="listarNegocios()">
+      Negocios
+      <mat-icon>store</mat-icon>
+    </button> -->
 
+    <mat-form-field appearance="outline">
+      <mat-label>Negocios</mat-label>
+      <mat-select (selectionChange)="listar($event.value)">
+        <mat-option *ngFor="let negocio of negocios; let i = index" [value]="negocio">
+          {{negocio}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="warn" (click)="abrirModal()">
+      Sumar mi negocio
+      <mat-icon>add</mat-icon>
+    </button>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Registro de Cadetes</mat-card-title>
+  <mat-card-content>
+    <p>Indique lo que está buscando.</p>
+    <form>
+      <mat-form-field appearance="outline">
+        <input [formControl]="busquedaCadetes" type="text" matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+    <button mat-raised-button color="primary" (click)="listarCadetes()">
+      Cadetes
+      <mat-icon>directions_bike</mat-icon>
+    </button>
+    <button mat-raised-button color="warn" (click)="agregarCadete()">
+      Registrar Cadetes
+      <mat-icon>add</mat-icon>
+    </button>
+</mat-card>
+
+<footer>
+  <p>Municipalidad de Gualeguay</p>
+</footer>
 </ion-content>
