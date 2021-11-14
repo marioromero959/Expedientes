@@ -1,0 +1,30 @@
+mat-card{
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+    img{
+        margin: 0;
+        border-radius: 50%;
+        background-color: #28bef0;
+    }
+}
+.carta{
+    width: 100%;
+    li{
+        list-style: none;
+        margin-top: 5px;
+    }
+    li:nth-child(2){
+        font-size: 20px;
+        color: #28bef0;
+    }
+}
+p{
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+mat-form-field{
+    margin-left: 2.5%;
+    width: 95%;
+}

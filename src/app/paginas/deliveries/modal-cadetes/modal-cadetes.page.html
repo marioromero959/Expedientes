@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Listado de Cadetes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <p>Indique lo que está buscando.</p>
+  <mat-form-field appearance="outline">
+    <input type="text" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+<mat-card *ngFor="let cadete of cadetes">
+  <img mat-card-sm-image src="../../../../assets/cadetes.png">
+  <div class="carta">
+    <mat-card-content>
+      <ul>
+        <li><ion-icon name="logo-whatsapp"></ion-icon> 1545634684</li>
+        <li>Nombre y Apellido</li>
+        <li>Telefono: 154564654</li>
+        <li>Descripción</li>
+      </ul>
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<mat-paginator [length]="2"
+[pageSizeOptions]="[3,5,10]"
+aria-label="Siguiente pagina">
+</mat-paginator>
+
+<button mat-raised-button color="warn" (click)="cerrarModal()">Volver</button>
+
+</ion-content>

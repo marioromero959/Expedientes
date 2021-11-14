@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { ModalCadetesPage } from './modal-cadetes/modal-cadetes.page';
 import { ModalPage } from './modal/modal.page';
 
 @Component({
@@ -31,25 +32,19 @@ negocios:string[] = ['Alimentos','Bebidas','Cafeterias','Calzado e Indumentaria'
     });
     return await modal.present();
   }
+  async abrirModalCadetes() {
+    const modal = await this.modalCtrl.create({
+      component: ModalCadetesPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        seleccion: 1,
+      }
+    });
+    return await modal.present();
+  }
 
-
-  
-listarNegocios(){
-  console.log('listaNeg')
-}
-agregarNegocio(){
-  console.log('agregarNeg')
-}
-
-listarCadetes(){
-  console.log('listarCad')
-}
-agregarCadete(){
-  console.log('AgregarCad')
-}
 listar(e){
   console.log(e)
 }
-
 
 }
