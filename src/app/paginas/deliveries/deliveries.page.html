@@ -20,11 +20,6 @@
       </mat-form-field>
     </form>
   </mat-card-content>
-<!--     <button mat-raised-button color="primary" (click)="listarNegocios()">
-      Negocios
-      <mat-icon>store</mat-icon>
-    </button> -->
-
     <mat-form-field appearance="outline">
       <mat-label>Negocios</mat-label>
       <mat-select (selectionChange)="listar($event.value)">
@@ -33,7 +28,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="warn" (click)="abrirModal()">
+    <button mat-raised-button color="warn" (click)="abrirModal(1)">
       Sumar mi negocio
       <mat-icon>add</mat-icon>
     </button>
@@ -54,7 +49,7 @@
       Cadetes
       <mat-icon>directions_bike</mat-icon>
     </button>
-    <button mat-raised-button color="warn" (click)="agregarCadete()">
+    <button mat-raised-button color="warn" (click)="abrirModal(2)">
       Registrar Cadetes
       <mat-icon>add</mat-icon>
     </button>

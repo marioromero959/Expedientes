@@ -21,13 +21,12 @@ negocios:string[] = ['Alimentos','Bebidas','Cafeterias','Calzado e Indumentaria'
   ngOnInit() {
   }
 
-  async abrirModal() {
+  async abrirModal(value) {
     const modal = await this.modalCtrl.create({
       component: ModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'firstName': 'Douglas',
-        'lastName': 'Adams',
+        seleccion: value,
       }
     });
     return await modal.present();

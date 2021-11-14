@@ -8,7 +8,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 })
 export class ModalPage implements OnInit {
 
-  registroDelivery: FormGroup;
+  @Input() seleccion;
+
+  registroNegocio: FormGroup;
+  registroCadete: FormGroup;
   actividades:any[] = [
     'Alimentos',
     'Bebidas',
@@ -54,6 +57,7 @@ export class ModalPage implements OnInit {
     'Rotiserías',
     'Varios'
   ];
+  mostrar = false;
 
   constructor(
     private modalCtrl:ModalController,
@@ -61,7 +65,7 @@ export class ModalPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.registroDelivery = this._formBuilder.group({
+    this.registroNegocio = this._formBuilder.group({
       cuit: ['', Validators.required],
       nombre: ['', Validators.required],
       telefono: ['', Validators.required],
@@ -75,6 +79,30 @@ export class ModalPage implements OnInit {
       horario: ['', Validators.required],
       pago: [''],
     });
+    this.registroCadete = this._formBuilder.group({
+      datosPersonales: this._formBuilder.group({
+        apellido: ['', Validators.required],
+        nombres: ['', Validators.required],
+        dni: ['', Validators.required],
+        cuit: ['', Validators.required],
+        nacimiento: ['', Validators.required],
+        domicilio: ['', Validators.required],
+        telefonoP: ['', Validators.required],
+        telefonoL: ['', Validators.required],
+        email: ['', Validators.required],
+        }),
+      datosVehiculo: this._formBuilder.group({
+        tipo1: ['', Validators.required],
+        tipo2: ['', Validators.required],
+        dominio1: ['', Validators.required],
+        dominio2: ['', Validators.required],
+        aseguradora1: ['', Validators.required],
+        aseguradora2: ['', Validators.required],
+        poliza1: ['', Validators.required],
+        poliza2: ['', Validators.required],
+        }),
+      bienes: ['',Validators.required]
+    })
   }
 
 

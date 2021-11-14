@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="seleccion == 1">
   <h1>Registro digital de comercios con Delívery de la Ciudad de Gualeguay</h1>
   <p>Si Usted es posee un comercio y cuenta con servicio de Delívery, complete este formulario para incorporarlo en el sistema y así poder brindar dicha información al Ciudadano de Gualeguay. Muchas gracias.</p>
   <p>Los datos marcados con * son obligatorios.</p>
@@ -59,19 +60,128 @@
     <mat-form-field appearance="outline">
       <input matInput>
     </mat-form-field>
-    <label>¿Que medios de pago se aceptan?</label>
-    <mat-radio-group color="primary">
-      <mat-radio-button value="1">Efectivo</mat-radio-button>
-      <mat-radio-button value="2">Mercado Pago</mat-radio-button>
-      <mat-radio-button value="3">Tarjeta de Credito</mat-radio-button>
-      <mat-radio-button value="4">Tarjeta de Débito</mat-radio-button>
-      <mat-radio-button value="5">Transferencia Bancaria</mat-radio-button>
-      <mat-radio-button value="6">Otros</mat-radio-button>
-    </mat-radio-group>
-    <p>
-      El propietario del comercio declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</p>
+    <div class="pagos">
+      <label>¿Que medios de pago se aceptan?</label>
+      <mat-radio-group color="primary">
+        <mat-radio-button value="1">Efectivo</mat-radio-button>
+        <mat-radio-button value="2">Mercado Pago</mat-radio-button>
+        <mat-radio-button value="3">Tarjeta de Credito</mat-radio-button>
+        <mat-radio-button value="4">Tarjeta de Débito</mat-radio-button>
+        <mat-radio-button value="5">Transferencia Bancaria</mat-radio-button>
+        <mat-radio-button value="6">Otros</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <label>
+      El propietario del comercio declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</label>
+      <mat-checkbox color="primary">Si, acepto el acuerdo</mat-checkbox>
+      
+      <button mat-raised-button color="warn" (click)="cerrarModal()">Cancelar</button>
+      <button mat-raised-button color="accent">Registrar</button>
 </form>
+</div>
 
-<button mat-button (click)="cerrarModal()">Cerrar Modal</button>
+<div *ngIf="seleccion == 2">
+  <h1>
+    Registro digital de Delivery de la ciudad de Gualeguay
+  </h1>
+  <p>Si Usted brinda servicios de Delívery, complete este formulario para incorporarlo en el sistema y así poder brindar dicha información al Ciudadano de Gualeguay.
+  <br><br>
+  Aquellas actividades que se encuentren exceptuados por los decretos y decisiones administrativas del gobierno nacional deben circular con el permiso nacional sin ser necesario gestionar el municipal.
+  <br><br>
+  El link para generar el permiso nacional: <a href="">Aqui</a>
+  <br><br>
+  Los datos marcados con * son obligatorios
+  </p>
+<form>
+  <h2>Datos Personales</h2>
+  <label>Indique su apellido: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique sus nombres: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique su DNI: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique su CUIT. Sólo números, sin puntos ni guiones: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique su fecha de nacimiento: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput type="date" required>
+  </mat-form-field>
+  <label>Indique su domicilio particular: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique su teléfono particular:</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Indique su teléfono laboral, éste número será publicado en la web: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique un mail de contacto:</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+
+
+  <h2>Datos del vehículo</h2>
+  <h3>Vehículo 1:</h3>
+  <mat-radio-group color="primary">
+    <mat-radio-button value="1">Bicicleta</mat-radio-button>
+    <mat-radio-button value="2">Moto</mat-radio-button>
+    <mat-radio-button value="3">Auto</mat-radio-button>
+  </mat-radio-group>
+  <label>Dominio: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Aseguradora: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Nro de póliza: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <h3>Vehículo 2:</h3>
+  <mat-radio-group color="primary">
+    <mat-radio-button value="1">Bicicleta</mat-radio-button>
+    <mat-radio-button value="2">Moto</mat-radio-button>
+    <mat-radio-button value="3">Auto</mat-radio-button>
+  </mat-radio-group>
+  <label>Dominio: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Aseguradora: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Nro de póliza: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Objeto reparto, indique de que tipo de bienes realizará delívery: *</label>
+  <mat-form-field appearance="outline">
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+  <label>
+    Quien suscribe declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</label>
+  <mat-checkbox color="primary">Si, acepto el acuerdo</mat-checkbox>
+  
+  <button mat-raised-button color="warn" (click)="cerrarModal()">Cancelar</button>
+  <button mat-raised-button color="accent">Registrar</button>
+
+</form>
+</div>
 
 </ion-content>
