@@ -5,5 +5,73 @@
 </ion-header>
 
 <ion-content>
+  <h1>Registro digital de comercios con Delívery de la Ciudad de Gualeguay</h1>
+  <p>Si Usted es posee un comercio y cuenta con servicio de Delívery, complete este formulario para incorporarlo en el sistema y así poder brindar dicha información al Ciudadano de Gualeguay. Muchas gracias.</p>
+  <p>Los datos marcados con * son obligatorios.</p>
+<form>
+  <label>Indique el CUIT del comercio. Inserte el número sin guiones ni puntos: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique el nombre comercial del comercio: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique un teléfono de contacto del comercio para administrar los pedidos telefónicos: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>Indique un teléfono de contacto del comercio para administrar los pedidos por whatsapp:</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Indique un mail de contacto del comercio pra administrar los pedidos:</label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+  <label>Indique la dirección exacta del comercio: *</label>
+  <mat-form-field appearance="outline">
+    <input matInput required>
+  </mat-form-field>
+  <label>¿A qué se dedica el comercio? Indique cual es su actividad principal. *</label>
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Seleccione">
+      <mat-option *ngFor="let actividad of actividades" [value]="actividad">{{actividad}} </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <label>¿Otros producto que ofrece? Indique todas las opciones que correspondan. *</label>
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Seleccione">
+      <mat-option *ngFor="let producto of productos" [value]="producto">{{producto}} </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <label>¿Su empresa realiza actualmente servicios de delivery? *</label>
+    <mat-radio-group color="primary">
+      <mat-radio-button value="1">Si</mat-radio-button>
+      <mat-radio-button value="2"> No todavía, pero esta preparándolo</mat-radio-button>
+    </mat-radio-group>
+    <label>¿El delivery es propio o terciarizado?*</label>
+    <mat-radio-group color="primary">
+      <mat-radio-button value="1">Personal propio</mat-radio-button>
+      <mat-radio-button value="2"> Terciarizó el servicio</mat-radio-button>
+    </mat-radio-group>
+    <label>¿En qué horarios el comercio realiza pedidos de delivery? *</label>
+    <mat-form-field appearance="outline">
+      <input matInput>
+    </mat-form-field>
+    <label>¿Que medios de pago se aceptan?</label>
+    <mat-radio-group color="primary">
+      <mat-radio-button value="1">Efectivo</mat-radio-button>
+      <mat-radio-button value="2">Mercado Pago</mat-radio-button>
+      <mat-radio-button value="3">Tarjeta de Credito</mat-radio-button>
+      <mat-radio-button value="4">Tarjeta de Débito</mat-radio-button>
+      <mat-radio-button value="5">Transferencia Bancaria</mat-radio-button>
+      <mat-radio-button value="6">Otros</mat-radio-button>
+    </mat-radio-group>
+    <p>
+      El propietario del comercio declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</p>
+</form>
+
 <button mat-button (click)="cerrarModal()">Cerrar Modal</button>
+
 </ion-content>
