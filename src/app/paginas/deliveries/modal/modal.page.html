@@ -9,60 +9,60 @@
   <h1>Registro digital de comercios con Delívery de la Ciudad de Gualeguay</h1>
   <p>Si Usted es posee un comercio y cuenta con servicio de Delívery, complete este formulario para incorporarlo en el sistema y así poder brindar dicha información al Ciudadano de Gualeguay. Muchas gracias.</p>
   <p>Los datos marcados con * son obligatorios.</p>
-<form>
+<form [formGroup]="registroNegocio">
   <label>Indique el CUIT del comercio. Inserte el número sin guiones ni puntos: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="cuit" required>
   </mat-form-field>
   <label>Indique el nombre comercial del comercio: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="nombre" required>
   </mat-form-field>
   <label>Indique un teléfono de contacto del comercio para administrar los pedidos telefónicos: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="telefono" required>
   </mat-form-field>
   <label>Indique un teléfono de contacto del comercio para administrar los pedidos por whatsapp:</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="whatsapp">
   </mat-form-field>
   <label>Indique un mail de contacto del comercio pra administrar los pedidos:</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="email">
   </mat-form-field>
   <label>Indique la dirección exacta del comercio: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="direccion" required>
   </mat-form-field>
   <label>¿A qué se dedica el comercio? Indique cual es su actividad principal. *</label>
   <mat-form-field appearance="outline">
-    <mat-select placeholder="Seleccione">
+    <mat-select formControlName="actividad" placeholder="Seleccione">
       <mat-option *ngFor="let actividad of actividades" [value]="actividad">{{actividad}} </mat-option>
     </mat-select>
   </mat-form-field>
   <label>¿Otros producto que ofrece? Indique todas las opciones que correspondan. *</label>
   <mat-form-field appearance="outline">
-    <mat-select placeholder="Seleccione">
+    <mat-select formControlName="productos" placeholder="Seleccione">
       <mat-option *ngFor="let producto of productos" [value]="producto">{{producto}} </mat-option>
     </mat-select>
   </mat-form-field>
   <label>¿Su empresa realiza actualmente servicios de delivery? *</label>
-    <mat-radio-group color="primary">
+    <mat-radio-group formControlName="realizaD" color="primary">
       <mat-radio-button value="1">Si</mat-radio-button>
       <mat-radio-button value="2"> No todavía, pero esta preparándolo</mat-radio-button>
     </mat-radio-group>
     <label>¿El delivery es propio o terciarizado?*</label>
-    <mat-radio-group color="primary">
+    <mat-radio-group formControlName="condicionD" color="primary">
       <mat-radio-button value="1">Personal propio</mat-radio-button>
       <mat-radio-button value="2"> Terciarizó el servicio</mat-radio-button>
     </mat-radio-group>
     <label>¿En qué horarios el comercio realiza pedidos de delivery? *</label>
     <mat-form-field appearance="outline">
-      <input matInput>
+      <input matInput type="number" formControlName="horario">
     </mat-form-field>
     <div class="pagos">
       <label>¿Que medios de pago se aceptan?</label>
-      <mat-radio-group color="primary">
+      <mat-radio-group formControlName="pago" color="primary">
         <mat-radio-button value="1">Efectivo</mat-radio-button>
         <mat-radio-button value="2">Mercado Pago</mat-radio-button>
         <mat-radio-button value="3">Tarjeta de Credito</mat-radio-button>
@@ -73,10 +73,10 @@
     </div>
     <label>
       El propietario del comercio declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</label>
-      <mat-checkbox color="primary">Si, acepto el acuerdo</mat-checkbox>
+      <mat-checkbox formControlName="acuerdo" color="primary">Si, acepto el acuerdo</mat-checkbox>
       
       <button mat-raised-button color="warn" (click)="cerrarModal()">Cancelar</button>
-      <button mat-raised-button color="accent">Registrar</button>
+      <button mat-raised-button color="accent" (click)="registrarNegocio()">Registrar</button>
 </form>
 </div>
 
@@ -92,92 +92,96 @@
   <br><br>
   Los datos marcados con * son obligatorios
   </p>
-<form>
+<form [formGroup]="registroCadete">
   <h2>Datos Personales</h2>
+  <div formGroupName="datosPersonales">
   <label>Indique su apellido: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="apellido" required>
   </mat-form-field>
   <label>Indique sus nombres: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="nombres" required>
   </mat-form-field>
   <label>Indique su DNI: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="dni" required>
   </mat-form-field>
   <label>Indique su CUIT. Sólo números, sin puntos ni guiones: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="cuit" required>
   </mat-form-field>
   <label>Indique su fecha de nacimiento: *</label>
   <mat-form-field appearance="outline">
-    <input matInput type="date" required>
+    <input matInput formControlName="nacimiento" type="date" required>
   </mat-form-field>
   <label>Indique su domicilio particular: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="domicilio" required>
   </mat-form-field>
   <label>Indique su teléfono particular:</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="telefonoP">
   </mat-form-field>
   <label>Indique su teléfono laboral, éste número será publicado en la web: *</label>
   <mat-form-field appearance="outline">
-    <input matInput required>
+    <input matInput formControlName="telefonoL" required>
   </mat-form-field>
   <label>Indique un mail de contacto:</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="email">
   </mat-form-field>
+</div>
 
 
   <h2>Datos del vehículo</h2>
   <h3>Vehículo 1:</h3>
-  <mat-radio-group color="primary">
+  <div formGroupName="datosVehiculo">
+  <mat-radio-group formControlName="tipo1" color="primary">
     <mat-radio-button value="1">Bicicleta</mat-radio-button>
     <mat-radio-button value="2">Moto</mat-radio-button>
     <mat-radio-button value="3">Auto</mat-radio-button>
   </mat-radio-group>
   <label>Dominio: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="dominio1">
   </mat-form-field>
   <label>Aseguradora: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="aseguradora1">
   </mat-form-field>
   <label>Nro de póliza: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="poliza1">
   </mat-form-field>
   <h3>Vehículo 2:</h3>
-  <mat-radio-group color="primary">
+  <mat-radio-group formControlName="tipo2" color="primary">
     <mat-radio-button value="1">Bicicleta</mat-radio-button>
     <mat-radio-button value="2">Moto</mat-radio-button>
     <mat-radio-button value="3">Auto</mat-radio-button>
   </mat-radio-group>
   <label>Dominio: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="dominio2">
   </mat-form-field>
   <label>Aseguradora: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="aseguradora2">
   </mat-form-field>
   <label>Nro de póliza: *</label>
   <mat-form-field appearance="outline">
-    <input matInput>
+    <input matInput formControlName="poliza2">
   </mat-form-field>
+</div>
   <label>Objeto reparto, indique de que tipo de bienes realizará delívery: *</label>
   <mat-form-field appearance="outline">
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="bienes"></textarea>
   </mat-form-field>
   <label>
     Quien suscribe declara bajo su responsabilidad cumplir con las regulaciones necesarias para la apertura y habilitacion ordinaria y en el presente estado de aislamiento social para la pandemia *</label>
   <mat-checkbox color="primary">Si, acepto el acuerdo</mat-checkbox>
   <button mat-raised-button color="warn" (click)="cerrarModal()">Cancelar</button>
-  <button mat-raised-button color="accent">Registrar</button>
+  <button mat-raised-button color="accent" (click)="registrarCadete()">Registrar</button>
 </form>
 </div>
 

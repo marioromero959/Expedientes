@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.page.html',
@@ -61,6 +62,7 @@ export class ModalPage implements OnInit {
 
   constructor(
     private modalCtrl:ModalController,
+    private alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
     ) { }
 
@@ -78,6 +80,7 @@ export class ModalPage implements OnInit {
       condicionD: ['', Validators.required],
       horario: ['', Validators.required],
       pago: [''],
+      acuerdo: ['',Validators.required],
     });
     this.registroCadete = this._formBuilder.group({
       datosPersonales: this._formBuilder.group({
@@ -87,9 +90,9 @@ export class ModalPage implements OnInit {
         cuit: ['', Validators.required],
         nacimiento: ['', Validators.required],
         domicilio: ['', Validators.required],
-        telefonoP: ['', Validators.required],
+        telefonoP: [''],
         telefonoL: ['', Validators.required],
-        email: ['', Validators.required],
+        email: [''],
         }),
       datosVehiculo: this._formBuilder.group({
         tipo1: ['', Validators.required],
@@ -105,9 +108,33 @@ export class ModalPage implements OnInit {
     })
   }
 
-
-
+registrarNegocio(){
+  if(this.registroNegocio.valid){
+    console.log(this.registroNegocio.value)
+  }else{
+    this.presentAlert();
+  }
+}
+registrarCadete(){
+  if(this.registroCadete.valid){
+    console.log(this.registroCadete.value)
+  }else{
+    this.presentAlert();
+  }
+}
 cerrarModal(){
   this.modalCtrl.dismiss();
 }
+
+async presentAlert() {
+  const alert = await this.alertCtrl.create({
+    cssClass: 'my-custom-class',
+    header: 'Datos Incompletos',
+    subHeader: 'Por favor, complete todos los campos con * para continuar.',
+    buttons: ['OK']
+  });
+
+await alert.present();
+};
+
 }

@@ -28,3 +28,11 @@ mat-form-field{
     margin-left: 2.5%;
     width: 95%;
 }
+.boton{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    button{
+        margin: 10px;
+    }
+}
