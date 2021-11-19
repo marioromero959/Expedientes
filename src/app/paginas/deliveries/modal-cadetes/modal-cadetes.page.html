@@ -13,7 +13,7 @@
   </mat-form-field>
 <ng-container *ngIf= "(cadetes | filtroCadetes:busquedaCadetes.value) as resultado">
   <div *ngIf="resultado.length != 0 ; else elseBlock">
-    <mat-card *ngFor="let cadete of cadetes | filtroCadetes:busquedaCadetes.value">
+    <mat-card *ngFor="let cadete of cadetes | filtroCadetes:busquedaCadetes.value:pagina">
       <img mat-card-sm-image src="../../../../assets/cadetes.png">
       <div class="carta">
         <mat-card-content>
@@ -22,22 +22,20 @@
             <li>{{cadete.nombre}}</li>
             <li>{{cadete.tel}}</li>
             <li>{{cadete.descripcion}}</li>
-            <li>{{resultado.length}}</li> 
           </ul>
         </mat-card-content>
       </div>
     </mat-card>
   </div>
 </ng-container>
-
+<ion-row class="boton">
+  <button mat-raised-button (click)="anterior()" color="primary">Anterior</button>
+  &nbsp;
+  <button mat-raised-button (click)="siguiente()" color="primary">Siguiente</button>
+</ion-row>
 <ng-template #elseBlock>
 <p>No hay coincidencias</p>
 </ng-template>
-<!-- Hacer pipe para paginacion -->
-<mat-paginator [length]="2"
-[pageSizeOptions]="[3,5,10]"
-aria-label="Siguiente pagina">
-</mat-paginator>
 <div class="boton">
   <button mat-raised-button color="warn" (click)="cerrarModal()">Volver</button>
 </div>
