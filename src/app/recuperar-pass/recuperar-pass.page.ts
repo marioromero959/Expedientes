@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-recuperar-pass',
@@ -9,12 +9,18 @@ import { AutenticacionService } from '../servicios/Autenticación/autenticacion.
 })
 export class RecuperarPassPage implements OnInit {
 
+  email = new FormControl('');
+
   constructor(
-    private auth: AutenticacionService,
     private router: Router,
   ) { }
 
   ngOnInit() {
   }
-  resetPass(){}
+  resetPass(){
+    console.log(this.email.value)
+    // enviar email para recuperacion
+    this.email.reset()
+    this.router.navigate(['/login'])
+  }
 }

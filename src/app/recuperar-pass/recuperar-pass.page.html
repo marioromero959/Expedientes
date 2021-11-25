@@ -1,5 +1,9 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="/login">
+    </ion-back-button>
+  </ion-buttons>
     <ion-title>Cambiar tu contraseña</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +13,7 @@
   <form>
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput>
+      <input matInput [formControl]="email">
     </mat-form-field>
     <button mat-raised-button
     (click)= "resetPass()" color="accent">
