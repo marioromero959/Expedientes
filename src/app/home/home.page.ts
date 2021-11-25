@@ -11,7 +11,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage{
 
-  userData = '';
+  userData;
+  nombre:string = "";
 
   constructor(
     private menu:MenuController,
@@ -21,6 +22,7 @@ export class HomePage{
 
 ionViewWillEnter(){
   this.userData = JSON.parse(localStorage.getItem('Usuario'));
+  this.nombre = this.userData.usuario_nombres;
 }
 
   // Abrir y cerrar menu lateral

@@ -7,24 +7,14 @@
 <ion-content>
   <h2>Por favor, ingresá tu email</h2>
   <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input autocomplete="email" type="text" #email required></ion-input>
-    </ion-item>
-  <br>
-    <ion-row>
-      <ion-col>
-        <ion-button
-        (click)= "resetPass(email)"
-        type="submit"
-        shape="round"
-        color="success"
-        expand="block">
-          Cambiar contraseña
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <button mat-raised-button
+    (click)= "resetPass()" color="accent">
+      Cambiar contraseña
+    </button>
     <p>Se enviará a tu correo un enlace donde podrás realizar el cambio de tu contraseña</p>
   </form>
 </ion-content>

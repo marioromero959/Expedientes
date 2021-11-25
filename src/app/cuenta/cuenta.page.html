@@ -9,15 +9,11 @@
 </ion-header>
 
 <ion-content>
+<div class="container">
 
- <ion-item lines=none>
-   <ion-row>
-       <h2>Tu perfil</h2>
-    </ion-row>
-    <!-- <ion-button shape=round slot="end" (click)="editar()" size=medium>Editar Datos</ion-button> -->
-</ion-item>
+  <h2>Tu perfil</h2>
 
-<ion-card mode="ios">
+  <ion-card mode="ios">
   <ion-card-header>
     <ion-card-title color="secondary" style="font-size: medium;">Información personal
     </ion-card-title>
@@ -28,55 +24,32 @@
         Nombre/s
       </ion-label>
       <ion-item lines=none>
-        {{userData.nombre}}
+        {{userData.usuario_nombres}}
       </ion-item>
       <ion-label>
         Apellido/s
       </ion-label>
       <ion-item lines=none>
-        {{userData.apellido}}
+        {{userData.usuario_apellido}}
       </ion-item>
       <ion-label>
         DNI
       </ion-label>
       <ion-item lines=none>
-        {{userData.dni}}
+        {{userData.usuario_dni}}
       </ion-item> 
       <ion-label>
         Correo Electrónico
       </ion-label>
       <ion-item lines=none>
-        {{userData.email}}
+        {{userData.usuario_email}}
       </ion-item>  
     </ion-list>
   </ion-card-content>
 </ion-card> 
-<!-- 
-<ion-card mode="ios">
-  <ion-card-header>
-    <ion-card-title color="secondary" style="font-size: medium;">
-      Seguridad de mi cuenta
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-label>
-        Nombre de usuario
-      </ion-label>
-      <ion-item lines=none>
-        {{userData.usuario}}
-      </ion-item>
-      <ion-label (click)="mostrarPass()">
-        Mostrar Contraseña 
-      </ion-label>
-      <ion-item lines=none *ngIf=pass>
-        {{userData.pass}}
-      </ion-item>
-    </ion-list>
-  </ion-card-content>
-</ion-card> -->
 
-  <ion-button fill="clear" expand="full" (click)="presentAlert()">
+  <ion-button fill="clear" color="danger" expand="full" (click)="presentAlert()">
     Cerrar Sesion
   </ion-button>
+</div>
 </ion-content>

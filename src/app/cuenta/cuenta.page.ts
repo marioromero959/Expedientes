@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
-import { User } from '../shared/interface/interfaz-usuario';
+import { Usuario } from '../shared/interface/interfaz-usuario';
 
 @Component({
   selector: 'app-cuenta',
@@ -11,25 +11,17 @@ import { User } from '../shared/interface/interfaz-usuario';
 })
 export class CuentaPage{
 
-  userData = [{
-    id: null,
-    usuario: '',
-    nombre: '',
-    apellido: '',
-    email: '',
-    dni: null,
-    pass: '',
-    repass: '',
-  }];
+  userData:Usuario;
   pass=false;
 
   constructor(
     private router:Router,
     private auth:AutenticacionService,
-    private alertCtrl:AlertController) { }
+    private alertCtrl:AlertController) { 
+      this.userData = JSON.parse(localStorage.getItem('Usuario'));
+    }
     
   ionViewWillEnter(){
-    this.userData = JSON.parse(localStorage.getItem('Usuario'));
   }
 
   editar(){

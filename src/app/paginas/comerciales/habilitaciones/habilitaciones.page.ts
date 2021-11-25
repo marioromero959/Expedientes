@@ -113,7 +113,7 @@ export class HabilitacionesPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    // construccion formularios
+    // Construccion formularios
     this.paso1 = this._formBuilder.group({
       cuit: ['', Validators.required],
       cuenta: [{value:'', disabled:false}, Validators.required],
@@ -242,7 +242,7 @@ if(this.paso1.value.tipoPersona == 1){
   fechaNacimiento: this.paso2.value.fechaNacimiento,
   nacionalidad: this.paso2.value.nacionalidad,
   caracter: 'Titular',
-  }
+  };
   // Enviar al back los value
 }else if(this.paso1.value.tipoPersona == 2){
   const value = {
@@ -315,9 +315,6 @@ alquilado(event){
 enviarP3(){
   if(this.paso3.invalid){
     this.presentAlert();
-    console.log(this.paso3.value)
-  }else{
-    console.log(this.paso3.value)
   }
 }
 
@@ -325,8 +322,6 @@ enviarP3(){
 enviarP4(){
   if(this.paso4.invalid){
     this.presentAlert();
-  }else{
-    console.log(this.paso4.value)
   }
 }
 

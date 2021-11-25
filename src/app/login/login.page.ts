@@ -53,14 +53,7 @@ login(){
   }else{
     this.auth.login(this.ingreso.value.email, this.ingreso.value.pass).subscribe(
       res=>{
-        if(res.status === 'correcto'){
-        this.ingreso.reset();
-        this.router.navigate(['home'])
-        }else if(res.status === 'El usuario no existe'){
-          this.presentAlert(res.status);
-        }else if(res.status === 'La contraseña es incorrecta'){
-          this.presentAlert(res.status);
-        }
+        (res.status === 'correcto') ? this.router.navigate(['home']) : this.presentAlert(res.status);  
       })
   }
 }
@@ -84,6 +77,8 @@ get passwordField(){
   return this.ingreso.get('pass');
 }
 
-
+ionViewDidLeave(){
+  this.ingreso.reset()
+}
 
 }

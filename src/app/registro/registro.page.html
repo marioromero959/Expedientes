@@ -6,104 +6,41 @@
 
 <ion-content>
   <h1>Crea tu cuenta</h1>
-  <form [formGroup]= "crearUsuarios"
-  (ngSubmit)= "registrarUsuario()">
-    <ion-item lines="inset">
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text"
-      formControlName="usuario"
-      autocomplete="on"
-      ></ion-input>
-    </ion-item>
-    <div *ngIf= "usuarioField.errors && usuarioField.touched">
-      <p *ngIf= "usuarioField.hasError('required')">Este campo es requerido</p>
+  <form [formGroup]="crearUsuarios">
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="usuario" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Dni</mat-label>
+      <input matInput formControlName="dni" type="number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Conrtaseña</mat-label>
+      <input [type]= "showPassword ? 'text' : 'password'" matInput formControlName="pass" >
+      <mat-icon color="primary" matSuffix (click)="togglePass()">{{passwordToggleIcon}} </mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Repetir Contraseña</mat-label>
+      <input [type]= "showRePassword ? 'text' : 'password'" matInput formControlName="repass" >
+      <mat-icon color="primary" matSuffix (click)="toggleRePass()">{{rePasswordToggleIcon}} </mat-icon>
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-raised-button color="accent" (click)="irALogin()">Volver</button>
+      <button mat-raised-button color="primary" (click)="registrarUsuario()">Registrarse</button>
     </div>
-    <p *ngIf= "errores[0]">Este usuario ya se encuentra en uso</p>
-    <ion-item lines="inset">
-      <ion-label position="floating">DNI</ion-label>
-      <ion-input type="number" 
-      formControlName="dni"
-      autocomplete="on"></ion-input>
-    </ion-item>
-    <div *ngIf= "dniField.errors && dniField.touched">
-      <p *ngIf= "dniField.hasError('required')">Este campo es requerido</p>
-    </div>
-    <p *ngIf= "errores[1]">Este DNI ya se encuentra registrado</p>
-    <ion-item lines="inset">
-      <ion-label position="floating">Nombres</ion-label>
-      <ion-input type="text" 
-      formControlName="nombre"
-      autocomplete="on"></ion-input>
-    </ion-item>
-    <div *ngIf= "nombreField.errors && nombreField.touched">
-      <p *ngIf= "nombreField.hasError('required')">Este campo es requerido</p>
-    </div>
-    <ion-item lines="inset">
-      <ion-label position="floating">Apellidos</ion-label>
-      <ion-input type="text"
-      formControlName="apellido"
-      autocomplete="on"></ion-input>
-    </ion-item>
-    <div *ngIf= "apellidoField.errors && apellidoField.touched">
-      <p *ngIf= "apellidoField.hasError('required')">Este campo es requerido</p>
-    </div>
-    <ion-item lines="inset">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" 
-      formControlName="email"
-      autocomplete="on"
-      ></ion-input>
-    </ion-item>
-    <div *ngIf="emailField.errors && emailField.touched">
-      <p *ngIf= "emailField.hasError('required')">Este campo es requerido</p>
-      <p *ngIf= "emailField.hasError('email')">Este campo no es un email válido</p>
-    </div>
-    <p *ngIf= "errores[2]">Este email ya se encuentra en uso</p>
-    <ion-item lines="inset">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input 
-      [type]= "showPassword ? 'text' : 'password'"
-      formControlName="pass"
-      name= "pass"
-      ></ion-input>
-      <ion-icon slot="end" class="ion-icon" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
-    </ion-item>
-    <div *ngIf= "passwordField.errors && passwordField.touched">
-      <p *ngIf= "passwordField.hasError('required')">Este campo es requerido</p>
-    </div>
-    <ion-item lines="inset">
-      <ion-label position="floating">Repetir Contraseña</ion-label>
-      <ion-input 
-      [type]= "showRePassword ? 'text' : 'password'"
-      formControlName="repass"
-      name= "repass
-    "
-      ></ion-input>
-      <ion-icon slot="end" class="ion-icon" [name]="rePasswordToggleIcon" (click)="toggleRePass()"></ion-icon>
-    </ion-item>
-    <div *ngIf= "repasswordField.errors && repasswordField.touched">
-      <p *ngIf= "repasswordField.hasError('required')">Este campo es requerido</p>
-    </div>
-    <div *ngIf= "passwordField.valid && repasswordField.value !== passwordField.value && repasswordField.touched">
-      <p>Las contraseñas no coinciden</p>
-    </div>
-    <ion-row class="ion-justify-content-center">
-        <ion-button
-        type="submit"
-        shape=round
-        color="success">
-          Registrarse
-        </ion-button>
-    </ion-row>
-    
-    <ion-row class="ion-justify-content-center">
-      <ion-button
-      type="button"
-      shape=round
-      (click)= "irALogin()">
-      Ya tengo cuenta
-    </ion-button>
-  </ion-row>
-</form>
+  </form>
 
-</ion-content>
+

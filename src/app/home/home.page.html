@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">  
   <ion-grid>
-  <h2>Bienvenido/a  </h2>
+  <h2>Bienvenido/a {{nombre}}</h2>
   <h3>Trámites Online</h3>
   <ion-card [routerLink]= "['/comerciales']" class="ion-padding ion-margin">
     <ion-card-header>
@@ -38,13 +38,6 @@
     </ion-card-header>
     </ion-card>  
   </ion-grid>
-
-<!-- <div *ngFor="let data of userData"> -->
-  <!-- {{data.nombre}} -->
-<!-- </div> -->
-
-
-
   <ion-button (click)= "logout()" color="danger" fill="clear" expand="block">
     Cerrar Sesion
   </ion-button>

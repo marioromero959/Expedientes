@@ -1,23 +1,18 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>Verifica tu Email</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-row>
-  <ion-col>
-    <h2>Gracias por registrarte!</h2>
-    <p>Enviamos un email de verificación a tu correo electronico</p>
-    <p>Por favor, verifica tu dirección de email e ingresa nuevamente.</p>
-  </ion-col>
-</ion-row>
-
-<ion-row>
-  <ion-col>
-    <ion-button (click)= "login()" color="success" expand="block">
-      Volver a login
-    </ion-button>
-  </ion-col>
-</ion-row>
+  <div class="container">
+    <h1>Gracias por registrarte!</h1>
+    <p>Ahora puedes acceder a Mi Gualeguay.</p>
+    
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)= "login()" color="success">
+        Volver a login
+      </ion-button>
+    </ion-row>
+  </div>
 </ion-content>

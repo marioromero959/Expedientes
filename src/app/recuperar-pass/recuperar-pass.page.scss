@@ -2,8 +2,13 @@ ion-content{
     display: block;
     text-align: center;
     h2{
+        font-size: 25px;
+        font-weight: 400;
         margin-top: 10%;
     }
+}
+mat-form-field{
+    width: 90%;
 }
 p{
     color: red;

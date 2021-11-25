@@ -1,17 +1,25 @@
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 h1,p,label,input{
     color: white;
 }
 h1{
-    display: block;
-    text-align: center;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
-    padding: 30px;
-    margin-top: 20vw;
-    margin-bottom: 10vw;
+    margin: 30px;
+}
+p{
+    margin: 0;
 }
 .borde{
     border-radius: 28px;
+    margin: 15px;
 }
 .ion-icon{
     height: 80%;
@@ -20,9 +28,6 @@ a{
     color: #fff;
     text-decoration: none;
 }
-p{
-    margin: 3px;
-}
 ion-item{
     --ion-background-color:#fff !important;
 }
@@ -30,6 +35,7 @@ ion-img{
     width: 200px;
     margin-top: 20px;
 }
+
 ion-content{
     --ion-background-color: linear-gradient(0deg, rgba(7,88,190,1) 22%, rgba(53,212,215,1) 69%);
-}
+}; 

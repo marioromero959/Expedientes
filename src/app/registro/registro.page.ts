@@ -1,29 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MisValidaciones } from '../shared/utils/mis-validaciones'
 import { Router } from '@angular/router';
 import { DatosService } from '../servicios/datos/datos.service';
+import { AlertController } from '@ionic/angular';
+import { User } from '../shared/interface/interfaz-usuario';
+
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit, OnDestroy {
+export class RegistroPage implements OnInit {
 
   crearUsuarios: FormGroup;
-  passwordToggleIcon = "eye";
-  rePasswordToggleIcon = "eye";
+  passwordToggleIcon = "visibility";
+  rePasswordToggleIcon = "visibility";
   showPassword = false;
   showRePassword = false;
-  users;
-  errores = [false,false,false];
 
   constructor(
     private router:Router,
     private fb:FormBuilder,
     private datos:DatosService,
-  ) { 
+    private alertCtrl:AlertController,
+  ) {
     this.crearUsuarios = this.fb.group({
       usuario:['',Validators.required],
       dni:['',Validators.required],
@@ -40,70 +41,53 @@ export class RegistroPage implements OnInit, OnDestroy {
   // mostrar u ocultar contraseña
   togglePass(){
     this.showPassword =! this.showPassword;
-    if(this.passwordToggleIcon == 'eye'){
-      this.passwordToggleIcon = 'eye-off';
+    if(this.passwordToggleIcon == 'visibility'){
+      this.passwordToggleIcon = 'visibility_off';
     }else{
-      this.passwordToggleIcon = 'eye';
+      this.passwordToggleIcon = 'visibility';
     }
   };
   toggleRePass(){
     this.showRePassword =! this.showRePassword;
-    if(this.rePasswordToggleIcon == 'eye'){
-      this.rePasswordToggleIcon = 'eye-off';
+    if(this.rePasswordToggleIcon == 'visibility'){
+      this.rePasswordToggleIcon = 'visibility_off';
     }else{
-      this.rePasswordToggleIcon = 'eye';
+      this.rePasswordToggleIcon = 'visibility';
     }
   };
 
   registrarUsuario(){
     if(this.crearUsuarios.invalid){
       this.crearUsuarios.markAllAsTouched();
+      this.presentAlert('Por favor, complete los campos para continuar')
       return;
     }else{
-    //Envio la data al back 
-    this.datos.altaUsuario(this.crearUsuarios.value).subscribe(
-      res=>{
-        // Esperar el id del error
-        // if(res[0].includes('Usuario')){
-          // this.errores[0] = true;
-        // }else if(res[0].includes('DNI')){
-          // this.errores[1] = true;
-        // }else if(res[0].includes('Email')){
-          // this.errores[2] = true;
-        // }
-        console.error(res)
-      }
-    );
-    // this.router.navigate(['/verificacion']);
-    }
+    //Envio la data al back
+    const usuario:User = this.crearUsuarios.value; 
+    this.datos.altaUsuario(usuario).subscribe((res:any)=>{
+      const {status} = res;
+      (status !== 'correcto') ? this.presentAlert(status) : this.router.navigate(['/verificacion']);
+      });
+    } 
   }
 
-  // Obtengo los campos para validar los formularios
-get usuarioField(){
-  return this.crearUsuarios.get('usuario');
-}
-get dniField(){
-  return this.crearUsuarios.get('dni');
-}
-get nombreField(){
-  return this.crearUsuarios.get('nombre');
-}
-get apellidoField(){
-  return this.crearUsuarios.get('apellido');
-}
-get emailField(){
-  return this.crearUsuarios.get('email');
-}
-get passwordField(){
-  return this.crearUsuarios.get('pass');
-}
-get repasswordField(){
-  return this.crearUsuarios.get('repass');
-}
-  
+async presentAlert(error) {
+  const alert = await this.alertCtrl.create({
+    cssClass: 'my-custom-class',
+    header: 'Ocurrió un problema',
+    subHeader: error,
+    buttons: ['OK']
+  });
+
+await alert.present();
+};
+
 irALogin(){
   this.router.navigate(['/login']);
 }
 
-ngOnDestroy(){}
+ionViewWillLeave(){
+  this.crearUsuarios.reset(); 
+}
+
 }

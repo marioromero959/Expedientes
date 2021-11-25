@@ -16,5 +16,5 @@ export class RecuperarPassPage implements OnInit {
 
   ngOnInit() {
   }
-
+  resetPass(){}
 }

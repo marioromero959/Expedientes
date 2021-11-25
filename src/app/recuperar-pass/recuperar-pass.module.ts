@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RecuperarPassPageRoutingModule } from './recuperar-pass-routing.module';
 
 import { RecuperarPassPage } from './recuperar-pass.page';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RecuperarPassPageRoutingModule
+    RecuperarPassPageRoutingModule,
+    MaterialModule
   ],
   declarations: [RecuperarPassPage]
 })

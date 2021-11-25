@@ -32,11 +32,6 @@ const routes: Routes = [
     path: 'verificacion',
     loadChildren: () => import('./verificacion/verificacion.module').then( m => m.VerificacionPageModule)
   },
-  // Se removio esta pagina hasta actualizacion del backend
-/*   {
-    path: 'editar-perfil',
-    loadChildren: () => import('./editar-perfil/editar-perfil.module').then( m => m.EditarPerfilPageModule)
-  }, */
   {
     path: 'tramites',
     loadChildren: () => import('./tramites/tramites.module').then( m => m.TramitesPageModule)
