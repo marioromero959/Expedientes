@@ -99,7 +99,7 @@ export class HabilitacionesPage implements OnInit {
     name: 'DNI del Presidente o Socio representante - Dorso',
     sName:'DNIPresidenteDorso'},
   ];
-  // filtrado de documentos
+// filtrado de documentos
   filtroLocal:number;
   filtroPersona:number;
   filtroSolic = [];
@@ -173,292 +173,290 @@ export class HabilitacionesPage implements OnInit {
     this.paso6 = this._formBuilder.group({
     documentos: ['',Validators.required]  
     })
-    // Traer data del back
+// Traer data del back
     this.dataP1Svc.obtenerPersonas().subscribe(res=>{
       this.arrPersonas = res;
-     })
+    })
     this.dataP1Svc.obtenerSolicitudes().subscribe(res=>{
       this.arrSolicitudes = res;
     })
-    // Traer data del usuario cargada en memoria
+// Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.id = userData.usuario_id;
-    // const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
+// const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
   }
 // PASO 1 ----------------
-get solicitudField(){return this.paso1.get('solicitud');}
+  get solicitudField(){return this.paso1.get('solicitud');}
 
-solicitud(event){
-  // Desabilito el input de Nro de cuenta y vacio el array de tipos 
-if((event.includes(1) || event.includes(9)) &&  event.length > 1){
-  this.condicionP1Solicitud = true;
-}else if(event.includes(1) && event.length == 1){
-  this.paso1.get('cuenta').patchValue('');
-  this.paso1.controls['cuenta'].disable();
-  this.condicionP1Solicitud = false;
-}else{
-  this.paso1.controls['cuenta'].enable();
-  this.condicionP1Solicitud = false;
-}
-};
+  solicitud(event){
+// Desabilito el input de Nro de cuenta y vacio el array de tipos 
+    if((event.includes(1) || event.includes(9)) &&  event.length > 1){
+      this.condicionP1Solicitud = true;
+    }else if(event.includes(1) && event.length == 1){
+      this.paso1.get('cuenta').patchValue('');
+      this.paso1.controls['cuenta'].disable();
+      this.condicionP1Solicitud = false;
+    }else{
+      this.paso1.controls['cuenta'].enable();
+      this.condicionP1Solicitud = false;
+    }
+  };
 
-enviarP1(){
-  if(this.paso1.invalid){
+  enviarP1(){
+    if(this.paso1.invalid){
       this.presentAlert();
-  }else{
+    }else{
     // Armamos el objeto para enviar al backend
-    const value = {
-      id:this.id,
-      cuit: Number(this.paso1.value.cuit),
-      cuenta:Number(this.paso1.value.cuenta),
-      tipo:this.paso1.value.tipoPersona,
-      local:Number(this.paso1.value.tipoLocal),
-      solicitud:this.paso1.value.solicitud,
-    };
-    // this.dataP1.enviarP1(value).subscribe();
-  }
+      const value = {
+        id:this.id,
+        cuit: Number(this.paso1.value.cuit),
+        cuenta:Number(this.paso1.value.cuenta),
+        tipo:this.paso1.value.tipoPersona,
+        local:Number(this.paso1.value.tipoLocal),
+        solicitud:this.paso1.value.solicitud,
+      };
+// this.dataP1.enviarP1(value).subscribe();
+    }
 // Modificamos el paso 2
- if(this.paso1.value.tipoPersona == 1){
-  this.condicionP2TipoPersona = "Persona Fisica"
-  this.paso2.get('caracter').patchValue('Titular');
-  this.paso2.controls['caracter'].disable();
-}else if(this.paso1.value.tipoPersona == 2){
-  this.condicionP2TipoPersona = "Persona Juridica"
-  this.paso2.get('caracter').patchValue('');
-  this.paso2.controls['caracter'].enable();
-}
-}
+    if(this.paso1.value.tipoPersona == 1){
+      this.condicionP2TipoPersona = "Persona Fisica"
+      this.paso2.get('caracter').patchValue('Titular');
+      this.paso2.controls['caracter'].disable();
+    }else if(this.paso1.value.tipoPersona == 2){
+      this.condicionP2TipoPersona = "Persona Juridica"
+      this.paso2.get('caracter').patchValue('');
+      this.paso2.controls['caracter'].enable();
+    }
+  }
 
 // PASO 2 ---------------
-enviarP2(){
-if(this.paso2.invalid){
-  this.presentAlert();
-}else{
-if(this.paso1.value.tipoPersona == 1){
-  const value = {
-  apellido: this.paso2.value.apellido,
-  nombres: this.paso2.value.nombres,
-  dni: this.paso2.value.dni,
-  fechaNacimiento: this.paso2.value.fechaNacimiento,
-  nacionalidad: this.paso2.value.nacionalidad,
-  caracter: 'Titular',
-  };
-  // Enviar al back los value
-}else if(this.paso1.value.tipoPersona == 2){
-  const value = {
-    razon: this.paso2.value.razon,
-    fechaInscripcion: this.paso2.value.fechaInscripcion,
-    tipoSocietario: this.paso2.value.tipoSocietario,
-    cierre: this.paso2.value.cierre,
-    apellido: this.paso2.value.apellido,
-    nombres: this.paso2.value.nombres,
-    fechaNacimiento: this.paso2.value.fechaNacimiento,
-    domicilio: this.paso2.value.domicilio,
-    localidad: this.paso2.value.localidad,
-    nacionalidad: this.paso2.value.nacionalidad,
-    cuit: this.paso2.value.cuit,
-    caracter: this.paso2.value.caracter,
-  }
-}
-}
+  enviarP2(){
+    if(this.paso2.invalid){
+      this.presentAlert();
+    }else{
+      if(this.paso1.value.tipoPersona == 1){
+        const value = {
+        apellido: this.paso2.value.apellido,
+        nombres: this.paso2.value.nombres,
+        dni: this.paso2.value.dni,
+        fechaNacimiento: this.paso2.value.fechaNacimiento,
+        nacionalidad: this.paso2.value.nacionalidad,
+        caracter: 'Titular',
+        };
+      // Enviar al back los value
+      }else if(this.paso1.value.tipoPersona == 2){
+      const value = {
+        razon: this.paso2.value.razon,
+        fechaInscripcion: this.paso2.value.fechaInscripcion,
+        tipoSocietario: this.paso2.value.tipoSocietario,
+        cierre: this.paso2.value.cierre,
+        apellido: this.paso2.value.apellido,
+        nombres: this.paso2.value.nombres,
+        fechaNacimiento: this.paso2.value.fechaNacimiento,
+        domicilio: this.paso2.value.domicilio,
+        localidad: this.paso2.value.localidad,
+        nacionalidad: this.paso2.value.nacionalidad,
+        cuit: this.paso2.value.cuit,
+        caracter: this.paso2.value.caracter,
+      }
+      }
+    }
 // Modificamos el paso 3
-if(this.paso1.value.tipoLocal === '1'){
-  // Si tiene local añadimos el control de domComercial
-  this.condicionP3Local = true;
-  this.paso3.addControl('domComercial',this._formBuilder.group({
-    calleC: ['', Validators.required],
-    numeroCalleC: ['', Validators.required],
-    pisoC: ['', Validators.required],
-    provinciaC: ['', Validators.required],
-    localidadC: ['', Validators.required],
-    codPostalC: ['', Validators.required],
-    partida: ['', Validators.required],
-    alquilado: ['', Validators.required],
-    }));
-}else{
-  // Si no tiene quitamos el control de domComercial
-  this.condicionP3Local = false;
-  this.paso3.removeControl('domComercial');
-}
-
-
-}
+    if(this.paso1.value.tipoLocal === '1'){
+// Si tiene local añadimos el control de domComercial
+      this.condicionP3Local = true;
+      this.paso3.addControl('domComercial',this._formBuilder.group({
+        calleC: ['', Validators.required],
+        numeroCalleC: ['', Validators.required],
+        pisoC: ['', Validators.required],
+        provinciaC: ['', Validators.required],
+        localidadC: ['', Validators.required],
+        codPostalC: ['', Validators.required],
+        partida: ['', Validators.required],
+        alquilado: ['', Validators.required],
+      }));
+    }else{
+// Si no tiene quitamos el control de domComercial
+      this.condicionP3Local = false;
+      this.paso3.removeControl('domComercial');
+    }
+  }
 
 // PASO 3 -------------
-domicilio(event){
+  domicilio(event){
   if(event === 'si'){
     this.paso3.get(['domComercial','calleC']).patchValue(this.paso3.value.domFiscal.calle);
-    this.paso3.get(['domComercial','numeroCalleC']).patchValue(this.paso3.value.domFiscal.numeroCalle);
-    this.paso3.get(['domComercial','pisoC']).patchValue(this.paso3.value.domFiscal.piso);
-    this.paso3.get(['domComercial','provinciaC']).patchValue(this.paso3.value.domFiscal.provincia);
-    this.paso3.get(['domComercial','localidadC']).patchValue(this.paso3.value.domFiscal.localidad);
-    this.paso3.get(['domComercial','codPostalC']).patchValue(this.paso3.value.domFiscal.codPostal); 
-  }else if(event === 'no'){
-    this.paso3.get(['domComercial','calleC']).patchValue('');
-    this.paso3.get(['domComercial','numeroCalleC']).patchValue('');
-    this.paso3.get(['domComercial','pisoC']).patchValue('');
-    this.paso3.get(['domComercial','provinciaC']).patchValue('');
-    this.paso3.get(['domComercial','localidadC']).patchValue('');
-    this.paso3.get(['domComercial','codPostalC']).patchValue('');
+      this.paso3.get(['domComercial','numeroCalleC']).patchValue(this.paso3.value.domFiscal.numeroCalle);
+      this.paso3.get(['domComercial','pisoC']).patchValue(this.paso3.value.domFiscal.piso);
+      this.paso3.get(['domComercial','provinciaC']).patchValue(this.paso3.value.domFiscal.provincia);
+      this.paso3.get(['domComercial','localidadC']).patchValue(this.paso3.value.domFiscal.localidad);
+      this.paso3.get(['domComercial','codPostalC']).patchValue(this.paso3.value.domFiscal.codPostal); 
+    }else if(event === 'no'){
+      this.paso3.get(['domComercial','calleC']).patchValue('');
+      this.paso3.get(['domComercial','numeroCalleC']).patchValue('');
+      this.paso3.get(['domComercial','pisoC']).patchValue('');
+      this.paso3.get(['domComercial','provinciaC']).patchValue('');
+      this.paso3.get(['domComercial','localidadC']).patchValue('');
+      this.paso3.get(['domComercial','codPostalC']).patchValue('');
+    }
   }
-}
 
 // Determinamos si es alquilado o no para mostrar el paso 4
-alquilado(event){
-  if(event === '1'){
-    this.condicionP4Alquiler = true;
-  }else{
-    this.condicionP4Alquiler = false;
+  alquilado(event){
+    if(event === '1'){
+      this.condicionP4Alquiler = true;
+    }else{
+      this.condicionP4Alquiler = false;
+    }
   }
-}
 
-enviarP3(){
-  if(this.paso3.invalid){
-    this.presentAlert();
+  enviarP3(){
+    if(this.paso3.invalid){
+      this.presentAlert();
+    }
   }
-}
 
 // PASO 4 -------------
-enviarP4(){
-  if(this.paso4.invalid){
-    this.presentAlert();
+  enviarP4(){
+    if(this.paso4.invalid){
+      this.presentAlert();
+    }
   }
-}
 
 // PASO 5 -------------
-borrarAct(id){
-  this.actividades.splice(id,1)
-  if(this.actividades.length == 0){
-    this.paso5.get('actividad').patchValue('');
-  }
-}
-
-borrarEstudio(){
-  this.estudio.splice(0,1)
-  this.estudioOk = false;
-}
-
-async agregarAct(){
-  const modal = await this.modalCtrl.create(
-    {
-      component: CargaActPage,
-      componentProps:{
-        tipo: '',
-        fecha: '',
-      },
-      cssClass: 'my-custom-class'
+  borrarAct(id){
+    this.actividades.splice(id,1)
+    if(this.actividades.length == 0){
+      this.paso5.get('actividad').patchValue('');
     }
-  )
-  await modal.present();
-  const { data } = await modal.onDidDismiss();
-      if(data === undefined){
-        console.log('Cancelado');
-      }else{
-        this.actividades.push(data);
-        this.paso5.get('actividad').patchValue(this.actividades);
-      }
-}
+  }
 
-async  agregarEstudio(){
+  borrarEstudio(){
+    this.estudio.splice(0,1)
+    this.estudioOk = false;
+  }
+
+  async agregarAct(){
     const modal = await this.modalCtrl.create(
       {
-        component: CargaEstudioPage,
+        component: CargaActPage,
         componentProps:{
-          estudio: '',
-          telefono: '',
-          email: '',
+          tipo: '',
+          fecha: '',
         },
         cssClass: 'my-custom-class'
       }
     )
     await modal.present();
     const { data } = await modal.onDidDismiss();
-    if(data === undefined){
-      console.log('Cancelado');
-    }else{
-      this.estudio.push(data);
-      this.paso5.get('estudio').patchValue(this.estudio);
-      this.estudioOk = true;
-    }
-}
-
-enviarP5(){
-  if(this.paso5.invalid || this.actividades.length == 0){
-    this.presentAlert();
-  }else{
-    console.log(this.paso5.value);
-    // Enviamos filtros P6
-    this.filtroLocal = this.paso1.value.tipoLocal;
-    this.filtroPersona = this.paso1.value.tipoPersona;
-    this.filtroSolic = this.paso1.value.solicitud;
+        if(data === undefined){
+          console.log('Cancelado');
+        }else{
+          this.actividades.push(data);
+          this.paso5.get('actividad').patchValue(this.actividades);
+        }
   }
-}
+
+  async  agregarEstudio(){
+      const modal = await this.modalCtrl.create(
+        {
+          component: CargaEstudioPage,
+          componentProps:{
+            estudio: '',
+            telefono: '',
+            email: '',
+          },
+          cssClass: 'my-custom-class'
+        }
+      )
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      if(data === undefined){
+        console.log('Cancelado');
+      }else{
+        this.estudio.push(data);
+        this.paso5.get('estudio').patchValue(this.estudio);
+        this.estudioOk = true;
+      }
+  }
+
+  enviarP5(){
+    if(this.paso5.invalid || this.actividades.length == 0){
+      this.presentAlert();
+    }else{
+      console.log(this.paso5.value);
+      // Enviamos filtros P6
+      this.filtroLocal = this.paso1.value.tipoLocal;
+      this.filtroPersona = this.paso1.value.tipoPersona;
+      this.filtroSolic = this.paso1.value.solicitud;
+    }
+  }
 
 // PASO 6 ------------
-select(event,index,count){
-  // count es el length del array a llenar
-  var reader = new FileReader();
-  this.archivos.length = count;
-  const self = this.archivos;
+  select(event,index,count){
+    // count es el length del array a llenar
+    var reader = new FileReader();
+    this.archivos.length = count;
+    const self = this.archivos;
 
-  const archivoCapturado = event.target.files[0];
-  if(archivoCapturado){
-    reader.readAsDataURL(archivoCapturado); 
-    reader.onloadend = function() {
-        var base64data = reader.result;
-        if(self[index] == '' || self[index] != ''){
-          self.splice(index,1,base64data);
-        }
-      };
-  }else{
-    self.splice(index,1,null)
+    const archivoCapturado = event.target.files[0];
+    if(archivoCapturado){
+      reader.readAsDataURL(archivoCapturado); 
+      reader.onloadend = function() {
+          var base64data = reader.result;
+          if(self[index] == '' || self[index] != ''){
+            self.splice(index,1,base64data);
+          }
+        };
+    }else{
+      self.splice(index,1,null)
+    }
   }
-}
 
-enviarP6(){
-  let filtrado = this.archivos.filter((res)=>{
-    return res   
-  })
-  if(this.archivos.length != filtrado.length || this.archivos.length == 0){
-    this.presentAlert();
-  }else{
-  this.paso6.get('documentos').patchValue('ok');
-    // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
-/*     this.archivos.forEach(res => {
-      // Ver tamaño de archivos en b64
-      const archivos = JSON.stringify(res)
-      this.formData.envioArchivos(archivos).subscribe();
-    }); */
-    this.presentAlert2();
-    console.log(this.archivos)
-  }
-};
+  enviarP6(){
+    let filtrado = this.archivos.filter((res)=>{
+      return res   
+    })
+    if(this.archivos.length != filtrado.length || this.archivos.length == 0){
+      this.presentAlert();
+    }else{
+    this.paso6.get('documentos').patchValue('ok');
+      // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
+  /*     this.archivos.forEach(res => {
+        // Ver tamaño de archivos en b64
+        const archivos = JSON.stringify(res)
+        this.formData.envioArchivos(archivos).subscribe();
+      }); */
+      this.presentAlert2();
+      console.log(this.archivos)
+    }
+  };
 
 // alertas
-async presentAlert() {
-  const alert = await this.alerta.create({
-    cssClass: 'my-custom-class',
-    header: 'Datos Incompletos',
-    subHeader: 'Por favor, complete todos los campos para continuar.',
-    buttons: ['OK']
-  });
-
-await alert.present();
-};
-
-async presentAlert2() {
-  const alert = await this.alerta.create({
-    cssClass: 'my-custom-class',
-    header: '¿Enviar solicitud?',
-    subHeader: '¿Desea terminar esta habilitación comercial?',
-    buttons: [{
-      text:'Finalizar',
-      handler: () =>{
-        this.router.navigate(['/comerciales/comprobante'])
-      }
-    }]
-  });
-await alert.present();
-};
+  async presentAlert() {
+    const alert = await this.alerta.create({
+      cssClass: 'my-custom-class',
+      header: 'Datos Incompletos',
+      subHeader: 'Por favor, complete todos los campos para continuar.',
+      buttons: ['OK']
+    });
+  
+  await alert.present();
+  };
+  
+  async presentAlert2() {
+    const alert = await this.alerta.create({
+      cssClass: 'my-custom-class',
+      header: '¿Enviar solicitud?',
+      subHeader: '¿Desea terminar esta habilitación comercial?',
+      buttons: [{
+        text:'Finalizar',
+        handler: () =>{
+          this.router.navigate(['/comerciales/comprobante'])
+        }
+      }]
+    });
+  await alert.present();
+  };
 
 }
