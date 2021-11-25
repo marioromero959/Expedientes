@@ -183,7 +183,8 @@ export class HabilitacionesPage implements OnInit {
 // Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.id = userData.usuario_id;
-// const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
+    const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
+    if(exp) this.cargarExp(exp);
   }
 // PASO 1 ----------------
   get solicitudField(){return this.paso1.get('solicitud');}
@@ -280,6 +281,8 @@ export class HabilitacionesPage implements OnInit {
       this.condicionP3Local = false;
       this.paso3.removeControl('domComercial');
     }
+    console.log(this.paso2.value)
+
   }
 
 // PASO 3 -------------
@@ -440,10 +443,10 @@ export class HabilitacionesPage implements OnInit {
       subHeader: 'Por favor, complete todos los campos para continuar.',
       buttons: ['OK']
     });
-  
+
   await alert.present();
   };
-  
+
   async presentAlert2() {
     const alert = await this.alerta.create({
       cssClass: 'my-custom-class',
@@ -458,5 +461,34 @@ export class HabilitacionesPage implements OnInit {
     });
   await alert.present();
   };
+
+// Si existe el expediente, entonces preparamos para edicion
+cargarExp(exp){
+// Cargamos paso1
+  this.paso1.get('cuit').patchValue(exp.hc_cuit);
+  this.paso1.get('cuenta').patchValue('preguntar');
+  this.paso1.get('tipoPersona').patchValue(1);
+  this.paso1.get('tipoLocal').patchValue('1')
+  this.paso1.get('solicitud').patchValue([1,2]);
+// Cargamos paso2
+  this.paso2.get('razon').patchValue('test');
+  this.paso2.get('fechaInscripcion').patchValue('2021-11-12');
+  this.paso2.get('tipoSocietario').patchValue('Sociedad simple');
+  this.paso2.get('cierre').patchValue('2021-11-12');
+  this.paso2.get('apellido').patchValue('test');
+  this.paso2.get('nombres').patchValue('test');
+  this.paso2.get('dni').patchValue('test');
+  this.paso2.get('fechaNacimiento').patchValue('2021-11-12');
+  this.paso2.get('domicilio').patchValue('test');
+  this.paso2.get('localidad').patchValue('test');
+  this.paso2.get('nacionalidad').patchValue('test');
+  this.paso2.get('cuit').patchValue('test');
+  this.paso2.get('caracter').patchValue('Titular'); //Ver -------
+}
+
+// Al salir del componente borramos los datos del expediente
+ionViewDidLeave(){
+  localStorage.removeItem('Datos Expedientes');
+}
 
 }
