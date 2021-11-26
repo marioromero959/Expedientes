@@ -281,8 +281,6 @@ export class HabilitacionesPage implements OnInit {
       this.condicionP3Local = false;
       this.paso3.removeControl('domComercial');
     }
-    console.log(this.paso2.value)
-
   }
 
 // PASO 3 -------------
@@ -317,6 +315,7 @@ export class HabilitacionesPage implements OnInit {
     if(this.paso3.invalid){
       this.presentAlert();
     }
+    console.log(this.paso3.value)
   }
 
 // PASO 4 -------------
@@ -484,6 +483,39 @@ cargarExp(exp){
   this.paso2.get('nacionalidad').patchValue('test');
   this.paso2.get('cuit').patchValue('test');
   this.paso2.get('caracter').patchValue('Titular'); //Ver -------
+// Cargamos paso3
+this.paso3.get(['domFiscal','calle']).patchValue('test');
+this.paso3.get(['domFiscal','numeroCalle']).patchValue('test');
+this.paso3.get(['domFiscal','piso']).patchValue('test');
+this.paso3.get(['domFiscal','provincia']).patchValue('test');
+this.paso3.get(['domFiscal','localidad']).patchValue('test');
+this.paso3.get(['domFiscal','codPostal']).patchValue('test');
+// Crear formControl para el radio mismo domicilio
+this.paso3.get(['domComercial','calleC']).patchValue('test');
+this.paso3.get(['domComercial','numeroCalleC']).patchValue('test');
+this.paso3.get(['domComercial','pisoC']).patchValue('test');
+this.paso3.get(['domComercial','provinciaC']).patchValue('test');
+this.paso3.get(['domComercial','localidadC']).patchValue('test');
+this.paso3.get(['domComercial','codPostalC']).patchValue('test');
+this.paso3.get(['domComercial','partida']).patchValue('test');
+this.paso3.get(['domComercial','alquilado']).patchValue('2');
+// Cargamos el paso4
+this.paso4.get('id').patchValue('test');
+this.paso4.get('apellido').patchValue('test');
+this.paso4.get('nombres').patchValue('test');
+// Cargamos el paso5
+this.paso5.get('fantasia').patchValue('test');
+this.paso5.get('telefono').patchValue('test');
+this.paso5.get('email').patchValue('test');
+this.paso5.get('actividad').patchValue('test');
+this.paso5.get('estudio').patchValue('test');
+
+
+// Ver estilos carga act y carga estudio
+
+
+
+
 }
 
 // Al salir del componente borramos los datos del expediente
