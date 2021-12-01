@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ComprobantePageRoutingModule } from './comprobante-routing.module';
 
 import { ComprobantePage } from './comprobante.page';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComprobantePageRoutingModule
+    ComprobantePageRoutingModule,
+    MaterialModule
   ],
   declarations: [ComprobantePage]
 })

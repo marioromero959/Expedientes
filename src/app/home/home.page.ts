@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { AutenticacionService } from '../servicios/autenticación/autenticacion.service';
 import { AlertController } from '@ionic/angular';
+import { Usuario } from '../shared/interface/interfaz-usuario';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage{
 
-  userData;
+  userData:Usuario;
   nombre:string = "";
 
   constructor(
@@ -26,19 +27,19 @@ ionViewWillEnter(){
 }
 
   // Abrir y cerrar menu lateral
-  openFirst() {
+  public openFirst():void {
     this.menu.enable(true, 'first');
     this.menu.open('first');
   }
-  openEnd() {
+  public openEnd():void {
     this.menu.open('end');
   }
-  openCustom() {
+  public openCustom():void {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
 
-  async logout() {
+  public async logout():Promise<void> {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: '¿Salir de MiGualeguay?',

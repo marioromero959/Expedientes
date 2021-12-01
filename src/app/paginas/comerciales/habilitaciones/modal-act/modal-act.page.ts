@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-carga-act',
-  templateUrl: './carga-act.page.html',
-  styleUrls: ['./carga-act.page.scss'],
+  selector: 'app-modal-act',
+  templateUrl: './modal-act.page.html',
+  styleUrls: ['./modal-act.page.scss'],
 })
-export class CargaActPage implements OnInit {
+export class ModalActPage implements OnInit {
 
   @Input() tipo;
   @Input() fecha;

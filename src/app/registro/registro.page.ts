@@ -1,10 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DatosService } from '../servicios/datos/datos.service';
+import { RegistroService } from '../servicios/registro/registro.service';
 import { AlertController } from '@ionic/angular';
 import { User } from '../shared/interface/interfaz-usuario';
-
 
 @Component({
   selector: 'app-registro',
@@ -14,15 +13,15 @@ import { User } from '../shared/interface/interfaz-usuario';
 export class RegistroPage implements OnInit {
 
   crearUsuarios: FormGroup;
-  passwordToggleIcon = "visibility";
-  rePasswordToggleIcon = "visibility";
-  showPassword = false;
-  showRePassword = false;
+  passwordToggleIcon:string = "visibility";
+  rePasswordToggleIcon:string = "visibility";
+  showPassword:boolean = false;
+  showRePassword:boolean = false;
 
   constructor(
     private router:Router,
     private fb:FormBuilder,
-    private datos:DatosService,
+    private _registro:RegistroService,
     private alertCtrl:AlertController,
   ) {
     this.crearUsuarios = this.fb.group({
@@ -39,7 +38,7 @@ export class RegistroPage implements OnInit {
   ngOnInit() {}
 
   // mostrar u ocultar contraseña
-  togglePass(){
+ public togglePass():void{
     this.showPassword =! this.showPassword;
     if(this.passwordToggleIcon == 'visibility'){
       this.passwordToggleIcon = 'visibility_off';
@@ -47,7 +46,7 @@ export class RegistroPage implements OnInit {
       this.passwordToggleIcon = 'visibility';
     }
   };
-  toggleRePass(){
+ public toggleRePass():void{
     this.showRePassword =! this.showRePassword;
     if(this.rePasswordToggleIcon == 'visibility'){
       this.rePasswordToggleIcon = 'visibility_off';
@@ -56,7 +55,7 @@ export class RegistroPage implements OnInit {
     }
   };
 
-  registrarUsuario(){
+  private registrarUsuario():void{
     if(this.crearUsuarios.invalid){
       this.crearUsuarios.markAllAsTouched();
       this.presentAlert('Por favor, complete los campos para continuar')
@@ -64,14 +63,14 @@ export class RegistroPage implements OnInit {
     }else{
     //Envio la data al back
     const usuario:User = this.crearUsuarios.value; 
-    this.datos.altaUsuario(usuario).subscribe((res:any)=>{
+    this._registro.altaUsuario(usuario).subscribe((res:any)=>{
       const {status} = res;
       (status !== 'correcto') ? this.presentAlert(status) : this.router.navigate(['/verificacion']);
       });
     } 
   }
 
-async presentAlert(error) {
+public async presentAlert(error):Promise<void> {
   const alert = await this.alertCtrl.create({
     cssClass: 'my-custom-class',
     header: 'Ocurrió un problema',
@@ -82,7 +81,7 @@ async presentAlert(error) {
 await alert.present();
 };
 
-irALogin(){
+public irALogin(){
   this.router.navigate(['/login']);
 }
 

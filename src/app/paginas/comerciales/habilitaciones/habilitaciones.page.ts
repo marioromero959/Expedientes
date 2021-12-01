@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { DataP1Service } from 'src/app/servicios/datos/data-pasos/dataP1/data-p1.service';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
-import { CargaActPage } from './carga-act/carga-act.page';
-import { CargaEstudioPage } from './carga-estudio/carga-estudio.page';
 import { Router } from '@angular/router';
-
+import { ModalActPage } from './modal-act/modal-act.page';
+import { ModalEstPage } from './modal-est/modal-est.page';
+import { DatosService } from 'src/app/servicios/datos/datos.service';
 
 @Component({
   selector: 'app-habilitaciones',
@@ -106,7 +105,7 @@ export class HabilitacionesPage implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private dataP1Svc: DataP1Service,
+    private datos: DatosService,
     private alerta: AlertController,
     private modalCtrl:ModalController,
     private router: Router,
@@ -148,6 +147,7 @@ export class HabilitacionesPage implements OnInit {
       }),
     //Domicilio comercial
       domComercial: this._formBuilder.group({
+        select: [''],
         calleC: ['', Validators.required],
         numeroCalleC: ['', Validators.required],
         pisoC: ['', Validators.required],
@@ -159,7 +159,7 @@ export class HabilitacionesPage implements OnInit {
         })
     });
     this.paso4 = this._formBuilder.group({
-      id: ['', Validators.required],
+      cuit: ['', Validators.required],
       apellido: ['', Validators.required],
       nombres: ['', Validators.required],
     });
@@ -174,10 +174,10 @@ export class HabilitacionesPage implements OnInit {
     documentos: ['',Validators.required]  
     })
 // Traer data del back
-    this.dataP1Svc.obtenerPersonas().subscribe(res=>{
+    this.datos.obtenerPersonas().subscribe(res=>{
       this.arrPersonas = res;
     })
-    this.dataP1Svc.obtenerSolicitudes().subscribe(res=>{
+    this.datos.obtenerSolicitudes().subscribe(res=>{
       this.arrSolicitudes = res;
     })
 // Traer data del usuario cargada en memoria
@@ -186,6 +186,7 @@ export class HabilitacionesPage implements OnInit {
     const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
     if(exp) this.cargarExp(exp);
   }
+
 // PASO 1 ----------------
   get solicitudField(){return this.paso1.get('solicitud');}
 
@@ -267,6 +268,7 @@ export class HabilitacionesPage implements OnInit {
 // Si tiene local añadimos el control de domComercial
       this.condicionP3Local = true;
       this.paso3.addControl('domComercial',this._formBuilder.group({
+        select: [''],
         calleC: ['', Validators.required],
         numeroCalleC: ['', Validators.required],
         pisoC: ['', Validators.required],
@@ -315,7 +317,6 @@ export class HabilitacionesPage implements OnInit {
     if(this.paso3.invalid){
       this.presentAlert();
     }
-    console.log(this.paso3.value)
   }
 
 // PASO 4 -------------
@@ -341,7 +342,7 @@ export class HabilitacionesPage implements OnInit {
   async agregarAct(){
     const modal = await this.modalCtrl.create(
       {
-        component: CargaActPage,
+        component: ModalActPage,
         componentProps:{
           tipo: '',
           fecha: '',
@@ -362,7 +363,7 @@ export class HabilitacionesPage implements OnInit {
   async  agregarEstudio(){
       const modal = await this.modalCtrl.create(
         {
-          component: CargaEstudioPage,
+          component: ModalEstPage,
           componentProps:{
             estudio: '',
             telefono: '',
@@ -491,16 +492,20 @@ this.paso3.get(['domFiscal','provincia']).patchValue('test');
 this.paso3.get(['domFiscal','localidad']).patchValue('test');
 this.paso3.get(['domFiscal','codPostal']).patchValue('test');
 // Crear formControl para el radio mismo domicilio
-this.paso3.get(['domComercial','calleC']).patchValue('test');
-this.paso3.get(['domComercial','numeroCalleC']).patchValue('test');
-this.paso3.get(['domComercial','pisoC']).patchValue('test');
-this.paso3.get(['domComercial','provinciaC']).patchValue('test');
-this.paso3.get(['domComercial','localidadC']).patchValue('test');
-this.paso3.get(['domComercial','codPostalC']).patchValue('test');
-this.paso3.get(['domComercial','partida']).patchValue('test');
-this.paso3.get(['domComercial','alquilado']).patchValue('2');
+if(this.paso1.value.tipoLocal === '1'){
+  this.paso3.get(['domComercial','select']).patchValue('si');
+  this.domicilio("si")
+  this.paso3.get(['domComercial','calleC']).patchValue('test');
+  this.paso3.get(['domComercial','numeroCalleC']).patchValue('test');
+  this.paso3.get(['domComercial','pisoC']).patchValue('test');
+  this.paso3.get(['domComercial','provinciaC']).patchValue('test');
+  this.paso3.get(['domComercial','localidadC']).patchValue('test');
+  this.paso3.get(['domComercial','codPostalC']).patchValue('test');
+  this.paso3.get(['domComercial','partida']).patchValue('test');
+  this.paso3.get(['domComercial','alquilado']).patchValue('2');
+}
 // Cargamos el paso4
-this.paso4.get('id').patchValue('test');
+this.paso4.get('cuit').patchValue('test');
 this.paso4.get('apellido').patchValue('test');
 this.paso4.get('nombres').patchValue('test');
 // Cargamos el paso5
@@ -509,8 +514,6 @@ this.paso5.get('telefono').patchValue('test');
 this.paso5.get('email').patchValue('test');
 this.paso5.get('actividad').patchValue('test');
 this.paso5.get('estudio').patchValue('test');
-
-
 // Ver estilos carga act y carga estudio
 
 

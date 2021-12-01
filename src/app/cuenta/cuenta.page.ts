@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { AutenticacionService } from '../servicios/autenticación/autenticacion.service';
 import { Usuario } from '../shared/interface/interfaz-usuario';
 
 @Component({
@@ -12,7 +12,7 @@ import { Usuario } from '../shared/interface/interfaz-usuario';
 export class CuentaPage{
 
   userData:Usuario;
-  pass=false;
+  pass:boolean=false;
 
   constructor(
     private router:Router,
@@ -20,17 +20,15 @@ export class CuentaPage{
     private alertCtrl:AlertController) { 
       this.userData = JSON.parse(localStorage.getItem('Usuario'));
     }
-    
-  ionViewWillEnter(){
-  }
 
-  editar(){
+  public editar():void{
     this.router.navigate(['/editar-perfil'])
   }
-  mostrarPass(){
+  public mostrarPass():void{
     this.pass = true;
   }
-  async presentAlert() {
+
+  public async presentAlert():Promise<void> {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: '¿Salir de MiGualeguay?',

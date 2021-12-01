@@ -148,7 +148,7 @@
         </div>
         <div formGroupName="domComercial" *ngIf="condicionP3Local">
           <p>¿Posee el mismo domicilio?</p>
-          <mat-radio-group color="primary" (change)="domicilio($event.value)">
+          <mat-radio-group color="primary" formControlName="select" (change)="domicilio($event.value)">
             <mat-radio-button value="si">Si</mat-radio-button>
             <mat-radio-button value="no">No</mat-radio-button>
           </mat-radio-group>
@@ -196,8 +196,8 @@
       <form [formGroup]="paso4">
         <p>Datos del Propietario</p>
         <mat-form-field appearance="outline">
-          <mat-label>ID</mat-label>
-          <input matInput formControlName="id" required>
+          <mat-label>CUIT o DNI</mat-label>
+          <input matInput formControlName="cuit" required>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Apellido</mat-label>

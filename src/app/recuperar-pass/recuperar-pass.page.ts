@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class RecuperarPassPage implements OnInit {
 
-  email = new FormControl('');
+  email:FormControl = new FormControl('');
 
   constructor(
     private router: Router,
@@ -17,7 +17,7 @@ export class RecuperarPassPage implements OnInit {
 
   ngOnInit() {
   }
-  resetPass(){
+ public resetPass():void{
     console.log(this.email.value)
     // enviar email para recuperacion
     this.email.reset()

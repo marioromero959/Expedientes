@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Nueva Actividad Comercial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Agregar Actividad Comercial</h2>
+  <form [formGroup]="actividades">
+    <mat-form-field appearance="outline">
+      <mat-label>Actividad Comercial</mat-label>
+      <mat-select formControlName="actividad" required>
+      <mat-option  value='Actividad 1'>Actividad 1</mat-option>
+      <mat-option  value='Actividad 2'>Actividad 2</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Fecha de Inicio/Baja</mat-label>
+    <input matInput type="date" formControlName="fechaInicioBaja" required>
+  </mat-form-field>   
+  <br>
+  <button mat-raised-button color='primary' (click)="volver()">Cancelar</button>
+  <button mat-raised-button color='accent' (click)="agregar()">Agregar</button>
+  </form>
+</ion-content>

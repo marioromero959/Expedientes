@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormulariosService } from 'src/app/servicios/datos/data-pasos/formularios.service';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
 
 @Component({
@@ -15,10 +14,10 @@ export class ComercialesPage implements OnInit {
   objetoUsuario = [{'dni':null}]
   panelOpenState = false;
   arr = [ 1 , 2 ]
+
   constructor(
     private router: Router,
     private datos: DatosService,
-    private formData:FormulariosService,
   ) {}
 
   ngOnInit() {
@@ -27,14 +26,6 @@ export class ComercialesPage implements OnInit {
     this.datos.obtenerExpedientes(this.objetoUsuario[0]).subscribe(res =>{
       this.expedientes[0] = res;
     })
-
-    this.formData.escucharData().subscribe((res) =>{
-    if(res){
-      this.dataPaso1 = res[0];
-    }else{
-      this.dataPaso1 = '';
-    }
-    });
   }
 nuevaHab(){
   this.router.navigate(['/comerciales/habilitaciones']);

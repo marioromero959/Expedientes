@@ -8,6 +8,9 @@ export interface User{
     repass: string;
 }
 export interface Usuario{
+    status: string;
+    usuario: string;
+    usuario_id:number;
     usuario_nombres:string,
     usuario_apellido:string,
     usuario_dni:number,

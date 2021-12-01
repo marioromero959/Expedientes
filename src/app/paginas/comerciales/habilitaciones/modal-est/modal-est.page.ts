@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators ,FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-carga-estudio',
-  templateUrl: './carga-estudio.page.html',
-  styleUrls: ['./carga-estudio.page.scss'],
+  selector: 'app-modal-est',
+  templateUrl: './modal-est.page.html',
+  styleUrls: ['./modal-est.page.scss'],
 })
-export class CargaEstudioPage implements OnInit {
+export class ModalEstPage implements OnInit {
 
   formEstudio:FormGroup;
   @Input() estudio;
@@ -53,6 +53,5 @@ async presentAlert() {
 
 await alert.present();
 };
-
 
 }

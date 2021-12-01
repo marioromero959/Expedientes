@@ -4,14 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyAAAa7ZFORJUwJErwY2j-LDajB8U5Najc4",
-    authDomain: "expedientes-33810.firebaseapp.com",
-    projectId: "expedientes-33810",
-    storageBucket: "expedientes-33810.appspot.com",
-    messagingSenderId: "227352500075",
-    appId: "1:227352500075:web:d8d9e0a8b44cd7f1c5de2e"
-  },
+  URL: "https://municipalidad.gualeguay.gob.ar/api/modulos"
 };
 
 /*

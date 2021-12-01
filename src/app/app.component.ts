@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticacionService } from './servicios/Autenticación/autenticacion.service';
+import { AutenticacionService } from './servicios/autenticación/autenticacion.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent {
     private alertCtrl:AlertController
   ) {}
 
-  async logout() {
+ public async logout():Promise<void> {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       header: '¿Salir de MiGualeguay?',

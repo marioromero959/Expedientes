@@ -1,9 +1,5 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-buttons slot="start"> 
-      <ion-back-button defaultHref="/comerciales">
-    </ion-back-button>
-  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,8 +14,8 @@
   </ion-card-content>
 </ion-card>
 <ion-row class="ion-justify-content-center">
-  <ion-button (click)='irAHome()' shape=round>
+  <button mat-raised-button color="primary" (click)='irAHome()'>
     Volver a inicio
-  </ion-button>
+  </button>
 </ion-row>
 </ion-content>

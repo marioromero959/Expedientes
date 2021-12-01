@@ -4,20 +4,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CargaEstudioPageRoutingModule } from './carga-estudio-routing.module';
+import { ModalActPageRoutingModule } from './modal-act-routing.module';
 
-import { CargaEstudioPage } from './carga-estudio.page';
+import { ModalActPage } from './modal-act.page';
 import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    CargaEstudioPageRoutingModule,
-    MaterialModule
+    ModalActPageRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
-  declarations: [CargaEstudioPage]
+  declarations: [ModalActPage]
 })
-export class CargaEstudioPageModule {}
+export class ModalActPageModule {}

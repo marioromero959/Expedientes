@@ -14,6 +14,7 @@ export class VerificacionPage implements OnInit {
   ) { }
 
   ngOnInit() {}
+  
 login(){
   this.router.navigate(['/login'])
 }

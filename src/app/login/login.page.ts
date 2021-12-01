@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutenticacionService } from '../servicios/Autenticación/autenticacion.service';
+import { AutenticacionService } from '../servicios/autenticación/autenticacion.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
@@ -11,11 +11,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit{
 
-  passwordToggleIcon = "eye";
-  showPassword = false;
+  passwordToggleIcon:string = "eye";
+  showPassword:boolean = false;
 
   ingreso:FormGroup;
-  ingresado = false;
+  ingresado:boolean = false;
 
   constructor(
     private auth: AutenticacionService,
@@ -24,7 +24,7 @@ export class LoginPage implements OnInit{
     private formBuilder: FormBuilder,
   ){}
 
-  ngOnInit() {
+  ngOnInit(){
     this.ingreso = this.formBuilder.group({
       email: ['',Validators.required],
       pass: ['',Validators.required]
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit{
   }
 
 // Mostrar y ocultar contraseña
-togglePass(){
+public togglePass():void{
     this.showPassword =! this.showPassword;
     if(this.passwordToggleIcon == 'eye'){
       this.passwordToggleIcon = 'eye-off';
@@ -41,12 +41,12 @@ togglePass(){
     }
 };
 
-goToRegister(){
+public goToRegister():void{
   this.ingreso.reset();
   this.router.navigate(['/registro']);
 }
 
-login(){
+public login():void{
   if(this.ingreso.invalid){
     this.ingreso.markAllAsTouched();
     return;
@@ -58,7 +58,7 @@ login(){
   }
 }
 
-async presentAlert(error) {
+public async presentAlert(error):Promise<void> {
   const alert = await this.alertCtrl.create({
     cssClass: 'my-custom-class',
     header: 'Datos Incorrectos',
