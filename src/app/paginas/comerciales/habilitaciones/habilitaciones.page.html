@@ -230,8 +230,6 @@
         </mat-form-field>
         <button mat-raised-button color="accent" (click)="agregarAct()">Agregar Actividad</button>
         <button mat-raised-button color="accent" (click)="agregarEstudio()" [disabled]="estudioOk">Agregar Estudio Contable</button>
-        <button mat-raised-button color="warn" (click)="imprimir()">Imprimir</button>
-        
         
         <div *ngIf= "estudio != 0"  class="container">
           <h4>Datos de Estudio Contable</h4>

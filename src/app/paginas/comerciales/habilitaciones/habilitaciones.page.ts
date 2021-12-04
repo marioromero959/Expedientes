@@ -356,9 +356,8 @@ export class HabilitacionesPage implements OnInit {
         if(data === undefined){
           console.log('Cancelado');
         }else{
-          console.log(data)
-          // this.actividades.push(data);
-          // this.paso5.get('actividad').patchValue(this.actividades);
+          this.actividades.push(data);
+          this.paso5.get('actividad').patchValue(this.actividades);
         }
   }
 
@@ -535,12 +534,6 @@ cargarExp(exp){
     actividades:[''],
   }
   // const actividades: fecha y tipo
-  const act = [
-    {
-      fecha:'2021-12-20',
-      tipo:'Actividad 1'
-    }
-  ]
   const estudio = 
     {
       estudio:'Mario Web',
@@ -553,15 +546,22 @@ cargarExp(exp){
     this.paso5.get('estudio').patchValue(this.estudio);
     this.estudioOk = true;
   }
-//  this.actividades.push(act)
+  const arrAct = [
+    {
+      fecha:'2021-12-20',
+      tipo:'Actividad 1'
+    },
+    {
+      fecha:'2021-12-20',
+      tipo:'Actividad 1'
+    }
+  ]
+  arrAct.forEach(act=>{
+    this.actividades.push(act)
+  })
+  this.paso5.get('actividad').patchValue(this.actividades);
 }
 
-
-imprimir(){
-  console.log('formulario',this.paso5.value)
-  console.log('actividades',this.actividades)
-  console.log('actividades length',this.actividades.length)
-}
 // Al salir del componente borramos los datos del expediente
 ionViewDidLeave(){
   localStorage.removeItem('Datos Expedientes');
