@@ -230,6 +230,7 @@
         </mat-form-field>
         <button mat-raised-button color="accent" (click)="agregarAct()">Agregar Actividad</button>
         <button mat-raised-button color="accent" (click)="agregarEstudio()" [disabled]="estudioOk">Agregar Estudio Contable</button>
+        <button mat-raised-button color="warn" (click)="imprimir()">Imprimir</button>
         
         
         <div *ngIf= "estudio != 0"  class="container">
@@ -237,15 +238,15 @@
           <div *ngFor= "let est of estudio" class="ion-text-start">
           <ion-row>
             <ion-col size=4 offset=0.5>Descripción:</ion-col>
-            <ion-col>{{est.estudio}}</ion-col>
+            <ion-col>{{est[0].estudio}}</ion-col>
           </ion-row>
           <ion-row>
             <ion-col size=4 offset=0.5>Teléfono:</ion-col>
-            <ion-col>{{est.telefono}}</ion-col>
+            <ion-col>{{est[0].telefono}}</ion-col>
           </ion-row>
           <ion-row>
             <ion-col size=4 offset=0.5>Email:</ion-col>
-            <ion-col>{{est.email}}</ion-col>
+            <ion-col>{{est[0].email}}</ion-col>
           </ion-row>
           <ion-row class="ion-justify-content-center">
             <button mat-raised-button (click)=borrarEstudio() size=small color="warn">Eliminar Estudio</button>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
+import { paso1, paso2, paso3Comercial, paso3Fiscal, paso4, paso5 } from 'src/app/shared/interface/interfaz-habilitaciones';
 
 @Component({
   selector: 'app-habilitaciones',
@@ -465,62 +466,92 @@ export class HabilitacionesPage implements OnInit {
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
 // Cargamos paso1
-  this.paso1.get('cuit').patchValue(exp.hc_cuit);
-  this.paso1.get('cuenta').patchValue('preguntar');
-  this.paso1.get('tipoPersona').patchValue(1);
-  this.paso1.get('tipoLocal').patchValue('1')
-  this.paso1.get('solicitud').patchValue([1,2]);
+  const resp1:paso1 = {
+    cuit:123,
+    cuenta:456,
+    tipoPersona:1,
+    tipoLocal:'1',
+    solicitud:[2]
+  }
+  this.paso1.patchValue(resp1);
 // Cargamos paso2
-  this.paso2.get('razon').patchValue('test');
-  this.paso2.get('fechaInscripcion').patchValue('2021-11-12');
-  this.paso2.get('tipoSocietario').patchValue('Sociedad simple');
-  this.paso2.get('cierre').patchValue('2021-11-12');
-  this.paso2.get('apellido').patchValue('test');
-  this.paso2.get('nombres').patchValue('test');
-  this.paso2.get('dni').patchValue('test');
-  this.paso2.get('fechaNacimiento').patchValue('2021-11-12');
-  this.paso2.get('domicilio').patchValue('test');
-  this.paso2.get('localidad').patchValue('test');
-  this.paso2.get('nacionalidad').patchValue('test');
-  this.paso2.get('cuit').patchValue('test');
-  this.paso2.get('caracter').patchValue('Titular'); //Ver -------
+  const resp2:paso2 = {
+    razon:'test',
+    fechaInscripcion:'2021-11-12',
+    tipoSocietario:'Sociedad simple',
+    cierre:'2021-11-12',
+    apellido:'Romero',
+    nombres:'Mario',
+    dni:40488154,
+    fechaNacimiento:'2021-11-12',
+    domicilio:'Balcarce',
+    localidad:'Cordoba',
+    nacionalidad:'Cordoba',
+    cuit:123456,
+    caracter:'Titular' //Ver -------
+  }
+  this.paso2.patchValue(resp2);
 // Cargamos paso3
-this.paso3.get(['domFiscal','calle']).patchValue('test');
-this.paso3.get(['domFiscal','numeroCalle']).patchValue('test');
-this.paso3.get(['domFiscal','piso']).patchValue('test');
-this.paso3.get(['domFiscal','provincia']).patchValue('test');
-this.paso3.get(['domFiscal','localidad']).patchValue('test');
-this.paso3.get(['domFiscal','codPostal']).patchValue('test');
-// Crear formControl para el radio mismo domicilio
+const resp3a:paso3Fiscal = {
+  calle:'Balcarce',
+  numeroCalle:136,
+  piso:7,
+  provincia:'Cordoba',
+  localidad:'Cordoba',
+  codPostal:5000
+}
+const resp3b:paso3Comercial = {
+  select:'si',
+  calleC:'Balcarce',
+  numeroCalleC:136,
+  pisoC:7,
+  provinciaC:'Cordoba',
+  localidadC:'Cordoba',
+  codPostalC:5000,
+  partida:'test',
+  alquilado:'1',
+};
+this.paso3.get('domFiscal').patchValue(resp3a);
+
 if(this.paso1.value.tipoLocal === '1'){
-  this.paso3.get(['domComercial','select']).patchValue('si');
-  this.domicilio("si")
-  this.paso3.get(['domComercial','calleC']).patchValue('test');
-  this.paso3.get(['domComercial','numeroCalleC']).patchValue('test');
-  this.paso3.get(['domComercial','pisoC']).patchValue('test');
-  this.paso3.get(['domComercial','provinciaC']).patchValue('test');
-  this.paso3.get(['domComercial','localidadC']).patchValue('test');
-  this.paso3.get(['domComercial','codPostalC']).patchValue('test');
-  this.paso3.get(['domComercial','partida']).patchValue('test');
-  this.paso3.get(['domComercial','alquilado']).patchValue('2');
+this.paso3.get('domComercial').patchValue(resp3b);
+this.domicilio("si")
 }
+// Verificar funcion domicilio para redireccionar
 // Cargamos el paso4
-this.paso4.get('cuit').patchValue('test');
-this.paso4.get('apellido').patchValue('test');
-this.paso4.get('nombres').patchValue('test');
-// Cargamos el paso5
-this.paso5.get('fantasia').patchValue('test');
-this.paso5.get('telefono').patchValue('test');
-this.paso5.get('email').patchValue('test');
-this.paso5.get('actividad').patchValue('test');
-this.paso5.get('estudio').patchValue('test');
-// Ver estilos carga act y carga estudio
-
-
-
-
+const resp4:paso4 = {
+  cuit:123456,
+  nombres:'Mario',
+  apellido:'Romero'
 }
+this.paso4.patchValue(resp4)
 
+// Cargamos el paso5
+const resp5:paso5 = {
+  fantasia:'Fantasia',
+  telefono:123456,
+  email:'marioromero959@gmail.com',
+}
+const estudio = [
+  {
+    estudio:'Mario Web',
+    telefono:123456,
+    email:'marioromero959@gmail.com'
+  }
+]
+if(estudio != null){
+  this.paso5.patchValue(resp5)
+  this.estudio.push(estudio)
+  this.paso5.get('estudio').patchValue(this.estudio[0]);
+  this.estudioOk = true;
+}
+//  this.actividades.push(resp5.actividad)
+}
+imprimir(){
+  console.log('formulario',this.paso5.value)
+  console.log('estudio ',this.estudio)
+  console.log('estudio 0',this.estudio[0])
+}
 // Al salir del componente borramos los datos del expediente
 ionViewDidLeave(){
   localStorage.removeItem('Datos Expedientes');
