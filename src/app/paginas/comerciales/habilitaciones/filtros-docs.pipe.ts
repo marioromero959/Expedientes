@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FiltrosDocsPipe implements PipeTransform {
 
-  transform(value:any , ...args: any[]): unknown {
+  transform(value:any , ...args: any[]) {
 
 // Args[] 
 // 0:Local, 1:Tipo de persona, 2:Tipo de solicitud

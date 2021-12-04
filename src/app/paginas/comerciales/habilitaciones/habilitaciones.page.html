@@ -231,7 +231,7 @@
         <button mat-raised-button color="accent" (click)="agregarAct()">Agregar Actividad</button>
         <button mat-raised-button color="accent" (click)="agregarEstudio()" [disabled]="estudioOk">Agregar Estudio Contable</button>
         
-        <div *ngIf= "estudio != 0"  class="container">
+        <div *ngIf= "estudio.length != 0"  class="container">
           <h4>Datos de Estudio Contable</h4>
           <div *ngFor= "let est of estudio" class="ion-text-start">
           <ion-row>

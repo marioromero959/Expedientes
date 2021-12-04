@@ -55,7 +55,7 @@ export class RegistroPage implements OnInit {
     }
   };
 
-  private registrarUsuario():void{
+  public registrarUsuario():void{
     if(this.crearUsuarios.invalid){
       this.crearUsuarios.markAllAsTouched();
       this.presentAlert('Por favor, complete los campos para continuar')
