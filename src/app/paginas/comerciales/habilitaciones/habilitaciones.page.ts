@@ -356,8 +356,9 @@ export class HabilitacionesPage implements OnInit {
         if(data === undefined){
           console.log('Cancelado');
         }else{
-          this.actividades.push(data);
-          this.paso5.get('actividad').patchValue(this.actividades);
+          console.log(data)
+          // this.actividades.push(data);
+          // this.paso5.get('actividad').patchValue(this.actividades);
         }
   }
 
@@ -492,65 +493,74 @@ cargarExp(exp){
   }
   this.paso2.patchValue(resp2);
 // Cargamos paso3
-const resp3a:paso3Fiscal = {
-  calle:'Balcarce',
-  numeroCalle:136,
-  piso:7,
-  provincia:'Cordoba',
-  localidad:'Cordoba',
-  codPostal:5000
-}
-const resp3b:paso3Comercial = {
-  select:'si',
-  calleC:'Balcarce',
-  numeroCalleC:136,
-  pisoC:7,
-  provinciaC:'Cordoba',
-  localidadC:'Cordoba',
-  codPostalC:5000,
-  partida:'test',
-  alquilado:'1',
-};
-this.paso3.get('domFiscal').patchValue(resp3a);
-
-if(this.paso1.value.tipoLocal === '1'){
-this.paso3.get('domComercial').patchValue(resp3b);
-this.domicilio("si")
-}
-// Verificar funcion domicilio para redireccionar
-// Cargamos el paso4
-const resp4:paso4 = {
-  cuit:123456,
-  nombres:'Mario',
-  apellido:'Romero'
-}
-this.paso4.patchValue(resp4)
-
-// Cargamos el paso5
-const resp5:paso5 = {
-  fantasia:'Fantasia',
-  telefono:123456,
-  email:'marioromero959@gmail.com',
-}
-const estudio = [
-  {
-    estudio:'Mario Web',
-    telefono:123456,
-    email:'marioromero959@gmail.com'
+  const resp3a:paso3Fiscal = {
+    calle:'Balcarce',
+    numeroCalle:136,
+    piso:7,
+    provincia:'Cordoba',
+    localidad:'Cordoba',
+    codPostal:5000
   }
-]
-if(estudio != null){
-  this.paso5.patchValue(resp5)
-  this.estudio.push(estudio)
-  this.paso5.get('estudio').patchValue(this.estudio[0]);
-  this.estudioOk = true;
+  const resp3b:paso3Comercial = {
+    select:'si',
+    calleC:'Balcarce',
+    numeroCalleC:136,
+    pisoC:7,
+    provinciaC:'Cordoba',
+    localidadC:'Cordoba',
+    codPostalC:5000,
+    partida:'test',
+    alquilado:'1',
+  };
+  this.paso3.get('domFiscal').patchValue(resp3a);
+  if(this.paso1.value.tipoLocal === '1'){
+  this.paso3.get('domComercial').patchValue(resp3b);
+  this.domicilio("si")
+  }
+  // Verificar funcion domicilio para redireccionar
+  // Cargamos el paso4
+  const resp4:paso4 = {
+    cuit:123456,
+    nombres:'Mario',
+    apellido:'Romero'
+  }
+  this.paso4.patchValue(resp4)
+  
+  // Cargamos el paso5
+  const resp5:paso5 = {
+    fantasia:'Fantasia',
+    telefono:123456,
+    email:'marioromero959@gmail.com',
+    estudio:[''],
+    actividades:[''],
+  }
+  // const actividades: fecha y tipo
+  const act = [
+    {
+      fecha:'2021-12-20',
+      tipo:'Actividad 1'
+    }
+  ]
+  const estudio = 
+    {
+      estudio:'Mario Web',
+      telefono:123456,
+      email:'marioromero959@gmail.com'
+  }
+  if(estudio != null){
+    this.paso5.patchValue(resp5)
+    this.estudio.push(estudio)
+    this.paso5.get('estudio').patchValue(this.estudio);
+    this.estudioOk = true;
+  }
+//  this.actividades.push(act)
 }
-//  this.actividades.push(resp5.actividad)
-}
+
+
 imprimir(){
   console.log('formulario',this.paso5.value)
-  console.log('estudio ',this.estudio)
-  console.log('estudio 0',this.estudio[0])
+  console.log('actividades',this.actividades)
+  console.log('actividades length',this.actividades.length)
 }
 // Al salir del componente borramos los datos del expediente
 ionViewDidLeave(){

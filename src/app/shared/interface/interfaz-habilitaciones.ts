@@ -5,7 +5,6 @@ export interface paso1{
     tipoLocal:string,
     solicitud:number[]
 }
-
 export interface paso2{
     razon:string,
     fechaInscripcion:string
@@ -49,4 +48,6 @@ export interface paso5{
     fantasia:string,
     telefono:number,
     email:string,
+    actividades:string[],
+    estudio:string[],
 }
