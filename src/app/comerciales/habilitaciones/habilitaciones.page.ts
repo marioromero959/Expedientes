@@ -113,7 +113,7 @@ export class HabilitacionesPage implements OnInit {
     private modalCtrl:ModalController,
     private loadingCtrl:LoadingController,
     private router: Router,
-    ) { }
+    ) {}
 
   ngOnInit() {
     // Construccion formularios
@@ -190,7 +190,6 @@ export class HabilitacionesPage implements OnInit {
     const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
     if(exp) this.cargarExp(exp);
   }
-
 // PASO 1 ----------------
   get solicitudField(){return this.paso1.get('solicitud');}
 

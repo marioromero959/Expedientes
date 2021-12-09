@@ -42,17 +42,17 @@ const routes: Routes = [
   },
   {
     path: 'comerciales',
-      loadChildren: () => import('./paginas/comerciales/comerciales.module').then( m => m.ComercialesPageModule),
+      loadChildren: () => import('./comerciales/comerciales.module').then( m => m.ComercialesPageModule),
       data: {preload:true}
   },
   {
     path: 'atencion',
-    loadChildren: () => import('./paginas/atencion/atencion.module').then( m => m.AtencionPageModule),
+    loadChildren: () => import('./atencion/atencion.module').then( m => m.AtencionPageModule),
     data: {preload:true}
   },
   {
     path: 'deliveries',
-    loadChildren: () => import('./paginas/deliveries/deliveries.module').then( m => m.DeliveriesPageModule),
+    loadChildren: () => import('./deliveries/deliveries.module').then( m => m.DeliveriesPageModule),
     data: {preload:true}
 
   }

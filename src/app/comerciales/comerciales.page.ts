@@ -10,13 +10,10 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ComercialesPage implements OnInit {
 
-  loading:any;
-
   dataPaso1;
   expedientes = [];
   objetoUsuario = [{'dni':null}]
   panelOpenState = false;
-  arr = [ 1 , 2 ]
 
   constructor(
     private router: Router,
@@ -30,7 +27,7 @@ export class ComercialesPage implements OnInit {
     this.objetoUsuario[0].dni = userData.usuario_dni;
     this.datos.obtenerExpedientes(this.objetoUsuario[0]).subscribe(res =>{
       this.expedientes[0] = res;
-      this.loading.dismiss();
+      this.loadingController.dismiss();
     })
   }
 nuevaHab(){
@@ -44,12 +41,11 @@ editarExp(id,expediente){
 }
 
 public  async presentLoading() {
-  this.loading = await this.loadingController.create({
-    cssClass: 'my-custom-class',
-    message: 'Espere por favor...',
+  const loading = await this.loadingController.create({
+    message: 'Espere, por favor...',
     backdropDismiss:true,
   });
-  return this.loading.present();
+  await loading.present();
 }
 
 }
