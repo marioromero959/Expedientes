@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
     <ion-buttons slot="end">
-      <ion-menu-button autoHide="false" ></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
     <ion-title>
       MiGualeguay
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">  
   <ion-grid>
   <h2>Bienvenido/a {{nombre}}</h2>
@@ -38,9 +37,8 @@
     </ion-card-header>
     </ion-card>  
   </ion-grid>
-  <ion-button (click)= "logout()" color="danger" fill="clear" expand="block">
+<ion-button (click)= "logout()" color="danger">
     Cerrar Sesion
-  </ion-button>
-
+  </ion-button> 
 </ion-content>
 

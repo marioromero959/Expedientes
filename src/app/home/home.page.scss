@@ -13,13 +13,22 @@
 #container a {
   text-decoration: none;
 }
+h2{
+  margin: 10px;
+}
 
+ion-content{
+  display: flex;
+  text-align: center;
+}
 ion-icon{
   font-size: 50px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 ion-card-header{
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 h2{
   font-size: 24px;
@@ -27,7 +36,4 @@ h2{
 }
 h3{
   text-align: center;
-}
-ion-button{
-  margin: 0 0 10px;
 }

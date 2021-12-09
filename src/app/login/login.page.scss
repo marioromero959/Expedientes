@@ -14,9 +14,6 @@ h1{
     font-weight: 600;
     margin: 30px;
 }
-p{
-    margin: 0;
-}
 .borde{
     border-radius: 28px;
     margin: 15px;
@@ -39,3 +36,10 @@ ion-img{
 ion-content{
     --ion-background-color: linear-gradient(0deg, rgba(7,88,190,1) 22%, rgba(53,212,215,1) 69%);
 }; 
+ion-row{
+    display: flex;
+    align-items: center;
+    p{
+        margin: 0;
+    }
+}

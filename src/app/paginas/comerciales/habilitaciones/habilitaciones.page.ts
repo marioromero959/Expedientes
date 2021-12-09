@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
@@ -14,6 +14,8 @@ import { paso1, paso2, paso3Comercial, paso3Fiscal, paso4, paso5 } from 'src/app
 })
 
 export class HabilitacionesPage implements OnInit {
+
+  loading:any;
   // Formularios
   paso1: FormGroup;
   paso2: FormGroup;
@@ -109,6 +111,7 @@ export class HabilitacionesPage implements OnInit {
     private datos: DatosService,
     private alerta: AlertController,
     private modalCtrl:ModalController,
+    private loadingCtrl:LoadingController,
     private router: Router,
     ) { }
 
@@ -462,7 +465,15 @@ export class HabilitacionesPage implements OnInit {
     });
   await alert.present();
   };
-
+//loading
+public  async presentLoading() {
+  this.loading = await this.loadingCtrl.create({
+    cssClass: 'my-custom-class',
+    message: 'Espere por favor...',
+    backdropDismiss:true,
+  });
+  return this.loading.present();
+}
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
 // Cargamos paso1

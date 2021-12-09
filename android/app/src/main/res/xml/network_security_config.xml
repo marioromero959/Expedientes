@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+  <domain-config cleartextTrafficPermitted="true">
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&amp;a=HCSolicitudesTiposListar</domain>
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&amp;a=UsuarioAcceso</domain>
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos//hcomerciales/?c=HComercial&amp;a=HComercialesListarXUsr</domain>
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&amp;a=HCPersonasTiposListar</domain>
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&amp;a=HComercialGuardar</domain>
+    <domain includeSubdomains="true">https://municipalidad.gualeguay.gob.ar/api/modulos/usuarios/?c=usuario&amp;a=UsuarioGuardar</domain>
+    <domain includeSubdomains="true">localhost</domain>
+  </domain-config>
+  <base-config cleartextTrafficPermitted="true">
+    <trust-anchors>
+      <certificates src="system" />
+    </trust-anchors>
+  </base-config>
+</network-security-config>

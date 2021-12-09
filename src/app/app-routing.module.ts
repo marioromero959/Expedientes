@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { PreloadStrategyService } from './preload-strategy.service';
 
-const routes: Routes = [
- 
+const routes: Routes = [ 
   {
     path: '',
     redirectTo: 'login',
@@ -10,15 +10,18 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    data: {preload:true}
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule),
+    data: {preload:true}
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    data: {preload:true}
   },
   {
     path: 'cuenta',
@@ -26,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'recuperar-pass',
-    loadChildren: () => import('./recuperar-pass/recuperar-pass.module').then( m => m.RecuperarPassPageModule)
+    loadChildren: () => import('./recuperar-pass/recuperar-pass.module').then( m => m.RecuperarPassPageModule),
+    data: {preload:true}
   },
   {
     path: 'verificacion',
@@ -38,21 +42,25 @@ const routes: Routes = [
   },
   {
     path: 'comerciales',
-      loadChildren: () => import('./paginas/comerciales/comerciales.module').then( m => m.ComercialesPageModule)
+      loadChildren: () => import('./paginas/comerciales/comerciales.module').then( m => m.ComercialesPageModule),
+      data: {preload:true}
   },
   {
     path: 'atencion',
-    loadChildren: () => import('./paginas/atencion/atencion.module').then( m => m.AtencionPageModule)
+    loadChildren: () => import('./paginas/atencion/atencion.module').then( m => m.AtencionPageModule),
+    data: {preload:true}
   },
   {
     path: 'deliveries',
-    loadChildren: () => import('./paginas/deliveries/deliveries.module').then( m => m.DeliveriesPageModule)
+    loadChildren: () => import('./paginas/deliveries/deliveries.module').then( m => m.DeliveriesPageModule),
+    data: {preload:true}
+
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy:PreloadStrategyService })
   ],
   exports: [RouterModule]
 })

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AutenticacionService } from '../servicios/autenticación/autenticacion.service';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,8 @@ export class LoginPage implements OnInit{
   passwordToggleIcon:string = "eye";
   showPassword:boolean = false;
 
+  loading:any;
+
   ingreso:FormGroup;
   ingresado:boolean = false;
 
@@ -22,7 +24,9 @@ export class LoginPage implements OnInit{
     private alertCtrl: AlertController,
     private router: Router,
     private formBuilder: FormBuilder,
-  ){}
+    public loadingController: LoadingController,
+  ){
+  }
 
   ngOnInit(){
     this.ingreso = this.formBuilder.group({
@@ -30,8 +34,7 @@ export class LoginPage implements OnInit{
       pass: ['',Validators.required]
     })
   }
-
-// Mostrar y ocultar contraseña
+  // Mostrar y ocultar contraseña
 public togglePass():void{
     this.showPassword =! this.showPassword;
     if(this.passwordToggleIcon == 'eye'){
@@ -51,8 +54,10 @@ public login():void{
     this.ingreso.markAllAsTouched();
     return;
   }else{
+    this.presentLoading();
     this.auth.login(this.ingreso.value.email, this.ingreso.value.pass).subscribe(
       res=>{
+        this.loading.dismiss();
         (res.status === 'correcto') ? this.router.navigate(['home']) : this.presentAlert(res.status);  
       })
   }
@@ -68,6 +73,15 @@ public async presentAlert(error):Promise<void> {
 
 await alert.present();
 };
+
+public  async presentLoading() {
+  this.loading = await this.loadingController.create({
+    cssClass: 'my-custom-class',
+    message: 'Espere por favor...',
+    backdropDismiss:true,
+  });
+  return this.loading.present();
+}
 
 // obtener campos
 get emailField(){

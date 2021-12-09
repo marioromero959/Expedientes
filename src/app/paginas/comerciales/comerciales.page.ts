@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-comerciales',
@@ -8,6 +9,8 @@ import { DatosService } from 'src/app/servicios/datos/datos.service';
   styleUrls: ['./comerciales.page.scss'],
 })
 export class ComercialesPage implements OnInit {
+
+  loading:any;
 
   dataPaso1;
   expedientes = [];
@@ -18,13 +21,16 @@ export class ComercialesPage implements OnInit {
   constructor(
     private router: Router,
     private datos: DatosService,
+    public loadingController:LoadingController
   ) {}
 
   ngOnInit() {
+    this.presentLoading();
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.objetoUsuario[0].dni = userData.usuario_dni;
     this.datos.obtenerExpedientes(this.objetoUsuario[0]).subscribe(res =>{
       this.expedientes[0] = res;
+      this.loading.dismiss();
     })
   }
 nuevaHab(){
@@ -35,6 +41,15 @@ editarExp(id,expediente){
   const obj = JSON.stringify(expediente)
   localStorage.setItem('Datos Expedientes',obj);
   this.router.navigate(['/comerciales/habilitaciones'])
+}
+
+public  async presentLoading() {
+  this.loading = await this.loadingController.create({
+    cssClass: 'my-custom-class',
+    message: 'Espere por favor...',
+    backdropDismiss:true,
+  });
+  return this.loading.present();
 }
 
 }
