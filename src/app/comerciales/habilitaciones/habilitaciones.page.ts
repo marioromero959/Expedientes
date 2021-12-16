@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AlertController, ModalController, LoadingController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
@@ -28,6 +28,8 @@ export class HabilitacionesPage implements OnInit {
 // Variables para almacenar datos del backend 
   arrPersonas:any;
   arrSolicitudes:any;
+  arrPaises:any;
+  arrProvincias:any;
 // Variables y condiciones
   id:number;
   condicionP1Solicitud:boolean = false;
@@ -111,7 +113,6 @@ export class HabilitacionesPage implements OnInit {
     private datos: DatosService,
     private alerta: AlertController,
     private modalCtrl:ModalController,
-    private loadingCtrl:LoadingController,
     private router: Router,
     ) {}
 
@@ -180,10 +181,17 @@ export class HabilitacionesPage implements OnInit {
 // Traer data del back
     this.datos.obtenerPersonas().subscribe(res=>{
       this.arrPersonas = res;
+      
     })
     this.datos.obtenerSolicitudes().subscribe(res=>{
       this.arrSolicitudes = res;
     })
+    this.datos.obtenerNacionalidades().subscribe(res=>{
+      this.arrPaises = res;
+      console.log(this.arrPaises);
+      
+    })
+
 // Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.id = userData.usuario_id;
@@ -220,7 +228,7 @@ export class HabilitacionesPage implements OnInit {
         local:Number(this.paso1.value.tipoLocal),
         solicitud:this.paso1.value.solicitud,
       };
-// this.dataP1.enviarP1(value).subscribe();
+// this.datos.enviarP1(value).subscribe(res=>console.log(res));
     }
 // Modificamos el paso 2
     if(this.paso1.value.tipoPersona == 1){
@@ -427,7 +435,6 @@ export class HabilitacionesPage implements OnInit {
       this.presentAlert();
     }else{
     this.paso6.get('documentos').patchValue('ok');
-      // this.formData.mandar(this.archivos,this.paso - 1).subscribe();
   /*     this.archivos.forEach(res => {
         // Ver tamaño de archivos en b64
         const archivos = JSON.stringify(res)
@@ -464,15 +471,7 @@ export class HabilitacionesPage implements OnInit {
     });
   await alert.present();
   };
-//loading
-public  async presentLoading() {
-  this.loading = await this.loadingCtrl.create({
-    cssClass: 'my-custom-class',
-    message: 'Espere por favor...',
-    backdropDismiss:true,
-  });
-  return this.loading.present();
-}
+
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
 // Cargamos paso1

@@ -21,14 +21,26 @@ export class ComercialesPage implements OnInit {
     public loadingController:LoadingController
   ) {}
 
+//Cuando funcione, activar loading
+
   ngOnInit() {
-    this.presentLoading();
+    // this.presentLoading();
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.objetoUsuario[0].dni = userData.usuario_dni;
     this.datos.obtenerExpedientes(this.objetoUsuario[0]).subscribe(res =>{
       this.expedientes[0] = res;
-      this.loadingController.dismiss();
+      // this.loadingController.dismiss();
     })
+
+    //Obtenemos campos
+ /*    this.datos.obtenerNacionalidades().subscribe(res=>{
+      console.log(res);
+    }) */
+/*     this.datos.obtenerProvincias().subscribe(res=>{
+      console.log('Departamentos',res);
+    }) */
+
+    
   }
 nuevaHab(){
   this.router.navigate(['/comerciales/habilitaciones']);
