@@ -5,7 +5,9 @@ import { Router } from '@angular/router';
 import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
-import { paso1, paso2, paso3Comercial, paso3Fiscal, paso4, paso5 } from 'src/app/shared/interface/interfaz-habilitaciones';
+import { EditarExpedientesService } from 'src/app/servicios/editar-exp/editar-expedientes.service';
+import { Paso1, Paso2Fisica, Paso3 } from 'src/app/shared/interface/interfaz-habilitaciones';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-habilitaciones',
@@ -111,6 +113,7 @@ export class HabilitacionesPage implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private datos: DatosService,
+    private editar: EditarExpedientesService,
     private alerta: AlertController,
     private modalCtrl:ModalController,
     private router: Router,
@@ -188,8 +191,6 @@ export class HabilitacionesPage implements OnInit {
     })
     this.datos.obtenerNacionalidades().subscribe(res=>{
       this.arrPaises = res;
-      console.log(this.arrPaises);
-      
     })
 
 // Traer data del usuario cargada en memoria
@@ -474,8 +475,38 @@ export class HabilitacionesPage implements OnInit {
 
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
+
+  const id = {
+    "hcexpid": 262
+  }
+
+//Obtener datos a cargar
+this.editar.obtenerPaso1(id)
+      .subscribe(res=>{
+       let datap1:Paso1 = res;
+      console.log('Datos P1',datap1);
+      })
+ this.editar.obtenerPaso2PersonaFisica(id).subscribe(res=>{
+      let datap2Fisica:Paso2Fisica =  res;
+  console.log('Datos P2 Fisica',datap2Fisica);
+})
+
+this.editar.obtenerPaso3(id).subscribe(res=>{
+  let datap3:Paso3 =  res;
+  console.log('Datos P3',datap3);
+})
+
+this.editar.obtenerPaso4(id).subscribe(res=>{
+  console.log('Datos P4',res);
+})
+/*
+this.editar.obtenerPaso5(id).subscribe(res=>{
+  console.log('Datos P5',res);
+}) */
+
+
 // Cargamos paso1
-  const resp1:paso1 = {
+  const resp1= {
     cuit:123,
     cuenta:456,
     tipoPersona:1,
@@ -484,7 +515,7 @@ cargarExp(exp){
   }
   this.paso1.patchValue(resp1);
 // Cargamos paso2
-  const resp2:paso2 = {
+  const resp2 = {
     razon:'test',
     fechaInscripcion:'2021-11-12',
     tipoSocietario:'Sociedad simple',
@@ -501,7 +532,7 @@ cargarExp(exp){
   }
   this.paso2.patchValue(resp2);
 // Cargamos paso3
-  const resp3a:paso3Fiscal = {
+  const resp3a = {
     calle:'Balcarce',
     numeroCalle:136,
     piso:7,
@@ -509,7 +540,7 @@ cargarExp(exp){
     localidad:'Cordoba',
     codPostal:5000
   }
-  const resp3b:paso3Comercial = {
+  const resp3b = {
     select:'si',
     calleC:'Balcarce',
     numeroCalleC:136,
@@ -527,7 +558,7 @@ cargarExp(exp){
   }
   // Verificar funcion domicilio para redireccionar
   // Cargamos el paso4
-  const resp4:paso4 = {
+  const resp4 = {
     cuit:123456,
     nombres:'Mario',
     apellido:'Romero'
@@ -535,7 +566,7 @@ cargarExp(exp){
   this.paso4.patchValue(resp4)
   
   // Cargamos el paso5
-  const resp5:paso5 = {
+  const resp5 = {
     fantasia:'Fantasia',
     telefono:123456,
     email:'marioromero959@gmail.com',

@@ -101,7 +101,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Nacionalidad</mat-label>
-          <mat-select formControlName="nacionalidad" (selectionChange)="solicitud($event.value)" multiple=true>
+          <mat-select formControlName="nacionalidad" multiple=false>
             <mat-option *ngFor="let pais of arrPaises" [value]="pais.pais_id">{{pais.pais_nombre}}</mat-option>
           </mat-select> 
         </mat-form-field>

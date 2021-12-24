@@ -37,28 +37,10 @@ export class DatosService {
     //Devuelve tipo de persona, local, y solicitudes para filtrar doc
   }
 
-//Cargar campos para editar hab
-obtenerPaso1(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HComercialObtener_HCEXPID`, JSON.stringify(id));//Obtener id_exp 
-}
-obtenerPaso2PersonaFisica(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCPersonaFisicaObtener`, JSON.stringify(id));//Obtener id_exp 
-}
-obtenerPaso2PersonaJuridica(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCPersonaJuridicaObtener`, JSON.stringify(id));//Obtener id_exp 
-}
-obtenerPaso3(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCDomiciliosFyCObtener`, JSON.stringify(id));//Obtener id_exp 
-}
-obtenerPaso4(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCDatosDelPropietarioObtener`, JSON.stringify(id));//Obtener id_exp 
-}
-obtenerPaso5(id){
-  return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCDatosEconomicosObtener`, JSON.stringify(id));//Obtener id_exp 
-}
-
 // Una vez completado el paso 1 se genera en la BD
   enviarP1(data){
     return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HComercialGuardar`, JSON.stringify(data));
   }
+
+  
 }
