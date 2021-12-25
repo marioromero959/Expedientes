@@ -24,7 +24,7 @@ obtenerPaso2PersonaJuridica(id){
   return this.http.post(`${this.URL}/hcomerciales/?c=HComercial&a=HCPersonaJuridicaObtener`, JSON.stringify(id));//Obtener id_exp 
 }
 obtenerPaso3(id){
-  return this.http.post<Paso3>(`${this.URL}/hcomerciales/?c=HComercial&a=HCDomiciliosFyCObtener`, JSON.stringify(id));//Obtener id_exp 
+  return this.http.post<Paso3[]>(`${this.URL}/hcomerciales/?c=HComercial&a=HCDomiciliosFyCObtener`, JSON.stringify(id));//Obtener id_exp 
 }
 obtenerPaso4(id){
   return this.http.post<Paso4>(`${this.URL}/hcomerciales/?c=HComercial&a=HCDatosDelPropietarioObtener`, JSON.stringify(id));//Obtener id_exp 

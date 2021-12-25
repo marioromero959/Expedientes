@@ -6,6 +6,7 @@ import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
 import { EditarExpedientesService } from 'src/app/servicios/editar-exp/editar-expedientes.service';
+import { Paso1, Paso2Fisica, Paso3, Paso4, Paso5 } from 'src/app/shared/interface/interfaz-habilitaciones';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -515,11 +516,46 @@ this.editar.obtenerPaso1(id).subscribe(res=>{
   // console.log('Datos P2 Fisica',datap2Fisica);
 })
 
-/* this.editar.obtenerPaso3(id).subscribe(res=>{
-  let datap3:Paso3 =  res;
+this.editar.obtenerPaso3(id).subscribe(res=>{
+  let datap3:Paso3[] =  res;
   console.log('Datos P3',datap3);
+  const {hc_domicilio_calle,
+        hc_domicilio_nro,
+        hc_domicilio_piso,
+        hc_domicilio_propietario,
+        hc_domicilio_codpostal,
+        hc_domicilio_estado,
+        hc_domicilio_id,
+        hc_domicilio_partida_provincial,
+        hc_domicilio_tipo_id} = datap3[0];
+  const {} = datap3[1];
+  const datosA = {
+    calle:hc_domicilio_calle,
+    numeroCalle:hc_domicilio_nro,
+    piso:hc_domicilio_piso,
+    provincia:'Cordoba',
+    localidad:'Cordoba',
+    codPostal:hc_domicilio_codpostal
+  }
+  const datosB = {
+    select:'si',
+    calleC:'Balcarce',
+    numeroCalleC:136,
+    pisoC:7,
+    provinciaC:'Cordoba',
+    localidadC:'Cordoba',
+    codPostalC:5000,
+    partida:'test',
+    alquilado:'1',
+  };
+  this.paso3.get('domFiscal').patchValue(datosA);
+  if(this.paso1.value.tipoLocal === '1'){
+    this.paso3.get('domComercial').patchValue(datosB);
+    this.domicilio("si")
+  }
 })
 
+/*
 this.editar.obtenerPaso4(id).subscribe(res=>{
   let datap4:Paso4 =  res;
   console.log('Datos P4',datap4);
@@ -531,34 +567,8 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
 })  */
 
 
-/* // Cargamos paso1
-  const resp1= {
-    cuit:123,
-    cuenta:456,
-    tipoPersona:1,
-    tipoLocal:'1',
-    solicitud:[2]
-  }
-  this.paso1.patchValue(resp1); */
-// Cargamos paso2
-/*   const resp2 = {
-    razon:'test',
-    fechaInscripcion:'2021-11-12',
-    tipoSocietario:'Sociedad simple',
-    cierre:'2021-11-12',
-    apellido:'Romero',
-    nombres:'Mario',
-    dni:40488154,
-    fechaNacimiento:'2021-11-12',
-    domicilio:'Balcarce',
-    localidad:'Cordoba',
-    nacionalidad:'Cordoba',
-    cuit:123456,
-    caracter:'Titular' //Ver -------
-  }
-  this.paso2.patchValue(resp2); */
 // Cargamos paso3
-  const resp3a = {
+/*   const resp3a = {
     calle:'Balcarce',
     numeroCalle:136,
     piso:7,
@@ -581,7 +591,7 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
   if(this.paso1.value.tipoLocal === '1'){
   this.paso3.get('domComercial').patchValue(resp3b);
   this.domicilio("si")
-  }
+  } */
   // Verificar funcion domicilio para redireccionar
   // Cargamos el paso4
   const resp4 = {
