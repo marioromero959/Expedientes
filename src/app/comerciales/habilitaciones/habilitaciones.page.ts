@@ -6,7 +6,6 @@ import { ModalActPage } from './modal-act/modal-act.page';
 import { ModalEstPage } from './modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
 import { EditarExpedientesService } from 'src/app/servicios/editar-exp/editar-expedientes.service';
-import { Paso1, Paso2Fisica, Paso3 } from 'src/app/shared/interface/interfaz-habilitaciones';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -475,37 +474,64 @@ export class HabilitacionesPage implements OnInit {
 
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
-
+  const { hcexp_id } = exp;
   const id = {
-    "hcexpid": 262
+    "hcexpid": hcexp_id
   }
 
 //Obtener datos a cargar
-this.editar.obtenerPaso1(id)
-      .subscribe(res=>{
-       let datap1:Paso1 = res;
-      console.log('Datos P1',datap1);
-      })
- this.editar.obtenerPaso2PersonaFisica(id).subscribe(res=>{
-      let datap2Fisica:Paso2Fisica =  res;
-  console.log('Datos P2 Fisica',datap2Fisica);
+this.editar.obtenerPaso1(id).subscribe(res=>{
+      const datap1:Paso1 = res;
+      const {cuit,personatipo, tienelocal,tsolicitudes} = datap1;
+      const datos = {
+        cuit,
+        cuenta:123,
+        tipoPersona:personatipo,
+        tipoLocal:String(tienelocal),
+        solicitud:[5]
+      }
+      this.paso1.patchValue(datos);
 })
 
-this.editar.obtenerPaso3(id).subscribe(res=>{
+ this.editar.obtenerPaso2PersonaFisica(id).subscribe(res=>{
+      const datap2Fisica:Paso2Fisica =  res;
+      const { persfisicaap,persfisicanom,persfiscandoc, persfisicafecnac,persfisicaestado } = datap2Fisica;
+      const datos = {
+        razon:'',
+        fechaInscripcion:'',
+        tipoSocietario:'',
+        cierre:'',
+        apellido:persfisicaap,
+        nombres:persfisicanom,
+        dni:persfiscandoc,
+        fechaNacimiento:persfisicafecnac,
+        domicilio:'',
+        localidad:'',
+        nacionalidad:persfisicaestado,
+        cuit:'',
+        caracter:'',
+      }
+  this.paso2.patchValue(datos);
+  // console.log('Datos P2 Fisica',datap2Fisica);
+})
+
+/* this.editar.obtenerPaso3(id).subscribe(res=>{
   let datap3:Paso3 =  res;
   console.log('Datos P3',datap3);
 })
 
 this.editar.obtenerPaso4(id).subscribe(res=>{
-  console.log('Datos P4',res);
+  let datap4:Paso4 =  res;
+  console.log('Datos P4',datap4);
 })
-/*
+
 this.editar.obtenerPaso5(id).subscribe(res=>{
-  console.log('Datos P5',res);
-}) */
+  let datap5:Paso5 =  res;
+  console.log('Datos P5',datap5);
+})  */
 
 
-// Cargamos paso1
+/* // Cargamos paso1
   const resp1= {
     cuit:123,
     cuenta:456,
@@ -513,9 +539,9 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
     tipoLocal:'1',
     solicitud:[2]
   }
-  this.paso1.patchValue(resp1);
+  this.paso1.patchValue(resp1); */
 // Cargamos paso2
-  const resp2 = {
+/*   const resp2 = {
     razon:'test',
     fechaInscripcion:'2021-11-12',
     tipoSocietario:'Sociedad simple',
@@ -530,7 +556,7 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
     cuit:123456,
     caracter:'Titular' //Ver -------
   }
-  this.paso2.patchValue(resp2);
+  this.paso2.patchValue(resp2); */
 // Cargamos paso3
   const resp3a = {
     calle:'Balcarce',

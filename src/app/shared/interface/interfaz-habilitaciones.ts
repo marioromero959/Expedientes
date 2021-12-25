@@ -1,10 +1,4 @@
-export interface paso1{
-    cuit:number,
-    cuenta:number,
-    tipoPersona:number,
-    tipoLocal:string,
-    solicitud:number[]
-}
+
 
 export interface Paso1 {
     status:       string;
@@ -42,4 +36,20 @@ export interface Paso3 {
     hc_domicilio_propietario:        number;
     hc_domicilio_tipo_id:            number;
     hc_domicilio_estado:             number;
+}
+export interface Paso4 {
+    hc_dp_id:            number;
+    hc_expediente_id:    number;
+    hc_dp_apellido:      string;
+    hc_dp_nombres:       string;
+    hc_dp_cuit_cuil_dni: number;
+    hc_dp_estado:        number;
+}
+export interface Paso5 {
+    hc_otro_dato_id:              number;
+    hc_expediente_id:             number;
+    hc_otro_dato_nombre_fantasia: string;
+    hc_otro_dato_telefono:        string;
+    hc_otro_dato_email:           string;
+    hc_otro_dato_estado:          number;
 }
