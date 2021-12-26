@@ -7,7 +7,6 @@ import { ModalEstPage } from './modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
 import { EditarExpedientesService } from 'src/app/servicios/editar-exp/editar-expedientes.service';
 import { Paso1, Paso2Fisica, Paso3, Paso4, Paso5 } from 'src/app/shared/interface/interfaz-habilitaciones';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-habilitaciones',
@@ -191,6 +190,9 @@ export class HabilitacionesPage implements OnInit {
     })
     this.datos.obtenerNacionalidades().subscribe(res=>{
       this.arrPaises = res;
+    })
+    this.datos.obtenerProvincias({provincia_id:'12'}).subscribe(res=>{
+      console.log(res)
     })
 
 // Traer data del usuario cargada en memoria
@@ -518,7 +520,7 @@ this.editar.obtenerPaso1(id).subscribe(res=>{
 
 this.editar.obtenerPaso3(id).subscribe(res=>{
   let datap3:Paso3[] =  res;
-  console.log('Datos P3',datap3);
+  // console.log('Datos P3',datap3);
   const {hc_domicilio_calle,
         hc_domicilio_nro,
         hc_domicilio_piso,
@@ -544,8 +546,8 @@ this.editar.obtenerPaso3(id).subscribe(res=>{
     pisoC:7,
     provinciaC:'Cordoba',
     localidadC:'Cordoba',
-    codPostalC:5000,
-    partida:'test',
+    codPostalC:hc_domicilio_codpostal,
+    partida:hc_domicilio_partida_provincial,
     alquilado:'1',
   };
   this.paso3.get('domFiscal').patchValue(datosA);
@@ -554,58 +556,27 @@ this.editar.obtenerPaso3(id).subscribe(res=>{
     this.domicilio("si")
   }
 })
+  // Verificar funcion domicilio para redireccionar
 
-/*
 this.editar.obtenerPaso4(id).subscribe(res=>{
-  let datap4:Paso4 =  res;
-  console.log('Datos P4',datap4);
+  const datap4:Paso4 =  res;
+  const { hc_dp_cuit_cuil_dni, hc_dp_apellido, hc_dp_nombres} = datap4;
+  const datos = {
+    cuit:hc_dp_cuit_cuil_dni,
+    apellido:hc_dp_apellido,
+    nombres:hc_dp_nombres
+  }
+  this.paso4.patchValue(datos);
 })
+
 
 this.editar.obtenerPaso5(id).subscribe(res=>{
   let datap5:Paso5 =  res;
-  console.log('Datos P5',datap5);
-})  */
-
-
-// Cargamos paso3
-/*   const resp3a = {
-    calle:'Balcarce',
-    numeroCalle:136,
-    piso:7,
-    provincia:'Cordoba',
-    localidad:'Cordoba',
-    codPostal:5000
-  }
-  const resp3b = {
-    select:'si',
-    calleC:'Balcarce',
-    numeroCalleC:136,
-    pisoC:7,
-    provinciaC:'Cordoba',
-    localidadC:'Cordoba',
-    codPostalC:5000,
-    partida:'test',
-    alquilado:'1',
-  };
-  this.paso3.get('domFiscal').patchValue(resp3a);
-  if(this.paso1.value.tipoLocal === '1'){
-  this.paso3.get('domComercial').patchValue(resp3b);
-  this.domicilio("si")
-  } */
-  // Verificar funcion domicilio para redireccionar
-  // Cargamos el paso4
-  const resp4 = {
-    cuit:123456,
-    nombres:'Mario',
-    apellido:'Romero'
-  }
-  this.paso4.patchValue(resp4)
-  
-  // Cargamos el paso5
-  const resp5 = {
-    fantasia:'Fantasia',
-    telefono:123456,
-    email:'marioromero959@gmail.com',
+  const { hc_otro_dato_nombre_fantasia, hc_otro_dato_telefono, hc_otro_dato_email} = datap5;
+  const datos = {
+    fantasia:hc_otro_dato_nombre_fantasia,
+    telefono:hc_otro_dato_telefono,
+    email:hc_otro_dato_email,
     estudio:[''],
     actividades:[''],
   }
@@ -617,7 +588,7 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
       email:'marioromero959@gmail.com'
   }
   if(estudio != null){
-    this.paso5.patchValue(resp5)
+    this.paso5.patchValue(datos)
     this.estudio.push(estudio)
     this.paso5.get('estudio').patchValue(this.estudio);
     this.estudioOk = true;
@@ -636,6 +607,11 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
     this.actividades.push(act)
   })
   this.paso5.get('actividad').patchValue(this.actividades);
+
+  }) 
+
+
+
 }
 
 // Al salir del componente borramos los datos del expediente

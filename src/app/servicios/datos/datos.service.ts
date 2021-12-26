@@ -26,8 +26,8 @@ export class DatosService {
   obtenerNacionalidades(){
     return this.http.get(`${this.URL}/hcomerciales/?c=HComercial&a=NacionalidadesListar`);
   }
-  obtenerProvincias(){
-    return this.http.post("https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&a=DepartamentosListar",{provincia_id:12}); //Obtener id prov
+  obtenerProvincias(provincia){
+    return this.http.post("https://municipalidad.gualeguay.gob.ar/api/modulos/hcomerciales/?c=HComercial&a=DepartamentosListar",provincia); //Obtener id prov
   }
   //Paso 3
   id =16339;
