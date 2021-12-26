@@ -16,7 +16,6 @@ export class EditarExpedientesService {
 obtenerPaso1(id){
   return this.http.post<Paso1>(`${this.URL}/hcomerciales/?c=HComercial&a=HComercialObtener_HCEXPID`, JSON.stringify(id)); 
 }
-
 obtenerPaso2PersonaFisica(id){
   return this.http.post<Paso2Fisica>(`${this.URL}/hcomerciales/?c=HComercial&a=HCPersonaFisicaObtener`, JSON.stringify(id));//Obtener id_exp 
 }

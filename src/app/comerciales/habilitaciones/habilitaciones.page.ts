@@ -18,12 +18,7 @@ export class HabilitacionesPage implements OnInit {
 
   loading:any;
   // Formularios
-  paso1: FormGroup;
-  paso2: FormGroup;
-  paso3: FormGroup;
-  paso4: FormGroup;
-  paso5: FormGroup;
-  paso6;
+  paso1: FormGroup;paso2: FormGroup;paso3: FormGroup;paso4: FormGroup;paso5: FormGroup;paso6;
   isEditable = true;
   estudioOk = false;
 // Variables para almacenar datos del backend 
@@ -183,7 +178,6 @@ export class HabilitacionesPage implements OnInit {
 // Traer data del back
     this.datos.obtenerPersonas().subscribe(res=>{
       this.arrPersonas = res;
-      
     })
     this.datos.obtenerSolicitudes().subscribe(res=>{
       this.arrSolicitudes = res;
@@ -193,7 +187,7 @@ export class HabilitacionesPage implements OnInit {
     })
     this.datos.obtenerProvincias({provincia_id:'12'}).subscribe(res=>{
       console.log(res)
-    })
+    })//ver
 
 // Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));
@@ -219,17 +213,18 @@ export class HabilitacionesPage implements OnInit {
   };
 
   enviarP1(){
+    const { cuit, cuenta, tipoPersona, tipoLocal, solicitud} = this.paso1.value;
     if(this.paso1.invalid){
       this.presentAlert();
     }else{
     // Armamos el objeto para enviar al backend
       const value = {
         id:this.id,
-        cuit: Number(this.paso1.value.cuit),
-        cuenta:Number(this.paso1.value.cuenta),
-        tipo:this.paso1.value.tipoPersona,
-        local:Number(this.paso1.value.tipoLocal),
-        solicitud:this.paso1.value.solicitud,
+        cuit: Number(cuit),
+        cuenta:Number(cuenta),
+        tipoPersona,
+        local:Number(tipoLocal),
+        solicitud
       };
 // this.datos.enviarP1(value).subscribe(res=>console.log(res));
     }
@@ -247,33 +242,34 @@ export class HabilitacionesPage implements OnInit {
 
 // PASO 2 ---------------
   enviarP2(){
+    const { apellido, nombres, dni, fechaNacimiento, nacionalidad, razon, fechaInscripcion,  tipoSocietario, cierre, domicilio, localidad, cuit, caracter } = this.paso2.value;
     if(this.paso2.invalid){
       this.presentAlert();
     }else{
       if(this.paso1.value.tipoPersona == 1){
         const value = {
-        apellido: this.paso2.value.apellido,
-        nombres: this.paso2.value.nombres,
-        dni: this.paso2.value.dni,
-        fechaNacimiento: this.paso2.value.fechaNacimiento,
-        nacionalidad: this.paso2.value.nacionalidad,
+        apellido,
+        nombres,
+        dni,
+        fechaNacimiento,
+        nacionalidad,
         caracter: 'Titular',
         };
       // Enviar al back los value
       }else if(this.paso1.value.tipoPersona == 2){
       const value = {
-        razon: this.paso2.value.razon,
-        fechaInscripcion: this.paso2.value.fechaInscripcion,
-        tipoSocietario: this.paso2.value.tipoSocietario,
-        cierre: this.paso2.value.cierre,
-        apellido: this.paso2.value.apellido,
-        nombres: this.paso2.value.nombres,
-        fechaNacimiento: this.paso2.value.fechaNacimiento,
-        domicilio: this.paso2.value.domicilio,
-        localidad: this.paso2.value.localidad,
-        nacionalidad: this.paso2.value.nacionalidad,
-        cuit: this.paso2.value.cuit,
-        caracter: this.paso2.value.caracter,
+        razon,
+        fechaInscripcion,
+        tipoSocietario,
+        cierre,
+        apellido,
+        nombres,
+        fechaNacimiento,
+        domicilio,
+        localidad,
+        nacionalidad,
+        cuit,
+        caracter,
       }
       }
     }
@@ -302,6 +298,7 @@ export class HabilitacionesPage implements OnInit {
 // PASO 3 -------------
   domicilio(event){
   if(event === 'si'){
+
     this.paso3.get(['domComercial','calleC']).patchValue(this.paso3.value.domFiscal.calle);
       this.paso3.get(['domComercial','numeroCalleC']).patchValue(this.paso3.value.domFiscal.numeroCalle);
       this.paso3.get(['domComercial','pisoC']).patchValue(this.paso3.value.domFiscal.piso);
@@ -309,12 +306,13 @@ export class HabilitacionesPage implements OnInit {
       this.paso3.get(['domComercial','localidadC']).patchValue(this.paso3.value.domFiscal.localidad);
       this.paso3.get(['domComercial','codPostalC']).patchValue(this.paso3.value.domFiscal.codPostal); 
     }else if(event === 'no'){
-      this.paso3.get(['domComercial','calleC']).patchValue('');
-      this.paso3.get(['domComercial','numeroCalleC']).patchValue('');
-      this.paso3.get(['domComercial','pisoC']).patchValue('');
-      this.paso3.get(['domComercial','provinciaC']).patchValue('');
-      this.paso3.get(['domComercial','localidadC']).patchValue('');
-      this.paso3.get(['domComercial','codPostalC']).patchValue('');
+      this.paso3.get('domComercial').patchValue('');//ver
+      // this.paso3.get(['domComercial','calleC']).patchValue('');
+      // this.paso3.get(['domComercial','numeroCalleC']).patchValue('');
+      // this.paso3.get(['domComercial','pisoC']).patchValue('');
+      // this.paso3.get(['domComercial','provinciaC']).patchValue('');
+      // this.paso3.get(['domComercial','localidadC']).patchValue('');
+      // this.paso3.get(['domComercial','codPostalC']).patchValue('');
     }
   }
 
@@ -325,7 +323,7 @@ export class HabilitacionesPage implements OnInit {
     }else{
       this.condicionP4Alquiler = false;
     }
-  }
+  }//ver
 
   enviarP3(){
     if(this.paso3.invalid){
@@ -401,7 +399,6 @@ export class HabilitacionesPage implements OnInit {
     if(this.paso5.invalid || this.actividades.length == 0){
       this.presentAlert();
     }else{
-      console.log(this.paso5.value);
       // Enviamos filtros P6
       this.filtroLocal = this.paso1.value.tipoLocal;
       this.filtroPersona = this.paso1.value.tipoPersona;
@@ -478,10 +475,7 @@ export class HabilitacionesPage implements OnInit {
 // Si existe el expediente, entonces preparamos para edicion
 cargarExp(exp){
   const { hcexp_id } = exp;
-  const id = {
-    "hcexpid": hcexp_id
-  }
-
+  const id = {"hcexpid": hcexp_id}
 //Obtener datos a cargar
 this.editar.obtenerPaso1(id).subscribe(res=>{
       const datap1:Paso1 = res;
@@ -515,12 +509,10 @@ this.editar.obtenerPaso1(id).subscribe(res=>{
         caracter:'',
       }
   this.paso2.patchValue(datos);
-  // console.log('Datos P2 Fisica',datap2Fisica);
 })
 
 this.editar.obtenerPaso3(id).subscribe(res=>{
   let datap3:Paso3[] =  res;
-  // console.log('Datos P3',datap3);
   const {hc_domicilio_calle,
         hc_domicilio_nro,
         hc_domicilio_piso,
@@ -569,7 +561,6 @@ this.editar.obtenerPaso4(id).subscribe(res=>{
   this.paso4.patchValue(datos);
 })
 
-
 this.editar.obtenerPaso5(id).subscribe(res=>{
   let datap5:Paso5 =  res;
   const { hc_otro_dato_nombre_fantasia, hc_otro_dato_telefono, hc_otro_dato_email} = datap5;
@@ -608,9 +599,7 @@ this.editar.obtenerPaso5(id).subscribe(res=>{
   })
   this.paso5.get('actividad').patchValue(this.actividades);
 
-  }) 
-
-
+}) 
 
 }
 
