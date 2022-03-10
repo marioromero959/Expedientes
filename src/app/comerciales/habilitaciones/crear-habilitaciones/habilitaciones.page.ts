@@ -2,8 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ModalActPage } from './modal-act/modal-act.page';
-import { ModalEstPage } from './modal-est/modal-est.page';
+import { ModalActPage } from '../modal-act/modal-act.page';
+import { ModalEstPage } from '../modal-est/modal-est.page';
 import { DatosService } from 'src/app/servicios/datos/datos.service';
 import { EditarExpedientesService } from 'src/app/servicios/editar-exp/editar-expedientes.service';
 import { Paso1, Paso2Fisica, Paso3, Paso4, Paso5 } from 'src/app/shared/interface/interfaz-habilitaciones';
@@ -103,6 +103,7 @@ export class HabilitacionesPage implements OnInit {
   filtroLocal:number;
   filtroPersona:number;
   filtroSolic = [];
+//validacion campo persona fisic y juridica
 
   constructor(
     private _formBuilder: FormBuilder,

@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HabilitacionesPage } from './crear-habilitaciones/habilitaciones.page';
+import { EditarHabilitacionesPage } from './editar-habilitaciones/editar-habilitaciones.page';
 
-import { HabilitacionesPage } from './habilitaciones.page';
 
 const routes: Routes = [
   {
     path: '',
     component: HabilitacionesPage
+  },
+    {
+    path: 'edit',
+    component: EditarHabilitacionesPage
   },
   {
     path: 'modal-act',
