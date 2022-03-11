@@ -26,13 +26,14 @@ export class HabilitacionesPage implements OnInit {
   arrSolicitudes:any;
   arrPaises:any;
   arrProvincias:any;
+  arrLocalidades:any;
 // Variables y condiciones
   id:number;
   condicionP1Solicitud:boolean = false;
   condicionP2TipoPersona:string = '';
   condicionP3Local:boolean = true;
   condicionP4Alquiler:boolean = false;
-// Variables P5
+// Arreglos P5
   actividades = []
   estudio = []
 // Variables P6
@@ -108,10 +109,10 @@ export class HabilitacionesPage implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private datos: DatosService,
-    private editar: EditarExpedientesService,
+    public editar: EditarExpedientesService,
     private alerta: AlertController,
     private modalCtrl:ModalController,
-    private router: Router,
+    public router: Router,
     ) {}
 
   ngOnInit() {
@@ -124,19 +125,19 @@ export class HabilitacionesPage implements OnInit {
       solicitud: ['', Validators.required],
     });
     this.paso2 = this._formBuilder.group({
+      apellido: ['',Validators.required],
+      nombres: ['',Validators.required],
+      fechaNacimiento: ['',Validators.required],
+      nacionalidad: ['',Validators.required],
+      caracter: [''],//comparten los mismos campos
       razon: [''],
       fechaInscripcion: [''],
       tipoSocietario: [''],
       cierre: [''],
-      apellido: ['', Validators.required],
-      nombres: ['', Validators.required],
       dni: [''],
-      fechaNacimiento: ['', Validators.required],
       domicilio: [''],
       localidad: [''],
-      nacionalidad: ['', Validators.required],
       cuit: [''],
-      caracter: ['', Validators.required],
     });
     this.paso3 = this._formBuilder.group({
        // Domicilio Fiscal
@@ -186,15 +187,18 @@ export class HabilitacionesPage implements OnInit {
     this.datos.obtenerNacionalidades().subscribe(res=>{
       this.arrPaises = res;
     })
-    this.datos.obtenerProvincias({provincia_id:'12'}).subscribe(res=>{
+    this.datos.obtenerProvincias().subscribe(res=>{
+      this.arrProvincias = res
+    }) 
+    this.datos.obtenerActividadesComerciales().subscribe(res=>{
       console.log(res)
-    })//ver
+    }) 
 
 // Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));
     this.id = userData.usuario_id;
     const exp = JSON.parse(localStorage.getItem('Datos Expedientes'));
-    if(exp) this.cargarExp(exp);
+    // if(exp) this.cargarExp(exp);
   }
 // PASO 1 ----------------
   get solicitudField(){return this.paso1.get('solicitud');}
@@ -240,6 +244,46 @@ export class HabilitacionesPage implements OnInit {
       this.paso2.controls['caracter'].enable();
     }
   }
+
+  changeValidacionPaso2(e){
+    //1 fisica 2 juridica
+    if(e.value == 2){
+      this.paso2.get('razon').setValidators(Validators.required)
+      this.paso2.get('caracter').setValidators(Validators.required)
+      this.paso2.get('fechaInscripcion').setValidators(Validators.required)
+      this.paso2.get('tipoSocietario').setValidators(Validators.required)
+      this.paso2.get('cierre').setValidators(Validators.required)
+      this.paso2.get('dni').clearValidators()
+      this.paso2.get('domicilio').setValidators(Validators.required)
+      this.paso2.get('localidad').setValidators(Validators.required)
+      this.paso2.get('cuit').setValidators(Validators.required)
+    }else{
+      this.paso2.get('razon').clearValidators()
+      this.paso2.get('fechaInscripcion').clearValidators()
+      this.paso2.get('tipoSocietario').clearValidators()
+      this.paso2.get('caracter').clearValidators()
+      this.paso2.get('cierre').clearValidators()
+      this.paso2.get('dni').setValidators(Validators.required)
+      this.paso2.get('domicilio').clearValidators()
+      this.paso2.get('localidad').clearValidators()
+      this.paso2.get('cuit').clearValidators()
+    }
+    this.paso2.get('razon').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('fechaInscripcion').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('tipoSocietario').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('cierre').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('dni').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('domicilio').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('localidad').updateValueAndValidity({onlySelf:true})
+    this.paso2.get('cuit').updateValueAndValidity({onlySelf:true})
+ }
+
+ setearLocalidad(e){
+    console.log(e.value);
+    this.datos.obtenerLocalidades({provincia:10}).subscribe(res=>{
+      console.log(res)
+    }) 
+ }
 
 // PASO 2 ---------------
   enviarP2(){
@@ -474,135 +518,7 @@ export class HabilitacionesPage implements OnInit {
   };
 
 // Si existe el expediente, entonces preparamos para edicion
-cargarExp(exp){
-  const { hcexp_id } = exp;
-  const id = {"hcexpid": hcexp_id}
-//Obtener datos a cargar
-this.editar.obtenerPaso1(id).subscribe(res=>{
-      const datap1:Paso1 = res;
-      const {cuit,personatipo, tienelocal,tsolicitudes} = datap1;
-      const datos = {
-        cuit,
-        cuenta:123,
-        tipoPersona:personatipo,
-        tipoLocal:String(tienelocal),
-        solicitud:[5]
-      }
-      this.paso1.patchValue(datos);
-})
 
- this.editar.obtenerPaso2PersonaFisica(id).subscribe(res=>{
-      const datap2Fisica:Paso2Fisica =  res;
-      const { persfisicaap,persfisicanom,persfiscandoc, persfisicafecnac,persfisicaestado } = datap2Fisica;
-      const datos = {
-        razon:'',
-        fechaInscripcion:'',
-        tipoSocietario:'',
-        cierre:'',
-        apellido:persfisicaap,
-        nombres:persfisicanom,
-        dni:persfiscandoc,
-        fechaNacimiento:persfisicafecnac,
-        domicilio:'',
-        localidad:'',
-        nacionalidad:persfisicaestado,
-        cuit:'',
-        caracter:'',
-      }
-  this.paso2.patchValue(datos);
-})
-
-this.editar.obtenerPaso3(id).subscribe(res=>{
-  let datap3:Paso3[] =  res;
-  const {hc_domicilio_calle,
-        hc_domicilio_nro,
-        hc_domicilio_piso,
-        hc_domicilio_propietario,
-        hc_domicilio_codpostal,
-        hc_domicilio_estado,
-        hc_domicilio_id,
-        hc_domicilio_partida_provincial,
-        hc_domicilio_tipo_id} = datap3[0];
-  const {} = datap3[1];
-  const datosA = {
-    calle:hc_domicilio_calle,
-    numeroCalle:hc_domicilio_nro,
-    piso:hc_domicilio_piso,
-    provincia:'Cordoba',
-    localidad:'Cordoba',
-    codPostal:hc_domicilio_codpostal
-  }
-  const datosB = {
-    select:'si',
-    calleC:'Balcarce',
-    numeroCalleC:136,
-    pisoC:7,
-    provinciaC:'Cordoba',
-    localidadC:'Cordoba',
-    codPostalC:hc_domicilio_codpostal,
-    partida:hc_domicilio_partida_provincial,
-    alquilado:'1',
-  };
-  this.paso3.get('domFiscal').patchValue(datosA);
-  if(this.paso1.value.tipoLocal === '1'){
-    this.paso3.get('domComercial').patchValue(datosB);
-    this.domicilio("si")
-  }
-})
-  // Verificar funcion domicilio para redireccionar
-
-this.editar.obtenerPaso4(id).subscribe(res=>{
-  const datap4:Paso4 =  res;
-  const { hc_dp_cuit_cuil_dni, hc_dp_apellido, hc_dp_nombres} = datap4;
-  const datos = {
-    cuit:hc_dp_cuit_cuil_dni,
-    apellido:hc_dp_apellido,
-    nombres:hc_dp_nombres
-  }
-  this.paso4.patchValue(datos);
-})
-
-this.editar.obtenerPaso5(id).subscribe(res=>{
-  let datap5:Paso5 =  res;
-  const { hc_otro_dato_nombre_fantasia, hc_otro_dato_telefono, hc_otro_dato_email} = datap5;
-  const datos = {
-    fantasia:hc_otro_dato_nombre_fantasia,
-    telefono:hc_otro_dato_telefono,
-    email:hc_otro_dato_email,
-    estudio:[''],
-    actividades:[''],
-  }
-  // const actividades: fecha y tipo
-  const estudio = 
-    {
-      estudio:'Mario Web',
-      telefono:123456,
-      email:'marioromero959@gmail.com'
-  }
-  if(estudio != null){
-    this.paso5.patchValue(datos)
-    this.estudio.push(estudio)
-    this.paso5.get('estudio').patchValue(this.estudio);
-    this.estudioOk = true;
-  }
-  const arrAct = [
-    {
-      fecha:'2021-12-20',
-      tipo:'Actividad 1'
-    },
-    {
-      fecha:'2021-12-20',
-      tipo:'Actividad 1'
-    }
-  ]
-  arrAct.forEach(act=>{
-    this.actividades.push(act)
-  })
-  this.paso5.get('actividad').patchValue(this.actividades);
-
-}) 
-
-}
 
 // Al salir del componente borramos los datos del expediente
 ionViewDidLeave(){

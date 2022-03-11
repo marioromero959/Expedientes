@@ -10,7 +10,7 @@ const routes: Routes = [
     component: HabilitacionesPage
   },
     {
-    path: 'edit',
+    path: 'edit/:id',
     component: EditarHabilitacionesPage
   },
   {

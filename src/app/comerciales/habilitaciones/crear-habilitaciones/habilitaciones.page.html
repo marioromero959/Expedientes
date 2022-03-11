@@ -15,15 +15,15 @@
       <form [formGroup]="paso1">
         <mat-form-field appearance="outline">
           <mat-label>CUIT</mat-label>
-          <input matInput formControlName="cuit" placeholder="Ej: 00-000000-0" required>
+          <input matInput formControlName="cuit" placeholder="Ej: 00-000000-0" required type="number">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Cuenta</mat-label>
-          <input matInput formControlName="cuenta" required>
+          <input matInput formControlName="cuenta" required type="number">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Tipo de Persona</mat-label>
-          <mat-select formControlName="tipoPersona">
+          <mat-select formControlName="tipoPersona" (selectionChange)="changeValidacionPaso2($event)">
             <mat-option *ngFor="let persona of arrPersonas" [value]='persona.persona_tipo_id'>{{persona.persona_tipo_nombre}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -50,11 +50,11 @@
       <form [formGroup]="paso2">
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Razón Social</mat-label>
-          <input matInput formControlName="razon" required>
+          <input matInput formControlName="razon">
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Fecha de Inscripción</mat-label>
-          <input matInput type="date" formControlName="fechaInscripcion" required>
+          <input matInput type="date" formControlName="fechaInscripcion">
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Tipo de Societario</mat-label>
@@ -68,42 +68,54 @@
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Cierre de Ejercicio</mat-label>
-          <input matInput type="date" formControlName="cierre" required>
+          <input matInput type="date" formControlName="cierre">
         </mat-form-field>
         <p *ngIf="condicionP2TipoPersona == 'Persona Juridica'">Responsable de la Persona Jurídica</p>
         <mat-form-field appearance="outline">
           <mat-label>Apellido</mat-label>
-          <input matInput formControlName="apellido" required>
+          <input matInput formControlName="apellido">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Nombres</mat-label>
-          <input matInput formControlName="nombres" required>
+          <input matInput formControlName="nombres">
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>CUIT</mat-label>
-          <input matInput formControlName="cuit" required>
+          <input matInput formControlName="cuit" type="number">
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Fisica'">
           <mat-label>DNI</mat-label>
-          <input matInput formControlName="dni" required>
+          <input matInput formControlName="dni" type="number">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput type=date formControlName="fechaNacimiento" required>
+          <input matInput type=date formControlName="fechaNacimiento">
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Domicilio</mat-label>
-          <input matInput formControlName="domicilio" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
-          <mat-label>Localidad</mat-label>
-          <input matInput formControlName="localidad" required>
+          <input matInput formControlName="domicilio">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Nacionalidad</mat-label>
-          <mat-select formControlName="nacionalidad" multiple=false>
+          <mat-select formControlName="nacionalidad" multiple=false (selectionChange)="setearLocalidad($event)">
             <mat-option *ngFor="let pais of arrPaises" [value]="pais.pais_id">{{pais.pais_nombre}}</mat-option>
           </mat-select> 
+        </mat-form-field>
+
+        <!-- 
+
+        <mat-form-field appearance="outline">
+          <mat-label>Localidad</mat-label>
+          <mat-select formControlName="localidad" multiple=false>
+            <mat-option *ngFor="let localidad of arrlocalidades" [value]="localidad.localidad_id">{{localidad.localidad_nombre}}</mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+         -->
+         <!-- Borrar el de abajo y dejar el de arriba -->
+        <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
+          <mat-label>Localidad</mat-label>
+          <input matInput formControlName="localidad">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>En caracter de</mat-label>
@@ -129,15 +141,17 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>N°</mat-label>
-            <input matInput formControlName="numeroCalle" required>
+            <input matInput formControlName="numeroCalle" required type="number">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Piso</mat-label>
-            <input matInput formControlName="piso" required>
+            <input matInput formControlName="piso" required type="number">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Provincia</mat-label>
-            <input matInput formControlName="provincia" required>
+            <mat-select formControlName="provincia" multiple=false>
+              <mat-option *ngFor="let provincia of arrProvincias" [value]="provincia.provincia_id">{{provincia.provincia_nombre}}</mat-option>
+            </mat-select> 
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Localidad</mat-label>

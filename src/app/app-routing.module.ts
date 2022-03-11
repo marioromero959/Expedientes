@@ -50,12 +50,11 @@ const routes: Routes = [
     loadChildren: () => import('./atencion/atencion.module').then( m => m.AtencionPageModule),
     data: {preload:true}
   },
-  {
+/*   {
     path: 'deliveries',
     loadChildren: () => import('./deliveries/deliveries.module').then( m => m.DeliveriesPageModule),
     data: {preload:true}
-
-  }
+  } */
 ];
 
 @NgModule({

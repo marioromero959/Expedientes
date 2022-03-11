@@ -37,9 +37,8 @@ nuevaHab(){
 editarExp(id,expediente){
   const obj = JSON.stringify(expediente)
   localStorage.setItem('Datos Expedientes',obj);
-  this.router.navigate(['/comerciales/habilitaciones'])
+  this.router.navigate([`/comerciales/habilitaciones/edit/${id}`])
 }
-
 public  async presentLoading() {
   const loading = await this.loadingController.create({
     message: 'Espere, por favor...',
