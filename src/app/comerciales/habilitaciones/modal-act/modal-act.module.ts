@@ -8,6 +8,7 @@ import { ModalActPageRoutingModule } from './modal-act-routing.module';
 
 import { ModalActPage } from './modal-act.page';
 import { MaterialModule } from 'src/app/material/material.module';
+import { FiltroActividadesPipe } from '../filtros-act.pipe';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { MaterialModule } from 'src/app/material/material.module';
     ReactiveFormsModule,
     MaterialModule,
   ],
-  declarations: [ModalActPage]
+  declarations: [ModalActPage,FiltroActividadesPipe]
 })
 export class ModalActPageModule {}

@@ -190,9 +190,6 @@ export class HabilitacionesPage implements OnInit {
     this.datos.obtenerProvincias().subscribe(res=>{
       this.arrProvincias = res
     }) 
-    this.datos.obtenerActividadesComerciales().subscribe(res=>{
-      console.log(res)
-    }) 
 
 // Traer data del usuario cargada en memoria
     const userData = JSON.parse(localStorage.getItem('Usuario'));

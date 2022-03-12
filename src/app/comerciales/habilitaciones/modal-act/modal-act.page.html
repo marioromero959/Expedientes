@@ -7,11 +7,14 @@
 <ion-content>
   <h2>Agregar Actividad Comercial</h2>
   <form [formGroup]="actividades">
-    <mat-form-field appearance="outline">
-      <mat-label>Actividad Comercial</mat-label>
-      <mat-select formControlName="actividad" required>
-      <mat-option  value='Actividad 1'>Actividad 1</mat-option>
-      <mat-option  value='Actividad 2'>Actividad 2</mat-option>
+    <mat-form-field>
+      <mat-label>Filtro actividades</mat-label>
+      <input matInput type="text" [formControl]="searchFilter">
+    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Actividad Comercial</mat-label>
+    <mat-select formControlName="actividad">
+      <mat-option *ngFor="let actividad of arrActividades | filtroAct:searchFilter.value" [value]='actividad.actividad_id'>{{actividad.actividad_id}} {{actividad.actividad_nombre}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline" >

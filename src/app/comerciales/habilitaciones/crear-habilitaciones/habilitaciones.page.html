@@ -97,22 +97,11 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Nacionalidad</mat-label>
-          <mat-select formControlName="nacionalidad" multiple=false (selectionChange)="setearLocalidad($event)">
+          <mat-select formControlName="nacionalidad" multiple=false>
             <mat-option *ngFor="let pais of arrPaises" [value]="pais.pais_id">{{pais.pais_nombre}}</mat-option>
           </mat-select> 
         </mat-form-field>
 
-        <!-- 
-
-        <mat-form-field appearance="outline">
-          <mat-label>Localidad</mat-label>
-          <mat-select formControlName="localidad" multiple=false>
-            <mat-option *ngFor="let localidad of arrlocalidades" [value]="localidad.localidad_id">{{localidad.localidad_nombre}}</mat-option>
-          </mat-select> 
-        </mat-form-field>
-
-         -->
-         <!-- Borrar el de abajo y dejar el de arriba -->
         <mat-form-field appearance="outline" *ngIf="condicionP2TipoPersona == 'Persona Juridica'">
           <mat-label>Localidad</mat-label>
           <input matInput formControlName="localidad">
@@ -149,14 +138,17 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Provincia</mat-label>
-            <mat-select formControlName="provincia" multiple=false>
+            <mat-select formControlName="provincia" multiple=false (selectionChange)="setearLocalidad($event)">
               <mat-option *ngFor="let provincia of arrProvincias" [value]="provincia.provincia_id">{{provincia.provincia_nombre}}</mat-option>
             </mat-select> 
           </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Localidad</mat-label>
-            <input matInput formControlName="localidad" required>
-          </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Localidad</mat-label>
+          <mat-select formControlName="localidad" multiple=false>
+            <mat-option *ngFor="let localidad of arrLocalidades" [value]="localidad.localidad_id">{{localidad.localidad_nombre}}</mat-option>
+          </mat-select> 
+        </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Codigo Postal</mat-label>
             <input matInput formControlName="codPostal" required>
@@ -182,7 +174,9 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Provincia</mat-label>
-            <input matInput formControlName="provinciaC" required>
+            <mat-select formControlName="provinciaC" multiple=false (selectionChange)="setearLocalidad($event)">
+              <mat-option *ngFor="let provincia of arrProvincias" [value]="provincia.provincia_id">{{provincia.provincia_nombre}}</mat-option>
+            </mat-select> 
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Localidad</mat-label>

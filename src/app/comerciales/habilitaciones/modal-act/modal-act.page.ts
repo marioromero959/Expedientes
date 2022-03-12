@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { DatosService } from 'src/app/servicios/datos/datos.service';
 
 @Component({
   selector: 'app-modal-act',
@@ -15,11 +16,14 @@ export class ModalActPage implements OnInit {
   tipoAct:string = '';
   fechaInicio:string = '';
   actividades: FormGroup;
+  arrActividades:any;
+  searchFilter = new FormControl('')
 
   constructor(
     private modalCtrl:ModalController,
     private alertCtrl:AlertController,
     private _formBuilder: FormBuilder,
+    private datos: DatosService,
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,9 @@ export class ModalActPage implements OnInit {
       fechaInicioBaja: [''],
       actividad: [''],
     })
+    this.datos.obtenerActividadesComerciales().subscribe(res=>{
+      this.arrActividades = res
+    }) 
   }
 
 agregar(){
